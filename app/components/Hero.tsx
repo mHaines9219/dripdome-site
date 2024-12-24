@@ -25,7 +25,7 @@ export default function Hero() {
     <div className="relative h-screen w-full">
       {/* Navbar */}
       {pathname === '/' && (
-        <nav className="absolute top-0 left-0 w-full bg-[var(--main-brown)] font-nova text-white z-50 h-[95px] flex items-center">
+        <nav className=" md:hidden absolute top-0 left-0 w-full bg-[var(--main-brown)] font-nova text-white z-50 h-[95px] flex items-center">
           <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4">
             <Link href="/" className="flex items-center space-x-3">
               <HomeOutlinedIcon
