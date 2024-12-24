@@ -29,10 +29,11 @@ export default function Contact() {
           display: 'flex',
           textAlign: 'center',
           marginBottom: '30px',
+          fontFamily: 'Nova Mono',
         }}
       >
-        Big or small, every idea has the potential to shine. Tell us about your
-        project, and let’s build something remarkable.
+        BIG OR SMALL, EVERY IDEA HAS THE POTENTITAL TO SHINE. TELL US ABOUT YOUR
+        PROJECT AND LET`S BUILD SOMETHING AMAZING!
       </Typography>
       <form
         className="flex flex-col max-w-md mx-auto"
@@ -67,31 +68,31 @@ export default function Contact() {
         }}
       >
         <input
-          className="mb-4 p-3 rounded-md bg-white text-black"
+          className="mb-4 p-3 rounded-md bg-white text-black font-nova"
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder="NAME"
           required
         />
         <input
-          className="mb-4 p-3 rounded-md bg-white text-black"
+          className="mb-4 p-3 rounded-md bg-white text-black font-nova"
           type="email"
           name="email"
-          placeholder="Your Email"
+          placeholder="EMAIL"
           required
         />
         <textarea
-          className="mb-4 p-3 rounded-md bg-white text-black"
+          className="mb-4 p-3 rounded-md bg-white text-black font-nova"
           name="message"
           rows={4}
-          placeholder="Your Message"
+          placeholder="YOUR MESSAGE"
           required
         ></textarea>
         <button
-          className="bg-green-600 hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
+          className="bg-green-600 font-nova hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
           type="submit"
         >
-          Send
+          SEND{' '}
         </button>
       </form>
     </div>

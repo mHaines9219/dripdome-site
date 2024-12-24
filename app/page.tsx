@@ -30,7 +30,7 @@ export default function Home() {
       </section> */}
       <LogoComponent />
 
-      <section id="contact" className="pb-12  px-8 bg-black text-white">
+      <section id="contact" className="pt-8 pb-8  px-8 bg-black text-white">
         <Contact />
       </section>
     </main>

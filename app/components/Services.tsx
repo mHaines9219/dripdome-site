@@ -64,13 +64,21 @@ export default function Services() {
         variants={variants}
         transition={{ duration: 3, ease: 'easeOut' }}
       >
-        <h4 className="font-nova text-2xl">3D RENDERS</h4>
+        <h4 className="font-nova text-2xl">INSTALLATIONS</h4>
       </motion.div>
       <motion.div
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
         variants={variants}
         transition={{ duration: 3.5, ease: 'easeOut' }}
+      >
+        <h4 className="font-nova text-2xl">3D RENDERS</h4>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        variants={variants}
+        transition={{ duration: 4, ease: 'easeOut' }}
       >
         <h4 className="font-nova text-2xl">PROP DESIGN + SOURCING</h4>
       </motion.div>
