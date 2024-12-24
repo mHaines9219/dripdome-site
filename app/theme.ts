@@ -12,7 +12,7 @@ const theme = createTheme({
     h1: {
       fontSize: '96px',
       fontWeight: 'bold',
-      fontFamily: 'Montserrat',
+      fontFamily: 'Open Sans',
       lineHeight: 1.26,
       '@media (max-width:600px)': {
         fontSize: '22px',

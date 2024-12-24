@@ -32,7 +32,48 @@ export default function Home() {
         dripdome
       </Typography> */}
       {/* {/* About Section */}
-      <section id="about" className=" px-8"></section>
+      <section id="about" className=" px-8">
+        <Typography
+          variant="h1"
+          component="h1"
+          color="primary"
+          sx={{
+            fontSize: { xs: '70px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+            fontWeight: 'bold', // Optional: Adjust font weight
+            lineHeight: 1.2, // Optional: Adjust line height
+          }}
+        >
+          About Us
+        </Typography>
+        <Typography
+          variant="h2"
+          component="h2"
+          color="primary"
+          sx={{
+            fontSize: { sm: '40px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+            fontWeight: 'bold', // Optional: Adjust font weight
+            lineHeight: 1.2, // Optional: Adjust line height
+          }}
+        >
+          Trusted by visionaries, creators, and industry professionals.
+        </Typography>
+        <Typography
+          variant="p"
+          component="p"
+          color="primary"
+          sx={{
+            fontSize: { sm: '40px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+            fontWeight: 'bold', // Optional: Adjust font weight
+            lineHeight: 1.2, // Optional: Adjust line height
+          }}
+        >
+          We bring bold ideas to life with stunning set designs, interactive art
+          installations, and custom props. From immersive activations for
+          conventions to show-stopping sets for music videos and unforgettable
+          party pieces, we turn your wildest concepts into reality. Let’s build
+          something extraordinary together.{' '}
+        </Typography>
+      </section>
       {/* Music Section */}
       <section id="music" className="pt-12 px-8">
         {/* <h2 className="text-3xl font-bold mb-4">Our Music</h2> */}
