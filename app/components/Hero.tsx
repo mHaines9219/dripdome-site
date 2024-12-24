@@ -6,7 +6,10 @@ export default function Hero() {
   return (
     <>
       {/* Video Background */}
-      <Box // Box container for responsive image
+      <div
+        className="h-3/4 w-full  object-cover"
+
+        // div container for responsive image
       >
         {/* <video
           preload="auto"
@@ -26,11 +29,11 @@ export default function Hero() {
           autoPlay
           playsInline
           muted
-          className="absolute top-0 left-0 w-full h-3/4 object-cover lg:object-contain "
+          className="w-full h-full object-cover lg:object-contain -my-4 "
         >
           Your browser does not support the video tag.
         </video>
-      </Box>
+      </div>
     </>
   );
 }

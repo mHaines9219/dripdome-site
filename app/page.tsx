@@ -6,24 +6,18 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main
-      className=" text-white min-h-screen "
-      style={{
-        backgroundImage: "url('/assets/scuff2.png')",
-        backgroundSize: '100%', // Corrected the quote
-      }}
-    >
+    <main className=" text-white  ">
       {/* Hero Section */}
       {/* Hero Section */}
       <section className="hero-container flex flex-col items-center justify-center h-screen ">
         <Hero />
-        <div className="flex justify-center ">
+        <div className="flex justify-center  ">
           <Image
             src="/assets/mobile_logo_1.png"
             alt="logos"
             width={350}
             height={300}
-            className=" mt-[633px]"
+            className=" "
           />
         </div>
       </section>
