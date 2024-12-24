@@ -5,29 +5,29 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: 'HOME', href: '/' },
-    { name: 'VIDEO/PHOTO', href: '/buildingdesigner' },
-    { name: 'FABRICATION', href: '/portfolio' },
-    { name: 'CONVENTIONS', href: '/finance' },
-    { name: 'RENTALS', href: '/finance' },
+    { name: 'ABOUT US', href: '/about' },
+    { name: 'VIDEO/PHOTO', href: '/video-photo' },
+    { name: 'FABRICATION', href: '/fabrication' },
+    { name: 'CONVENTIONS', href: '/conventions' },
+    { name: 'RENTALS', href: '/rentals' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-[var(--main-brown)]  font-nova text-white fixed top-0 left-0 w-screen z-50 h-[95px] flex items-center md:pr-[43px]">
+    <nav className="bg-black  font-nova text-white fixed top-0 left-0 w-screen z-50 h-[95px] flex items-center md:pr-[43px]">
       <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4">
         <Link href="/" className="flex items-center space-x-3">
-          <Image
-            src=""
-            className="h-[51px] w-[62px]"
-            alt="Shiner Steel Logo"
+          <HomeOutlinedIcon
+            className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
+            alt="Home"
             width={40}
             height={40}
           />
