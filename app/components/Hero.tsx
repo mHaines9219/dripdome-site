@@ -8,7 +8,7 @@ export default function Hero() {
       {/* Video Background */}
       <Box // Box container for responsive image
       >
-        <video
+        {/* <video
           preload="auto"
           loop
           autoPlay
@@ -17,6 +17,17 @@ export default function Hero() {
           className="absolute top-0 left-0 w-full h-3/4 object-cover lg:object-contain "
         >
           <source src="/assets/1223.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> */}
+        <video
+          preload="auto"
+          src="https://dripdome-site.s3.us-east-2.amazonaws.com/1223.mp4"
+          loop
+          autoPlay
+          playsInline
+          muted
+          className="absolute top-0 left-0 w-full h-3/4 object-cover lg:object-contain "
+        >
           Your browser does not support the video tag.
         </video>
       </Box>

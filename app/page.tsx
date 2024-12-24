@@ -24,6 +24,7 @@ export default function Home() {
             width={300}
             height={300}
             className=" mt-[633px]"
+            
           />
         </div>
       </section>
