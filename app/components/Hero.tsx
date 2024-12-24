@@ -12,11 +12,11 @@ export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: 'HOME', href: '/' },
-    { name: 'VIDEO/PHOTO', href: '/buildingdesigner' },
-    { name: 'FABRICATION', href: '/portfolio' },
-    { name: 'CONVENTIONS', href: '/finance' },
-    { name: 'RENTALS', href: '/finance' },
+    { name: 'ABOUT US', href: '/about' },
+    { name: 'VIDEO/PHOTO', href: '/video-photo' },
+    { name: 'FABRICATION', href: '/fabrication' },
+    { name: 'CONVENTIONS', href: '/conventions' },
+    { name: 'RENTALS', href: '/rentals' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -29,14 +29,14 @@ export default function Hero() {
           <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4">
             <Link href="/" className="flex items-center space-x-3">
               <HomeOutlinedIcon
-                className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-70 p-2"
-                alt="Shiner Steel Logo"
+                className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
+                alt="Home"
                 width={40}
                 height={40}
               />
             </Link>
             <button
-              className="md:hidden text-white text-3xl bg-opacity-70 pb-2 px-2  mr-8 z-50 bg-black  rounded-xl"
+              className="md:hidden text-white text-3xl bg-opacity-60 pb-2 px-2  mr-8 z-50 bg-black  rounded-xl"
               onClick={toggleMenu}
             >
               ☰
