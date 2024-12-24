@@ -15,18 +15,18 @@ export default function Home() {
     >
       {/* Hero Section */}
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center h-[70dvh] md:[100dvh] ">
+      <section className="hero-container flex flex-col items-center justify-center h-screen ">
         <Hero />
+        <div className="flex justify-center ">
+          <Image
+            src="/assets/mobile_logo.png"
+            alt="logos"
+            width={300}
+            height={300}
+            className=" mt-[633px]"
+          />
+        </div>
       </section>
-      <div className="flex justify-center">
-        <Image
-          src="/assets/mobile_logo.png"
-          alt="logos"
-          width={750}
-          height={300}
-          className="rounded"
-        />
-      </div>
       {/* <Typography
         variant="h2"
         component="h2"

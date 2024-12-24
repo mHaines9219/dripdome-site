@@ -7,11 +7,6 @@ export default function Hero() {
     <>
       {/* Video Background */}
       <Box // Box container for responsive image
-        sx={{
-          width: { md: '100%', xs: '100%', sm: '100%' },
-          height: { xs: '100%', sm: '100%' },
-          position: '',
-        }}
       >
         <video
           preload="auto"
@@ -19,7 +14,7 @@ export default function Hero() {
           autoPlay
           playsInline
           muted
-          className="absolute top-0 left-0 w-full h-full object-cover lg:object-contain"
+          className="absolute top-0 left-0 w-full h-3/4 object-cover lg:object-contain "
         >
           <source src="/assets/1223.mp4" type="video/mp4" />
           Your browser does not support the video tag.
