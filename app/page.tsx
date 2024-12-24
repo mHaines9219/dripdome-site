@@ -19,12 +19,11 @@ export default function Home() {
         <Hero />
         <div className="flex justify-center ">
           <Image
-            src="/assets/mobile_logo.png"
+            src="/assets/mobile_logo_1.png"
             alt="logos"
-            width={300}
+            width={350}
             height={300}
             className=" mt-[633px]"
-            
           />
         </div>
       </section>
