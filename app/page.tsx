@@ -21,6 +21,7 @@ export default function Home() {
       <div className="flex justify-center">
         <Image
           src="/assets/mobile_logo.png"
+          alt="logos"
           width={750}
           height={300}
           className="rounded"
