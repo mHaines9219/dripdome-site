@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <div className="relative h-3/4 w-full">
+    <div className="relative h-3/4 w-full mb-auto">
       {/* Video Background */}
       <video
         preload="auto"

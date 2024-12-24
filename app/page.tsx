@@ -9,7 +9,7 @@ export default function Home() {
     <main className=" text-white  ">
       {/* Hero Section */}
       {/* Hero Section */}
-      <section className="hero-container flex flex-col items-center justify-center h-screen ">
+      <section className="hero-container flex flex-col items-center justify-center h-screen  ">
         <Hero />
         <div className="flex justify-center  ">
           <Image
