@@ -6,6 +6,7 @@ import '@fontsource/montserrat/600.css'; // Semi-bold
 import '@fontsource/montserrat/700.css'; // Bold
 import '@fontsource/open-sans/400.css'; // Regular
 import '@fontsource/shrikhand';
+import '@fontsource/nova-mono';
 
 const theme = createTheme({
   typography: {
@@ -27,7 +28,7 @@ const theme = createTheme({
     h3: {
       fontSize: '32px',
       fontWeight: 'bold',
-      fontFamily: 'Montserrat',
+      fontFamily: '',
       '@media (max-width:600px)': {
         fontSize: '16px',
       },
@@ -35,7 +36,7 @@ const theme = createTheme({
     h4: {
       fontSize: '24px',
       fontWeight: 'semi-bold',
-      fontFamily: 'Montserrat',
+      fontFamily: 'Nova Mono',
       '@media (max-width:600px)': {
         fontSize: '14px',
       },

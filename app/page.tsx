@@ -7,21 +7,28 @@ import Image from 'next/image';
 import LogoComponent from './components/LogoComponent';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
+import Services from './components/Services';
 
 export default function Home() {
   return (
     <main className="main-container text-white  ">
-      <section className="hero-container flex flex-col items-center justify-center h-screen  ">
+      <section className="hero-container flex flex-col items-center justify-center h-[75dvh]  ">
         <Hero />
-        <LogoComponent />
       </section>
 
       <section
+        id="services"
+        className="flex flex-col items-center justify-center text-center px-8 bg-black h-96  "
+      >
+        <Services />
+      </section>
+      {/* <section
         id="about"
-        className="flex flex-col items-center justify-center text-center px-8 bg-black h-96 "
+        className="flex flex-col items-center justify-center text-center px-8 bg-black h-80  "
       >
         <AboutUs />
-      </section>
+      </section> */}
+      <LogoComponent />
 
       <section id="contact" className="pb-12  px-8 bg-black text-white">
         <Contact />
