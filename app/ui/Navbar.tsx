@@ -25,12 +25,7 @@ export default function Navbar() {
     <nav className="bg-black  font-nova text-white fixed top-0 left-0 w-screen z-50 h-[95px] flex items-center md:pr-[43px]">
       <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4">
         <Link href="/" className="flex items-center space-x-3">
-          <HomeOutlinedIcon
-            className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
-            alt="Home"
-            width={40}
-            height={40}
-          />
+          <HomeOutlinedIcon className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2" />
         </Link>
         <button
           className="md:hidden text-white mr-6 text-3xl pr-8 z-50"
