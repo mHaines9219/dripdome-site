@@ -32,33 +32,38 @@ export default function Home() {
         dripdome
       </Typography> */}
       {/* {/* About Section */}
-      <section id="about" className=" px-8">
+      <section
+        id="about"
+        className="flex flex-col items-center justify-center text-center px-8 bg-black h-96 "
+      >
         <Typography
           variant="h1"
           component="h1"
           color="primary"
           sx={{
-            fontSize: { xs: '70px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+            fontSize: { xs: '60px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
             fontWeight: 'bold', // Optional: Adjust font weight
             lineHeight: 1.2, // Optional: Adjust line height
+            whiteSpace: 'nowrap',
           }}
         >
-          About Us
+          ABOUT US{' '}
         </Typography>
         <Typography
           variant="h2"
           component="h2"
           color="primary"
           sx={{
-            fontSize: { sm: '40px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+            fontSize: { xs: '20px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
             fontWeight: 'bold', // Optional: Adjust font weight
             lineHeight: 1.2, // Optional: Adjust line height
+            marginBottom: '15px',
           }}
         >
-          Trusted by visionaries, creators, and industry professionals.
+          Trusted by creators who dream big and deliver bigger.{' '}
         </Typography>
         <Typography
-          variant="p"
+          variant="body1"
           component="p"
           color="primary"
           sx={{

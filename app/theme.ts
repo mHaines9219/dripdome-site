@@ -5,6 +5,7 @@ import '@fontsource/montserrat/400.css'; // Regular
 import '@fontsource/montserrat/600.css'; // Semi-bold
 import '@fontsource/montserrat/700.css'; // Bold
 import '@fontsource/open-sans/400.css'; // Regular
+import '@fontsource/shrikhand';
 
 const theme = createTheme({
   typography: {
@@ -12,7 +13,7 @@ const theme = createTheme({
     h1: {
       fontSize: '96px',
       fontWeight: 'bold',
-      fontFamily: 'Open Sans',
+      fontFamily: 'Shrikhand',
       lineHeight: 1.26,
       '@media (max-width:600px)': {
         fontSize: '22px',
@@ -21,7 +22,7 @@ const theme = createTheme({
     h2: {
       fontSize: '42px',
       fontWeight: 600,
-      fontFamily: 'Montserrat',
+      fontFamily: 'Shrikhand',
     },
     h3: {
       fontSize: '32px',
@@ -50,7 +51,7 @@ const theme = createTheme({
     body2: {
       fontSize: '24px',
       fontWeight: 400,
-      fontFamily: 'Open Sans',
+      fontFamily: 'Shrikhand',
       '@media (max-width:600px)': {
         fontSize: '12px',
       },
@@ -58,7 +59,7 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#391e0c', // mainBrown
+      main: '#FCF5EC', // mainBrown
     },
     secondary: {
       main: '#DD9F28', // mainGold
