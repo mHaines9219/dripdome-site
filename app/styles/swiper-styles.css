@@ -1,0 +1,20 @@
+/* Change the color of all pagination bullets */
+.swiper-pagination-bullet {
+  background: #007bff; /* Change to your desired color */
+  opacity: 0.5; /* Adjust the opacity for inactive bullets */
+  height: 8px;
+  width: 8px;
+}
+
+/* Change the color and style of the active pagination bullet */
+.swiper-pagination-bullet-active {
+  height: 8px;
+  width: 8px;
+  background: #dead32;
+  border: 1px solid black; /* Change to your desired color */
+  opacity: 1; /* Ensure the active bullet is fully opaque */
+}
+
+.swiper-pagination {
+  bottom: -5px !important; /* Adjust this value to control the exact position */
+}

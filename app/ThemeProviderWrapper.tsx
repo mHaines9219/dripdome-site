@@ -4,13 +4,18 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ReactNode } from 'react'; // Import ReactNode
 import theme from './theme'; // Import your custom theme
+import ClientLayout from './ClientLayout';
 
 type ThemeProviderWrapperProps = {
   children: ReactNode; // Define children as ReactNode
 };
 
 const ThemeProviderWrapper = ({ children }: ThemeProviderWrapperProps) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <ClientLayout>{children}</ClientLayout>
+    </ThemeProvider>
+  );
 };
 
 export default ThemeProviderWrapper;
