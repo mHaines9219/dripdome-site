@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 
 export default function Contact() {
   return (
-    <div>
+    <div className="">
       <Typography
         variant="h2"
         component="h2"

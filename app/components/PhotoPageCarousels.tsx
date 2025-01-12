@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, EffectCoverflow } from 'swiper/modules';
 import { Typography } from '@mui/material';
 
 import { photographyData } from '../photo/data';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import '../styles/swiper-styles.css';
+import 'swiper/css/effect-coverflow';
 
 const PhotoPageCarousels: React.FC = () => {
-  const [activeIndexes, setActiveIndexes] = useState<number[]>(
-    photographyData.map(() => 1) // Start each carousel on the second image
-  );
-
-  const handleSlideChange = (index: number, activeIndex: number) => {
-    setActiveIndexes((prev) => {
-      const newIndexes = [...prev];
-      newIndexes[index] = activeIndex;
-      return newIndexes;
-    });
-  };
-
   return (
     <div className="w-screen overflow-hidden">
+      {' '}
+      {/* Prevent horizontal scroll */}
       {photographyData.map((section, index) => (
-        <div key={index}>
+        <div key={index} className="max-w-screen overflow-hidden ">
+          {' '}
+          {/* Prevent expanding beyond viewport */}
           <Typography
             variant="h1"
             component="h1"
@@ -43,36 +34,33 @@ const PhotoPageCarousels: React.FC = () => {
             {section.category}
           </Typography>
           <Swiper
-            className="justify-center items-center"
-            spaceBetween={15}
-            slidesPerView={2}
+            className="w-full max-w-4xl h-full justify-center items-center"
+            effect={'coverflow'} // Use coverflow effect
+            grabCursor={true}
             centeredSlides={true}
+            slidesPerView={1.5} // Show partial slides on the sides
             loop={true} // Enable looping for the carousel
             pagination={{ clickable: true }}
-            modules={[Pagination]}
-            onSlideChange={(swiper) =>
-              handleSlideChange(index, swiper.realIndex)
-            } // Update active index for the specific carousel
+            modules={[Pagination, EffectCoverflow]}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
           >
             {section.images.map((image, idx) => (
-              <SwiperSlide key={idx}>
-                <div
-                  className="relative "
-                  style={{
-                    filter: idx === activeIndexes[index] ? 'none' : 'blur(2px)', // Blur all slides except the active one for the specific carousel
-
-                    zIndex: idx === activeIndexes[index] ? 100 : 1, // Set higher zIndex for active image
-                    transform:
-                      idx === activeIndexes[index] ? 'scale(1.1)' : 'scale(1)', // Slightly enlarge the active image
-                    transition:
-                      'filter 0.3s ease-in-out, transform 0.3s ease-in-out',
-                  }}
-                >
+              <SwiperSlide
+                key={idx}
+                className="flex h-[20px] justify-center items-center"
+              >
+                <div className="">
                   <Image
                     src={image}
-                    width={200}
-                    height={200}
-                    objectFit="cover"
+                    width={500}
+                    height={500}
+                    objectFit="contain"
                     alt={`${section.category} ${idx + 1}`}
                   />
                 </div>

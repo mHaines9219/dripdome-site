@@ -21,11 +21,14 @@
 
 .swiper {
   height: 230px;
-  width: 400px; /* Adjust to your desired height */
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  width: 390px; /* Adjust to your desired height */
 }
 
 .swiper-slide img {
-  width: 100%;
+  width: auto;
   height: auto;
   object-fit: cover;
 }
