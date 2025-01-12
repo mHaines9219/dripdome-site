@@ -32,7 +32,7 @@ export default function Services() {
         variants={variants}
         transition={{ duration: 1, ease: 'easeOut' }}
       >
-        <h4 className="font-nova text-2xl">FABRICATION</h4>
+        <h4 className="font-nova text-2xl">PRODUCTION/SET DESIGN</h4>
       </motion.div>
       <motion.div
         initial="hidden"
@@ -40,7 +40,7 @@ export default function Services() {
         variants={variants}
         transition={{ duration: 1.5, ease: 'easeOut' }}
       >
-        <h4 className="font-nova text-2xl">CARPENTRY</h4>
+        <h4 className="font-nova text-2xl">FABRICATION</h4>
       </motion.div>
       <motion.div
         initial="hidden"
@@ -48,7 +48,7 @@ export default function Services() {
         variants={variants}
         transition={{ duration: 2, ease: 'easeOut' }}
       >
-        <h4 className="font-nova text-2xl">PRODUCTION/SET DESIGN</h4>
+        <h4 className="font-nova text-2xl">CARPENTRY</h4>
       </motion.div>
       <motion.div
         initial="hidden"

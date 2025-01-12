@@ -18,3 +18,14 @@
 .swiper-pagination {
   bottom: -5px !important; /* Adjust this value to control the exact position */
 }
+
+.swiper {
+  height: 400px;
+  width: 400px; /* Adjust to your desired height */
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
