@@ -24,7 +24,7 @@ const PhotoPageCarousels: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="w-screen overflow-hidden">
       {photographyData.map((section, index) => (
         <div key={index}>
           <Typography
@@ -32,18 +32,18 @@ const PhotoPageCarousels: React.FC = () => {
             component="h1"
             color="black"
             sx={{
-              fontSize: { xs: '60px', md: '80px', lg: '96px' },
+              fontSize: { xs: '50px', md: '80px', lg: '96px' },
               fontWeight: 'bold',
               lineHeight: 1.2,
-              whiteSpace: 'nowrap',
               marginTop: '20px',
+              marginBottom: '20px',
               textAlign: 'center',
             }}
           >
             {section.category}
           </Typography>
           <Swiper
-            className="!w-screen max-w-4xl h-[50dvh] justify-center items-center"
+            className="justify-center items-center"
             spaceBetween={15}
             slidesPerView={2}
             centeredSlides={true}
@@ -57,7 +57,7 @@ const PhotoPageCarousels: React.FC = () => {
             {section.images.map((image, idx) => (
               <SwiperSlide key={idx}>
                 <div
-                  className="relative h-full w-full"
+                  className="relative "
                   style={{
                     filter: idx === activeIndexes[index] ? 'none' : 'blur(2px)', // Blur all slides except the active one for the specific carousel
 
@@ -68,15 +68,13 @@ const PhotoPageCarousels: React.FC = () => {
                       'filter 0.3s ease-in-out, transform 0.3s ease-in-out',
                   }}
                 >
-                  <div className="img-container !h-[500px]">
-                    <Image
-                      src={image}
-                      width={200}
-                      height={200}
-                      objectFit="cover"
-                      alt={`${section.category} ${idx + 1}`}
-                    />
-                  </div>
+                  <Image
+                    src={image}
+                    width={200}
+                    height={200}
+                    objectFit="cover"
+                    alt={`${section.category} ${idx + 1}`}
+                  />
                 </div>
               </SwiperSlide>
             ))}
