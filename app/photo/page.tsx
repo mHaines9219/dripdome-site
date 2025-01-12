@@ -2,6 +2,7 @@
 import { Typography } from '@mui/material';
 import React from 'react';
 import PhotoPageCarousels from '../components/PhotoPageCarousels';
+import Contact from '../components/Contact';
 
 export default function page() {
   return (
@@ -12,21 +13,23 @@ export default function page() {
           component="h1"
           color="black"
           sx={{
-            fontSize: { xs: '60px', md: '80px', lg: '96px' },
+            fontSize: { xs: '35px', md: '80px', lg: '96px' },
             fontWeight: 'bold',
             lineHeight: 1.2,
-            whiteSpace: 'nowrap',
             marginTop: '120px',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            textAlign: 'center',
           }}
         >
-          PHOTO
+          PHOTOGRAPHY PORTFOLIO
         </Typography>
         <Typography
           variant="body1"
           component="p"
           color="black"
           sx={{
-            fontSize: { xs: '15px', md: '80px', lg: '96px' },
+            fontSize: { xs: '13px', md: '80px', lg: '96px' },
             fontWeight: 'bold',
             lineHeight: 1.2,
             marginTop: '10px',
@@ -42,6 +45,9 @@ export default function page() {
           audiences.
         </Typography>
         <PhotoPageCarousels />
+        <div className=" mt-8 pt-8 pb-8  px-8 bg-black text-white">
+          <Contact />
+        </div>
       </div>
     </>
   );
