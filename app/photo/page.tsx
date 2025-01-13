@@ -29,9 +29,8 @@ export default function page() {
           component="p"
           color="black"
           sx={{
-            fontSize: { xs: '13px', md: 'px', lg: '96px' },
+            fontSize: { xs: '14px', md: 'px', lg: '96px' },
             fontWeight: 'bold',
-            lineHeight: 1.2,
             marginTop: '10px',
             marginLeft: '30px',
             marginRight: '30px',

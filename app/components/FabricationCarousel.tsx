@@ -3,34 +3,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow } from 'swiper/modules';
 import { Typography } from '@mui/material';
 
-import { photographyData } from '../photo/data';
+import { fabricationData } from '../fabrication/data';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
-const PhotoPageCarousels: React.FC = () => {
+const FabricationCarousel: React.FC = () => {
   return (
     <>
       {/* Mobile/Tablet Container */}
-      <div className="lg:hidden w-screen overflow-hidden">
-        {photographyData.map((section, index) => (
+      <div className="lg:hidden w-screen overflow-hidden my-8">
+        {fabricationData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
-            <Typography
-              variant="h1"
-              component="h1"
-              color="black"
-              sx={{
-                fontSize: { xs: '35px', md: '40px', lg: '45px' },
-                fontWeight: 'bold',
-                lineHeight: 1.2,
-                marginTop: '20px',
-                marginBottom: '20px',
-                textAlign: 'center',
-              }}
-            >
-              {section.category}
-            </Typography>
             <Swiper
               className="w-full max-w-4xl h-full justify-center items-center"
               effect={'coverflow'}
@@ -71,7 +56,7 @@ const PhotoPageCarousels: React.FC = () => {
 
       {/* Desktop Container */}
       <div className="hidden lg:block w-screen overflow-hidden">
-        {photographyData.map((section, index) => (
+        {fabricationData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
             <Typography
               variant="h1"
@@ -123,4 +108,4 @@ const PhotoPageCarousels: React.FC = () => {
   );
 };
 
-export default PhotoPageCarousels;
+export default FabricationCarousel;
