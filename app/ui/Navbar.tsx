@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const links = [
     { name: 'ABOUT US', href: '/about' },
-    { name: 'VIDEO/PHOTO', href: '/video-photo' },
+    { name: 'VIDEO/PHOTO', href: '/photo' },
     { name: 'FABRICATION', href: '/fabrication' },
     { name: 'CONVENTIONS', href: '/conventions' },
     { name: 'RENTALS', href: '/rentals' },
@@ -27,6 +27,12 @@ export default function Navbar() {
         <Link href="/" className="flex items-center space-x-3">
           <HomeOutlinedIcon className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2" />
         </Link>
+        <Image
+          alt="Company Logo"
+          src="/assets/dd_logo.png"
+          width={90}
+          height={90}
+        ></Image>
         <button
           className="md:hidden text-white mr-6 text-3xl pr-8 z-50"
           onClick={toggleMenu}

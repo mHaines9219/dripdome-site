@@ -42,7 +42,7 @@ export default function page() {
         to craft striking, camera-ready environments that captivate audiences.
       </Typography>
       <FabricationCarousel />
-      <div className="bg-black">
+      <div className="bg-black  py-10">
         <Contact />
       </div>
     </>

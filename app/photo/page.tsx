@@ -44,7 +44,7 @@ export default function page() {
           audiences.
         </Typography>
         <PhotoPageCarousels />
-        <div className=" mt-8 pt-8 pb-8  px-8 bg-black text-white">
+        <div className=" mt-8 py-12 px-8 bg-black text-white">
           <Contact />
         </div>
       </div>
