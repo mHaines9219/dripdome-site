@@ -34,7 +34,7 @@ export default function Navbar() {
           height={90}
         ></Image>
         <button
-          className="md:hidden text-white mr-6 text-3xl pr-8 z-50"
+          className="md:hidden text-white mr-6 text-3xl  z-50"
           onClick={toggleMenu}
         >
           ☰
