@@ -55,7 +55,7 @@ const FabricationCarousel: React.FC = () => {
       </div>
 
       {/* Desktop Container */}
-      <div className="hidden lg:block w-screen overflow-hidden">
+      <div className="hidden lg:block w-screen ">
         {fabricationData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
             <Typography
@@ -66,19 +66,19 @@ const FabricationCarousel: React.FC = () => {
                 fontSize: { xs: '35px', md: '40px', lg: '45px' },
                 fontWeight: 'bold',
                 lineHeight: 1.2,
-                marginTop: '20px',
-                marginBottom: '20px',
+                marginTop: '24px',
+                marginBottom: '24px',
                 textAlign: 'center',
               }}
             >
               {section.category}
             </Typography>
             <Swiper
-              className="w-full max-w-4xl h-full justify-center items-center"
-              effect={'coverflow'}
+              className="w-full max-w-4xl h-[550px] justify-center items-center mb-12"
               grabCursor={true}
+              spaceBetween={100}
               centeredSlides={true}
-              slidesPerView={3}
+              slidesPerView={4}
               initialSlide={1}
               loop={true}
               pagination={{ clickable: true }}
@@ -87,9 +87,9 @@ const FabricationCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] justify-center items-center"
+                  className="flex h-[20px] mx-48 justify-center items-center"
                 >
-                  <div>
+                  <div className="h-96 w-96">
                     <Image
                       src={image}
                       width={500}
