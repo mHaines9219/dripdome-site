@@ -24,7 +24,7 @@ export default function Contact() {
         component="p"
         color="primary"
         sx={{
-          fontSize: { sm: '40px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+          fontSize: { sm: '20px', md: '25px', lg: '30px' }, // Define different font sizes for different breakpoints
           fontWeight: 'bold', // Optional: Adjust font weight
           display: 'flex',
           textAlign: 'center',
