@@ -5,7 +5,7 @@ export interface PhotographyCategory {
 
 export const photographyData: PhotographyCategory[] = [
   {
-    category: 'EDITORIALS',
+    category: 'COMMERCIAL',
     images: [
       'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/cosmo.jpg',
@@ -20,7 +20,7 @@ export const photographyData: PhotographyCategory[] = [
     ],
   },
   {
-    category: 'ECOMMERCE',
+    category: 'PHOTO SHOOTS',
     images: [
       'https://picsum.photos/800/800?random=4',
       'https://picsum.photos/800/800?random=5',
@@ -30,7 +30,7 @@ export const photographyData: PhotographyCategory[] = [
     ],
   },
   {
-    category: 'INDIE PROJECTS',
+    category: 'EDITORIALS',
     images: [
       'https://picsum.photos/800/800?random=6',
       'https://picsum.photos/800/800?random=7',

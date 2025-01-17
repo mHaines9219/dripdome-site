@@ -17,7 +17,7 @@ const FabricationCarousel: React.FC = () => {
         {fabricationData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
             <Swiper
-              className="w-full max-w-4xl h-full justify-center items-center"
+              className="w-full max-w-4xl h-[355px] justify-center items-center"
               effect={'coverflow'}
               grabCursor={true}
               centeredSlides={true}
@@ -36,7 +36,7 @@ const FabricationCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] justify-center items-center"
+                  className=" flex h-[20px] justify-center items-center border-4 border-black"
                 >
                   <div>
                     <Image

@@ -51,7 +51,7 @@ const PhotoPageCarousels: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] justify-center items-center"
+                  className="flex h-[20px] justify-center items-center border-4 border-black"
                 >
                   <div>
                     <Image
@@ -102,7 +102,7 @@ const PhotoPageCarousels: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] justify-center items-center"
+                  className="flex h-[20px] justify-center items-center border-4 border-black rounded-lg"
                 >
                   <div>
                     <Image

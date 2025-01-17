@@ -22,7 +22,7 @@ export default function page() {
             textAlign: 'center',
           }}
         >
-          PHOTOGRAPHY PORTFOLIO
+          SET DESIGN
         </Typography>
         <Typography
           variant="body1"
