@@ -1,10 +1,10 @@
 import React from 'react';
-import AboutComponent from '../components/AboutComponent';
+import FabricationSection from '../components/FabricationSection';
 
 function ConventionsPage() {
   return (
     <>
-      <AboutComponent />
+      <FabricationSection />
     </>
   );
 }

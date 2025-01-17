@@ -30,7 +30,7 @@ const aboutSections: AboutSection[] = [
   },
 ];
 
-const AboutUs = () => {
+const FabricationSection = () => {
   return (
     <Box
       sx={{
@@ -101,4 +101,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default FabricationSection;

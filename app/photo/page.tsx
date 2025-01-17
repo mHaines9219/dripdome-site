@@ -7,11 +7,11 @@ import Contact from '../components/Contact';
 export default function page() {
   return (
     <>
-      <div className="page-container flex flex-col items-center  justify-center">
+      <div className="page-container flex flex-col items-center bg-black justify-center">
         <Typography
           variant="h1"
           component="h1"
-          color="black"
+          color="white"
           sx={{
             fontSize: { xs: '35px', md: '80px', lg: '96px' },
             fontWeight: 'bold',
@@ -27,7 +27,7 @@ export default function page() {
         <Typography
           variant="body1"
           component="p"
-          color="black"
+          color="white"
           sx={{
             fontSize: { xs: '14px', md: 'px', lg: '96px' },
             fontWeight: 'bold',
@@ -44,7 +44,7 @@ export default function page() {
           audiences.
         </Typography>
         <PhotoPageCarousels />
-        <div className=" mt-8 py-12 px-8 bg-black text-white">
+        <div className=" mt-8 py-12 px-8 bg-white text-white">
           <Contact />
         </div>
       </div>

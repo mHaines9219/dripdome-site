@@ -19,7 +19,7 @@ const PhotoPageCarousels: React.FC = () => {
             <Typography
               variant="h1"
               component="h1"
-              color="black"
+              color="white"
               sx={{
                 fontSize: { xs: '35px', md: '40px', lg: '45px' },
                 fontWeight: 'bold',
@@ -51,7 +51,7 @@ const PhotoPageCarousels: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] justify-center items-center border-4 border-black"
+                  className="flex h-[20px] justify-center items-center border-4 border-white"
                 >
                   <div>
                     <Image
@@ -76,7 +76,7 @@ const PhotoPageCarousels: React.FC = () => {
             <Typography
               variant="h1"
               component="h1"
-              color="black"
+              color="white"
               sx={{
                 fontSize: { xs: '35px', md: '40px', lg: '45px' },
                 fontWeight: 'bold',
