@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import { Typography } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
@@ -12,63 +13,58 @@ export default function AboutUs() {
   };
 
   return (
-    <div ref={ref}>
-      <Typography
-        variant="h1"
-        component="h1"
-        color="primary"
-        sx={{
-          fontSize: { xs: '60px', md: '80px', lg: '96px' },
-          fontWeight: 'bold',
-          lineHeight: 1.2,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        ABOUT US
-      </Typography>
+    <div className=" h-screen   bg-black" ref={ref}>
       <motion.div
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        variants={variants}
-        transition={{ duration: 1.6, ease: 'easeOut' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0, duration: 0.5 }}
       >
         <Typography
-          variant="h2"
-          component="h2"
-          color="primary"
+          variant="h1"
+          component="h1"
+          color="white"
           sx={{
-            fontSize: { xs: '20px', md: '80px', lg: '96px' },
+            fontSize: { xs: '55px', sm: '95px', lg: '150px' },
             fontWeight: 'bold',
-            lineHeight: 1.2,
-            marginBottom: '15px',
+            paddingTop: { xs: '120px', md: '150px' },
+            marginBottom: { xs: '20px', md: '30px' },
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            textAlign: 'center',
           }}
         >
-          Trusted by creators who dream big and deliver bigger.
+          ABOUT US
         </Typography>
       </motion.div>
       <motion.div
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        variants={variants}
-        transition={{ duration: 2.6, ease: 'easeOut' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <Typography
-          variant="body1"
-          component="p"
-          color="primary"
-          sx={{
-            fontSize: { sm: '40px', md: '80px', lg: '96px' },
-            fontWeight: 'bold',
-            lineHeight: 1.2,
-          }}
-        >
-          With bases in New York and Los Angeles, we specialize in crafting
-          unforgettable set designs, interactive art installations, and custom
-          props. Whether it’s immersive activations for conventions, cinematic
-          sets for music videos, or large-scale props for parties, we bring bold
-          ideas to life coast to coast. Let’s create something extraordinary
-          together.{' '}
-        </Typography>
+        <div className="text-container mx-2 md:mx-10">
+          <Typography
+            variant="body1"
+            component="p"
+            color="white"
+            sx={{
+              fontSize: { xs: '14px', sm: '20px', md: '30px' },
+              fontWeight: 'bold',
+              marginTop: '10px',
+              marginLeft: '30px',
+              marginRight: '30px',
+              textAlign: 'center',
+            }}
+          >
+            Drip Dome Productions is a majority women-owned, family-run business
+            based in Los Angeles, with a growing presence in New York. We
+            specialize in set design, custom fabrication, murals, graphic
+            design, photography, and rentals. From photoshoots and music videos
+            to large-scale event installations, we bring creative visions to
+            life with artistry and precision. At Drip Dome, family values and
+            collaboration fuel our passion for creating extraordinary projects
+            that leave a lasting impact.
+          </Typography>
+        </div>
       </motion.div>
     </div>
   );
