@@ -1,5 +1,5 @@
 import React from 'react';
-import FabricationSection from '../components/ConventionSection';
+import FabricationSection from '../components/AboutPhotos';
 import { Typography } from '@mui/material';
 
 function ConventionsPage() {

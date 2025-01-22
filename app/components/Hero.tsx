@@ -12,9 +12,9 @@ export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: 'ABOUT US', href: '/about' },
+    { name: 'ABOUT US', href: '/about-us' },
     { name: 'VIDEO/PHOTO', href: '/video-photo' },
-    { name: 'FABRICATION', href: '/fabrication' },
+    { name: 'SERVICES', href: '/services' },
     { name: 'CONVENTIONS', href: '/conventions' },
     { name: 'RENTALS', href: '/rentals' },
   ];

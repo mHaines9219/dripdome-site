@@ -2,14 +2,14 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-type AboutSection = {
+type AboutPhotos = {
   header: string;
   text: string;
   image: string;
   imageAlt: string;
 };
 
-const aboutSections: AboutSection[] = [
+const aboutSections: AboutPhotos[] = [
   {
     header: 'Our Mission',
     text: 'Our mission is to revolutionize the real estate industry with cutting-edge technology that empowers agents, streamlines transactions, and creates delightful experiences for clients.',
@@ -30,7 +30,7 @@ const aboutSections: AboutSection[] = [
   },
 ];
 
-const FabricationSection = () => {
+const AboutPhotos = () => {
   return (
     <Box
       sx={{
@@ -101,4 +101,4 @@ const FabricationSection = () => {
   );
 };
 
-export default FabricationSection;
+export default AboutPhotos;

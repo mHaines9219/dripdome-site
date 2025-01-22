@@ -29,7 +29,7 @@ const theme = createTheme({
     h3: {
       fontSize: '32px',
       fontWeight: 'bold',
-      fontFamily: '',
+      fontFamily: 'Shrikhand',
       '@media (max-width:600px)': {
         fontSize: '16px',
       },
