@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow } from 'swiper/modules';
 import { Typography } from '@mui/material';
 
-import { photographyData } from '../portfolio/data';
+import { photographyData } from '../photo/data';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
