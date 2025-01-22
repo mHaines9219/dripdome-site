@@ -27,6 +27,7 @@ const PhotoPageCarousels: React.FC = () => {
                 marginTop: '20px',
                 marginBottom: '20px',
                 textAlign: 'center',
+                whitespace: 'nowrap',
               }}
             >
               {section.category}
