@@ -7,7 +7,7 @@ import Image from 'next/image';
 import LogoComponent from './components/LogoComponent';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
-import Services from './components/Services';
+import HomeBlurb from './components/HomeBlurb';
 
 export default function Home() {
   return (
@@ -18,9 +18,9 @@ export default function Home() {
 
       <section
         id="services"
-        className="flex flex-col items-center justify-center text-center px-8 bg-black h-96  "
+        className="flex flex-col items-center justify-center text-center px-8 bg-black p  "
       >
-        <Services />
+        <HomeBlurb />
       </section>
       {/* <section
         id="about"
