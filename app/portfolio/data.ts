@@ -19,24 +19,24 @@ export const photographyData: PhotographyCategory[] = [
       'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/lunalindemann.jpg',
     ],
   },
-  {
-    category: 'PHOTO SHOOTS',
-    images: [
-      'https://picsum.photos/800/800?random=4',
-      'https://picsum.photos/800/800?random=5',
-      'https://picsum.photos/800/800?random=5',
-      'https://picsum.photos/800/800?random=5',
-      'https://picsum.photos/800/800?random=5',
-    ],
-  },
-  {
-    category: 'EDITORIALS',
-    images: [
-      'https://picsum.photos/800/800?random=6',
-      'https://picsum.photos/800/800?random=7',
-      'https://picsum.photos/800/800?random=7',
-      'https://picsum.photos/800/800?random=8',
-      'https://picsum.photos/800/800?random=9',
-    ],
-  },
+  // {
+  //   category: 'PHOTO SHOOTS',
+  //   images: [
+  //     'https://picsum.photos/800/800?random=4',
+  //     'https://picsum.photos/800/800?random=5',
+  //     'https://picsum.photos/800/800?random=5',
+  //     'https://picsum.photos/800/800?random=5',
+  //     'https://picsum.photos/800/800?random=5',
+  //   ],
+  // },
+  // {
+  //   category: 'EDITORIALS',
+  //   images: [
+  //     'https://picsum.photos/800/800?random=6',
+  //     'https://picsum.photos/800/800?random=7',
+  //     'https://picsum.photos/800/800?random=7',
+  //     'https://picsum.photos/800/800?random=8',
+  //     'https://picsum.photos/800/800?random=9',
+  //   ],
+  // },
 ];

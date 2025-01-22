@@ -93,7 +93,8 @@ const ServicesCarousel: React.FC = () => {
                   <div className="h-[600px] w-[600px] ">
                     <Image
                       src={image}
-                      layout="fill" // Makes the image fill the parent container
+                      height={500}
+                      width={500}
                       objectFit="contain"
                       alt={`${section.category} ${idx + 1}`}
                     />

@@ -5,6 +5,8 @@ import PhotoPageCarousels from '../components/PhotoPageCarousels';
 import Contact from '../components/Contact';
 
 import { motion } from 'framer-motion';
+import FeaturedProjects from '../components/FeatuedProjects';
+import PressSection from '../components/PressSection';
 
 export default function page() {
   return (
@@ -63,8 +65,18 @@ export default function page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0, duration: 1.5 }}
         >
+          <FeaturedProjects />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0, duration: 1.5 }}
+        >
           <PhotoPageCarousels />
         </motion.div>
+        <div className="mt-16">
+          <PressSection />
+        </div>
         <div className=" mt-8 py-12 px-8 bg-black text-white">
           <Contact />
         </div>
