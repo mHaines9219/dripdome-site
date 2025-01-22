@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow } from 'swiper/modules';
 import { Typography } from '@mui/material';
 
-import { fabricationData } from '../fabrication/data';
+import { fabricationData } from '../services/data';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -13,7 +13,8 @@ const FabricationCarousel: React.FC = () => {
   return (
     <>
       {/* Mobile/Tablet Container */}
-      <div className="lg:hidden w-screen overflow-hidden my-8">
+
+      <div className="lg:hidden w-screen overflow-hidden mb-8">
         {fabricationData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
             <Swiper

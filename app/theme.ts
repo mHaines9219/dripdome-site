@@ -7,6 +7,7 @@ import '@fontsource/montserrat/700.css'; // Bold
 import '@fontsource/open-sans/400.css'; // Regular
 import '@fontsource/shrikhand';
 import '@fontsource/nova-mono';
+import '@fontsource/quicksand';
 
 const theme = createTheme({
   typography: {
@@ -52,7 +53,7 @@ const theme = createTheme({
     body2: {
       fontSize: '24px',
       fontWeight: 400,
-      fontFamily: 'Shrikhand',
+      fontFamily: 'Open Sans',
       '@media (max-width:600px)': {
         fontSize: '12px',
       },

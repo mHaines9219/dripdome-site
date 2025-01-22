@@ -37,7 +37,7 @@ const FabricationSection = () => {
         padding: { xs: '24px', md: '48px' },
         maxWidth: '1200px',
         margin: '0 auto',
-        backgroundColor: 'blue',
+        backgroundColor: 'black',
       }}
     >
       {aboutSections.map((section, index) => (
@@ -52,7 +52,7 @@ const FabricationSection = () => {
             alignItems: 'center',
             marginBottom: '64px',
             gap: '32px',
-            border: '2px solid black',
+            // border: '2px solid black',
           }}
         >
           {/* Image Section */}
@@ -63,7 +63,7 @@ const FabricationSection = () => {
             }}
           >
             <Image
-              src={section.image}
+              src="https://picsum.photos/800/800?random=4,"
               alt={section.imageAlt}
               width={500} // Adjust width
               height={300} // Adjust height
@@ -83,7 +83,7 @@ const FabricationSection = () => {
             }}
           >
             <Typography
-              variant="h4"
+              variant="h2"
               sx={{
                 fontWeight: 'bold',
                 marginBottom: '16px',
@@ -91,7 +91,7 @@ const FabricationSection = () => {
             >
               {section.header.toUpperCase()}
             </Typography>
-            <Typography variant="body1" color="textSecondary">
+            <Typography variant="body1" color="">
               {section.text}
             </Typography>
           </Box>

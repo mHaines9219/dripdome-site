@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 
 export default function Contact() {
   return (
-    <div className="">
+    <div className="mx-8">
       <Typography
         variant="h2"
         component="h2"
@@ -29,7 +29,7 @@ export default function Contact() {
           display: 'flex',
           textAlign: 'center',
           marginBottom: '30px',
-          fontFamily: 'Nova Mono',
+          fontFamily: 'Open Sans',
         }}
       >
         BIG OR SMALL, EVERY IDEA HAS THE POTENTITAL TO SHINE. TELL US ABOUT YOUR

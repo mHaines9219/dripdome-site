@@ -30,7 +30,7 @@ export default function page() {
           color="white"
           sx={{
             fontSize: { xs: '14px', md: 'px', lg: '96px' },
-            fontWeight: 'bold',
+            fontWeight: '',
             marginTop: '10px',
             marginLeft: '30px',
             marginRight: '30px',
