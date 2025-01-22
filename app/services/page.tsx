@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Typography } from '@mui/material';
-import FabricationCarousel from '../components/ServicesCarousel';
+import ServicesCarousel from '../components/ServicesCarousel';
 import { motion } from 'framer-motion';
 import '../globals.css';
 
@@ -33,7 +33,7 @@ export default function ServicesPage() {
           component="h1"
           color="white"
           sx={{
-            fontSize: { xs: '55px', md: '80px', lg: '96px' },
+            fontSize: { xs: '55px', sm: '95px', lg: '150px' },
             fontWeight: 'bold',
             paddingTop: { xs: '120px', md: '150px' },
             marginBottom: { xs: '20px', md: '30px' },
@@ -50,30 +50,32 @@ export default function ServicesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <Typography
-          variant="body1"
-          component="p"
-          color="white"
-          sx={{
-            fontSize: { xs: '14px', md: '20px', lg: '25px' },
-            fontWeight: 'bold',
-            marginTop: '10px',
-            marginLeft: '30px',
-            marginRight: '30px',
-            textAlign: 'center',
-          }}
-        >
-          From the first spark of an idea to the final reveal, we handle every
-          detail of the design and build process. Our expertise spans across a
-          variety of services, including custom carpentry, scenic painting,
-          props, murals, LED integrations, and more. Whether you're looking to
-          create an unforgettable photo set, a dynamic event installation, or a
-          large-scale art piece, Drip Dome Productions has the tools and talent
-          to make it happen.
-        </Typography>
+        <div className="text-container mx-2 md:mx-10">
+          <Typography
+            variant="body1"
+            component="p"
+            color="white"
+            sx={{
+              fontSize: { xs: '14px', sm: '20px', md: '40px' },
+              fontWeight: 'bold',
+              marginTop: '10px',
+              marginLeft: '30px',
+              marginRight: '30px',
+              textAlign: 'center',
+            }}
+          >
+            From the first spark of an idea to the final reveal, we handle every
+            detail of the design and build process. Our expertise spans across a
+            variety of services, including custom carpentry, scenic painting,
+            props, murals, LED integrations, and more. Whether you're looking to
+            create an unforgettable photo set, a dynamic event installation, or
+            a large-scale art piece, Drip Dome Productions has the tools and
+            talent to make it happen.
+          </Typography>
+        </div>
       </motion.div>
-      <div className="w-full max-w-4xl mx-auto p-4">
-        <div className="grid grid-cols-2 gap-4 text-lg text-white my-8">
+      <div className="w-full  mx-auto p-4">
+        <div className="grid grid-cols-2 gap-4 text-lg text-white border my-8 py-12 rounded-xl mx-2 md:mx-4">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -85,7 +87,7 @@ export default function ServicesPage() {
                 variant="h2"
                 align="center"
                 sx={{
-                  fontSize: { xs: '20px', md: '25px', lg: '45px' },
+                  fontSize: { xs: '20px', sm: '35px', lg: '45px' },
                 }}
               >
                 {service.toUpperCase()}
@@ -95,7 +97,13 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <FabricationCarousel />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0, duration: 3.0 }}
+      >
+        <ServicesCarousel />
+      </motion.div>
       <div className="bg-black  py-10">
         <Contact />
       </div>

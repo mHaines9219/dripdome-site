@@ -18,7 +18,7 @@ export default function Services() {
         component="h1"
         color="primary"
         sx={{
-          fontSize: { xs: '60px', md: '80px', lg: '96px' },
+          fontSize: { xs: '60px', md: '800px', lg: '96px' },
           fontWeight: 'bold',
           lineHeight: 1.2,
           whiteSpace: 'nowrap',

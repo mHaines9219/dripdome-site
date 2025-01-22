@@ -17,9 +17,9 @@ const theme = createTheme({
       fontWeight: 'bold',
       fontFamily: 'Shrikhand',
       lineHeight: 1.26,
-      '@media (max-width:600px)': {
-        fontSize: '22px',
-      },
+      // '@media (max-width:600px)': {
+      //   fontSize: '202px',
+      // },
     },
     h2: {
       fontSize: '42px',

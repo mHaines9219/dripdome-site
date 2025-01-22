@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 
-const FabricationCarousel: React.FC = () => {
+const ServicesCarousel: React.FC = () => {
   return (
     <>
       {/* Mobile/Tablet Container */}
@@ -109,4 +109,4 @@ const FabricationCarousel: React.FC = () => {
   );
 };
 
-export default FabricationCarousel;
+export default ServicesCarousel;

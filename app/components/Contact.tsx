@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 
 export default function Contact() {
   return (
-    <div className="mx-8">
+    <div className="mx-8 ">
       <Typography
         variant="h2"
         component="h2"
@@ -36,7 +36,7 @@ export default function Contact() {
         PROJECT AND LET`S BUILD SOMETHING AMAZING!
       </Typography>
       <form
-        className="flex flex-col max-w-md mx-auto"
+        className="flex flex-col max-w-md mx-auto "
         onSubmit={async (e) => {
           e.preventDefault();
 
