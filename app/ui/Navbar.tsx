@@ -15,7 +15,7 @@ export default function Navbar() {
     { name: 'ABOUT US', href: '/about-us' },
     { name: 'PORTFOLIO', href: '/portfolio' },
     { name: 'SERVICES', href: '/services' },
-    // { name: 'CONVENTIONS', href: '/conventions' },
+    // { name: 'CONVENTIONS', href: '/convenions' },
     { name: 'RENTALS', href: '/rentals' },
   ];
 
