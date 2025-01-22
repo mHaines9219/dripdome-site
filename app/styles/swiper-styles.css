@@ -16,7 +16,7 @@
 }
 
 .swiper-pagination {
-  bottom: -5px !important; /* Adjust this value to control the exact position */
+  bottom: -8px !important; /* Adjust this value to control the exact position */
 }
 
 .swiper {

@@ -3,13 +3,13 @@ import { Typography } from '@mui/material';
 
 export default function Contact() {
   return (
-    <div className="mx-8 ">
+    <div className="mx-8 md:mx-16 ">
       <Typography
         variant="h2"
         component="h2"
         color="primary"
         sx={{
-          fontSize: { xs: '50px', md: '80px', lg: '96px' }, // Define different font sizes for different breakpoints
+          fontSize: { xs: '50px', md: '80px', lg: '150px' }, // Define different font sizes for different breakpoints
           fontWeight: 'bold', // Optional: Adjust font weight
           marginBottom: '15px',
           justifyContent: 'center',
@@ -36,7 +36,7 @@ export default function Contact() {
         PROJECT AND LET`S BUILD SOMETHING AMAZING!
       </Typography>
       <form
-        className="flex flex-col max-w-md mx-auto "
+        className="flex flex-col max-w-screen mx-auto mb-24 md:gap-y-4 "
         onSubmit={async (e) => {
           e.preventDefault();
 

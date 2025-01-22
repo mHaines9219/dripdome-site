@@ -56,7 +56,7 @@ export default function ServicesPage() {
             component="p"
             color="white"
             sx={{
-              fontSize: { xs: '14px', sm: '20px', md: '40px' },
+              fontSize: { xs: '14px', sm: '20px', md: '30px' },
               fontWeight: 'bold',
               marginTop: '10px',
               marginLeft: '30px',
@@ -75,7 +75,7 @@ export default function ServicesPage() {
         </div>
       </motion.div>
       <div className="w-full  mx-auto p-4">
-        <div className="grid grid-cols-2 gap-4 text-lg text-white border my-8 py-12 rounded-xl mx-2 md:mx-4">
+        <div className="grid grid-cols-2 gap-4 text-lg text-white border  md:border-4 my-8 py-12 rounded-xl mx-2 md:mx-4 md:my-20">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -87,7 +87,7 @@ export default function ServicesPage() {
                 variant="h2"
                 align="center"
                 sx={{
-                  fontSize: { xs: '20px', sm: '35px', lg: '45px' },
+                  fontSize: { xs: '20px', sm: '35px', lg: '65px' },
                 }}
               >
                 {service.toUpperCase()}

@@ -5,6 +5,7 @@ import { Typography } from '@mui/material';
 
 import { fabricationData } from '../services/data';
 import Image from 'next/image';
+import '../styles/swiper-pagination.css';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
@@ -37,13 +38,12 @@ const ServicesCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className=" flex h-[20px] justify-center items-center border-4 border-black"
+                  className=" flex h-[20px] justify-center items-center border-2  rounded-2xl border-white"
                 >
                   <div>
                     <Image
                       src={image}
-                      width={500}
-                      height={500}
+                      layout="fill"
                       objectFit="contain"
                       alt={`${section.category} ${idx + 1}`}
                     />
@@ -56,9 +56,11 @@ const ServicesCarousel: React.FC = () => {
       </div>
 
       {/* Desktop Container */}
-      <div className="hidden lg:block w-screen ">
+      {/* Desktop Container */}
+      {/* Desktop Container */}
+      <div className="hidden lg:block w-screen  mx-4">
         {fabricationData.map((section, index) => (
-          <div key={index} className="max-w-screen overflow-hidden">
+          <div key={index} className="w-[100vw] overflow-hidden">
             <Typography
               variant="h1"
               component="h1"
@@ -75,12 +77,10 @@ const ServicesCarousel: React.FC = () => {
               {section.category}
             </Typography>
             <Swiper
-              className="w-full max-w-4xl h-[550px] justify-center items-center mb-12"
+              className="w-full max-w-7xl h-[700px] justify-center items-center mb-24 -mt-20"
               grabCursor={true}
-              spaceBetween={100}
-              centeredSlides={true}
-              slidesPerView={4}
-              initialSlide={1}
+              slidesPerView={2.5} // Adjust based on your preference
+              spaceBetween={10} // Add space between slides
               loop={true}
               pagination={{ clickable: true }}
               modules={[Pagination]}
@@ -88,13 +88,12 @@ const ServicesCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex h-[20px] mx-48 justify-center items-center"
+                  className="flex justify-center border border-4 border-white items-center rounded-2xl "
                 >
-                  <div className="h-96 w-96">
+                  <div className="h-[600px] w-[600px] ">
                     <Image
                       src={image}
-                      width={500}
-                      height={500}
+                      layout="fill" // Makes the image fill the parent container
                       objectFit="contain"
                       alt={`${section.category} ${idx + 1}`}
                     />
