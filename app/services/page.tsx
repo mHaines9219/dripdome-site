@@ -15,7 +15,7 @@ export default function ServicesPage() {
 
     'CNC Routing',
     '3D Renders',
-    'Props',
+    'PHOTOGRAPHY',
     'Production',
     'Printing',
     'Murals',

@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const links = [
     { name: 'ABOUT US', href: '/about-us' },
-    { name: 'VIDEO/PHOTO', href: '/photo' },
+    { name: 'PORTFOLIO', href: '/portfolio' },
     { name: 'SERVICES', href: '/services' },
     { name: 'CONVENTIONS', href: '/conventions' },
     { name: 'RENTALS', href: '/rentals' },

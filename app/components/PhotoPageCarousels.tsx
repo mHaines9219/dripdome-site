@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, EffectCoverflow } from 'swiper/modules';
 import { Typography } from '@mui/material';
 
-import { photographyData } from '../photo/data';
+import { photographyData } from '../portfolio/data';
 import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -21,7 +21,7 @@ const PhotoPageCarousels: React.FC = () => {
               component="h1"
               color="white"
               sx={{
-                fontSize: { xs: '35px', md: '40px', lg: '45px' },
+                fontSize: { xs: '45px', md: '40px', lg: '45px' },
                 fontWeight: 'bold',
                 lineHeight: 1.2,
                 marginTop: '20px',
