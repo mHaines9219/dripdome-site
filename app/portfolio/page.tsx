@@ -63,6 +63,28 @@ export default function page() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0, duration: 1 }}
+        >
+          <Typography
+            variant="h1"
+            component="h1"
+            color="white"
+            sx={{
+              fontSize: { xs: '30px', sm: '55px', lg: '80px' },
+              fontWeight: 'bold',
+              paddingTop: { xs: '30px', md: '30px' },
+              marginBottom: { xs: '20px', md: '30px' },
+              paddingLeft: '10px',
+              paddingRight: '10px',
+              textAlign: 'center',
+            }}
+          >
+            FEATURED PROJECTS
+          </Typography>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0, duration: 1.5 }}
         >
           <FeaturedProjects />
@@ -74,6 +96,7 @@ export default function page() {
         >
           <PhotoPageCarousels />
         </motion.div>
+
         <div className="mt-16">
           <PressSection />
         </div>

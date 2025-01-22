@@ -20,6 +20,7 @@ const PressSection = () => {
           flexDirection: 'column',
           gap: 2,
           textAlign: 'center',
+          width: '80vw',
         }}
       >
         <Typography
@@ -28,7 +29,7 @@ const PressSection = () => {
           sx={{
             textDecoration: 'none',
             color: 'inherit',
-            fontSize: { xs: '70px', sm: '30px' },
+            fontSize: { xs: '70px', sm: '80px' },
           }}
         >
           PRESS

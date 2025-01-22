@@ -21,7 +21,7 @@ const PhotoPageCarousels: React.FC = () => {
               component="h1"
               color="white"
               sx={{
-                fontSize: { xs: '45px', md: '40px', lg: '45px' },
+                fontSize: { xs: '45px', sm: '60px', md: '75px', lg: '75px' },
                 fontWeight: 'bold',
                 lineHeight: 1.2,
                 marginTop: '20px',
@@ -79,7 +79,7 @@ const PhotoPageCarousels: React.FC = () => {
               component="h1"
               color="white"
               sx={{
-                fontSize: { xs: '35px', md: '40px', lg: '45px' },
+                fontSize: { xs: '35px', md: '80px', lg: '95px' },
                 fontWeight: 'bold',
                 lineHeight: 1.2,
                 marginTop: '20px',

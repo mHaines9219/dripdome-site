@@ -30,7 +30,7 @@ const sections = [
     ], // Replace with actual image paths
   },
   {
-    header: 'X3 CONVENTION',
+    header: 'X3 EXPO',
     blurb: ` At the X3 Expo, held at the historic Hollywood Palladium  we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
     images: [
       'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
@@ -49,7 +49,7 @@ const FeaturedProjects = () => {
   return (
     <div className="  px-6 pt-6">
       {sections.map((section, index) => (
-        <div className="rounded-3xl border-4 mb-6">
+        <div className="rounded-3xl  mb-6 ">
           <Box
             key={index}
             sx={{
@@ -62,7 +62,8 @@ const FeaturedProjects = () => {
               alignItems: 'center',
               marginBottom: '1rem',
               gap: '1rem',
-              padding: '20px',
+              padding: '0',
+              height: 'auto',
             }}
           >
             {/* Carousel */}
@@ -71,11 +72,14 @@ const FeaturedProjects = () => {
                 flex: 1,
                 maxWidth: isMobile ? '100%' : '100%',
                 height: '50vh',
-                width: '70vw',
+                width: isMobile ? '70vw' : '20vw',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignItems: 'center',
               }}
             >
               <Swiper
-                className="w-full  h-full justify-center items-center"
+                className="w-full flex  justify-center items-center"
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
@@ -95,7 +99,7 @@ const FeaturedProjects = () => {
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx + 1}
-                    className="flex justify-center border border-4 border-white items-center rounded-2xl  "
+                    className="flex justify-center   border border-4 border-white items-center rounded-2xl  "
                   >
                     <div className="">
                       <Image
@@ -123,13 +127,16 @@ const FeaturedProjects = () => {
             >
               <Typography
                 variant="h1"
-                sx={{ fontSize: '1.8rem', marginBottom: '1rem' }}
+                sx={{
+                  fontSize: { xs: '30px', sm: '40px', md: '50px', lg: '80px' },
+                  marginBottom: '1rem',
+                }}
               >
                 {section.header}
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontSize: { xs: '14px', sm: '30px' } }}
+                sx={{ fontSize: { xs: '14px', sm: '20px', md: '30px' } }}
               >
                 {section.blurb}
               </Typography>
