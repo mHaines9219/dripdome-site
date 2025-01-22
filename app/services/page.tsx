@@ -75,7 +75,7 @@ export default function ServicesPage() {
         </div>
       </motion.div>
       <div className="w-full  mx-auto p-4">
-        <div className="grid grid-cols-2 gap-4 text-lg text-white border  md:border-4 my-8 py-12 rounded-xl mx-2 md:mx-4 md:my-20">
+        <div className="grid grid-cols-2 gap-4 text-lg text-white border  md:border-4 my-8 py-12 rounded-xl mx-2 px-2 md:mx-4 md:my-20">
           {services.map((service, index) => (
             <motion.div
               key={index}
