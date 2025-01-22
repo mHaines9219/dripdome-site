@@ -87,7 +87,7 @@ export default function ServicesPage() {
                 variant="h2"
                 align="center"
                 sx={{
-                  fontSize: { xs: '20px', sm: '35px', lg: '65px' },
+                  fontSize: { xs: '20px', sm: '35px', md: '55px', lg: '65px' },
                 }}
               >
                 {service.toUpperCase()}
