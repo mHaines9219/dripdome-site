@@ -22,7 +22,7 @@ export default function page() {
             component="h1"
             color="white"
             sx={{
-              fontSize: { xs: '55px', sm: '95px', lg: '120px' },
+              fontSize: { xs: '55px', sm: '95px', lg: '96px' },
               fontWeight: 'bold',
               paddingTop: { xs: '120px', md: '150px' },
               marginBottom: { xs: '20px', md: '30px' },
@@ -45,7 +45,7 @@ export default function page() {
               component="p"
               color="white"
               sx={{
-                fontSize: { xs: '14px', sm: '20px', md: '30px' },
+                fontSize: { xs: '14px', sm: '20px', md: '24px' },
                 marginLeft: '30px',
                 marginRight: '30px',
                 textAlign: 'center',

@@ -11,15 +11,16 @@ export default function ServicesPage() {
   const services = [
     'Carpentry',
     'Set Design',
-    'Metalwork',
+    'PHOTOGRAPHY',
 
     'CNC Routing',
     '3D Renders',
-    'PHOTOGRAPHY',
+
     'Production',
     'Printing',
     'Murals',
     'Rentals',
+    'Props',
   ];
   return (
     <div className="bg-black">
@@ -33,7 +34,7 @@ export default function ServicesPage() {
           component="h1"
           color="white"
           sx={{
-            fontSize: { xs: '55px', sm: '95px', lg: '120px' },
+            fontSize: { xs: '55px', sm: '95px', lg: '96px' },
             fontWeight: 'bold',
             paddingTop: { xs: '120px', md: '150px' },
             marginBottom: { xs: '20px', md: '30px' },
@@ -56,7 +57,7 @@ export default function ServicesPage() {
             component="p"
             color="white"
             sx={{
-              fontSize: { xs: '14px', sm: '20px', md: '30px' },
+              fontSize: { xs: '14px', sm: '20px', md: '24px' },
               marginTop: '10px',
               marginLeft: '30px',
               marginRight: '30px',
@@ -86,7 +87,7 @@ export default function ServicesPage() {
                 variant="h2"
                 align="center"
                 sx={{
-                  fontSize: { xs: '20px', sm: '35px', md: '55px', lg: '65px' },
+                  fontSize: { xs: '20px', sm: '35px', md: '55px', lg: '55px' },
                 }}
               >
                 {service.toUpperCase()}

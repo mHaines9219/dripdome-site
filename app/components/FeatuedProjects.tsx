@@ -3,7 +3,7 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import { Pagination, EffectCoverflow } from 'swiper/modules';
+import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
 
 const sections = [
   {
@@ -36,6 +36,17 @@ const sections = [
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.jpeg',
     ],
   },
+  {
+    header: 'GOOD DYE YOUNG BRAND SHOOT',
+    blurb: `We partnered with Good Dye Young to create surreal, colorful sets that brought their vibrant hair dye products to life. Our team fabricated custom picket fences, reimagined window blinds, and curated unique props to craft immersive environments that perfectly captured the brand's creative spirit.`,
+    images: [
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy1.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy2.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy3.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy5.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy4.jpeg',
+    ],
+  },
 ];
 
 const FeaturedProjects = () => {
@@ -45,7 +56,7 @@ const FeaturedProjects = () => {
   return (
     <div className="px-6 pt-6">
       {sections.map((section, index) => (
-        <div key={index} className="rounded-3xl md:pt-12 lg:pt-24  mb-6">
+        <div key={index} className="rounded-3xl md:pt-12 lg:pt-20  mb-6">
           <Box
             sx={{
               display: 'flex',
@@ -67,14 +78,14 @@ const FeaturedProjects = () => {
                 flex: 1,
                 maxWidth: '100%',
                 width: isMobile ? '70vw' : '20vw',
-                height: isMobile ? 'auto' : '300px', // Height for larger screens
+                height: 'auto', // Height for larger screens
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
               <Swiper
-                className="w-full flex justify-center items-center"
+                className="w-full lg:h-[600px] flex justify-center items-center"
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
@@ -82,7 +93,11 @@ const FeaturedProjects = () => {
                 slidesPerView={1}
                 loop={true}
                 pagination={{ clickable: true }}
-                modules={[Pagination, EffectCoverflow]}
+                autoplay={{
+                  delay: 3000, // time between slides in ms
+                  disableOnInteraction: true, // stops autoplay when the user interacts
+                }}
+                modules={[Pagination, EffectCoverflow, Autoplay]}
                 coverflowEffect={{
                   rotate: 50,
                   stretch: 0,
@@ -93,14 +108,14 @@ const FeaturedProjects = () => {
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
-                    key={idx + 1}
-                    className="flex justify-center items-center rounded-3xl overflow-hidden"
+                    key={idx}
+                    className="flex justify-center items-center   overflow-hidden"
                     style={{ width: '100%', height: '100%' }}
                   >
                     <Box
                       sx={{
                         width: '100%',
-                        height: { xs: '400px', lg: '600px' }, // Responsive height using sx
+                        height: { xs: '400px', lg: '600px' },
                         position: 'relative',
                         borderRadius: 'inherit',
                         overflow: 'hidden',
@@ -110,7 +125,10 @@ const FeaturedProjects = () => {
                         src={image}
                         alt={`${section.header}`}
                         fill
-                        style={{ objectFit: 'cover' }}
+                        style={{
+                          objectFit: 'contain', // Change the object-fit property to adjust the image size
+                          // Add border styling directly to the image
+                        }}
                       />
                     </Box>
                   </SwiperSlide>
@@ -130,7 +148,7 @@ const FeaturedProjects = () => {
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: '30px', sm: '40px', md: '50px', lg: '60px' },
+                  fontSize: { xs: '30px', sm: '40px', md: '40px', lg: '50px' },
                   mb: '1rem',
                 }}
               >
@@ -138,7 +156,7 @@ const FeaturedProjects = () => {
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontSize: { xs: '14px', sm: '20px', md: '30px' } }}
+                sx={{ fontSize: { xs: '14px', sm: '20px', md: '20px' } }}
               >
                 {section.blurb}
               </Typography>

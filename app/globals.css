@@ -25,3 +25,24 @@ body {
 .page-container {
   background-color: 'black';
 }
+
+/* Change bullet color, size, margin, etc. */
+.swiper-pagination-bullet {
+  background-color: white !important; /* Change the bullet color */
+  width: 12px; /* Adjust bullet size */
+  height: 12px;
+  margin: 12px 6px; /* Add horizontal spacing */
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: yellow !important;
+  border: 2px solid black !important; /* Active bullet color */
+  opacity: 1;
+}
+
+/* Adjust pagination container padding/margin */
+.swiper-pagination {
+  bottom: 20px !important; /* Move pagination up or down */
+  padding: 10px;
+}

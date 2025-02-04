@@ -25,7 +25,6 @@ export default function Contact() {
         color="primary"
         sx={{
           fontSize: { sm: '20px', md: '25px', lg: '30px' }, // Define different font sizes for different breakpoints
-          fontWeight: 'bold', // Optional: Adjust font weight
           display: 'flex',
           textAlign: 'center',
           marginBottom: '30px',
@@ -33,7 +32,7 @@ export default function Contact() {
         }}
       >
         BIG OR SMALL, EVERY IDEA HAS THE POTENTITAL TO SHINE. TELL US ABOUT YOUR
-        PROJECT AND LET`S BUILD SOMETHING AMAZING!
+        PROJECT AND LET'S BUILD SOMETHING AMAZING!
       </Typography>
       <form
         className="flex flex-col max-w-screen mx-auto mb-24 md:gap-y-4 "
