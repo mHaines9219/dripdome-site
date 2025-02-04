@@ -3,13 +3,13 @@ import { Typography } from '@mui/material';
 
 export default function Contact() {
   return (
-    <div className="mx-8 md:mx-16 ">
+    <div className="mx-8 md:mx-16 lg:mx-48 ">
       <Typography
         variant="h2"
         component="h2"
         color="primary"
         sx={{
-          fontSize: { xs: '50px', md: '80px', lg: '150px' }, // Define different font sizes for different breakpoints
+          fontSize: { xs: '50px', md: '80px', lg: '90px' }, // Define different font sizes for different breakpoints
           fontWeight: 'bold', // Optional: Adjust font weight
           marginBottom: '15px',
           justifyContent: 'center',

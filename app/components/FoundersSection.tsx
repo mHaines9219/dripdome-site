@@ -7,7 +7,7 @@ const founders = [
   {
     name: 'DIANA HAINES',
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/diana_headshot.jpeg',
 
     blurb:
       'Founder 1 is an expert in custom set design with a passion for creating immersive environments. With years of experience, they bring bold visions to life.',
@@ -15,14 +15,14 @@ const founders = [
   {
     name: 'PATRICIA KWIATKOWSKI',
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/pat_headshot.jpeg',
     blurb:
       'Founder 2 specializes in scenic painting and graphic design, ensuring every project is visually striking and unforgettable.',
   },
   {
     name: 'MATT HAINES',
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/matt_headshot.jpeg',
     blurb:
       'Founder 3 is the driving force behind Drip Dome’s innovative approach to fabrication and installations, delivering exceptional results every time.',
   },
@@ -50,8 +50,8 @@ const FoundersSection = () => {
               xs: '35px',
               sm: '50px',
               md: '50px',
-              lg: '90px',
-              xl: '100px',
+              lg: '80px',
+              xl: '80px',
             },
           }}
           gutterBottom
@@ -72,7 +72,7 @@ const FoundersSection = () => {
               key={index}
               sx={{
                 flex: isMobile ? 'none' : '1',
-                maxWidth: isMobile ? '100%' : '300px',
+                maxWidth: isMobile ? '100%' : '33%',
                 textAlign: 'center',
                 border: '1px solid #ddd',
                 borderRadius: '8px',

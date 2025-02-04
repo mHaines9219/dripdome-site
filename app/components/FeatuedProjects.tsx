@@ -7,6 +7,18 @@ import { Pagination, EffectCoverflow } from 'swiper/modules';
 
 const sections = [
   {
+    header: 'NOT LOVELINE PODCAST SET',
+    blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style. 
+`,
+    images: [
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
+    ], // Replace with actual image paths
+  },
+  {
     header: 'THE ORIGINAL SOUTH SIDE',
     blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style. 
 `,
@@ -49,7 +61,7 @@ const FeaturedProjects = () => {
   return (
     <div className="  px-6 pt-6">
       {sections.map((section, index) => (
-        <div className="rounded-3xl  mb-6 ">
+        <div className="rounded-3xl  md:pt-12  mb-6 ">
           <Box
             key={index}
             sx={{
@@ -59,7 +71,7 @@ const FeaturedProjects = () => {
                 : index % 2 === 0
                 ? 'row'
                 : 'row-reverse',
-              alignItems: 'center',
+              alignItems: isMobile ? 'center' : 'start',
               marginBottom: '1rem',
               gap: '1rem',
               padding: '0',
@@ -71,7 +83,7 @@ const FeaturedProjects = () => {
               sx={{
                 flex: 1,
                 maxWidth: isMobile ? '100%' : '100%',
-                height: '50vh',
+                // height: '50vh',
                 width: isMobile ? '70vw' : '20vw',
                 justifyContent: 'center',
                 alignContent: 'center',
@@ -99,7 +111,7 @@ const FeaturedProjects = () => {
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx + 1}
-                    className="flex justify-center   border border-4 border-white items-center rounded-2xl  "
+                    className="flex justify-centerborder border-4 border-white items-center rounded-2xl  "
                   >
                     <div className="">
                       <Image
@@ -128,7 +140,7 @@ const FeaturedProjects = () => {
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: '30px', sm: '40px', md: '50px', lg: '80px' },
+                  fontSize: { xs: '30px', sm: '40px', md: '50px', lg: '60px' },
                   marginBottom: '1rem',
                 }}
               >

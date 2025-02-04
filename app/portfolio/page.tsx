@@ -22,7 +22,7 @@ export default function page() {
             component="h1"
             color="white"
             sx={{
-              fontSize: { xs: '55px', sm: '95px', lg: '150px' },
+              fontSize: { xs: '55px', sm: '95px', lg: '120px' },
               fontWeight: 'bold',
               paddingTop: { xs: '120px', md: '150px' },
               marginBottom: { xs: '20px', md: '30px' },
@@ -46,7 +46,6 @@ export default function page() {
               color="white"
               sx={{
                 fontSize: { xs: '14px', sm: '20px', md: '30px' },
-                fontWeight: 'bold',
                 marginLeft: '30px',
                 marginRight: '30px',
                 textAlign: 'center',
@@ -70,7 +69,7 @@ export default function page() {
             component="h1"
             color="white"
             sx={{
-              fontSize: { xs: '30px', sm: '55px', lg: '80px' },
+              fontSize: { xs: '30px', sm: '55px', lg: '70px' },
               fontWeight: 'bold',
               paddingTop: { xs: '30px', md: '30px' },
               marginBottom: { xs: '20px', md: '30px' },

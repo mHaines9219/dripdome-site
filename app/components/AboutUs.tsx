@@ -54,7 +54,6 @@ export default function AboutUs() {
               color="white"
               sx={{
                 fontSize: { xs: '14px', sm: '20px', md: '30px' },
-                fontWeight: 'bold',
                 marginTop: '10px',
                 marginLeft: '30px',
                 marginRight: '30px',
