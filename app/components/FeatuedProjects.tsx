@@ -7,50 +7,34 @@ import { Pagination, EffectCoverflow } from 'swiper/modules';
 
 const sections = [
   {
-    header: 'NOT LOVELINE PODCAST SET',
-    blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style. 
-`,
-    images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-    ], // Replace with actual image paths
-  },
-  {
     header: 'THE ORIGINAL SOUTH SIDE',
-    blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style. 
-`,
+    blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-    ], // Replace with actual image paths
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss2.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss3.jpg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss4.jpg',
+    ],
   },
   {
     header: 'JENNIFERS BODY PHOTO SHOOT',
     blurb: `We meticulously recreated the iconic pool scene from Jennifers Body by constructing a 20x20-foot structure featuring a functional pool. To authentically capture the scene's atmosphere, we employed specialized techniques to distress the walls, achieving a realistic, aged appearance. This project highlights our commitment to detail and our ability to bring cinematic visions to life.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-    ], // Replace with actual image paths
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb2.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb1.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb3.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb4.jpeg',
+    ],
   },
   {
     header: 'X3 EXPO',
-    blurb: ` At the X3 Expo, held at the historic Hollywood Palladium  we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
+    blurb: `At the X3 Expo, held at the historic Hollywood Palladium, we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/editorials/paperhoney.jpg',
-    ], // Replace with actual image paths
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_2.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_1.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_3.jpeg',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.jpeg',
+    ],
   },
 ];
 
@@ -59,11 +43,10 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="  px-6 pt-6">
+    <div className="px-6 pt-6">
       {sections.map((section, index) => (
-        <div className="rounded-3xl  md:pt-12  mb-6 ">
+        <div key={index} className="rounded-3xl md:pt-12 lg:pt-24  mb-6">
           <Box
-            key={index}
             sx={{
               display: 'flex',
               flexDirection: isMobile
@@ -71,10 +54,10 @@ const FeaturedProjects = () => {
                 : index % 2 === 0
                 ? 'row'
                 : 'row-reverse',
-              alignItems: isMobile ? 'center' : 'start',
-              marginBottom: '1rem',
+              alignItems: 'center',
+              mb: '1rem',
               gap: '1rem',
-              padding: '0',
+              p: 0,
               height: 'auto',
             }}
           >
@@ -82,16 +65,16 @@ const FeaturedProjects = () => {
             <Box
               sx={{
                 flex: 1,
-                maxWidth: isMobile ? '100%' : '100%',
-                // height: '50vh',
+                maxWidth: '100%',
                 width: isMobile ? '70vw' : '20vw',
+                height: isMobile ? 'auto' : '300px', // Height for larger screens
+                display: 'flex',
                 justifyContent: 'center',
-                alignContent: 'center',
                 alignItems: 'center',
               }}
             >
               <Swiper
-                className="w-full flex  justify-center items-center"
+                className="w-full flex justify-center items-center"
                 effect={'coverflow'}
                 grabCursor={true}
                 centeredSlides={true}
@@ -111,18 +94,25 @@ const FeaturedProjects = () => {
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx + 1}
-                    className="flex justify-centerborder border-4 border-white items-center rounded-2xl  "
+                    className="flex justify-center items-center rounded-3xl overflow-hidden"
+                    style={{ width: '100%', height: '100%' }}
                   >
-                    <div className="">
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: { xs: '400px', lg: '600px' }, // Responsive height using sx
+                        position: 'relative',
+                        borderRadius: 'inherit',
+                        overflow: 'hidden',
+                      }}
+                    >
                       <Image
                         src={image}
-                        className=""
-                        alt={`${section.header} `}
-                        objectFit="contain"
-                        width={500} // Replace with actual image dimensions
-                        height={300} // Replace with actual image dimensions
+                        alt={`${section.header}`}
+                        fill
+                        style={{ objectFit: 'cover' }}
                       />
-                    </div>
+                    </Box>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -133,15 +123,15 @@ const FeaturedProjects = () => {
                 flex: 1,
                 maxWidth: isMobile ? '100%' : '50%',
                 textAlign: isMobile ? 'center' : 'left',
-                padding: '0px,10px,10px,0px',
-                margin: '10px',
+                p: '0 10px 10px 0',
+                m: '10px',
               }}
             >
               <Typography
                 variant="h1"
                 sx={{
                   fontSize: { xs: '30px', sm: '40px', md: '50px', lg: '60px' },
-                  marginBottom: '1rem',
+                  mb: '1rem',
                 }}
               >
                 {section.header}
