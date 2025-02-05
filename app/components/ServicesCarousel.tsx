@@ -56,8 +56,6 @@ const ServicesCarousel: React.FC = () => {
       </div>
 
       {/* Desktop Container */}
-      {/* Desktop Container */}
-      {/* Desktop Container */}
       <div className="hidden lg:block w-screen  mx-4">
         {fabricationData.map((section, index) => (
           <div key={index} className="w-[100vw] overflow-hidden">

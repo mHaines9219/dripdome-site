@@ -2,6 +2,7 @@
 import React from 'react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 
 const founders = [
   {
@@ -33,79 +34,87 @@ const FoundersSection = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="pt-12 bg-black">
-      <Box
-        sx={{
-          padding: '4rem 2rem',
-          paddingTop: '0px',
-          margin: '30px,0,0,0',
-          textAlign: 'center',
-          background: 'black',
-        }}
+    <div className="bg-black">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0, duration: 0.5 }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            fontSize: {
-              xs: '35px',
-              sm: '50px',
-              md: '50px',
-              lg: '80px',
-              xl: '80px',
-            },
-          }}
-          gutterBottom
-        >
-          MEET OUR FOUNDERS
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
-            gap: '2rem',
-            justifyContent: 'center',
-            alignItems: 'stretch',
-          }}
-        >
-          {founders.map((founder, index) => (
-            <Box
-              key={index}
+        <div className="pt-12 bg-black">
+          <Box
+            sx={{
+              padding: '4rem 2rem',
+              paddingTop: '0px',
+              margin: '30px,0,0,0',
+              textAlign: 'center',
+              background: 'black',
+            }}
+          >
+            <Typography
+              variant="h3"
               sx={{
-                flex: isMobile ? 'none' : '1',
-                maxWidth: isMobile ? '100%' : '33%',
-                textAlign: 'center',
-                border: '1px solid #ddd',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                backgroundColor: 'black',
-                boxShadow: '0px 2px 5px rgba(0,0,0,0.1)',
+                fontSize: {
+                  xs: '35px',
+                  sm: '50px',
+                  md: '50px',
+                  lg: '80px',
+                  xl: '80px',
+                },
+              }}
+              gutterBottom
+            >
+              MEET OUR FOUNDERS
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: '2rem',
+                justifyContent: 'center',
+                alignItems: 'stretch',
               }}
             >
-              <div className="headshot-container h-24 w-24 rounded-full overflow-hidden flex justify-center items-center mx-auto mt-4">
-                <Image
-                  src={founder.photo}
-                  width={500}
-                  height={500}
-                  alt={founder.name}
-                  className="object-cover"
-                />
-              </div>
-              <Box sx={{ padding: '1rem' }}>
-                <Typography variant="h3" gutterBottom>
-                  {founder.name}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontSize: { xs: '14px', sm: '14px', md: '20px' } }}
-                  color="white"
+              {founders.map((founder, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    flex: isMobile ? 'none' : '1',
+                    maxWidth: isMobile ? '100%' : '33%',
+                    textAlign: 'center',
+                    border: '1px solid #ddd',
+                    borderRadius: '8px',
+                    overflow: 'hidden',
+                    backgroundColor: 'black',
+                    boxShadow: '0px 2px 5px rgba(0,0,0,0.1)',
+                  }}
                 >
-                  {founder.blurb}
-                </Typography>
-              </Box>
+                  <div className="headshot-container h-24 w-24 rounded-full overflow-hidden flex justify-center items-center mx-auto mt-4">
+                    <Image
+                      src={founder.photo}
+                      width={500}
+                      height={500}
+                      alt={founder.name}
+                      className="object-cover"
+                    />
+                  </div>
+                  <Box sx={{ padding: '1rem' }}>
+                    <Typography variant="h3" gutterBottom>
+                      {founder.name}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{ fontSize: { xs: '14px', sm: '14px', md: '20px' } }}
+                      color="white"
+                    >
+                      {founder.blurb}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
             </Box>
-          ))}
-        </Box>
-      </Box>
+          </Box>
+        </div>
+      </motion.div>
     </div>
   );
 };

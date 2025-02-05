@@ -54,7 +54,7 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="px-6 pt-6">
+    <div className="px-6 ">
       {sections.map((section, index) => (
         <div key={index} className="rounded-3xl md:pt-12 lg:pt-20  mb-6">
           <Box
@@ -68,8 +68,10 @@ const FeaturedProjects = () => {
               alignItems: 'center',
               mb: '1rem',
               gap: '1rem',
-              p: 0,
+              p: 2,
               height: 'auto',
+              border: '2px solid white',
+              borderRadius: '30px',
             }}
           >
             {/* Carousel */}
@@ -115,7 +117,12 @@ const FeaturedProjects = () => {
                     <Box
                       sx={{
                         width: '100%',
-                        height: { xs: '400px', lg: '600px' },
+                        height: {
+                          xs: '400px',
+                          sm: '400px',
+                          md: '600px',
+                          lg: '600px',
+                        },
                         position: 'relative',
                         borderRadius: 'inherit',
                         overflow: 'hidden',

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
+import { motion, useInView } from 'framer-motion';
 
 type AboutPhotos = {
   header: string;
@@ -32,72 +33,78 @@ const aboutSections: AboutPhotos[] = [
 
 const AboutPhotos = () => {
   return (
-    <Box
-      sx={{
-        padding: { xs: '24px', md: '48px' },
-        maxWidth: '1200px',
-        margin: '0 auto',
-        backgroundColor: 'black',
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0, duration: 0.5 }}
     >
-      {aboutSections.map((section, index) => (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            flexDirection: {
-              xs: 'column',
-              md: index % 2 === 0 ? 'row' : 'row-reverse',
-            },
-            alignItems: 'center',
-            marginBottom: '64px',
-            gap: '32px',
-            // border: '2px solid black',
-          }}
-        >
-          {/* Image Section */}
+      <Box
+        sx={{
+          padding: { xs: '24px', md: '48px' },
+          maxWidth: '1200px',
+          margin: '0 auto',
+          backgroundColor: 'black',
+        }}
+      >
+        {aboutSections.map((section, index) => (
           <Box
+            key={index}
             sx={{
-              flex: '1',
-              textAlign: 'center',
+              display: 'flex',
+              flexDirection: {
+                xs: 'column',
+                md: index % 2 === 0 ? 'row' : 'row-reverse',
+              },
+              alignItems: 'center',
+              marginBottom: '64px',
+              gap: '32px',
+              // border: '2px solid black',
             }}
           >
-            <Image
-              src="https://picsum.photos/800/800?random=4,"
-              alt={section.imageAlt}
-              width={500} // Adjust width
-              height={300} // Adjust height
-              style={{
-                borderRadius: '8px',
-                objectFit: 'cover',
-              }}
-            />
-          </Box>
-
-          {/* Text Section */}
-          <Box
-            sx={{
-              flex: '1',
-              textAlign: { xs: 'center', md: 'left' },
-              padding: '16px',
-            }}
-          >
-            <Typography
-              variant="h2"
+            {/* Image Section */}
+            <Box
               sx={{
-                fontWeight: 'bold',
-                marginBottom: '16px',
+                flex: '1',
+                textAlign: 'center',
               }}
             >
-              {section.header.toUpperCase()}
-            </Typography>
-            <Typography variant="body1" color="">
-              {section.text}
-            </Typography>
+              <Image
+                src="https://picsum.photos/800/800?random=4,"
+                alt={section.imageAlt}
+                width={500} // Adjust width
+                height={300} // Adjust height
+                style={{
+                  borderRadius: '8px',
+                  objectFit: 'cover',
+                }}
+              />
+            </Box>
+
+            {/* Text Section */}
+            <Box
+              sx={{
+                flex: '1',
+                textAlign: { xs: 'center', md: 'left' },
+                padding: '16px',
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 'bold',
+                  marginBottom: '16px',
+                }}
+              >
+                {section.header.toUpperCase()}
+              </Typography>
+              <Typography variant="body1" color="">
+                {section.text}
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-      ))}
-    </Box>
+        ))}
+      </Box>
+    </motion.div>
   );
 };
 

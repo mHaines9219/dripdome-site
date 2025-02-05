@@ -3,17 +3,23 @@ import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
 
 const pressItems = [
-  { headline: 'Exciting New Project Launches', url: '/news/project-launch' },
-  { headline: 'Company Achieves Record Growth', url: '/news/record-growth' },
   {
-    headline: 'Innovative Solutions in Development',
-    url: '/news/innovative-solutions',
+    headline: 'BUSINESS INSIDER - BELLA THORNE COACHELLA AFTERPARTY',
+    url: 'https://www.businessinsider.com/bella-thorne-coachella-after-party-photos-diplo-2022-4',
+  },
+  {
+    headline: 'FORBES - BEST CANNED COCKTAIL ORIGINAL SOUTHSIDE',
+    url: 'https://www.forbes.com/sites/karlaalindahao/2024/03/01/best-canned-cocktail-original-southside/',
+  },
+  {
+    headline: 'ROLLING STONE - THEIA RETURNS TO ALT-POP',
+    url: 'https://au.rollingstone.com/music/music-news/theia-crucified-by-u-45218/',
   },
 ];
 
 const PressSection = () => {
   return (
-    <div className="mx-6">
+    <div className="flex items-center justify-center">
       <Box
         sx={{
           display: 'flex',
@@ -29,10 +35,10 @@ const PressSection = () => {
           sx={{
             textDecoration: 'none',
             color: 'inherit',
-            fontSize: { xs: '70px', sm: '80px' },
+            fontSize: { xs: '30px', sm: '80px' },
           }}
         >
-          PRESS
+          OUR WORK IN THE PRESS
         </Typography>
         {pressItems.map((item, index) => (
           <Box
@@ -41,8 +47,14 @@ const PressSection = () => {
               padding: 2,
               border: '1px solid #ccc',
               borderRadius: 1,
-              backgroundColor: 'black',
+              backgroundColor: 'white',
               textAlign: 'center',
+              color: 'black',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                backgroundColor: 'black',
+                color: 'white',
+              },
             }}
           >
             <Link href={item.url} passHref>
