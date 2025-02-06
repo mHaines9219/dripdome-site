@@ -52,7 +52,7 @@ const LogoCarousel = () => {
         slidesPerView={5} // Adjust the number of visible logos
         spaceBetween={20}
         loop={true}
-        speed={1200} // Controls the scroll speed (lower = faster)
+        speed={100} // Controls the scroll speed (lower = faster)
         autoplay={{
           delay: 0, // Continuous scroll
           disableOnInteraction: false, // Keep autoplay even after user interacts
