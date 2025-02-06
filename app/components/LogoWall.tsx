@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GridLayout from 'react-grid-layout';
-import 'react-grid-layout/css/styles.css';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';

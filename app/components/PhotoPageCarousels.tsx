@@ -45,7 +45,6 @@ const PhotoPageCarousels: React.FC = () => {
               spaceBetween={0}
               modules={[Autoplay]}
               freeMode={true}
-              freeModeMomentum={true}
             >
               {section.images.map((image, idx) => (
                 <SwiperSlide
@@ -107,7 +106,6 @@ const PhotoPageCarousels: React.FC = () => {
                 spaceBetween={0}
                 modules={[Autoplay]}
                 freeMode={true}
-                freeModeMomentum={true}
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
