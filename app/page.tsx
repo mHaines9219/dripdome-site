@@ -11,7 +11,7 @@ import HomeBlurb from './components/HomeBlurb';
 
 export default function Home() {
   return (
-    <main className="main-container text-white  ">
+    <main className="main-container text-white  overflow-x-hidden">
       <section className="hero-container flex flex-col items-center justify-center h-[75dvh]  ">
         <Hero />
       </section>

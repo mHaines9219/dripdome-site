@@ -11,7 +11,7 @@ import PressSection from '../components/PressSection';
 export default function page() {
   return (
     <>
-      <div className="page-container  lg:hidden flex flex-col items-center bg-black justify-center">
+      <div className="page-container overflow-hidden  lg:hidden flex flex-col items-center bg-black justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ export default function page() {
 
       {/* DESKTOP CONTAINER */}
 
-      <div className=" hidden  lg:block page-container flex flex-col items-center bg-black justify-center">
+      <div className=" hidden overflow-hidden  lg:block page-container flex flex-col items-center bg-black justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

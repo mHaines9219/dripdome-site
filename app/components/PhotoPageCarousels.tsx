@@ -90,7 +90,7 @@ const PhotoPageCarousels: React.FC = () => {
                 reverseDirection: index % 2 === 1,
               }}
               speed={10000}
-              slidesPerView="auto"
+              slidesPerView={2.5}
               spaceBetween={0}
               modules={[Autoplay]}
               onSwiper={(swiper: SwiperInstance) => {
@@ -161,7 +161,7 @@ const PhotoPageCarousels: React.FC = () => {
                   reverseDirection: index % 2 === 1,
                 }}
                 speed={5000}
-                slidesPerView="auto"
+                slidesPerView={3}
                 spaceBetween={0}
                 modules={[Autoplay]}
                 onSwiper={(swiper: SwiperInstance) => {

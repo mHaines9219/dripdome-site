@@ -23,7 +23,7 @@ export default function ServicesPage() {
     'Props',
   ];
   return (
-    <div className="bg-black">
+    <div className="bg-black overflow-hidden ">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
