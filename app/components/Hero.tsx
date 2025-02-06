@@ -82,6 +82,7 @@ export default function Hero() {
       )}
 
       {/* Video Background */}
+
       <video
         preload="auto"
         src="https://dripdome-site.s3.us-east-2.amazonaws.com/1223.mp4"
@@ -89,7 +90,7 @@ export default function Hero() {
         autoPlay
         playsInline
         muted
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover lg:object-contain"
       >
         Your browser does not support the video tag.
       </video>

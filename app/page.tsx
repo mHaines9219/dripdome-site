@@ -2,12 +2,13 @@
 import './globals.css';
 import Link from 'next/link';
 import Hero from './components/Hero';
-import { Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import LogoComponent from './components/LogoComponent';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import HomeBlurb from './components/HomeBlurb';
+import PageButtons from './components/PageButtons';
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       </section>
 
       <section
-        id="services"
+        id="home"
         className="flex flex-col items-center justify-center text-center px-8 bg-black p  "
       >
         <HomeBlurb />
@@ -29,7 +30,36 @@ export default function Home() {
         <AboutUs />
       </section> */}
       <LogoComponent />
+      {/* <Box
+        sx={{
+          display: 'flex',
+          fontSize: '30px',
+          mt: 2,
+          bgcolor: 'black',
 
+          color: 'white',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '0 auto',
+          textAlign: 'center',
+          fontFamily: 'Shrikhand',
+          width: '100%',
+          height: '70px',
+          transition: 'background-color 1s ease, color 1s ease',
+
+          '&:hover': {
+            bgcolor: 'white',
+            color: 'black', // Change text color on hover
+          },
+          '&:active': {
+            bgcolor: 'white', // only while clicking
+          },
+        }}
+      >
+        <Link href="/portfolio">PORTFOLIO</Link>
+      </Box> */}
+
+      <PageButtons />
       <section id="contact" className="pt-8 pb-8  px-8 bg-black text-white">
         <Contact />
       </section>

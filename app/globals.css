@@ -46,3 +46,9 @@ body {
   bottom: 20px !important; /* Move pagination up or down */
   padding: 10px;
 }
+
+@media (min-width: 1024px) {
+  video {
+    object-fit: contain !important;
+  }
+}
