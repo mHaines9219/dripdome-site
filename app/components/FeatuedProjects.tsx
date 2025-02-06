@@ -3,7 +3,12 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import { Pagination, EffectCoverflow, Autoplay } from 'swiper/modules';
+import {
+  Pagination,
+  EffectCoverflow,
+  Autoplay,
+  EffectCards,
+} from 'swiper/modules';
 
 const sections = [
   {
@@ -54,9 +59,9 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="px-6 ">
+    <div className="px-6">
       {sections.map((section, index) => (
-        <div key={index} className="rounded-3xl md:pt-12 lg:pt-20  mb-6">
+        <div key={index} className="rounded-3xl md:pt-12 lg:pt-20 mb-6">
           <Box
             sx={{
               display: 'flex',
@@ -66,66 +71,59 @@ const FeaturedProjects = () => {
                 ? 'row'
                 : 'row-reverse',
               alignItems: 'center',
-              mb: '1rem',
-              gap: '1rem',
-              p: 2,
-              height: 'auto',
+              mb: '2rem',
+              gap: '1.5rem',
+              p: 3,
               border: '2px solid white',
               borderRadius: '30px',
+              backgroundColor: '#121212',
             }}
           >
-            {/* Carousel */}
+            {/* Swiper with Cards Effect */}
             <Box
               sx={{
                 flex: 1,
-                maxWidth: '100%',
-                width: isMobile ? '70vw' : '20vw',
-                height: 'auto', // Height for larger screens
+                width: isMobile ? '90vw' : '40vw',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
             >
               <Swiper
-                className="w-full lg:h-[600px] flex justify-center items-center"
-                effect={'coverflow'}
+                effect="cards"
                 grabCursor={true}
-                centeredSlides={true}
-                initialSlide={1}
-                slidesPerView={1}
                 loop={true}
-                pagination={{ clickable: true }}
                 autoplay={{
-                  delay: 3000, // time between slides in ms
-                  disableOnInteraction: true, // stops autoplay when the user interacts
+                  delay: 2500,
+                  disableOnInteraction: true,
                 }}
-                modules={[Pagination, EffectCoverflow, Autoplay]}
-                coverflowEffect={{
-                  rotate: 50,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
+                cardsEffect={{
+                  perSlideOffset: 8,
+                  perSlideRotate: 2,
+                  rotate: true,
                   slideShadows: true,
                 }}
+                modules={[EffectCards, Autoplay]}
+                className="w-full lg:h-[600px] flex justify-center items-center"
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx}
-                    className="flex justify-center items-center   overflow-hidden"
-                    style={{ width: '100%', height: '100%' }}
+                    className="flex justify-center items-center"
                   >
                     <Box
                       sx={{
                         width: '100%',
                         height: {
-                          xs: '400px',
+                          xs: '300px',
                           sm: '400px',
-                          md: '600px',
+                          md: '500px',
                           lg: '600px',
                         },
                         position: 'relative',
-                        borderRadius: 'inherit',
+                        borderRadius: '15px',
                         overflow: 'hidden',
+                        boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.3)',
                       }}
                     >
                       <Image
@@ -133,8 +131,8 @@ const FeaturedProjects = () => {
                         alt={`${section.header}`}
                         fill
                         style={{
-                          objectFit: 'contain', // Change the object-fit property to adjust the image size
-                          // Add border styling directly to the image
+                          objectFit: 'contain',
+                          borderRadius: '15px',
                         }}
                       />
                     </Box>
@@ -142,28 +140,32 @@ const FeaturedProjects = () => {
                 ))}
               </Swiper>
             </Box>
-            {/* Header and Text */}
+
+            {/* Header and Blurb */}
             <Box
               sx={{
                 flex: 1,
                 maxWidth: isMobile ? '100%' : '50%',
                 textAlign: isMobile ? 'center' : 'left',
-                p: '0 10px 10px 0',
-                m: '10px',
+                p: '0 20px 20px 0',
               }}
             >
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: '30px', sm: '40px', md: '40px', lg: '50px' },
-                  mb: '1rem',
+                  fontSize: { xs: '28px', sm: '36px', md: '40px', lg: '50px' },
+                  mb: '1.5rem',
+                  color: 'white',
                 }}
               >
                 {section.header}
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ fontSize: { xs: '14px', sm: '20px', md: '20px' } }}
+                sx={{
+                  fontSize: { xs: '14px', sm: '18px', md: '20px' },
+                  color: '#e0e0e0',
+                }}
               >
                 {section.blurb}
               </Typography>

@@ -9,6 +9,7 @@ import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import HomeBlurb from './components/HomeBlurb';
 import PageButtons from './components/PageButtons';
+import LogoWall from './components/LogoWall';
 
 export default function Home() {
   return (
@@ -29,7 +30,8 @@ export default function Home() {
       >
         <AboutUs />
       </section> */}
-      <LogoComponent />
+      {/* <LogoComponent /> */}
+      <LogoWall />
       {/* <Box
         sx={{
           display: 'flex',
