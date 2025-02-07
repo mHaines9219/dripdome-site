@@ -27,13 +27,15 @@ export default function Navbar() {
           <HomeOutlinedIcon className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2" />
         </Link>
         <div className="flex-grow flex justify-center md:justify-start">
-          <Image
-            alt="Company Logo"
-            src="/assets/dd_logo.png"
-            width={90}
-            height={90}
-            className="md:ml-4 md:w-[120px] md:h-[120px]"
-          />
+          <Link href="/">
+            <Image
+              alt="Company Logo"
+              src="/assets/dd_logo.png"
+              width={90}
+              height={90}
+              className="md:ml-4 md:w-[120px] md:h-[120px]"
+            />
+          </Link>
         </div>
         <button
           className="md:hidden text-white mr-6 text-3xl z-50"
