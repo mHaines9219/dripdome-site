@@ -2,30 +2,27 @@
 import React from 'react';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const founders = [
   {
     name: 'DIANA HAINES',
     photo:
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/diana_headshot.jpeg',
-
-    blurb:
-      'Founder 1 is an expert in custom set design with a passion for creating immersive environments. With years of experience, they bring bold visions to life.',
   },
   {
-    name: 'PATRICIA KWIATKOWSKI',
+    name: (
+      <>
+        PATRICIA <br /> KWIATKOWSKI
+      </>
+    ),
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/pat_headshot.jpeg',
-    blurb:
-      'Founder 2 specializes in scenic painting and graphic design, ensuring every project is visually striking and unforgettable.',
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/pat_4.jpeg',
   },
   {
     name: 'MATT HAINES',
     photo:
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/matt_headshot.jpeg',
-    blurb:
-      'Founder 3 is the driving force behind Drip Dome’s innovative approach to fabrication and installations, delivering exceptional results every time.',
   },
 ];
 
@@ -43,14 +40,12 @@ const FoundersSection = () => {
         <div className="pt-12 bg-black">
           <Box
             sx={{
-              padding: '4rem 2rem',
               paddingTop: '0px',
-              margin: '30px,0,0,0',
               textAlign: 'center',
               background: 'black',
             }}
           >
-            <Typography
+            {/* <Typography
               variant="h3"
               sx={{
                 fontSize: {
@@ -64,53 +59,60 @@ const FoundersSection = () => {
               gutterBottom
             >
               MEET OUR FOUNDERS
-            </Typography>
+            </Typography> */}
+
+            {/* Founders Box */}
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
-                gap: '2rem',
-                justifyContent: 'center',
-                alignItems: 'stretch',
+                padding: '2rem',
+                backgroundColor: 'black',
               }}
             >
-              {founders.map((founder, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    flex: isMobile ? 'none' : '1',
-                    maxWidth: isMobile ? '100%' : '33%',
-                    textAlign: 'center',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    backgroundColor: 'black',
-                    boxShadow: '0px 2px 5px rgba(0,0,0,0.1)',
-                  }}
-                >
-                  <div className="headshot-container h-24 w-24 rounded-full overflow-hidden flex justify-center items-center mx-auto mt-4">
-                    <Image
-                      src={founder.photo}
-                      width={500}
-                      height={500}
-                      alt={founder.name}
-                      className="object-cover"
-                    />
-                  </div>
-                  <Box sx={{ padding: '1rem' }}>
-                    <Typography variant="h3" gutterBottom>
-                      {founder.name}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ fontSize: { xs: '14px', sm: '14px', md: '20px' } }}
-                      color="white"
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  gap: '2rem',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {founders.map((founder, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.2, duration: 0.5 }}
+                  >
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        flexShrink: 0,
+                        flexBasis: '12rem',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
                     >
-                      {founder.blurb}
-                    </Typography>
-                  </Box>
-                </Box>
-              ))}
+                      <div className="headshot-container w-48 h-48 lg:w-72 lg:h-72  rounded-full overflow-hidden flex justify-center align-center items-center mb-4">
+                        <Image
+                          src={founder.photo}
+                          width={192}
+                          height={192}
+                          alt={founder.name}
+                          className="object-cover w-full h-full self-center "
+                        />
+                      </div>
+                      <Typography
+                        variant="h5"
+                        fontFamily={'Shrikhand'}
+                        sx={{ textAlign: 'center' }}
+                      >
+                        {founder.name}
+                      </Typography>
+                    </Box>
+                  </motion.div>
+                ))}
+              </Box>
             </Box>
           </Box>
         </div>
