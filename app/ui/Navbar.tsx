@@ -24,7 +24,10 @@ export default function Navbar() {
     <nav className="bg-black font-nova text-white fixed top-0 left-0 w-screen z-50 h-[95px] md:h-[120px] flex items-center md:pr-[43px]">
       <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4 md:mt-[30px] md:mb-[30px]">
         <Link href="/" className="flex items-center space-x-3 md:hidden">
-          <HomeTwoToneIcon className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2" />
+          <HomeTwoToneIcon
+            sx={{ height: '45px', width: '45px' }}
+            className="rounded-xl bg-black bg-opacity-60 p-2"
+          />
         </Link>
         <div className="flex-grow flex justify-center md:justify-start">
           <Link href="/">
