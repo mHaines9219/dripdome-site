@@ -31,6 +31,24 @@ export default function Home() {
         <AboutUs />
       </section> */}
       {/* <LogoComponent /> */}
+      <div className="w-full flex justify-center items-center bg-white text-center mt-4 -mb-8 md:-mb-2">
+        <Typography
+          variant="h2"
+          component="h2"
+          color="black"
+          sx={{
+            fontSize: { xs: '30px', sm: '45px', lg: '50px' }, // Define different font sizes for different breakpoints
+            fontWeight: 'bold', // Optional: Adjust font weight
+            marginBottom: '15px',
+            paddingLeft: '10px',
+            paddingRight: '10px',
+            justifyContent: 'center',
+            display: 'flex',
+          }}
+        >
+          PROJECTS WE'VE CONTRIBUTED TO
+        </Typography>
+      </div>
       <LogoWall />
       {/* <Box
         sx={{
