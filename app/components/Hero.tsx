@@ -22,7 +22,7 @@ export default function Hero() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative h-full w-full">
       {/* Navbar */}
       {pathname === '/' && (
         <nav className="absolute top-0 left-0 w-full bg-[var(--main-brown)] font-nova text-white z-50 h-[95px] flex items-center">

@@ -13,8 +13,8 @@ import LogoWall from './components/LogoWall';
 
 export default function Home() {
   return (
-    <main className="main-container text-white  overflow-x-hidden">
-      <section className="hero-container flex flex-col items-center justify-center h-[75dvh]  ">
+    <main className="main-container text-white  max-w-[1024px] ">
+      <section className="hero-container flex flex-col items-center justify-center h-[500px] ">
         <Hero />
       </section>
 
@@ -24,13 +24,7 @@ export default function Home() {
       >
         <HomeBlurb />
       </section>
-      {/* <section
-        id="about"
-        className="flex flex-col items-center justify-center text-center px-8 bg-black h-80  "
-      >
-        <AboutUs />
-      </section> */}
-      {/* <LogoComponent /> */}
+
       <div className="w-full flex justify-center items-center bg-white text-center mt-4 -mb-8 md:-mb-2">
         <Typography
           variant="h2"
@@ -50,34 +44,6 @@ export default function Home() {
         </Typography>
       </div>
       <LogoWall />
-      {/* <Box
-        sx={{
-          display: 'flex',
-          fontSize: '30px',
-          mt: 2,
-          bgcolor: 'black',
-
-          color: 'white',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '0 auto',
-          textAlign: 'center',
-          fontFamily: 'Shrikhand',
-          width: '100%',
-          height: '70px',
-          transition: 'background-color 1s ease, color 1s ease',
-
-          '&:hover': {
-            bgcolor: 'white',
-            color: 'black', // Change text color on hover
-          },
-          '&:active': {
-            bgcolor: 'white', // only while clicking
-          },
-        }}
-      >
-        <Link href="/portfolio">PORTFOLIO</Link>
-      </Box> */}
 
       <PageButtons />
       <section id="contact" className="pt-8 pb-8  px-8 bg-black text-white">
