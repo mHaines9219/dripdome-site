@@ -42,7 +42,7 @@ const secondHalf = imageNames
 
 const LogoCarousel = () => {
   return (
-    <div className="w-auto mt-6  h-[245px] lg:h-[300px] ">
+    <div className="w-auto mt-6  h-[245px]  md:h-[300px] lg:h-[300px] ">
       <div>
         <Swiper
           slidesPerView={3}

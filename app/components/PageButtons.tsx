@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Link from 'next/link';
 
 const pages = [
-  { name: 'ABOUT US', href: '/about-us' },
   { name: 'PORTFOLIO', href: '/portfolio' },
   { name: 'SERVICES', href: '/services' },
+  { name: 'ABOUT US', href: '/about-us' },
 ];
 
 function PageButtons() {
@@ -23,7 +23,7 @@ function PageButtons() {
             component="a" // Make it behave like a link
             sx={{
               display: 'flex',
-              fontSize: '30px',
+              fontSize: { xs: '30px', sm: '50px', md: '60px' }, //
               bgcolor: 'black',
               color: 'white',
               alignItems: 'center',
@@ -33,7 +33,7 @@ function PageButtons() {
               border: '2px solid white',
               borderRadius: '15px',
               width: '100%',
-              height: '70px',
+              height: { xs: '70px', sm: '80px', md: '90px' }, // Responsive height
               transition: 'background-color 1s ease, color 1s ease',
               cursor: 'pointer',
               textDecoration: 'none', // Removes default link underline
