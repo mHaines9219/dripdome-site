@@ -98,7 +98,7 @@ const FoundersSection = () => {
                           src={founder.photo}
                           width={192}
                           height={192}
-                          alt={founder.name}
+                          alt={typeof founder.name === 'string' ? founder.name : 'Founder image'}
                           className="object-cover w-full h-full self-center "
                         />
                       </div>
