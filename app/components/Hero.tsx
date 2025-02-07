@@ -69,7 +69,7 @@ export default function Hero() {
         autoPlay
         playsInline
         muted
-        className="absolute top-0 left-0 w-full h-full object-cover lg:object-contain"
+        className="absolute top-0 left-0 w-full h-full object-cover lg:object-contain bg-black"
       >
         Your browser does not support the video tag.
       </video>
