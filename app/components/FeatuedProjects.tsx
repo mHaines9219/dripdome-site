@@ -59,7 +59,7 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className="px-6">
+    <div className="px-6 ">
       {sections.map((section, index) => (
         <div key={index} className="rounded-3xl md:pt-12 lg:pt-20 mb-6">
           <Box
@@ -76,7 +76,34 @@ const FeaturedProjects = () => {
               border: '2px solid white',
               borderRadius: '30px',
               backgroundColor: '#121212',
-              paddingTop: '20px',
+              paddingTop: {
+                xs: '20px',
+                sm: '20px',
+                md: '20px',
+                lg: '20px',
+                xl: '20px',
+              },
+              paddingBottom: {
+                xs: '0px',
+                sm: '20px',
+                md: '20px',
+                lg: '20px',
+                xl: '20px',
+              },
+              paddingLeft: {
+                xs: '0px',
+                sm: '20px',
+                md: '20px',
+                lg: '20px',
+                xl: '20px',
+              },
+              paddingRight: {
+                xs: '0px',
+                sm: '20px',
+                md: '20px',
+                lg: '20px',
+                xl: '20px',
+              },
             }}
           >
             {/* Swiper with Cards Effect */}
