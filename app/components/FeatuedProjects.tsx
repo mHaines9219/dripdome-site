@@ -73,10 +73,10 @@ const FeaturedProjects = () => {
               alignItems: 'center',
               mb: '2rem',
               gap: '1.5rem',
-              p: 3,
               border: '2px solid white',
               borderRadius: '30px',
               backgroundColor: '#121212',
+              paddingTop: '20px',
             }}
           >
             {/* Swiper with Cards Effect */}
@@ -104,7 +104,7 @@ const FeaturedProjects = () => {
                   slideShadows: true,
                 }}
                 modules={[EffectCards, Autoplay]}
-                className="w-full lg:h-[600px] flex justify-center items-center"
+                className="w-full lg:h-[600px] flex justify-center items-center lg:my-6 lg:-mb-6 xl:mb-10"
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
@@ -147,7 +147,7 @@ const FeaturedProjects = () => {
                 flex: 1,
                 maxWidth: isMobile ? '100%' : '50%',
                 textAlign: isMobile ? 'center' : 'left',
-                p: '0 20px 20px 0',
+                p: '0 10px 20px 10px',
               }}
             >
               <Typography

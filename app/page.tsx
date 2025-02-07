@@ -31,7 +31,7 @@ export default function Home() {
         <AboutUs />
       </section> */}
       {/* <LogoComponent /> */}
-      {/* <LogoWall /> */}
+      <LogoWall />
       {/* <Box
         sx={{
           display: 'flex',
