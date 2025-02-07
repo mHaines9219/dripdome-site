@@ -1,11 +1,7 @@
 'use client';
 import './globals.css';
-import Link from 'next/link';
 import Hero from './components/Hero';
-import { Box, Button, Typography } from '@mui/material';
-import Image from 'next/image';
-import LogoComponent from './components/LogoComponent';
-import AboutUs from './components/AboutUs';
+import { Typography } from '@mui/material';
 import Contact from './components/Contact';
 import HomeBlurb from './components/HomeBlurb';
 import PageButtons from './components/PageButtons';
