@@ -28,7 +28,7 @@ export default function Hero() {
           <div className="w-full flex items-center justify-between mt-[19px] mb-[19px] pl-4">
             <Link href="/" className="flex items-center space-x-3">
               <HomeTwoToneIcon
-                fontSize="inherit"
+                style={{ height: '45px', width: '45px' }}
                 className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
               />
             </Link>
