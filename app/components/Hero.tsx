@@ -64,7 +64,7 @@ export default function Hero() {
 
       <video
         preload="auto"
-        src="https://dripdome-site.s3.us-east-2.amazonaws.com/1223.mp4"
+        src="https://dripdome-site.s3.us-east-2.amazonaws.com/dd_hero.mp4"
         loop
         autoPlay
         playsInline
