@@ -4,6 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import { IoMdHome } from 'react-icons/io';
 
 export default function Hero() {
   const pathname = usePathname();
