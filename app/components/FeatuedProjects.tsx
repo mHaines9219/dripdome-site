@@ -25,20 +25,20 @@ const sections = [
     header: 'JENNIFERS BODY PHOTO SHOOT',
     blurb: `We meticulously recreated the iconic pool scene from Jennifers Body by constructing a 20x20-foot structure featuring a functional pool. To authentically capture the scene's atmosphere, we employed specialized techniques to distress the walls, achieving a realistic, aged appearance. This project highlights our commitment to detail and our ability to bring cinematic visions to life.`,
     images: [
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb4.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb2.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb1.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb3.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb4.png',
     ],
   },
   {
     header: 'X3 EXPO',
     blurb: `At the X3 Expo, held at the historic Hollywood Palladium, we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
     images: [
+      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_2.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_1.png',
       'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_3.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.png',
     ],
   },
   {

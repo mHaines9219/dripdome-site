@@ -13,7 +13,6 @@ export default function Hero() {
     { name: 'ABOUT US', href: '/about-us' },
     { name: 'PORTFOLIO', href: '/portfolio' },
     { name: 'SERVICES', href: '/services' },
-    // { name: 'CONVENTIONS', href: '/conventions' },
     { name: 'RENTALS', href: '/rentals' },
   ];
 

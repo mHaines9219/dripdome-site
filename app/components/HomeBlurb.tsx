@@ -23,7 +23,7 @@ export default function HomeBlurb() {
           component="h1"
           color="primary"
           sx={{
-            fontSize: { xs: '32px', sm: '60px', lg: '50px' },
+            fontSize: { xs: '32px', sm: '60px', lg: '70px' },
             fontWeight: 'bold',
             marginBottom: '10px',
           }}
@@ -42,16 +42,16 @@ export default function HomeBlurb() {
           component="p"
           color="primary"
           sx={{
-            fontSize: { xs: '14px', sm: '18px', md: '20px' },
+            fontSize: { xs: '14px', sm: '18px', md: '20px', lg: '24px' },
           }}
         >
           {' '}
           Drip Dome Productions. Based in Los Angeles and expanding to New York,
-          we are a majority women-owned, family-run business specializing in production
-          design, custom fabrication, murals, graphic design, photography, and
-          rentals. From immersive installations to unforgettable photoshoot
-          backdrops, our expert team transforms bold ideas into stunning
-          realities.
+          we are a majority women-owned, family-run business specializing in
+          production design, custom fabrication, murals, graphic design,
+          photography, and rentals. From immersive installations to
+          unforgettable photoshoot backdrops, our expert team transforms bold
+          ideas into stunning realities.
         </Typography>
       </motion.div>
     </div>
