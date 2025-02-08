@@ -119,7 +119,6 @@ const FeaturedProjects = () => {
               <Swiper
                 effect="cards"
                 grabCursor={true}
-                loop={true}
                 autoplay={{
                   delay: 2500,
                   disableOnInteraction: true,
@@ -157,6 +156,7 @@ const FeaturedProjects = () => {
                         src={image}
                         alt={`${section.header}`}
                         fill
+                        sizes="(max-width: 600px) 90vw, (max-width: 900px) 40vw, 40vw"
                         style={{
                           objectFit: 'contain',
                           borderRadius: '15px',

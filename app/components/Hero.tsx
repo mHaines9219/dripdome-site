@@ -13,6 +13,7 @@ export default function Hero() {
     { name: 'ABOUT US', href: '/about-us' },
     { name: 'PORTFOLIO', href: '/portfolio' },
     { name: 'SERVICES', href: '/services' },
+    // { name: 'CONVENTIONS', href: '/conventions' },
     { name: 'RENTALS', href: '/rentals' },
   ];
 
@@ -25,10 +26,7 @@ export default function Hero() {
         <nav className="absolute top-0 left-0 w-full bg-[var(--main-brown)] font-nova text-white z-50 h-[95px] flex items-center">
           <div className="w-full flex items-center justify-between mt-[19px] mb-[19px] pl-4">
             <Link href="/" className="flex items-center space-x-3">
-              <HomeTwoToneIcon
-                sx={{ height: '45px', width: '45px' }}
-                className="rounded-xl bg-black bg-opacity-60 p-2"
-              />
+              <HomeTwoToneIcon className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2" />
             </Link>
             <button
               className="text-white text-3xl bg-opacity-60 pb-2 px-2 mr-8 z-50 bg-black rounded-xl"
