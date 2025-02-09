@@ -18,6 +18,7 @@
 
 body {
   color: var(--foreground);
+  max-width: 2000px;
   background: 'black';
   font-family: Arial, Helvetica, sans-serif;
 }
