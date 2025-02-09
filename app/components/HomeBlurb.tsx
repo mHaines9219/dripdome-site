@@ -12,7 +12,7 @@ export default function HomeBlurb() {
   };
 
   return (
-    <div ref={ref} className="w-screen px-4 py-8">
+    <div ref={ref} className="w-full px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
