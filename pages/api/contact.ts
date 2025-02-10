@@ -26,6 +26,7 @@ export default async function handler(
       bcc: [
         { email: 'diana@dripdome.com', name: 'Diana Haines' },
         { email: 'matt@dripdome.com', name: 'Matt Haines' },
+        { email: 'patricia@dripdome.com', name: 'Patricia Kwiatkowski' },
       ],
     };
 
