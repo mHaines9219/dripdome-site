@@ -31,7 +31,7 @@ export default function Contact() {
           fontFamily: 'Open Sans',
         }}
       >
-        BIG OR SMALL, EVERY IDEA HAS THE POTENTITAL TO SHINE. TELL US ABOUT YOUR
+        BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT YOUR
         PROJECT AND LET'S BUILD SOMETHING AMAZING!
       </Typography>
       <form

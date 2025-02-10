@@ -3,6 +3,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import Navbar from './ui/Navbar'; // Adjust the path to your Navbar component
+import Footer from './ui/Footer'; // Adjust the path to your Footer component
 
 export default function ClientLayout({
   children,
@@ -13,9 +14,9 @@ export default function ClientLayout({
 
   return (
     <>
-      {/* Conditionally render Navbar */}
       {pathname !== '/' && <Navbar />}
       {children}
+      {/* <Footer /> */}
     </>
   );
 }
