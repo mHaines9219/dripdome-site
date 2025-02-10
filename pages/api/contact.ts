@@ -23,8 +23,10 @@ export default async function handler(
       }, // Your verified sender
       subject: 'Thank you for contacting us',
       text: `Hi ${name},\n\nThank you for reaching out. We have received your message: "${message}".\n\nBest regards,\nDrip Dome Productions`,
-      cc: [{ email: 'matt@dripdome.com', name: 'Matt Haines' }],
-      bcc: [{ email: 'diana@dripdome.com', name: 'Diana Haines' }],
+      bcc: [
+        { email: 'diana@dripdome.com', name: 'Diana Haines' },
+        { email: 'matt@dripdome.com', name: 'Matt Haines' },
+      ],
     };
 
     try {
