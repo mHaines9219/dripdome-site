@@ -9,7 +9,7 @@ import LogoWall from './components/LogoWall';
 
 export default function Home() {
   return (
-    <main className="main-container text-white  max-w-[1444px] overflow-hidden ">
+    <main className="main-container text-white   overflow-hidden ">
       <section className="hero-container flex flex-col items-center justify-center h-[500px] overflow-x-hidden ">
         <Hero />
       </section>

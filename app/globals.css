@@ -18,13 +18,13 @@
 
 body {
   color: var(--foreground);
-  max-width: 1500px;
   background: 'black';
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .page-container {
   background-color: 'black';
+  width: auto;
 }
 
 /* Change bullet color, size, margin, etc. */

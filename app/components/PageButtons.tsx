@@ -18,12 +18,17 @@ function PageButtons() {
       }}
     >
       {pages.map(({ name, href }) => (
-        <Link key={name} href={href} passHref>
+        <Link
+          key={name}
+          href={href}
+          style={{
+            textDecoration: 'none',
+          }}
+        >
           <Box
-            component="a" // Make it behave like a link
             sx={{
               display: 'flex',
-              fontSize: { xs: '30px', sm: '50px', md: '60px' }, //
+              fontSize: { xs: '30px', sm: '50px', md: '60px' },
               bgcolor: 'black',
               color: 'white',
               alignItems: 'center',
@@ -33,10 +38,9 @@ function PageButtons() {
               border: '2px solid white',
               borderRadius: '15px',
               width: '100%',
-              height: { xs: '70px', sm: '80px', md: '90px' }, // Responsive height
+              height: { xs: '70px', sm: '80px', md: '90px' },
               transition: 'background-color 1s ease, color 1s ease',
               cursor: 'pointer',
-              textDecoration: 'none', // Removes default link underline
               '&:hover': {
                 bgcolor: 'white',
                 color: 'black',
