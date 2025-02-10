@@ -22,7 +22,8 @@ export default async function handler(
         name: 'Drip Dome Productions',
       }, // Your verified sender
       subject: 'Thank you for contacting us',
-      text: `Hi ${name},\n\nThank you for reaching out. We have received your message: "${message}".\n\nBest regards,\nDrip Dome Productions`,
+      text: `Hi ${name},\n\nThank you for reaching out. We have received your message and will be in touch shortly!: "${message}".\n\nBest regards,\nDrip Dome Productions`,
+      cc: [{ email: 'info@dripdome.com', name: 'Drip Dome Productions' }],
       bcc: [
         { email: 'diana@dripdome.com', name: 'Diana Haines' },
         { email: 'matt@dripdome.com', name: 'Matt Haines' },
