@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
+import Footer from '../ui/Footer';
 
 export default function Contact() {
   return (
@@ -19,6 +20,7 @@ export default function Contact() {
       >
         CONTACT US{' '}
       </Typography>
+
       <Typography
         variant="body1"
         component="p"
@@ -35,13 +37,14 @@ export default function Contact() {
         PROJECT AND LET'S BUILD SOMETHING AMAZING!
       </Typography>
       <form
-        className="flex flex-col max-w-screen mx-auto mb-24 md:gap-y-4 "
+        className="flex flex-col max-w-screen mx-auto mb-8 md:gap-y-4 "
         onSubmit={async (e) => {
           e.preventDefault();
 
           // Form Data
           const formData = {
             name: (e.target as any).name.value,
+            instagram: (e.target as any).instagram.value,
             email: (e.target as any).email.value,
             message: (e.target as any).message.value,
           };
@@ -75,6 +78,13 @@ export default function Contact() {
         />
         <input
           className="mb-4 p-3 rounded-md bg-white text-black font-nova"
+          type="instagram"
+          name="instagram"
+          placeholder="INSTAGRAM"
+          required
+        />
+        <input
+          className="mb-4 p-3 rounded-md bg-white text-black font-nova"
           type="email"
           name="email"
           placeholder="EMAIL"
@@ -94,6 +104,7 @@ export default function Contact() {
           SEND{' '}
         </button>
       </form>
+      <Footer />
     </div>
   );
 }

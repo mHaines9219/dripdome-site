@@ -16,7 +16,6 @@ export default function ClientLayout({
     <>
       {pathname !== '/' && <Navbar />}
       {children}
-      {/* <Footer /> */}
     </>
   );
 }
