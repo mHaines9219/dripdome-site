@@ -22,9 +22,7 @@ export default function Footer() {
               </a>
             </div>
           </div>
-          <div className="text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Drip Dome Productions.
-          </div>
+
           <Link href="/privacy" className=" text-sm text-gray-500 ">
             Privacy Policy
           </Link>
