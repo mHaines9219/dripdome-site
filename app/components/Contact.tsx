@@ -1,6 +1,7 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import Footer from '../ui/Footer';
+import React from "react";
+import { Typography } from "@mui/material";
+import Footer from "../ui/Footer";
+import { sendData } from "../hooks/sendData";
 
 export default function Contact() {
   return (
@@ -11,15 +12,15 @@ export default function Contact() {
           component="h2"
           color="primary"
           sx={{
-            fontSize: { xs: '50px', md: '80px', lg: '90px' }, // Define different font sizes for different breakpoints
-            fontWeight: 'bold', // Optional: Adjust font weight
-            marginBottom: '15px',
-            justifyContent: 'center',
-            display: 'flex',
-            whiteSpace: 'nowrap',
+            fontSize: { xs: "50px", md: "80px", lg: "90px" }, // Define different font sizes for different breakpoints
+            fontWeight: "bold", // Optional: Adjust font weight
+            marginBottom: "15px",
+            justifyContent: "center",
+            display: "flex",
+            whiteSpace: "nowrap",
           }}
         >
-          CONTACT US{' '}
+          CONTACT US{" "}
         </Typography>
 
         <Typography
@@ -27,11 +28,11 @@ export default function Contact() {
           component="p"
           color="primary"
           sx={{
-            fontSize: { sm: '20px', md: '25px', lg: '30px' }, // Define different font sizes for different breakpoints
-            display: 'flex',
-            textAlign: 'center',
-            marginBottom: '30px',
-            fontFamily: 'Open Sans',
+            fontSize: { sm: "20px", md: "25px", lg: "30px" }, // Define different font sizes for different breakpoints
+            display: "flex",
+            textAlign: "center",
+            marginBottom: "30px",
+            fontFamily: "Open Sans",
           }}
         >
           BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT
@@ -51,22 +52,22 @@ export default function Contact() {
             };
 
             try {
-              const response = await fetch('/api/contact', {
-                method: 'POST',
+              const response = await fetch("/api/contact", {
+                method: "POST",
                 headers: {
-                  'Content-Type': 'application/json',
+                  "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
               });
-
+              await sendData(formData);
               if (response.ok) {
-                alert('Thank you! Your message has been sent.');
+                alert("Thank you! Your message has been sent.");
                 (e.target as any).reset(); // Clear the form
               } else {
-                throw new Error('Failed to send message');
+                throw new Error("Failed to send message");
               }
             } catch (error) {
-              alert('An error occurred. Please try again.');
+              alert("An error occurred. Please try again.");
             }
           }}
         >
@@ -102,7 +103,7 @@ export default function Contact() {
             className="bg-green-600 font-nova hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
             type="submit"
           >
-            SEND{' '}
+            SEND{" "}
           </button>
         </form>
       </div>
