@@ -43,7 +43,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={` antialiased`}>
         <ThemeProviderWrapper>
-          <ClientLayout>{children}</ClientLayout>
+          <ClientLayout>
+            {children}
+            <Analytics />
+          </ClientLayout>
         </ThemeProviderWrapper>
       </body>
     </html>
