@@ -45,7 +45,7 @@ export default function RootLayout({
         <ThemeProviderWrapper>
           <ClientLayout>
             {children}
-            <Analytics />
+            <Analytics /> 
           </ClientLayout>
         </ThemeProviderWrapper>
       </body>
