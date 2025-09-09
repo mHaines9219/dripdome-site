@@ -1,8 +1,7 @@
-'use client';
-import React, { useRef } from 'react';
-import { Box, Typography } from '@mui/material';
-import { motion, useInView } from 'framer-motion';
-
+"use client";
+import React, { useRef } from "react";
+import { Box, Typography } from "@mui/material";
+import { motion, useInView } from "framer-motion";
 
 export default function AboutUs() {
   const ref = useRef(null);
@@ -17,8 +16,8 @@ export default function AboutUs() {
     <div className="   bg-black " ref={ref}>
       <Box
         sx={{
-          width: '100%',
-          height: 'auto',
+          width: "100%",
+          height: "auto",
         }}
       >
         <motion.div
@@ -31,13 +30,13 @@ export default function AboutUs() {
             component="h1"
             color="white"
             sx={{
-              fontSize: { xs: '55px', sm: '95px' },
-              fontWeight: 'bold',
-              paddingTop: { xs: '120px', md: '150px' },
-              marginBottom: { xs: '20px', md: '30px' },
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              textAlign: 'center',
+              fontSize: { xs: "55px", sm: "95px" },
+              fontWeight: "bold",
+              paddingTop: { xs: "120px", md: "150px" },
+              marginBottom: { xs: "20px", md: "30px" },
+              paddingLeft: "10px",
+              paddingRight: "10px",
+              textAlign: "center",
             }}
           >
             ABOUT US
@@ -54,16 +53,16 @@ export default function AboutUs() {
               component="p"
               color="white"
               sx={{
-                fontSize: { xs: '14px', sm: '20px', md: '30px' },
-                marginTop: '10px',
-                marginLeft: '30px',
-                marginRight: '30px',
-                textAlign: 'center',
+                fontSize: { xs: "14px", sm: "20px", md: "30px" },
+                marginTop: "10px",
+                marginLeft: "30px",
+                marginRight: "30px",
+                textAlign: "center",
               }}
             >
               Drip Dome Productions is a majority women-owned, family-run
-              business based in Los Angeles, with a growing presence in New
-              York. We specialize in set design, custom fabrication, murals,
+              business based in New York City, with a presence in Los Angeles as
+              well. We specialize in set design, custom fabrication, murals,
               graphic design, photography, and rentals. From photoshoots and
               music videos to large-scale event installations, we bring creative
               visions to life with artistry and precision. At Drip Dome, family
