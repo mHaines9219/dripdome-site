@@ -1,62 +1,73 @@
-import React from 'react';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import Image from 'next/image';
+import React from "react";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import Image from "next/image";
 import {
   Pagination,
   EffectCoverflow,
   Autoplay,
   EffectCards,
-} from 'swiper/modules';
+} from "swiper/modules";
 
 const sections = [
   {
-    header: 'THE ORIGINAL SOUTH SIDE',
+    header: "THE SET OF NOTLOVELINE",
+    blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors .`,
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.jpeg",
+    ],
+  },
+  {
+    header: "THE ORIGINAL SOUTH SIDE",
     blurb: `We collaborated with The Original Southside™ on their ad campaign, managing prop sourcing, styling, and custom vinyl wraps. Our team ensured each element reflected the brand's modern twist on the classic 1920s Southside cocktail, effectively communicating their commitment to quality and style.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss2.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss3.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss4.png',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss3.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss4.png",
     ],
   },
   {
-    header: 'JENNIFERS BODY PHOTO SHOOT',
+    header: "JENNIFERS BODY PHOTO SHOOT",
     blurb: `We meticulously recreated the iconic pool scene from Jennifers Body by constructing a 20x20-foot structure featuring a functional pool. To authentically capture the scene's atmosphere, we employed specialized techniques to distress the walls, achieving a realistic, aged appearance. This project highlights our commitment to detail and our ability to bring cinematic visions to life.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb4.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb2.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb1.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb3.png',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb4.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb3.png",
     ],
   },
   {
-    header: 'X3 EXPO',
+    header: "X3 EXPO",
     blurb: `At the X3 Expo, held at the historic Hollywood Palladium, we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_2.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_1.png',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_3.png',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_3.png",
     ],
   },
   {
-    header: 'GOOD DYE YOUNG BRAND SHOOT',
+    header: "GOOD DYE YOUNG BRAND SHOOT",
     blurb: `We partnered with Good Dye Young to create surreal, colorful sets that brought their vibrant hair dye products to life. Our team fabricated custom picket fences, reimagined window blinds, and curated unique props to craft immersive environments that perfectly captured the brand's creative spirit.`,
     images: [
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy1.jpeg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy2.jpeg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy3.jpeg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy5.jpeg',
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy4.jpeg',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy1.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy2.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy3.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy5.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy4.jpeg",
     ],
   },
 ];
 
 const FeaturedProjects = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <div className="px-6 ">
@@ -64,45 +75,45 @@ const FeaturedProjects = () => {
         <div key={index} className="rounded-3xl md:pt-12 lg:pt-20 mb-6">
           <Box
             sx={{
-              display: 'flex',
+              display: "flex",
               flexDirection: isMobile
-                ? 'column'
+                ? "column"
                 : index % 2 === 0
-                ? 'row'
-                : 'row-reverse',
-              alignItems: 'center',
-              mb: '2rem',
-              gap: '1.5rem',
-              border: '2px solid white',
-              borderRadius: '30px',
-              backgroundColor: '#121212',
+                ? "row"
+                : "row-reverse",
+              alignItems: "center",
+              mb: "2rem",
+              gap: "1.5rem",
+              border: "2px solid white",
+              borderRadius: "30px",
+              backgroundColor: "#121212",
               paddingTop: {
-                xs: '20px',
-                sm: '20px',
-                md: '20px',
-                lg: '20px',
-                xl: '20px',
+                xs: "20px",
+                sm: "20px",
+                md: "20px",
+                lg: "20px",
+                xl: "20px",
               },
               paddingBottom: {
-                xs: '0px',
-                sm: '20px',
-                md: '20px',
-                lg: '20px',
-                xl: '20px',
+                xs: "0px",
+                sm: "20px",
+                md: "20px",
+                lg: "20px",
+                xl: "20px",
               },
               paddingLeft: {
-                xs: '0px',
-                sm: '20px',
-                md: '20px',
-                lg: '20px',
-                xl: '20px',
+                xs: "0px",
+                sm: "20px",
+                md: "20px",
+                lg: "20px",
+                xl: "20px",
               },
               paddingRight: {
-                xs: '0px',
-                sm: '20px',
-                md: '20px',
-                lg: '20px',
-                xl: '20px',
+                xs: "0px",
+                sm: "20px",
+                md: "20px",
+                lg: "20px",
+                xl: "20px",
               },
             }}
           >
@@ -110,10 +121,10 @@ const FeaturedProjects = () => {
             <Box
               sx={{
                 flex: 1,
-                width: isMobile ? '90vw' : '40vw',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                width: isMobile ? "90vw" : "40vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <Swiper
@@ -139,17 +150,17 @@ const FeaturedProjects = () => {
                   >
                     <Box
                       sx={{
-                        width: '100%',
+                        width: "100%",
                         height: {
-                          xs: '300px',
-                          sm: '400px',
-                          md: '500px',
-                          lg: '600px',
+                          xs: "300px",
+                          sm: "400px",
+                          md: "500px",
+                          lg: "600px",
                         },
-                        position: 'relative',
-                        borderRadius: '15px',
-                        overflow: 'hidden',
-                        boxShadow: '0px 5px 20px rgba(0, 0, 0, 0.3)',
+                        position: "relative",
+                        borderRadius: "15px",
+                        overflow: "hidden",
+                        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
                       }}
                     >
                       <Image
@@ -158,8 +169,8 @@ const FeaturedProjects = () => {
                         fill
                         sizes="(max-width: 600px) 90vw, (max-width: 900px) 40vw, 40vw"
                         style={{
-                          objectFit: 'contain',
-                          borderRadius: '15px',
+                          objectFit: "contain",
+                          borderRadius: "15px",
                         }}
                       />
                     </Box>
@@ -172,17 +183,17 @@ const FeaturedProjects = () => {
             <Box
               sx={{
                 flex: 1,
-                maxWidth: isMobile ? '100%' : '50%',
-                textAlign: isMobile ? 'center' : 'left',
-                p: '0 10px 20px 10px',
+                maxWidth: isMobile ? "100%" : "50%",
+                textAlign: isMobile ? "center" : "left",
+                p: "0 10px 20px 10px",
               }}
             >
               <Typography
                 variant="h1"
                 sx={{
-                  fontSize: { xs: '28px', sm: '36px', md: '40px', lg: '50px' },
-                  mb: '1.5rem',
-                  color: 'white',
+                  fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
+                  mb: "1.5rem",
+                  color: "white",
                 }}
               >
                 {section.header}
@@ -190,8 +201,8 @@ const FeaturedProjects = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontSize: { xs: '14px', sm: '18px', md: '20px' },
-                  color: '#e0e0e0',
+                  fontSize: { xs: "14px", sm: "18px", md: "20px" },
+                  color: "#e0e0e0",
                 }}
               >
                 {section.blurb}
