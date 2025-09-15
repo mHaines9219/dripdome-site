@@ -13,7 +13,7 @@ import {
 const sections = [
   {
     header: "THE SET OF NOTLOVELINE",
-    blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors .`,
+    blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors.`,
     images: [
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
