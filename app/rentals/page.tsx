@@ -22,7 +22,20 @@ export default function page() {
             RENTALS
           </Typography>
           <Box sx={{ backgroundColor: "black", minHeight: "100vh" }}>
-            <RentalGrid />
+            {/* <RentalGrid /> */}
+            <Typography
+              variant="h2"
+              component="h2"
+              color="white"
+              sx={{
+                fontSize: { xs: "30px", sm: "45px", lg: "50px" },
+                fontWeight: "bold",
+                marginBottom: { xs: "20px", md: "30px" },
+                textAlign: "center",
+              }}
+            >
+              Rentals are currently unavailable. Please check back soon.
+            </Typography>
           </Box>
         </Box>
       </Box>

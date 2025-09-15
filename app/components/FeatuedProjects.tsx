@@ -83,6 +83,7 @@ const FeaturedProjects = () => {
                 : "row-reverse",
               alignItems: "center",
               mb: "2rem",
+              width: "auto",
               gap: "1.5rem",
               border: "2px solid white",
               borderRadius: "30px",
