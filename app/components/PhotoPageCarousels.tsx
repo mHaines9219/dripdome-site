@@ -1,19 +1,19 @@
-import React, { useRef, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-import { Typography } from '@mui/material';
-import { photographyData } from '../portfolio/data';
-import Image from 'next/image';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
-import type { Swiper as SwiperInstance } from 'swiper';
+import React, { useRef, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
+import { Typography } from "@mui/material";
+import { photographyData } from "../portfolio/data";
+import Image from "next/image";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+import type { Swiper as SwiperInstance } from "swiper";
 
 const PhotoPageCarousels: React.FC = () => {
   return (
     <>
       {/* Mobile Container */}
-      <div className="lg:hidden w-screen overflow-hidden">
+      <div className="lg:hidden w-screen overflow-hidden pr-8">
         {photographyData.map((section, index) => (
           <div key={index} className="max-w-screen overflow-hidden">
             <Typography
@@ -21,20 +21,20 @@ const PhotoPageCarousels: React.FC = () => {
               component="h1"
               color="white"
               sx={{
-                fontSize: { xs: '30px', sm: '55px', lg: '70px' },
-                fontWeight: 'bold',
-                paddingTop: { xs: '30px', sm: '50px', md: '80px' },
-                marginBottom: { xs: '20px', md: '30px', lg: '40px' },
-                paddingLeft: '10px',
-                paddingRight: '10px',
-                textAlign: 'center',
+                fontSize: { xs: "30px", sm: "55px", lg: "70px" },
+                fontWeight: "bold",
+                paddingTop: { xs: "30px", sm: "50px", md: "80px" },
+                marginBottom: { xs: "20px", md: "30px", lg: "40px" },
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                textAlign: "center",
               }}
             >
               {section.category}
             </Typography>
             <Swiper
               key={index}
-              style={{ borderRadius: '40px' }}
+              style={{ borderRadius: "40px" }}
               loop={true}
               autoplay={{
                 delay: 0,
@@ -52,11 +52,11 @@ const PhotoPageCarousels: React.FC = () => {
                   key={idx}
                   className="flex justify-center items-center rounded-lg"
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    maxWidth: '500px',
-                    aspectRatio: '1',
-                    borderRadius: '20px',
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "500px",
+                    aspectRatio: "1",
+                    borderRadius: "20px",
                   }}
                 >
                   <Image
@@ -73,7 +73,7 @@ const PhotoPageCarousels: React.FC = () => {
       </div>
 
       {/* Desktop Container */}
-      <div className="hidden lg:block w-screen overflow-hidden">
+      <div className="hidden lg:block overflow-hidden  ">
         {photographyData.map((section, index) => {
           // Offset index for desktop containers to avoid collision with mobile ones
           const desktopIndex = index + photographyData.length;
@@ -84,13 +84,13 @@ const PhotoPageCarousels: React.FC = () => {
                 component="h1"
                 color="white"
                 sx={{
-                  fontSize: { xs: '30px', sm: '55px', lg: '70px' },
-                  fontWeight: 'bold',
-                  paddingTop: { xs: '30px', md: '30px' },
-                  marginBottom: { xs: '20px', md: '30px' },
-                  paddingLeft: '10px',
-                  paddingRight: '10px',
-                  textAlign: 'center',
+                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
+                  fontWeight: "bold",
+                  paddingTop: { xs: "30px", md: "30px" },
+                  marginBottom: { xs: "20px", md: "30px" },
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                  textAlign: "center",
                 }}
               >
                 {section.category}
@@ -109,8 +109,8 @@ const PhotoPageCarousels: React.FC = () => {
                 modules={[Autoplay]}
                 freeMode={true}
                 style={{
-                  borderRadius: '50px',
-                  border: '8px solid',
+                  borderRadius: "50px",
+                  border: "8px solid",
                 }}
               >
                 {section.images.map((image, idx) => (
@@ -118,8 +118,8 @@ const PhotoPageCarousels: React.FC = () => {
                     key={idx}
                     className="flex justify-center items-center rounded-lg"
                     style={{
-                      width: '500px',
-                      height: '600px',
+                      width: "500px",
+                      height: "600px",
                     }}
                   >
                     <Image
