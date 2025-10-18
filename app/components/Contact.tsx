@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Typography } from "@mui/material";
 import Footer from "../ui/Footer";
 import { sendData } from "../hooks/sendData";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   return (
     <>
       <div className="mx-4 md:mx-16 lg:mx-48 ">
@@ -43,8 +45,15 @@ export default function Contact() {
           onSubmit={async (e) => {
             e.preventDefault();
 
+            const captchaValue = recaptchaRef.current?.getValue();
+            if (!captchaValue) {
+              alert("Please complete the CAPTCHA");
+              return;
+            }
+
             // Form Data
             const formData = {
+              recaptchaToken: captchaValue,
               name: (e.target as any).name.value,
               instagram: (e.target as any).instagram.value,
               email: (e.target as any).email.value,
@@ -63,6 +72,7 @@ export default function Contact() {
               if (response.ok) {
                 alert("Thank you! Your message has been sent.");
                 (e.target as any).reset(); // Clear the form
+                recaptchaRef.current?.reset(); // Reset the CAPTCHA
               } else {
                 throw new Error("Failed to send message");
               }
@@ -99,6 +109,13 @@ export default function Contact() {
             placeholder="YOUR MESSAGE"
             required
           ></textarea>
+          <div className="mb-4">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              className="flex justify-center"
+            />
+          </div>
           <button
             className="bg-green-600 font-nova hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
             type="submit"
