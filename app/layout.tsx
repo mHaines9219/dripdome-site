@@ -5,8 +5,10 @@ import ThemeProviderWrapper from "./ThemeProviderWrapper";
 import Navbar from "./ui/Navbar";
 import ClientLayout from "./ClientLayout";
 import { Analytics } from "@vercel/analytics/next";
+import JsonLd from "./components/JsonLd";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dripdome.com"),
   title:
     "DripDome | Set Design, Production Design & Fabrication Experts in New York City",
   description:
@@ -30,7 +32,29 @@ export const metadata: Metadata = {
       },
     ],
   },
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DripDome | Set Design & Production Design Studio",
+    description:
+      "Expert set design, production design, and fabrication services in New York City and Los Angeles. Custom solutions for film, TV, commercials, and events.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+  alternates: {
+    canonical: "https://www.dripdome.com",
+  },
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#ffffff",
 };
@@ -42,6 +66,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <JsonLd />
+      </head>
       <body className={` antialiased`}>
         <ThemeProviderWrapper>
           <ClientLayout>

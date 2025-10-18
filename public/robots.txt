@@ -1,0 +1,28 @@
+# https://www.dripdome.com robots.txt
+User-agent: *
+Allow: /
+Allow: /about-us
+Allow: /portfolio
+Allow: /services
+Allow: /video-photo
+Allow: /rentals
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+Allow: /*.gif
+Allow: /*.webp
+
+# Prevent crawling of admin or sensitive areas
+Disallow: /api/
+Disallow: /_next/
+
+# Prevent duplicate content issues
+Disallow: /*?
+
+# Sitemap
+Sitemap: https://www.dripdome.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
