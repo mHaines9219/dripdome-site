@@ -112,7 +112,7 @@ export default function Contact() {
           <div className="mb-4">
             <ReCAPTCHA
               ref={recaptchaRef}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               className="flex justify-center"
             />
           </div>
