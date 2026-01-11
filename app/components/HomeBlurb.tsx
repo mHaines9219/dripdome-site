@@ -25,10 +25,11 @@ export default function HomeBlurb() {
           sx={{
             fontSize: { xs: "32px", sm: "60px", lg: "70px" },
             fontWeight: "bold",
-            marginBottom: "10px",
+            color: "white",
           }}
         >
-          WHO ARE WE?{" "}
+          Production Design & Fabrication for Film, TV & Experiential Projects
+          in NYC
         </Typography>
       </motion.div>
       <motion.div

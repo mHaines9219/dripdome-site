@@ -1,19 +1,46 @@
-'use client';
-import './globals.css';
-import Hero from './components/Hero';
-import { Typography } from '@mui/material';
-import Contact from './components/Contact';
-import HomeBlurb from './components/HomeBlurb';
-import PageButtons from './components/PageButtons';
-import LogoWall from './components/LogoWall';
-
+"use client";
+import "./globals.css";
+import Hero from "./components/Hero";
+import { Typography } from "@mui/material";
+import Contact from "./components/Contact";
+import HomeBlurb from "./components/HomeBlurb";
+import PageButtons from "./components/PageButtons";
+import LogoWall from "./components/LogoWall";
+import DomeGallery from "./components/DomeGallery";
+import { Box } from "@mui/material";
+import Navbar from "./ui/Navbar";
 export default function Home() {
   return (
-    <main className="main-container text-white   overflow-hidden ">
-      <section className="hero-container flex flex-col items-center justify-center h-[500px] overflow-x-hidden ">
-        <Hero />
-      </section>
-
+    <main className="main-container border-2 border-red-500 text-white  h-screen overflow-hidden ">
+      <Navbar />
+      {/* <DomeGallery /> */}
+      {/* <Box className=" opacity-80">
+        <Typography
+          variant="h4"
+          component="h1"
+          color="black"
+          sx={{
+            fontSize: { xs: "30px", sm: "45px", lg: "50px" },
+            fontWeight: "bold",
+            marginBottom: "15px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            justifyContent: "center",
+            display: "flex",
+            position: "absolute",
+            top: "30%",
+            left: "50%",
+            p: 4,
+            borderRadius: "30px",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            textAlign: "center",
+          }}
+        >
+          We design and build sets for the biggest brands and cultural icons in
+          the world <br></br>[enter]
+        </Typography>
+      </Box> */}
       <section
         id="home"
         className="flex flex-col items-center justify-center text-center px-8 bg-black p  "
@@ -27,13 +54,13 @@ export default function Home() {
           component="h2"
           color="black"
           sx={{
-            fontSize: { xs: '30px', sm: '45px', lg: '50px' }, // Define different font sizes for different breakpoints
-            fontWeight: 'bold', // Optional: Adjust font weight
-            marginBottom: '15px',
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            justifyContent: 'center',
-            display: 'flex',
+            fontSize: { xs: "30px", sm: "45px", lg: "50px" }, // Define different font sizes for different breakpoints
+            fontWeight: "bold", // Optional: Adjust font weight
+            marginBottom: "15px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            justifyContent: "center",
+            display: "flex",
           }}
         >
           PROJECTS WE'VE CONTRIBUTED TO
