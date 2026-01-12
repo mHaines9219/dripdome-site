@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import PhotoPageCarousels from "../components/PhotoPageCarousels";
 import Contact from "../components/Contact";
@@ -10,8 +10,16 @@ import PressSection from "../components/PressSection";
 
 export default function page() {
   return (
-    <Box className="min-h-screen w-full bg-black pt-24 md:pt-32 overflow-x-hidden">
-      <div className="container mx-auto px-4">
+    <Box
+      sx={{
+        minHeight: "100vh",
+        width: "100%",
+        bgcolor: "black",
+        pt: { xs: 12, md: 16 },
+        overflowX: "hidden",
+      }}
+    >
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +44,7 @@ export default function page() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0, duration: 1 }}
         >
-          <div className="text-container mx-auto max-w-4xl mb-4 md:mb-12">
+          <Box sx={{ mx: "auto", maxWidth: "56rem", mb: { xs: 4, md: 12 } }}>
             <Typography
               variant="body1"
               component="p"
@@ -52,27 +60,28 @@ export default function page() {
               stylists, and brands to craft striking, camera-ready environments
               that captivate audiences.
             </Typography>
-          </div>
+          </Box>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1 }}
-          className="mb-8 md:mb-12"
-        >
-          <Typography
-            variant="h2"
-            component="h2"
-            color="white"
-            sx={{
-              fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
+        <Box sx={{ mb: { xs: 8, md: 12 } }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0, duration: 1 }}
           >
-            FEATURED PROJECTS
-          </Typography>
-        </motion.div>
+            <Typography
+              variant="h2"
+              component="h2"
+              color="white"
+              sx={{
+                fontSize: { xs: "30px", sm: "55px", lg: "70px" },
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              FEATURED PROJECTS
+            </Typography>
+          </motion.div>
+        </Box>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,13 +97,21 @@ export default function page() {
           <PhotoPageCarousels />
         </motion.div>
 
-        <div className="mt-16">
+        <Box sx={{ mt: 16 }}>
           <PressSection />
-        </div>
-        <div className="mt-8 py-12 px-8 bg-black text-white">
+        </Box>
+        <Box
+          sx={{
+            mt: 8,
+            py: 12,
+            px: { xs: 2, md: 8 },
+            bgcolor: "black",
+            color: "white",
+          }}
+        >
           <Contact />
-        </div>
-      </div>
+        </Box>
+      </Container>
     </Box>
   );
 }

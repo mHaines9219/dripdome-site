@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import ThemeProviderWrapper from "./ThemeProviderWrapper";
 import ClientLayout from "./ClientLayout";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "./components/JsonLd";
@@ -53,7 +52,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.dripdome.com",
   },
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#ffffff",
 };
 
@@ -77,13 +80,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
-        <ThemeProviderWrapper>
+      <body>
+        <ThemeRegistry>
           <ClientLayout>
             {children}
             <Analytics />
           </ClientLayout>
-        </ThemeProviderWrapper>
+        </ThemeRegistry>
       </body>
     </html>
   );

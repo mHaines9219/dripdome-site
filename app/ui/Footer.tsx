@@ -1,33 +1,51 @@
-import React from 'react';
-import Link from 'next/link';
-import InstagramIcon from '@mui/icons-material/Instagram';
+import React from "react";
+import Link from "next/link";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
-    <footer className="bg-black ">
-      <div className="container mx-auto px-4">
-        <div className="flex  md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-4  md:mb-0">
-            <div className="text-gray-600 hover:text-gray-800">
-              <a
-                href="https://www.instagram.com/dripdome"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-3"
-              >
-                <InstagramIcon
-                  style={{ height: '45px', width: '45px' }}
-                  className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
-                />
-              </a>
-            </div>
-          </div>
+    <Box component="footer" sx={{ bgcolor: "black", py: 2 }}>
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          <IconButton
+            component="a"
+            href="https://www.instagram.com/dripdome"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="DripDome Instagram"
+            sx={{
+              bgcolor: "rgba(0,0,0,0.6)",
+              borderRadius: 2,
+              p: 1,
+              color: "common.white",
+              "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
+            }}
+          >
+            <InstagramIcon sx={{ width: 28, height: 28 }} />
+          </IconButton>
 
-          <Link href="/privacy" className=" text-sm text-gray-500 ">
+          <Typography
+            component={Link}
+            href="/privacy"
+            sx={{
+              color: "grey.500",
+              textDecoration: "none",
+              fontSize: 14,
+              "&:hover": { color: "grey.300" },
+            }}
+          >
             Privacy Policy
-          </Link>
-        </div>
-      </div>
-    </footer>
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 }
