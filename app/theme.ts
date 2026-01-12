@@ -1,65 +1,80 @@
-// app/theme.ts
-import { createTheme } from "@mui/material/styles";
+// theme.ts
+import { createTheme } from '@mui/material/styles';
 
-/**
- * App colors (ONLY 3).
- * Replace these with your real brand values.
- */
-export const APP_COLORS = {
-  /** Used for page backgrounds and surfaces */
-  surface: "#FFFFFF",
-  /** Used for all text/icons */
-  ink: "#111111",
-  /** Used for buttons/links/highlights */
-  accent: "#FF00AA",
-} as const;
-
-// Optional: keep font imports here if you're using them app-wide
-import "@fontsource/montserrat/400.css";
-import "@fontsource/montserrat/600.css";
-import "@fontsource/montserrat/700.css";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/shrikhand";
-import "@fontsource/nova-mono";
-import "@fontsource/quicksand";
+import '@fontsource/montserrat/400.css'; // Regular
+import '@fontsource/montserrat/600.css'; // Semi-bold
+import '@fontsource/montserrat/700.css'; // Bold
+import '@fontsource/open-sans/400.css'; // Regular
+import '@fontsource/shrikhand';
+import '@fontsource/nova-mono';
+import '@fontsource/quicksand';
 
 const theme = createTheme({
   typography: {
-    // Placeholder typography; adjust freely.
     fontFamily: "'Montserrat', 'Open Sans', sans-serif",
-    h1: { fontFamily: "Shrikhand" },
-    h2: { fontFamily: "Shrikhand" },
-    h3: { fontFamily: "Shrikhand" },
-    h4: { fontFamily: "Nova Mono" },
-    body1: { fontFamily: "Open Sans" },
-    body2: { fontFamily: "Open Sans" },
+    h1: {
+      fontSize: '96px',
+      fontWeight: 'bold',
+      fontFamily: 'Shrikhand',
+      lineHeight: 1.26,
+      // '@media (max-width:600px)': {
+      //   fontSize: '202px',
+      // },
+    },
+    h2: {
+      fontSize: '42px',
+      fontWeight: 600,
+      fontFamily: 'Shrikhand',
+    },
+    h3: {
+      fontSize: '32px',
+      fontWeight: 'bold',
+      fontFamily: 'Shrikhand',
+      '@media (max-width:600px)': {
+        fontSize: '16px',
+      },
+    },
+    h4: {
+      fontSize: '24px',
+      fontWeight: 'semi-bold',
+      fontFamily: 'Nova Mono',
+      '@media (max-width:600px)': {
+        fontSize: '14px',
+      },
+    },
+    body1: {
+      fontSize: '24px',
+      fontWeight: 400,
+      fontFamily: 'Open Sans',
+      '@media (max-width:600px)': {
+        fontSize: '14px',
+      },
+    },
+    body2: {
+      fontSize: '24px',
+      fontWeight: 400,
+      fontFamily: 'Open Sans',
+      '@media (max-width:600px)': {
+        fontSize: '12px',
+      },
+    },
   },
-
-  /**
-   * Palette fields are derived from the 3 base colors above.
-   * No extra hex values should be introduced here.
-   */
   palette: {
-    // Treat "accent" as your MUI primary color.
-    primary: { main: APP_COLORS.accent },
-    // Secondary can point at the same accent (or you can swap usage in components).
-    secondary: { main: APP_COLORS.accent },
+    primary: {
+      main: '#FCF5EC', // mainBrown
+    },
+    secondary: {
+      main: '#DD9F28', // mainGold
+    },
 
     background: {
-      default: APP_COLORS.surface,
-      paper: APP_COLORS.surface,
+      default: '#FCF5EC', // mainWhite
     },
-
     text: {
-      primary: APP_COLORS.ink,
-      secondary: APP_COLORS.ink,
+      primary: '#391E0C', // mainBrown
+      secondary: '#DD9F28', // mainGold
     },
-
-    divider: APP_COLORS.ink,
   },
-
-  // Scaffold for future component-level styling.
-  components: {},
 });
 
 export default theme;

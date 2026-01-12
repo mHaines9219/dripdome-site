@@ -1,21 +1,21 @@
-"use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
-import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
-import { IoMdHome } from "react-icons/io";
+'use client';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import { IoMdHome } from 'react-icons/io';
 
 export default function Hero() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: "ABOUT US", href: "/about-us" },
-    { name: "PORTFOLIO", href: "/portfolio" },
-    { name: "SERVICES", href: "/services" },
+    { name: 'ABOUT US', href: '/about-us' },
+    { name: 'PORTFOLIO', href: '/portfolio' },
+    { name: 'SERVICES', href: '/services' },
     // { name: 'CONVENTIONS', href: '/conventions' },
-    { name: "RENTALS", href: "/rentals" },
+    { name: 'RENTALS', href: '/rentals' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -23,12 +23,12 @@ export default function Hero() {
   return (
     <div className="relative h-full w-full">
       {/* Navbar */}
-      {pathname === "/" && (
+      {pathname === '/' && (
         <nav className="absolute top-0 left-0 w-full bg-[var(--main-brown)] font-nova text-white z-50 h-[95px] flex items-center">
           <div className="w-full flex items-center justify-between mt-[19px] mb-[19px] pl-4">
             <Link href="/" className="flex items-center space-x-3">
               <HomeTwoToneIcon
-                style={{ height: "45px", width: "45px" }}
+                style={{ height: '45px', width: '45px' }}
                 className="h-[45px] w-[45px] rounded-xl bg-black bg-opacity-60 p-2"
               />
             </Link>
@@ -43,10 +43,10 @@ export default function Hero() {
           {/* Mobile Menu */}
           <ul
             className={clsx(
-              "absolute top-[95px] left-0 w-full bg-[var(--main-brown)] flex flex-col items-center justify-start transition-all ease-in-out duration-300 mt-24",
+              'absolute top-[95px] left-0 w-full bg-[var(--main-brown)] flex flex-col items-center justify-start transition-all ease-in-out duration-300 mt-24',
               {
-                "opacity-100 pointer-events-auto": isOpen, // Show menu when open
-                "opacity-0 pointer-events-none": !isOpen, // Hide menu when closed
+                'opacity-100 pointer-events-auto': isOpen, // Show menu when open
+                'opacity-0 pointer-events-none': !isOpen, // Hide menu when closed
               }
             )}
           >
