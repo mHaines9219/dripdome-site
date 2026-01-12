@@ -1,26 +1,39 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, EffectCoverflow } from 'swiper/modules';
-import { Typography } from '@mui/material';
+"use client";
 
-import { fabricationData } from '../services/data';
-import Image from 'next/image';
-import '../styles/swiper-pagination.css';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, EffectCoverflow } from "swiper/modules";
+import { Box, Typography } from "@mui/material";
+
+import { fabricationData } from "../services/data";
+import Image from "next/image";
+import "../styles/swiper-pagination.css";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 const ServicesCarousel: React.FC = () => {
   return (
     <>
       {/* Mobile/Tablet Container */}
 
-      <div className="lg:hidden w-screen overflow-hidden mb-8">
+      <Box
+        sx={{
+          display: { xs: "block", lg: "none" },
+          width: "100vw",
+          overflow: "hidden",
+          mb: 8,
+        }}
+      >
         {fabricationData.map((section, index) => (
-          <div key={index} className="max-w-screen overflow-hidden">
+          <Box key={index} sx={{ maxWidth: "100vw", overflow: "hidden" }}>
             <Swiper
-              className="w-full max-w-4xl h-[355px] justify-center items-center"
-              effect={'coverflow'}
+              style={{
+                width: "100%",
+                maxWidth: "56rem",
+                height: "355px",
+              }}
+              effect={"coverflow"}
               grabCursor={true}
               centeredSlides={true}
               slidesPerView={1.5}
@@ -38,44 +51,60 @@ const ServicesCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className=" flex h-[20px] justify-center items-center border-2  rounded-2xl border-white"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "2px solid white",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    height: "100%",
+                  }}
                 >
-                  <div>
+                  <Box
+                    sx={{ position: "relative", width: "100%", height: "100%" }}
+                  >
                     <Image
                       src={image}
-                      layout="fill"
-                      objectFit="contain"
+                      fill
+                      style={{ objectFit: "contain" }}
                       alt={`${section.category} ${idx + 1}`}
                     />
-                  </div>
+                  </Box>
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </Box>
         ))}
-      </div>
+      </Box>
 
       {/* Desktop Container */}
-      <div className="hidden lg:block w-screen  mx-4">
+      <Box sx={{ display: { xs: "none", lg: "block" }, width: "100vw", mx: 2 }}>
         {fabricationData.map((section, index) => (
-          <div key={index} className="w-[100vw] overflow-hidden">
+          <Box key={index} sx={{ width: "100vw", overflow: "hidden" }}>
             <Typography
               variant="h1"
               component="h1"
               color="black"
               sx={{
-                fontSize: { xs: '35px', md: '40px', lg: '45px' },
-                fontWeight: 'bold',
+                fontSize: { xs: "35px", md: "40px", lg: "45px" },
+                fontWeight: "bold",
                 lineHeight: 1.2,
-                marginTop: '24px',
-                marginBottom: '24px',
-                textAlign: 'center',
+                marginTop: "24px",
+                marginBottom: "24px",
+                textAlign: "center",
               }}
             >
               {section.category}
             </Typography>
             <Swiper
-              className="w-full max-w-7xl h-[700px] justify-center items-center mb-24 -mt-20"
+              style={{
+                width: "100%",
+                maxWidth: "80rem",
+                height: "700px",
+                marginBottom: "96px",
+                marginTop: "-80px",
+              }}
               grabCursor={true}
               slidesPerView={2.5} // Adjust based on your preference
               spaceBetween={10} // Add space between slides
@@ -86,23 +115,36 @@ const ServicesCarousel: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex justify-center border border-4 border-white items-center rounded-2xl "
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    border: "4px solid white",
+                    borderRadius: "16px",
+                  }}
                 >
-                  <div className="h-[600px] w-[600px] ">
+                  <Box
+                    sx={{
+                      width: 600,
+                      height: 600,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
                     <Image
                       src={image}
                       height={500}
                       width={500}
-                      objectFit="contain"
+                      style={{ objectFit: "contain" }}
                       alt={`${section.category} ${idx + 1}`}
                     />
-                  </div>
+                  </Box>
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </Box>
         ))}
-      </div>
+      </Box>
     </>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -70,9 +72,16 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className="px-6 ">
+    <Box sx={{ px: 3 }}>
       {sections.map((section, index) => (
-        <div key={index} className="rounded-3xl md:pt-12 lg:pt-20 mb-6">
+        <Box
+          key={index}
+          sx={{
+            borderRadius: 4,
+            pt: { md: 12, lg: 20 },
+            mb: 6,
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -142,12 +151,16 @@ const FeaturedProjects = () => {
                   slideShadows: true,
                 }}
                 modules={[EffectCards, Autoplay]}
-                className="w-full lg:h-[600px] flex justify-center items-center lg:my-6 lg:-mb-6 xl:mb-10"
+                style={{ width: "100%" }}
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx}
-                    className="flex justify-center items-center"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
                     <Box
                       sx={{
@@ -210,9 +223,9 @@ const FeaturedProjects = () => {
               </Typography>
             </Box>
           </Box>
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 

@@ -1,17 +1,17 @@
-'use client';
-import React from 'react';
-import AboutUs from '../components/AboutUs';
-import FoundersSection from '../components/FoundersSection';
-import Contact from '../components/Contact';
+import React from "react";
+import { Box } from "@mui/material";
+import AboutUs from "../components/AboutUs";
+import FoundersSection from "../components/FoundersSection";
+import Contact from "../components/Contact";
 
 export default function page() {
   return (
-    <div>
+    <Box>
       <AboutUs />
       <FoundersSection />
-      <div className="bg-black  py-10">
+      <Box sx={{ bgcolor: "black", py: 10 }}>
         <Contact />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

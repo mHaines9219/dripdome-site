@@ -14,25 +14,27 @@ export const APP_COLORS = {
   accent: "#FF00AA",
 } as const;
 
-// Optional: keep font imports here if you're using them app-wide
-import "@fontsource/montserrat/400.css";
-import "@fontsource/montserrat/600.css";
-import "@fontsource/montserrat/700.css";
-import "@fontsource/open-sans/400.css";
-import "@fontsource/shrikhand";
-import "@fontsource/nova-mono";
-import "@fontsource/quicksand";
+const FONT_FALLBACK =
+  "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif";
 
 const theme = createTheme({
   typography: {
-    // Placeholder typography; adjust freely.
-    fontFamily: "'Montserrat', 'Open Sans', sans-serif",
-    h1: { fontFamily: "Shrikhand" },
-    h2: { fontFamily: "Shrikhand" },
-    h3: { fontFamily: "Shrikhand" },
-    h4: { fontFamily: "Nova Mono" },
-    body1: { fontFamily: "Open Sans" },
-    body2: { fontFamily: "Open Sans" },
+    // Loaded in app/layout.tsx via Google Fonts <link> tags
+    fontFamily: `'Source Sans 3', ${FONT_FALLBACK}`,
+
+    // Titles (h1-h6)
+    h1: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h2: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h3: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h4: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h5: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h6: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+
+    // Subheaders + paragraphs
+    subtitle1: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    subtitle2: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    body1: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    body2: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
   },
 
   /**

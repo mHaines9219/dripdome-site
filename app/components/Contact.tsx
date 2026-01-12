@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useRef } from "react";
-import { Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import Footer from "../ui/Footer";
 import { sendData } from "../hooks/sendData";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -8,7 +10,7 @@ export default function Contact() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   return (
     <>
-      <div className="mx-4 md:mx-16 lg:mx-48 ">
+      <Box sx={{ mx: { xs: 2, md: 8, lg: 24 } }}>
         <Typography
           variant="h2"
           component="h2"
@@ -40,8 +42,17 @@ export default function Contact() {
           BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT
           YOUR PROJECT AND LET'S BUILD SOMETHING AMAZING!
         </Typography>
-        <form
-          className="flex flex-col max-w-screen mx-auto mb-8 md:gap-y-4 "
+        <Box
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            maxWidth: 900,
+            mx: "auto",
+            mb: 4,
+            gap: { xs: 2, md: 2.5 },
+          }}
           onSubmit={async (e) => {
             e.preventDefault();
 
@@ -81,49 +92,87 @@ export default function Contact() {
             }
           }}
         >
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="text"
+          <TextField
             name="name"
             placeholder="NAME"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Name" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="instagram"
+          <TextField
             name="instagram"
             placeholder="INSTAGRAM"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Instagram" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="email"
+          <TextField
             name="email"
+            type="email"
             placeholder="EMAIL"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Email" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <textarea
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
+          <TextField
             name="message"
-            rows={4}
             placeholder="YOUR MESSAGE"
             required
-          ></textarea>
-          <div className="mb-4">
+            fullWidth
+            multiline
+            minRows={4}
+            inputProps={{ "aria-label": "Message" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
+          />
+          <Box sx={{ mb: 1, display: "flex", justifyContent: "center" }}>
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-              className="flex justify-center"
             />
-          </div>
-          <button
-            className="bg-green-600 font-nova hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
+          </Box>
+          <Button
             type="submit"
+            variant="contained"
+            sx={{
+              alignSelf: "flex-start",
+              px: 4,
+              py: 1.5,
+              fontWeight: 700,
+              bgcolor: "#16a34a",
+              "&:hover": { bgcolor: "#1d4ed8" },
+            }}
           >
-            SEND{" "}
-          </button>
-        </form>
-      </div>
+            SEND
+          </Button>
+        </Box>
+      </Box>
       <Footer />
     </>
   );

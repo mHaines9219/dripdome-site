@@ -13,7 +13,7 @@ export default function AboutUs() {
   };
 
   return (
-    <div className="   bg-black " ref={ref}>
+    <Box ref={ref} sx={{ bgcolor: "black" }}>
       <Box
         sx={{
           width: "100%",
@@ -47,7 +47,7 @@ export default function AboutUs() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <div className="text-container mx-2 md:mx-10">
+          <Box sx={{ mx: { xs: 2, md: 10 } }}>
             <Typography
               variant="body1"
               component="p"
@@ -69,9 +69,9 @@ export default function AboutUs() {
               values and collaboration fuel our passion for creating
               extraordinary projects that leave a lasting impact.
             </Typography>
-          </div>
+          </Box>
         </motion.div>
       </Box>
-    </div>
+    </Box>
   );
 }

@@ -1,29 +1,28 @@
-'use client';
-import React from 'react';
-import { Typography } from '@mui/material';
-import ServicesCarousel from '../components/ServicesCarousel';
-import { motion } from 'framer-motion';
-import '../globals.css';
+"use client";
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import ServicesCarousel from "../components/ServicesCarousel";
+import { motion } from "framer-motion";
 
-import Contact from '../components/Contact';
+import Contact from "../components/Contact";
 
 export default function ServicesPage() {
   const services = [
-    'Carpentry',
-    'Set Design',
-    'PHOTOGRAPHY',
+    "Carpentry",
+    "Set Design",
+    "PHOTOGRAPHY",
 
-    'CNC Routing',
-    '3D Renders',
+    "CNC Routing",
+    "3D Renders",
 
-    'Production',
-    'Printing',
-    'Murals',
-    'Rentals',
-    'Props',
+    "Production",
+    "Printing",
+    "Murals",
+    "Rentals",
+    "Props",
   ];
   return (
-    <div className="bg-black overflow-hidden ">
+    <Box sx={{ bgcolor: "black", overflow: "hidden" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -34,13 +33,13 @@ export default function ServicesPage() {
           component="h1"
           color="white"
           sx={{
-            fontSize: { xs: '55px', sm: '95px', lg: '96px' },
-            fontWeight: 'bold',
-            paddingTop: { xs: '120px', md: '150px' },
-            marginBottom: { xs: '20px', md: '30px' },
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            textAlign: 'center',
+            fontSize: { xs: "55px", sm: "95px", lg: "96px" },
+            fontWeight: "bold",
+            paddingTop: { xs: "120px", md: "150px" },
+            marginBottom: { xs: "20px", md: "30px" },
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            textAlign: "center",
           }}
         >
           SERVICES
@@ -51,17 +50,17 @@ export default function ServicesPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <div className="text-container mx-2 md:mx-10">
+        <Box sx={{ mx: { xs: 2, md: 10 } }}>
           <Typography
             variant="body1"
             component="p"
             color="white"
             sx={{
-              fontSize: { xs: '14px', sm: '20px', md: '24px' },
-              marginTop: '10px',
-              marginLeft: '30px',
-              marginRight: '30px',
-              textAlign: 'center',
+              fontSize: { xs: "14px", sm: "20px", md: "24px" },
+              marginTop: "10px",
+              marginLeft: "30px",
+              marginRight: "30px",
+              textAlign: "center",
             }}
           >
             From the first spark of an idea to the final reveal, we handle every
@@ -72,10 +71,25 @@ export default function ServicesPage() {
             a large-scale art piece, Drip Dome Productions has the tools and
             talent to make it happen.
           </Typography>
-        </div>
+        </Box>
       </motion.div>
-      <div className="w-full  mx-auto p-4">
-        <div className="grid grid-cols-2 gap-4 text-lg text-white border  md:border-4 my-8 py-12 rounded-xl mx-2 px-2 md:mx-4 md:my-20">
+      <Box sx={{ width: "100%", mx: "auto", p: 2 }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            gap: 2,
+            color: "white",
+            borderStyle: "solid",
+            borderWidth: { xs: 1, md: 4 },
+            borderColor: "white",
+            my: { xs: 4, md: 20 },
+            py: { xs: 6, md: 8 },
+            borderRadius: 2,
+            mx: { xs: 2, md: 4 },
+            px: 2,
+          }}
+        >
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -87,15 +101,15 @@ export default function ServicesPage() {
                 variant="h2"
                 align="center"
                 sx={{
-                  fontSize: { xs: '20px', sm: '35px', md: '55px', lg: '55px' },
+                  fontSize: { xs: "20px", sm: "35px", md: "55px", lg: "55px" },
                 }}
               >
                 {service.toUpperCase()}
               </Typography>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -104,9 +118,9 @@ export default function ServicesPage() {
       >
         {/* <ServicesCarousel /> */}
       </motion.div>
-      <div className="bg-black  py-10">
+      <Box component="section" id="contact" sx={{ bgcolor: "black", py: 10 }}>
         <Contact />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
