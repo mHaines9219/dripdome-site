@@ -3,6 +3,7 @@ import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "./components/JsonLd";
+import ThemeRegistry from "./ThemeRegistry";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.dripdome.com"),

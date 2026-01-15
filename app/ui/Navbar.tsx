@@ -91,13 +91,8 @@ export default function Navbar() {
                 <Image
                   alt="Company Logo"
                   src="/assets/dd_logo.png"
-                  width={120}
-                  height={120}
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                    maxHeight: 120,
-                  }}
+                  width={100}
+                  height={100}
                   priority
                 />
               </Box>
