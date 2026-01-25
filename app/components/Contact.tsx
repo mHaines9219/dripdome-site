@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef, FormEvent } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Footer from "../ui/Footer";
-import { sendData } from "../hooks/sendData";
+import { sendData } from "@/hooks/sendData";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
@@ -16,15 +16,15 @@ export default function Contact() {
           component="h2"
           color="primary"
           sx={{
-            fontSize: { xs: "50px", md: "80px", lg: "90px" }, // Define different font sizes for different breakpoints
-            fontWeight: "bold", // Optional: Adjust font weight
+            fontSize: { xs: "50px", md: "80px", lg: "90px" },
+            fontWeight: "bold",
             marginBottom: "15px",
             justifyContent: "center",
             display: "flex",
             whiteSpace: "nowrap",
           }}
         >
-          CONTACT US{" "}
+          CONTACT US
         </Typography>
 
         <Typography
@@ -32,7 +32,7 @@ export default function Contact() {
           component="p"
           color="primary"
           sx={{
-            fontSize: { sm: "20px", md: "25px", lg: "30px" }, // Define different font sizes for different breakpoints
+            fontSize: { sm: "20px", md: "25px", lg: "30px" },
             display: "flex",
             textAlign: "center",
             marginBottom: "30px",
@@ -40,7 +40,7 @@ export default function Contact() {
           }}
         >
           BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT
-          YOUR PROJECT AND LET'S BUILD SOMETHING AMAZING!
+          YOUR PROJECT AND LET&apos;S BUILD SOMETHING AMAZING!
         </Typography>
         <Box
           component="form"
@@ -53,7 +53,7 @@ export default function Contact() {
             mb: 4,
             gap: { xs: 2, md: 2.5 },
           }}
-          onSubmit={async (e) => {
+          onSubmit={async (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
             const captchaValue = recaptchaRef.current?.getValue();
@@ -62,13 +62,20 @@ export default function Contact() {
               return;
             }
 
-            // Form Data
+            const form = e.currentTarget;
+            const formElements = form.elements as HTMLFormControlsCollection & {
+              name: HTMLInputElement;
+              instagram: HTMLInputElement;
+              email: HTMLInputElement;
+              message: HTMLTextAreaElement;
+            };
+
             const formData = {
               recaptchaToken: captchaValue,
-              name: (e.target as any).name.value,
-              instagram: (e.target as any).instagram.value,
-              email: (e.target as any).email.value,
-              message: (e.target as any).message.value,
+              name: formElements.name.value,
+              instagram: formElements.instagram.value,
+              email: formElements.email.value,
+              message: formElements.message.value,
             };
 
             try {
@@ -82,12 +89,12 @@ export default function Contact() {
               await sendData(formData);
               if (response.ok) {
                 alert("Thank you! Your message has been sent.");
-                (e.target as any).reset(); // Clear the form
-                recaptchaRef.current?.reset(); // Reset the CAPTCHA
+                form.reset();
+                recaptchaRef.current?.reset();
               } else {
                 throw new Error("Failed to send message");
               }
-            } catch (error) {
+            } catch {
               alert("An error occurred. Please try again.");
             }
           }}

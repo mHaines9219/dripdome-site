@@ -57,9 +57,10 @@ export default async function handler(
     try {
       await sgMail.send(msg);
       res.status(200).json({ message: "Email sent successfully" });
-    } catch (error: any) {
+    } catch (error) {
       console.error("SendGrid Error:", error);
-      res.status(500).json({ error: error.message || "Failed to send email" });
+      const errorMessage = error instanceof Error ? error.message : "Failed to send email";
+      res.status(500).json({ error: errorMessage });
     }
   } else {
     res.status(405).json({ error: "Method not allowed" });

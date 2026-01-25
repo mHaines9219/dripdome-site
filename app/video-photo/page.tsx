@@ -1,4 +1,4 @@
-import React from "react";
+import { Metadata } from "next";
 import {
   Box,
   Card,
@@ -8,7 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function VideoPhoto() {
+export const metadata: Metadata = {
+  title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
+  description:
+    "Explore DripDome&apos;s video and photo production work. Custom set design and fabrication for film, TV, commercials, and photography in New York City.",
+  alternates: {
+    canonical: "https://www.dripdome.com/video-photo",
+  },
+  openGraph: {
+    title: "Video & Photo | DripDome - Set Design for Productions",
+    description:
+      "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
+    url: "https://www.dripdome.com/video-photo",
+  },
+};
+
+export default function VideoPhotoPage() {
   // Placeholder data for the gallery
   const galleryImages = [
     { id: 1, src: "/images/work1.jpg", alt: "Project 1", caption: "Project 1" },
@@ -42,7 +57,7 @@ export default function VideoPhoto() {
           component="p"
           sx={{ textAlign: "center", color: "grey.700", mb: 8 }}
         >
-          Explore some of the amazing projects we've worked on.
+          Explore some of the amazing projects we&apos;ve worked on.
         </Typography>
 
         <Box

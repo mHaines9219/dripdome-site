@@ -27,7 +27,7 @@ export default function ProjectsContributed() {
           zIndex: 10,
         }}
       >
-        Projects We've Contributed To{" "}
+        Projects We&apos;ve Contributed To
       </Typography>
       <Box
         sx={{

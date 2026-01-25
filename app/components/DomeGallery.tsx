@@ -1,6 +1,11 @@
-import { useEffect, useMemo, useRef, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useCallback, CSSProperties } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
+
+// Extend CSSProperties to allow CSS custom properties
+type CustomCSSProperties = CSSProperties & {
+  [key: `--${string}`]: string | number;
+};
 
 type ImageItem = string | { src: string; alt?: string };
 
@@ -375,7 +380,7 @@ export default function DomeGallery({
         if (last) {
           draggingRef.current = false;
 
-          let [vMagX, vMagY] = velocity;
+          const [vMagX, vMagY] = velocity;
           const [dirX, dirY] = direction;
           let vx = vMagX * dirX;
           let vy = vMagY * dirY;
@@ -451,7 +456,7 @@ export default function DomeGallery({
     };
 
     el.style.visibility = 'hidden';
-    (el.style as any).zIndex = 0;
+    el.style.zIndex = '0';
 
     const overlay = document.createElement('div');
     overlay.className = 'enlarge';
@@ -570,7 +575,7 @@ export default function DomeGallery({
         parent.style.setProperty('--rot-y-delta', `0deg`);
         parent.style.setProperty('--rot-x-delta', `0deg`);
         el.style.visibility = '';
-        (el.style as any).zIndex = 0;
+        el.style.zIndex = '0';
         focusedElRef.current = null;
         rootRef.current?.removeAttribute('data-enlarging');
         openingRef.current = false;
@@ -647,7 +652,7 @@ export default function DomeGallery({
         requestAnimationFrame(() => {
           el.style.visibility = '';
           el.style.opacity = '0';
-          (el.style as any).zIndex = 0;
+          el.style.zIndex = '0';
           focusedElRef.current = null;
           rootRef.current?.removeAttribute('data-enlarging');
 
@@ -699,13 +704,13 @@ export default function DomeGallery({
       className="sphere-root"
       style={
         {
-          ['--segments-x' as any]: segments,
-          ['--segments-y' as any]: segments,
-          ['--overlay-blur-color' as any]: overlayBlurColor,
-          ['--tile-radius' as any]: imageBorderRadius,
-          ['--enlarge-radius' as any]: openedImageBorderRadius,
-          ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none'
-        } as React.CSSProperties
+          '--segments-x': segments,
+          '--segments-y': segments,
+          '--overlay-blur-color': overlayBlurColor,
+          '--tile-radius': imageBorderRadius,
+          '--enlarge-radius': openedImageBorderRadius,
+          '--image-filter': grayscale ? 'grayscale(1)' : 'none'
+        } as CustomCSSProperties
       }
     >
       <main ref={mainRef} className="sphere-main">
@@ -722,11 +727,11 @@ export default function DomeGallery({
                 data-size-y={it.sizeY}
                 style={
                   {
-                    ['--offset-x' as any]: it.x,
-                    ['--offset-y' as any]: it.y,
-                    ['--item-size-x' as any]: it.sizeX,
-                    ['--item-size-y' as any]: it.sizeY
-                  } as React.CSSProperties
+                    '--offset-x': it.x,
+                    '--offset-y': it.y,
+                    '--item-size-x': it.sizeX,
+                    '--item-size-y': it.sizeY
+                  } as CustomCSSProperties
                 }
               >
                 <div

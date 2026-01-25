@@ -9,7 +9,6 @@ import {
   CardMedia,
   Chip,
   Grid,
-  Grid2,
   Typography,
 } from "@mui/material";
 

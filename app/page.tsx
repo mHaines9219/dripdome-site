@@ -1,17 +1,9 @@
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
-import Contact from "./components/Contact";
+import { Box } from "@mui/material";
 import HomeBlurb from "./components/HomeBlurb";
-import PageButtons from "./components/PageButtons";
 import LogoWall from "./components/LogoWall";
 import Navbar from "./ui/Navbar";
-import Dither from "@/app/components/Dither";
 import ProjectsContributed from "./components/ProjectsContributed";
 import OurServices from "./components/OurServices";
-import ExpandableCardDemo from "./components/expandable-card-demo-grid";
-import { LiquidMetalCard } from "@/components/ui/liquid-metal-card";
-import { LiquidMetalCardDefault } from "./components/LiquidMetalCardDefault";
-
 export default function Home() {
   return (
     <>
@@ -51,17 +43,16 @@ export default function Home() {
         </Box>
         <Box
           sx={{
-            width: "100%",
-            height: "500px",
-            bgcolor: "gray",
+            // width: "100%",
+            // height: "500px",
+            bgcolor: "black",
           }}
         >
-          {/* <ExpandableCardDemo /> */}
-          {/* <LiquidMetalCard /> */}
-          <LiquidMetalCardDefault />
+          {/* <LogoWall /> */}
+      <OurServices />
         </Box>
         <ProjectsContributed />
-        <OurServices />
+        {/* <OurServices /> */}
       </Box>
     </>
   );

@@ -1,6 +1,18 @@
+"use client";
+
 import { Box, Typography } from "@mui/material";
+import { GlareCard } from "@/components/ui/glare-card";
+
+const S3_BASE = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 
 export default function OurServices() {
+  const services = [
+    { label: "FABRICATION", image: `${S3_BASE}/website-assets/fab.png` },
+    { label: "PRODUCTION & SET DESIGN", image: `${S3_BASE}/website-assets/setdes.png` },
+    { label: "RENTALS", image: `${S3_BASE}/website-assets/rentals.png` },
+    { label: "CONSULTING", image: `${S3_BASE}/website-assets/consulting.png` },
+  ];
+
   return (
     <Box
       component="section"
@@ -11,76 +23,52 @@ export default function OurServices() {
         px: { xs: 2, md: 8 },
       }}
     >
-      <Typography
-        variant="h2"
-        component="h2"
-        color="white"
-        sx={{
-          fontSize: { xs: "24px", sm: "45px", lg: "50px" },
-          fontWeight: "bold",
-          marginBottom: "15px",
-          paddingLeft: "10px",
-          paddingRight: "10px",
-          justifyContent: "flex-start",
-          display: "flex",
-        }}
-      >
-        Our Services
-      </Typography>
-
       <Box
         sx={{
           display: "grid",
-          gap: { xs: 2, sm: 4 },
           gridTemplateColumns: {
-            xs: "repeat(2, minmax(0, 1fr))",
-            sm: "repeat(4, minmax(0, 1fr))",
+            xs: "repeat(2, 1fr)",
+            md: "repeat(4, 1fr)",
           },
+          gap: { xs: 2, md: 4 },
+          justifyItems: "center",
           px: 1,
         }}
       >
-        {[
-          "FABRICATION",
-          "SET DESIGN",
-          "CONSULTING",
-          "PRODUCTION DESIGN",
-        ].map((label) => (
-          <Box
-            key={label}
-            sx={{
-              aspectRatio: "1 / 1",
-              borderRadius: 4,
-              bgcolor: "#222",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-              boxShadow: 3,
-              border: "2px solid #333",
-              overflow: "hidden",
-              transition: "transform 150ms ease, border-color 150ms ease",
-              "&:hover": {
-                transform: "translateY(-2px)",
-                borderColor: "rgba(255,255,255,0.5)",
-              },
-            }}
-          >
-            <Typography
-              component="span"
+        {services.map((service) => (
+          <GlareCard key={service.label}>
+            <Box
               sx={{
-                px: 2,
-                color: "rgba(255,255,255,0.85)",
-                fontWeight: 800,
-                letterSpacing: "0.12em",
-                fontSize: { xs: 12, sm: 14, md: 16 },
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                p: 2,
+                backgroundImage: `url(${service.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
-              {label}
-            </Typography>
-          </Box>
+              <Typography
+                component="span"
+                sx={{
+                  color: "white",
+                  fontWeight: 800,
+                  letterSpacing: "0.12em",
+                  fontSize: { xs: 14, sm: 18, md: 20 },
+                  textShadow: "0 2px 8px rgba(0,0,0,0.8)",
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  p:1,
+                }}
+              >
+                {service.label}
+              </Typography>
+            </Box>
+          </GlareCard>
         ))}
       </Box>
     </Box>
   );
 }
-

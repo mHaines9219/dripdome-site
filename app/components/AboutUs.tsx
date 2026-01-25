@@ -1,16 +1,11 @@
 "use client";
-import React, { useRef } from "react";
+
+import { useRef } from "react";
 import { Box, Typography } from "@mui/material";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function AboutUs() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true }); // Trigger once when in view
-
-  const variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   return (
     <Box ref={ref} sx={{ bgcolor: "black" }}>
