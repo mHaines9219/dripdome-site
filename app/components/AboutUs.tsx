@@ -55,14 +55,17 @@ export default function AboutUs() {
                 textAlign: "center",
               }}
             >
-              Drip Dome Productions is a majority women-owned, family-run
-              business based in New York City, with a presence in Los Angeles as
-              well. We specialize in set design, custom fabrication, murals,
-              graphic design, photography, and rentals. From photoshoots and
-              music videos to large-scale event installations, we bring creative
-              visions to life with artistry and precision. At Drip Dome, family
-              values and collaboration fuel our passion for creating
-              extraordinary projects that leave a lasting impact.
+              <Box component="span" sx={{ color: "#FF00AA", fontWeight: 600 }}>
+                Drip Dome Productions
+              </Box>{" "}
+              is a majority women-owned, family-run business based in New York
+              City, with a presence in Los Angeles as well. We specialize in set
+              design, custom fabrication, murals, graphic design, photography,
+              and rentals. From photoshoots and music videos to large-scale
+              event installations, we bring creative visions to life with
+              artistry and precision. At Drip Dome, family values and
+              collaboration fuel our passion for creating extraordinary projects
+              that leave a lasting impact.
             </Typography>
           </Box>
         </motion.div>

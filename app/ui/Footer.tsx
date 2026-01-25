@@ -26,7 +26,7 @@ export default function Footer() {
               borderRadius: 2,
               p: 1,
               color: "common.white",
-              "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
+              "&:hover": { bgcolor: "rgba(0,0,0,0.75)", color: "#FF00AA" },
             }}
           >
             <InstagramIcon sx={{ width: 28, height: 28 }} />

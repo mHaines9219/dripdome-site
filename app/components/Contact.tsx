@@ -10,37 +10,39 @@ export default function Contact() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   return (
     <>
-      <Box sx={{ mx: { xs: 2, md: 8, lg: 24 } }}>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
         <Typography
           variant="h2"
           component="h2"
-          color="primary"
           sx={{
             fontSize: { xs: "50px", md: "80px", lg: "90px" },
             fontWeight: "bold",
             marginBottom: "15px",
             justifyContent: "center",
             display: "flex",
+            color: "white",
             whiteSpace: "nowrap",
           }}
         >
-          CONTACT US
+          Contact Us
         </Typography>
 
         <Typography
-          variant="body1"
+          variant="body2"
           component="p"
-          color="primary"
           sx={{
             fontSize: { sm: "20px", md: "25px", lg: "30px" },
             display: "flex",
             textAlign: "center",
+            maxWidth: 900,
             marginBottom: "30px",
-            fontFamily: "Open Sans",
+            color: "white",
           }}
         >
-          BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT
-          YOUR PROJECT AND LET&apos;S BUILD SOMETHING AMAZING!
+          Big or small, every idea has the potential to shine. Tell us about
+          your project and let&apos;s build something amazing!
         </Typography>
         <Box
           component="form"
@@ -168,9 +170,11 @@ export default function Contact() {
             type="submit"
             variant="contained"
             sx={{
-              alignSelf: "flex-start",
+              alignSelf: "center",
               px: 4,
               py: 1.5,
+              width: "80dvw",
+              maxWidth: 900,
               fontWeight: 700,
               bgcolor: "#16a34a",
               "&:hover": { bgcolor: "#1d4ed8" },

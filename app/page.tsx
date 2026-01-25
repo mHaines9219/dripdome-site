@@ -4,6 +4,7 @@ import LogoWall from "./components/LogoWall";
 import Navbar from "./ui/Navbar";
 import ProjectsContributed from "./components/ProjectsContributed";
 import OurServices from "./components/OurServices";
+import Contact from "./components/Contact";
 export default function Home() {
   return (
     <>
@@ -49,10 +50,11 @@ export default function Home() {
           }}
         >
           {/* <LogoWall /> */}
-      <OurServices />
+          <OurServices />
         </Box>
         <ProjectsContributed />
         {/* <OurServices /> */}
+        <Contact />
       </Box>
     </>
   );

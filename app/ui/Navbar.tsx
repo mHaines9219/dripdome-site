@@ -120,9 +120,9 @@ export default function Navbar() {
                       fontWeight: 600,
                       borderRadius: 0,
                       borderBottom: isActive
-                        ? "2px solid #eab308"
+                        ? "2px solid #FF00AA"
                         : "2px solid transparent",
-                      "&:hover": { color: "#eab308", bgcolor: "transparent" },
+                      "&:hover": { color: "#FF00AA", bgcolor: "transparent" },
                     }}
                   >
                     {link.name}
@@ -167,7 +167,7 @@ export default function Navbar() {
                   sx={{
                     bgcolor: "rgba(0,0,0,0.7)",
                     borderRadius: 2,
-                    "&:hover": { color: "#eab308" },
+                    "&:hover": { color: "#FF00AA" },
                   }}
                 >
                   <ListItemText

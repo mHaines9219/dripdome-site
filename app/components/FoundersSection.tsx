@@ -123,8 +123,20 @@ const FoundersSection = () => {
                       </Box>
                       <Typography
                         variant="h5"
-                        fontFamily={"Shrikhand"}
-                        sx={{ textAlign: "center" }}
+                        sx={{
+                          color: "white",
+                          textAlign: "center",
+                          position: "relative",
+                          "&::after": {
+                            content: '""',
+                            display: "block",
+                            width: "40px",
+                            height: "2px",
+                            bgcolor: "#FF00AA",
+                            mx: "auto",
+                            mt: 1,
+                          },
+                        }}
                       >
                         {founder.name}
                       </Typography>

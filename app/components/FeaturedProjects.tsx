@@ -84,7 +84,7 @@ const FeaturedProjects = () => {
               mb: "2rem",
               width: "auto",
               gap: "1.5rem",
-              border: "2px solid white",
+              border: "2px solid rgba(255, 0, 170, 0.3)",
               borderRadius: "30px",
               backgroundColor: "#121212",
               paddingTop: {
@@ -198,6 +198,7 @@ const FeaturedProjects = () => {
                   fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
                   mb: "1.5rem",
                   color: "white",
+                  "& span": { color: "#FF00AA" },
                 }}
               >
                 {section.header}

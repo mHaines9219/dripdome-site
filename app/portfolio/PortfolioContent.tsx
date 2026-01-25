@@ -67,18 +67,31 @@ export default function PortfolioContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0, duration: 1 }}
           >
-            <Typography
-              variant="h2"
-              component="h2"
-              color="white"
-              sx={{
-                fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              FEATURED PROJECTS
-            </Typography>
+            <Box sx={{ textAlign: "center" }}>
+              <Typography
+                variant="h2"
+                component="h2"
+                color="white"
+                sx={{
+                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
+                  fontWeight: "bold",
+                  display: "inline",
+                }}
+              >
+                FEATURED{" "}
+              </Typography>
+              <Typography
+                variant="h2"
+                component="span"
+                sx={{
+                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
+                  fontWeight: "bold",
+                  color: "#FF00AA",
+                }}
+              >
+                PROJECTS
+              </Typography>
+            </Box>
           </motion.div>
         </Box>
         <motion.div

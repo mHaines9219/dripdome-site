@@ -22,9 +22,11 @@ export default function ProjectsContributed() {
           marginBottom: "15px",
           paddingLeft: "10px",
           paddingRight: "10px",
-          justifyContent: "flex-start",
+          justifyContent: { xs: "center", md: "flex-start" },
           display: "flex",
           zIndex: 10,
+          mt: 4,
+          textAlign: { xs: "center", md: "left" },
         }}
       >
         Projects We&apos;ve Contributed To
@@ -42,11 +44,11 @@ export default function ProjectsContributed() {
         }}
       >
         {[
-          "bitrans.png",
-          "cctrans.png",
+          "biw.png",
+          "ccw.png",
           "googtrans.png",
-          "paper.png",
-          "phlogo.png",
+          "paperw.png",
+          "phw.png",
           "sunnydtrans.png",
         ].map((logo) => (
           <Box
@@ -77,4 +79,3 @@ export default function ProjectsContributed() {
     </Box>
   );
 }
-
