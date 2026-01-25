@@ -9,6 +9,8 @@ import Dither from "@/app/components/Dither";
 import ProjectsContributed from "./components/ProjectsContributed";
 import OurServices from "./components/OurServices";
 import ExpandableCardDemo from "./components/expandable-card-demo-grid";
+import { LiquidMetalCard } from "@/components/ui/liquid-metal-card";
+import { LiquidMetalCardDefault } from "./components/LiquidMetalCardDefault";
 
 export default function Home() {
   return (
@@ -54,7 +56,9 @@ export default function Home() {
             bgcolor: "gray",
           }}
         >
-          <ExpandableCardDemo />
+          {/* <ExpandableCardDemo /> */}
+          {/* <LiquidMetalCard /> */}
+          <LiquidMetalCardDefault />
         </Box>
         <ProjectsContributed />
         <OurServices />
