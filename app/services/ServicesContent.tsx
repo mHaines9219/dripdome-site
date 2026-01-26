@@ -295,7 +295,10 @@ export default function ServicesContent() {
               letterSpacing: "-0.02em",
             }}
           >
-            WHAT WE DO
+            WHAT WE{" "}
+            <Box component="span" sx={{ color: "#FF00AA", display: "inline" }}>
+              DO
+            </Box>
           </Typography>
         </motion.div>
 

@@ -14,7 +14,8 @@ export default function PortfolioContent() {
         minHeight: "100vh",
         width: "100%",
         bgcolor: "black",
-        pt: { xs: 12, md: 16 },
+        px: 2,
+        pt: { xs: 8, md: 6 },
         overflowX: "hidden",
       }}
     >
@@ -29,7 +30,7 @@ export default function PortfolioContent() {
             component="h1"
             color="white"
             sx={{
-              fontSize: { xs: "55px", sm: "95px", lg: "96px" },
+              fontSize: { xs: "45px", sm: "95px", lg: "96px" },
               fontWeight: "bold",
               marginBottom: { xs: "20px", md: "30px" },
               textAlign: "center",
@@ -61,7 +62,7 @@ export default function PortfolioContent() {
             </Typography>
           </Box>
         </motion.div>
-        <Box sx={{ mb: { xs: 8, md: 12 } }}>
+        <Box sx={{ mb: { xs: 4, md: 0 } }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

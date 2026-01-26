@@ -22,10 +22,10 @@ export default function ProjectsContributed() {
           marginBottom: "15px",
           paddingLeft: "10px",
           paddingRight: "10px",
-          justifyContent: { xs: "center", md: "flex-start" },
+          justifyContent: { xs: "center" },
           display: "flex",
           zIndex: 10,
-          mt: 4,
+          mt: { xs: 4, md: 8 },
           textAlign: { xs: "center", md: "left" },
         }}
       >
@@ -34,12 +34,10 @@ export default function ProjectsContributed() {
       <Box
         sx={{
           zIndex: 10,
-          flexWrap: "wrap",
-          gap: { xs: 2, sm: 4 },
           display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: { xs: 2, sm: 3, md: 4 },
           justifyItems: "center",
-          gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-          justifyContent: { xs: "center", sm: "flex-start" },
           px: 1,
         }}
       >
@@ -49,29 +47,32 @@ export default function ProjectsContributed() {
           "googtrans.png",
           "paperw.png",
           "phw.png",
-          "sunnydtrans.png",
+          "sunny2.png",
         ].map((logo) => (
           <Box
             key={logo}
             sx={{
-              width: { xs: 120, sm: 170, md: 200 },
-              height: { xs: 120, sm: 170, md: 200 },
+              width: "100%",
+              maxWidth: { xs: 100, sm: 150, md: 200, lg: 250 },
+              aspectRatio: "1 / 1",
               borderRadius: 4,
-              // bgcolor: "#222",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              // boxShadow: 3,
-              // border: "2px solid #333",
               overflow: "hidden",
-              p: 2,
+              p: { xs: 1, sm: 2 },
             }}
           >
             <Image
               src={`/logos/${logo}`}
               alt={logo.replace(".png", "")}
-              width={100}
-              height={100}
+              width={250}
+              height={250}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+              }}
             />
           </Box>
         ))}

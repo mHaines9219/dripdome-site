@@ -16,14 +16,18 @@ const PhotoPageCarousels: React.FC = () => {
       {/* Mobile Container */}
       <Box
         sx={{
-          display: { xs: "block", lg: "none" },
-          width: "100vw",
+          width: "100%",
           overflow: "hidden",
-          pr: 4,
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 1,
         }}
       >
         {photographyData.map((section, index) => (
-          <Box key={index} sx={{ maxWidth: "100vw", overflow: "hidden" }}>
+          <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
             <Typography
               variant="h1"
               component="h1"
@@ -83,10 +87,16 @@ const PhotoPageCarousels: React.FC = () => {
       </Box>
 
       {/* Desktop Container */}
-      <Box sx={{ display: { xs: "none", lg: "block" }, overflow: "hidden" }}>
+      <Box
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         {photographyData.map((section, index) => {
           return (
-            <Box key={index} sx={{ maxWidth: "100vw", overflow: "hidden" }}>
+            <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
               <Typography
                 variant="h1"
                 component="h1"

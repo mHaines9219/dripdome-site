@@ -35,11 +35,13 @@ const PressSection = () => {
           component="h1"
           sx={{
             textDecoration: "none",
-            color: "inherit",
+            color: "white",
+
+            mb: 2,
             fontSize: { xs: "30px", sm: "80px" },
           }}
         >
-          OUR WORK IN THE PRESS
+          Our Work in the Press
         </Typography>
         {pressItems.map((item, index) => (
           <Box
