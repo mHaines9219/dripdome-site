@@ -27,7 +27,7 @@ export default function AboutUs() {
             sx={{
               fontSize: { xs: "55px", sm: "95px" },
               fontWeight: "bold",
-              paddingTop: { xs: "120px", md: "150px" },
+              paddingTop: { xs: 8 },
               marginBottom: { xs: "20px", md: "30px" },
               paddingLeft: "10px",
               paddingRight: "10px",

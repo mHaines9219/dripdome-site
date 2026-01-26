@@ -8,16 +8,16 @@ import ThemeRegistry from "./ThemeRegistry";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.dripdome.com"),
   title:
-    "DripDome | Set Design, Production Design & Fabrication Experts in New York City",
+    "DripDome | Set Design, Experiential Design & Pop-Up Activations NYC",
   description:
-    "DripDome is a premier set design and production design studio based in New York City. Our team specializes in professional fabrication and creative services for film, television, commercial, and experiential projects. Custom-built sets and tailored production solutions for media professionals.",
+    "DripDome is a premier set design and experiential design studio in NYC & LA. We specialize in pop-up activations, brand experiences, custom fabrication, and immersive environments for film, TV, commercials, and experiential marketing campaigns.",
   keywords:
-    "set design, production design, fabrication, New York City, NYC, Manhattan, Brooklyn, Queens, custom fabrication, creative services, media production, studio services, custom sets, film sets, TV production, Los Angeles set design",
+    "set design, experiential design, pop-up activations, brand activations, experiential marketing, immersive experiences, pop-up shops, production design, fabrication, New York City, NYC, Los Angeles, custom fabrication, event design, trade show design, retail activations, interactive installations, brand experiences",
   openGraph: {
     title:
-      "DripDome | Set Design, Production Design & Fabrication Studio in New York City",
+      "DripDome | Set Design, Experiential Design & Pop-Up Activations NYC",
     description:
-      "Expert set design, production design, and fabrication services in New York City and Los Angeles. Custom solutions for film, TV, commercials, and events.",
+      "Expert set design, experiential design, and pop-up activations in NYC & LA. Custom fabrication for film, TV, brand activations, and immersive experiences.",
     type: "website",
     locale: "en_US",
     siteName: "DripDome",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DripDome | Set Design & Production Design Studio",
+    title: "DripDome | Set Design & Experiential Design Studio",
     description:
-      "Expert set design, production design, and fabrication services in New York City and Los Angeles. Custom solutions for film, TV, commercials, and events.",
+      "Expert set design, experiential design, and pop-up activations in NYC & LA. Custom fabrication for film, TV, brand activations, and immersive experiences.",
     images: [
       "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
     ],

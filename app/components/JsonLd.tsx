@@ -7,7 +7,7 @@ export default function JsonLd() {
     "@id": "https://www.dripdome.com",
     url: "https://www.dripdome.com",
     description:
-      "DripDome is a premier set design and production design studio based in New York City. Our team specializes in professional fabrication and creative services for film, television, commercial, and experiential projects.",
+      "DripDome is a premier set design, experiential design, and pop-up activation studio in NYC & LA. We specialize in custom fabrication, brand activations, immersive experiences, and production design for film, television, commercials, and experiential marketing campaigns.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "New York",
@@ -19,7 +19,7 @@ export default function JsonLd() {
       latitude: 40.7128,
       longitude: -74.006,
     },
-    areaServed: ["New York City", "Los Angeles"],
+    areaServed: ["New York City", "Los Angeles", "Brooklyn", "Manhattan"],
     priceRange: "$$$",
     sameAs: [
       "https://www.instagram.com/dripdome",
@@ -27,10 +27,16 @@ export default function JsonLd() {
     ],
     serviceType: [
       "Set Design",
+      "Experiential Design",
+      "Pop-Up Activations",
+      "Brand Activations",
       "Production Design",
-      "Fabrication",
-      "Creative Services",
-      "Studio Services",
+      "Custom Fabrication",
+      "Immersive Experiences",
+      "Event Design",
+      "Trade Show Design",
+      "Retail Activations",
+      "Interactive Installations",
     ],
   };
 
