@@ -44,7 +44,7 @@ export default function Navbar() {
           left: 0,
           right: 0,
           width: "100%",
-          maxWidth: 2000,
+
           mx: "auto",
           color: "common.white",
           height: { xs: 95, md: 120 },

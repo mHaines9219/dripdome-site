@@ -1,5 +1,8 @@
 import { Metadata } from "next";
 import { Box, Typography } from "@mui/material";
+import RentalGrid from "../components/RentalGrid";
+import RentalForm from "./RentalForm";
+import Footer from "../ui/Footer";
 
 export const metadata: Metadata = {
   title: "Rentals | DripDome - Props & Set Piece Rentals NYC",
@@ -28,16 +31,17 @@ export default function RentalsPage() {
             sx={{
               fontSize: { xs: "55px", sm: "95px", lg: "150px" },
               fontWeight: "bold",
-              paddingTop: { xs: "120px", md: "150px" },
+              paddingTop: { xs: 4, md: 8 },
               paddingLeft: "10px",
               paddingRight: "10px",
               textAlign: "center",
             }}
           >
-            RENTALS
+            Rentals
           </Typography>
-          <Box sx={{ backgroundColor: "black", minHeight: "100vh" }}>
-            {/* <RentalGrid /> */}
+
+          {/* Equipment Grid */}
+          <Box sx={{ backgroundColor: "black", py: 4, px: { xs: 0, md: 8 } }}>
             <Typography
               variant="h2"
               component="h2"
@@ -49,11 +53,18 @@ export default function RentalsPage() {
                 textAlign: "center",
               }}
             >
-              Rentals are currently unavailable. Please check back soon.
+              Available Equipment
             </Typography>
+            <RentalGrid />
+          </Box>
+
+          {/* Rental Request Form */}
+          <Box sx={{ backgroundColor: "black", py: 4 }}>
+            <RentalForm />
           </Box>
         </Box>
       </Box>
+      <Footer />
     </>
   );
 }

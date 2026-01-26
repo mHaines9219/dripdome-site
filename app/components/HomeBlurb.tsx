@@ -127,8 +127,8 @@ export default function HomeBlurb() {
             mt: 1,
           }}
         >
-          Award-winning production design & custom fabrication for film, TV, and
-          experiential projects — from concept to completion in NYC & LA.
+          Production design & custom fabrication trusted by world-class brands
+          and A-list talent — from concept to completion in NYC & LA.
         </Typography>
       </motion.div>
       <motion.div

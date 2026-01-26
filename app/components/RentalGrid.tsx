@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   CardMedia,
@@ -11,50 +10,15 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-
-const rentals = [
-  {
-    id: 1,
-    name: "Velvet Chaise",
-    category: "Furniture",
-    image: "/rentals/chaise.jpg",
-  },
-  {
-    id: 2,
-    name: "Gothic Mirror",
-    category: "Props",
-    image: "/rentals/mirror.jpg",
-  },
-  {
-    id: 3,
-    name: "Red Fabric Wall Flat",
-    category: "Wall Flats",
-    image: "/rentals/wallflat.jpg",
-  },
-  {
-    id: 4,
-    name: 'Neon Sign "Hell Yes"',
-    category: "Lighting",
-    image: "/rentals/neon.jpg",
-  },
-  {
-    id: 5,
-    name: "Candelabra",
-    category: "Props",
-    image: "/rentals/candelabra.jpg",
-  },
-  // add more items here
-];
-
-const categories = ["All", "Furniture", "Props", "Wall Flats", "Lighting"];
+import { rentalEquipment, categories } from "../rentals/data";
 
 export default function RentalGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filtered =
     selectedCategory === "All"
-      ? rentals
-      : rentals.filter((item) => item.category === selectedCategory);
+      ? rentalEquipment
+      : rentalEquipment.filter((item) => item.category === selectedCategory);
 
   return (
     <Box sx={{ p: 3, width: "100%" }}>
@@ -77,9 +41,13 @@ export default function RentalGrid() {
             sx={{
               bgcolor: selectedCategory === cat ? "#FF00AA" : "black",
               color: "white",
-              borderColor: selectedCategory === cat ? "#FF00AA" : "rgba(255,255,255,0.3)",
+              borderColor:
+                selectedCategory === cat ? "#FF00AA" : "rgba(255,255,255,0.3)",
               "&:hover": {
-                bgcolor: selectedCategory === cat ? "#d1008f" : "rgba(255, 0, 170, 0.1)",
+                bgcolor:
+                  selectedCategory === cat
+                    ? "#d1008f"
+                    : "rgba(255, 0, 170, 0.1)",
                 borderColor: "#FF00AA",
               },
             }}
@@ -87,18 +55,17 @@ export default function RentalGrid() {
         ))}
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent="center">
         {filtered.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id} sx={{ p: 0, m: 0 }}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
             <Card
               sx={{
-                height: "40vh",
-                width: { xs: "90vw", sm: "40vw", md: "30vw" },
+                height: { xs: "300px", sm: "350px", md: "400px" },
+                width: "100%",
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: "rgba(100, 100, 100, 0.5)",
                 justifyContent: "center",
-
                 alignItems: "center",
                 transition: "box-shadow 0.3s ease",
                 borderRadius: "10px",
@@ -107,13 +74,28 @@ export default function RentalGrid() {
                 },
               }}
             >
-              <Box sx={{ height: "100%" }}>
+              <Box
+                sx={{
+                  height: "60%",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  overflow: "hidden",
+                }}
+              >
                 <CardMedia
                   component="img"
-                  height="192"
-                  image={item.image}
+                  image={
+                    item.image ||
+                    "https://placehold.co/400x300/1a1a1a/666666?text=Coming+Soon"
+                  }
                   alt={item.name}
-                  sx={{ objectFit: "cover" }}
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
                 />
               </Box>
               <CardContent
@@ -128,14 +110,13 @@ export default function RentalGrid() {
                   variant="h6"
                   component="h3"
                   gutterBottom
-                  sx={{ fontFamily: "Nova Mono", color: "white" }}
+                  sx={{ color: "white" }}
                 >
                   {item.name.toUpperCase()}
                 </Typography>
                 <Typography
                   variant="body2"
                   sx={{
-                    fontFamily: "Nova Mono",
                     fontSize: "12px",
                     color: "#FF00AA",
                   }}
@@ -143,24 +124,6 @@ export default function RentalGrid() {
                 >
                   {item.category.toUpperCase()}
                 </Typography>
-                <Button
-                  variant="outlined"
-                  size="small"
-                  sx={{
-                    bgcolor: "white",
-                    mt: 1,
-                    fontFamily: "Nova Mono",
-                    borderColor: "black",
-                    color: "black",
-                    "&:hover": {
-                      bgcolor: "black",
-                      color: "white",
-                      borderColor: "black",
-                    },
-                  }}
-                >
-                  Add to List
-                </Button>
               </CardContent>
             </Card>
           </Grid>
