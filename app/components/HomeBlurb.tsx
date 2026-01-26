@@ -63,11 +63,11 @@ export default function HomeBlurb() {
     letterSpacing: "0.08em",
     fontSize: { xs: "12px", sm: "13px" },
     color: "common.white",
-    background: "linear-gradient(90deg, #ec4899 0%, #3b82f6 100%)",
-    boxShadow: "0 10px 30px rgba(59,130,246,0.15)",
+    backgroundColor: "#FF00AA",
+    boxShadow: "0 10px 30px rgba(255,0,170,0.25)",
     "&:hover": {
-      background: "linear-gradient(90deg, #db2777 0%, #2563eb 100%)",
-      boxShadow: "0 12px 34px rgba(59,130,246,0.22)",
+      backgroundColor: "#E0009A",
+      boxShadow: "0 12px 34px rgba(255,0,170,0.35)",
     },
   } as const;
 
@@ -90,7 +90,15 @@ export default function HomeBlurb() {
   return (
     <Box
       ref={ref}
-      sx={{ width: "100%", px: 2, py: 4, zIndex: 10, position: "relative" }}
+      sx={{
+        width: "80dvw",
+        maxWidth: "1900px",
+        mx: "auto",
+        px: 1,
+        py: 4,
+        zIndex: 10,
+        position: "relative",
+      }}
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -107,8 +115,7 @@ export default function HomeBlurb() {
             color: "white",
           }}
         >
-          Production Design & Fabrication for Film, TV & Experiential Projects
-          in NYC
+          We Build Worlds.
         </Typography>
         <Typography
           variant="body1"
@@ -117,10 +124,11 @@ export default function HomeBlurb() {
           sx={{
             fontSize: { xs: "14px", sm: "18px", md: "20px", lg: "24px" },
             color: "white",
+            mt: 1,
           }}
         >
-          Production Design & Fabrication for Film, TV & Experiential Projects
-          in NYC
+          Award-winning production design & custom fabrication for film, TV, and
+          experiential projects — from concept to completion in NYC & LA.
         </Typography>
       </motion.div>
       <motion.div

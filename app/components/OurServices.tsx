@@ -8,7 +8,10 @@ const S3_BASE = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 export default function OurServices() {
   const services = [
     { label: "FABRICATION", image: `${S3_BASE}/website-assets/fab.png` },
-    { label: "PRODUCTION & SET DESIGN", image: `${S3_BASE}/website-assets/setdes.png` },
+    {
+      label: "PRODUCTION & SET DESIGN",
+      image: `${S3_BASE}/website-assets/setdes.png`,
+    },
     { label: "RENTALS", image: `${S3_BASE}/website-assets/rentals.png` },
     { label: "CONSULTING", image: `${S3_BASE}/website-assets/consulting.png` },
   ];
@@ -26,13 +29,16 @@ export default function OurServices() {
       <Box
         sx={{
           display: "grid",
+          width: "80dvw",
+          maxWidth: "1900px",
+          mx: "auto",
           gridTemplateColumns: {
             xs: "repeat(2, 1fr)",
             md: "repeat(4, 1fr)",
           },
-          gap: { xs: 2, md: 4 },
+          gap: { xs: 2, md: 3 },
           justifyItems: "center",
-          px: 1,
+          px: 0,
         }}
       >
         {services.map((service) => (
@@ -60,7 +66,7 @@ export default function OurServices() {
                   fontSize: { xs: 14, sm: 18, md: 20 },
                   textShadow: "0 2px 8px rgba(0,0,0,0.8)",
                   backgroundColor: "rgba(0,0,0,0.5)",
-                  p:1,
+                  p: 1,
                 }}
               >
                 {service.label}

@@ -18,8 +18,8 @@ export default function Home() {
           alignItems: "center",
           justifyContent: "flex-start",
           width: "100dvw",
-          maxWidth: "2000px",
-          // margin: "0 auto",
+          maxWidth: "2500px",
+          margin: "0 auto",
           color: "common.white",
         }}
       >
@@ -35,7 +35,7 @@ export default function Home() {
             alignItems: "flex-start ",
             justifyContent: "center",
             textAlign: "left",
-            px: { xs: 2, md: 8 },
+            px: { xs: 0, md: 8 },
             mb: 2,
             // border: "1px solid white",
           }}

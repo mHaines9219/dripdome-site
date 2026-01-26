@@ -11,7 +11,12 @@ export default function Contact() {
   return (
     <>
       <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          px: { xs: 4, md: 8 },
+        }}
       >
         <Typography
           variant="h2"
