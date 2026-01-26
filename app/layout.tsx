@@ -1,9 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { Analytics } from "@vercel/analytics/next";
 import JsonLd from "./components/JsonLd";
 import ThemeRegistry from "./ThemeRegistry";
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-source-sans",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.dripdome.com"),
@@ -67,21 +74,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={sourceSans.variable}>
       <head>
         <JsonLd />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body>
+      <body className={sourceSans.className}>
         <ThemeRegistry>
           <ClientLayout>
             {children}
