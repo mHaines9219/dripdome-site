@@ -1,25 +1,21 @@
-import React from "react";
+"use client";
+
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
-import {
-  Pagination,
-  EffectCoverflow,
-  Autoplay,
-  EffectCards,
-} from "swiper/modules";
+import { Autoplay, EffectCards } from "swiper/modules";
 
 const sections = [
   {
     header: "THE SET OF NOTLOVELINE",
     blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors.`,
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.jpeg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.JPG",
     ],
   },
   {
@@ -70,22 +66,30 @@ const FeaturedProjects = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className="px-6 ">
+    <Box sx={{ px: 3, width: "100%", overflow: "hidden" }}>
       {sections.map((section, index) => (
-        <div key={index} className="rounded-3xl md:pt-12 lg:pt-20 mb-6">
+        <Box
+          key={index}
+          sx={{
+            borderRadius: 4,
+            pt: { md: 8, lg: 8 },
+            mb: 6,
+          }}
+        >
           <Box
             sx={{
               display: "flex",
               flexDirection: isMobile
                 ? "column"
                 : index % 2 === 0
-                ? "row"
-                : "row-reverse",
+                  ? "row"
+                  : "row-reverse",
               alignItems: "center",
               mb: "2rem",
-              width: "auto",
+              width: "100%",
               gap: "1.5rem",
-              border: "2px solid white",
+              overflow: "hidden",
+              border: "4px solid rgba(255, 0, 170, 0.3)",
               borderRadius: "30px",
               backgroundColor: "#121212",
               paddingTop: {
@@ -122,10 +126,13 @@ const FeaturedProjects = () => {
             <Box
               sx={{
                 flex: 1,
-                width: isMobile ? "90vw" : "40vw",
+                width: "100%",
+                maxWidth: isMobile ? "100%" : "50%",
+                minWidth: 0,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                overflow: "hidden",
               }}
             >
               <Swiper
@@ -142,12 +149,16 @@ const FeaturedProjects = () => {
                   slideShadows: true,
                 }}
                 modules={[EffectCards, Autoplay]}
-                className="w-full lg:h-[600px] flex justify-center items-center lg:my-6 lg:-mb-6 xl:mb-10"
+                style={{ width: "100%" }}
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx}
-                    className="flex justify-center items-center"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
                   >
                     <Box
                       sx={{
@@ -185,6 +196,7 @@ const FeaturedProjects = () => {
               sx={{
                 flex: 1,
                 maxWidth: isMobile ? "100%" : "50%",
+                minWidth: 0,
                 textAlign: isMobile ? "center" : "left",
                 p: "0 10px 20px 10px",
               }}
@@ -195,6 +207,7 @@ const FeaturedProjects = () => {
                   fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
                   mb: "1.5rem",
                   color: "white",
+                  "& span": { color: "#FF00AA" },
                 }}
               >
                 {section.header}
@@ -210,9 +223,9 @@ const FeaturedProjects = () => {
               </Typography>
             </Box>
           </Box>
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 

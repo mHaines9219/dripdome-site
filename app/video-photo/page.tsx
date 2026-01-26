@@ -1,44 +1,140 @@
-'use client';
+import { Metadata } from "next";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Typography,
+} from "@mui/material";
 
-import React from 'react';
+export const metadata: Metadata = {
+  title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
+  description:
+    "Explore DripDome's video and photo production work. Custom set design and fabrication for film, TV, commercials, and photography in New York City.",
+  alternates: {
+    canonical: "https://www.dripdome.com/video-photo",
+  },
+  openGraph: {
+    title: "Video & Photo | DripDome - Set Design for Productions",
+    description:
+      "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
+    url: "https://www.dripdome.com/video-photo",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Video & Photo - Set Design for Productions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
+    description:
+      "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+};
 
-export default function VideoPhoto() {
+export default function VideoPhotoPage() {
   // Placeholder data for the gallery
   const galleryImages = [
-    { id: 1, src: '/images/work1.jpg', alt: 'Project 1', caption: 'Project 1' },
-    { id: 2, src: '/images/work2.jpg', alt: 'Project 2', caption: 'Project 2' },
-    { id: 3, src: '/images/work3.jpg', alt: 'Project 3', caption: 'Project 3' },
-    { id: 4, src: '/images/work4.jpg', alt: 'Project 4', caption: 'Project 4' },
-    { id: 5, src: '/images/work5.jpg', alt: 'Project 5', caption: 'Project 5' },
+    { id: 1, src: "/images/work1.jpg", alt: "Project 1", caption: "Project 1" },
+    { id: 2, src: "/images/work2.jpg", alt: "Project 2", caption: "Project 2" },
+    { id: 3, src: "/images/work3.jpg", alt: "Project 3", caption: "Project 3" },
+    { id: 4, src: "/images/work4.jpg", alt: "Project 4", caption: "Project 4" },
+    { id: 5, src: "/images/work5.jpg", alt: "Project 5", caption: "Project 5" },
   ];
 
   return (
-    <section id="work-gallery" className="py-16 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <Box
+      component="section"
+      id="work-gallery"
+      sx={{ py: 16, bgcolor: "grey.100" }}
+    >
+      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
+        <Typography
+          variant="h2"
+          component="h2"
+          sx={{
+            textAlign: "center",
+            color: "grey.900",
+            mb: 4,
+            fontWeight: 800,
+          }}
+        >
           Our Work
-        </h2>
-        <p className="text-center text-gray-600 mb-12">
-          Explore some of the amazing projects we've worked on.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        </Typography>
+        <Typography
+          variant="body1"
+          component="p"
+          sx={{ textAlign: "center", color: "grey.700", mb: 8 }}
+        >
+          Explore some of the amazing projects we&apos;ve worked on.
+        </Typography>
+
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)",
+            },
+            gap: 3,
+          }}
+        >
           {galleryImages.map((image) => (
-            <div
+            <Card
               key={image.id}
-              className="group relative bg-white shadow-md rounded-md overflow-hidden"
+              sx={{
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: 2,
+                boxShadow: 3,
+                "&:hover .MuiCardMedia-root": { transform: "scale(1.08)" },
+                "&:hover .MuiCardContent-root": { opacity: 1 },
+              }}
             >
-              <img
-                src={image.src}
+              <CardMedia
+                component="img"
+                image={image.src}
                 alt={image.alt}
-                className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                height={192}
+                sx={{
+                  height: 192,
+                  transition: "transform 300ms ease",
+                  objectFit: "cover",
+                }}
               />
-              <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-center p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                {image.caption}
-              </div>
-            </div>
+              <CardContent
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  bgcolor: "rgba(0,0,0,0.5)",
+                  color: "common.white",
+                  textAlign: "center",
+                  py: 1,
+                  opacity: 0,
+                  transition: "opacity 300ms ease",
+                }}
+              >
+                <Typography variant="body2">{image.caption}</Typography>
+              </CardContent>
+            </Card>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Box>
   );
 }

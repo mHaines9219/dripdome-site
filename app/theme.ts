@@ -1,63 +1,40 @@
 // theme.ts
 import { createTheme } from '@mui/material/styles';
 
-import '@fontsource/montserrat/400.css'; // Regular
-import '@fontsource/montserrat/600.css'; // Semi-bold
-import '@fontsource/montserrat/700.css'; // Bold
-import '@fontsource/open-sans/400.css'; // Regular
-import '@fontsource/shrikhand';
-import '@fontsource/nova-mono';
-import '@fontsource/quicksand';
+/**
+ * App colors (ONLY 3).
+ * Replace these with your real brand values.
+ */
+export const APP_COLORS = {
+  /** Used for page backgrounds and surfaces */
+  surface: "#FFFFFF",
+  /** Used for all text/icons */
+  ink: "#111111",
+  /** Used for buttons/links/highlights */
+  accent: "#FF00AA",
+} as const;
+
+const FONT_FALLBACK =
+  "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "'Montserrat', 'Open Sans', sans-serif",
-    h1: {
-      fontSize: '96px',
-      fontWeight: 'bold',
-      fontFamily: 'Shrikhand',
-      lineHeight: 1.26,
-      // '@media (max-width:600px)': {
-      //   fontSize: '202px',
-      // },
-    },
-    h2: {
-      fontSize: '42px',
-      fontWeight: 600,
-      fontFamily: 'Shrikhand',
-    },
-    h3: {
-      fontSize: '32px',
-      fontWeight: 'bold',
-      fontFamily: 'Shrikhand',
-      '@media (max-width:600px)': {
-        fontSize: '16px',
-      },
-    },
-    h4: {
-      fontSize: '24px',
-      fontWeight: 'semi-bold',
-      fontFamily: 'Nova Mono',
-      '@media (max-width:600px)': {
-        fontSize: '14px',
-      },
-    },
-    body1: {
-      fontSize: '24px',
-      fontWeight: 400,
-      fontFamily: 'Open Sans',
-      '@media (max-width:600px)': {
-        fontSize: '14px',
-      },
-    },
-    body2: {
-      fontSize: '24px',
-      fontWeight: 400,
-      fontFamily: 'Open Sans',
-      '@media (max-width:600px)': {
-        fontSize: '12px',
-      },
-    },
+    // Loaded in app/layout.tsx via Google Fonts <link> tags
+    fontFamily: `'Source Sans 3', ${FONT_FALLBACK}`,
+
+    // Titles (h1-h6)
+    h1: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h2: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h3: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h4: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h5: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+    h6: { fontFamily: `'Zalando Sans Expanded', ${FONT_FALLBACK}` },
+
+    // Subheaders + paragraphs
+    subtitle1: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    subtitle2: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    body1: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
+    body2: { fontFamily: `'Source Sans 3', ${FONT_FALLBACK}` },
   },
   palette: {
     primary: {

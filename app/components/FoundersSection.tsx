@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+"use client";
+import React from "react";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 const founders = [
   {
-    name: 'DIANA HAINES',
+    name: "DIANA HAINES",
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/diana_headshot.jpeg',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/diana_headshot.jpeg",
   },
   {
     name: (
@@ -17,32 +17,32 @@ const founders = [
       </>
     ),
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/pat_4.jpeg',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/pat_4.jpeg",
   },
   {
-    name: 'MATT HAINES',
+    name: "MATT HAINES",
     photo:
-      'https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/matt_headshot.jpeg',
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/matt_headshot.jpeg",
   },
 ];
 
 const FoundersSection = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <div className="bg-black">
+    <Box sx={{ bgcolor: "black" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0, duration: 0.5 }}
       >
-        <div className="pt-12 bg-black">
+        <Box sx={{ pt: 12, bgcolor: "black" }}>
           <Box
             sx={{
-              paddingTop: '0px',
-              textAlign: 'center',
-              background: 'black',
+              paddingTop: "0px",
+              textAlign: "center",
+              background: "black",
             }}
           >
             {/* <Typography
@@ -64,17 +64,17 @@ const FoundersSection = () => {
             {/* Founders Box */}
             <Box
               sx={{
-                padding: '2rem',
-                backgroundColor: 'black',
+                padding: "2rem",
+                backgroundColor: "black",
               }}
             >
               <Box
                 sx={{
-                  display: 'flex',
-                  flexDirection: isMobile ? 'column' : 'row',
-                  gap: '2rem',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  display: "flex",
+                  flexDirection: isMobile ? "column" : "row",
+                  gap: "2rem",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 {founders.map((founder, index) => (
@@ -86,26 +86,57 @@ const FoundersSection = () => {
                   >
                     <Box
                       sx={{
-                        textAlign: 'center',
+                        textAlign: "center",
                         flexShrink: 0,
-                        flexBasis: '12rem',
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        flexBasis: "12rem",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
-                      <div className="headshot-container w-48 h-48 lg:w-72 lg:h-72  rounded-full overflow-hidden flex justify-center align-center items-center mb-4">
+                      <Box
+                        sx={{
+                          width: { xs: 192, lg: 288 },
+                          height: { xs: 192, lg: 288 },
+                          borderRadius: "50%",
+                          overflow: "hidden",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          mb: 4,
+                        }}
+                      >
                         <Image
                           src={founder.photo}
                           width={192}
                           height={192}
-                          alt={typeof founder.name === 'string' ? founder.name : 'Founder image'}
-                          className="object-cover w-full h-full self-center "
+                          alt={
+                            typeof founder.name === "string"
+                              ? founder.name
+                              : "Founder image"
+                          }
+                          style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            height: "100%",
+                          }}
                         />
-                      </div>
+                      </Box>
                       <Typography
                         variant="h5"
-                        fontFamily={'Shrikhand'}
-                        sx={{ textAlign: 'center' }}
+                        sx={{
+                          color: "white",
+                          textAlign: "center",
+                          position: "relative",
+                          "&::after": {
+                            content: '""',
+                            display: "block",
+                            width: "40px",
+                            height: "2px",
+                            bgcolor: "#FF00AA",
+                            mx: "auto",
+                            mt: 1,
+                          },
+                        }}
                       >
                         {founder.name}
                       </Typography>
@@ -115,9 +146,9 @@ const FoundersSection = () => {
               </Box>
             </Box>
           </Box>
-        </div>
+        </Box>
       </motion.div>
-    </div>
+    </Box>
   );
 };
 

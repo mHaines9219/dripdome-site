@@ -1,100 +1,43 @@
-"use client";
-import { Box, Typography } from "@mui/material";
-import React from "react";
-import PhotoPageCarousels from "../components/PhotoPageCarousels";
-import Contact from "../components/Contact";
+import { Metadata } from "next";
+import PortfolioContent from "./PortfolioContent";
 
-import { motion } from "framer-motion";
-import FeaturedProjects from "../components/FeatuedProjects";
-import PressSection from "../components/PressSection";
+export const metadata: Metadata = {
+  title: "Portfolio | DripDome - Set Design, Pop-Up Activations & Experiential Work NYC",
+  description:
+    "Explore DripDome's portfolio of set design, pop-up activations, experiential design, and brand activation projects. See our work for film, TV, commercials, immersive brand experiences, and experiential marketing campaigns in NYC and LA.",
+  keywords:
+    "pop-up activation portfolio, experiential design portfolio, brand activation examples, set design portfolio NYC, immersive experience projects",
+  alternates: {
+    canonical: "https://www.dripdome.com/portfolio",
+  },
+  openGraph: {
+    title: "Portfolio | DripDome - Set Design, Pop-Up Activations & Experiential Projects",
+    description:
+      "View our portfolio of set designs, pop-up activations, brand experiences, and immersive installations for film, TV, and experiential marketing.",
+    url: "https://www.dripdome.com/portfolio",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Portfolio - Set Design, Pop-Up Activations & Experiential Projects",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio | DripDome - Set Design, Pop-Up Activations & Experiential Work NYC",
+    description:
+      "View our portfolio of set designs, pop-up activations, brand experiences, and immersive installations for film, TV, and experiential marketing.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+};
 
-export default function page() {
-  return (
-    <Box className="min-h-screen w-full bg-black pt-24 md:pt-32 overflow-x-hidden">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 0.5 }}
-        >
-          <Typography
-            variant="h1"
-            component="h1"
-            color="white"
-            sx={{
-              fontSize: { xs: "55px", sm: "95px", lg: "96px" },
-              fontWeight: "bold",
-              marginBottom: { xs: "20px", md: "30px" },
-              textAlign: "center",
-            }}
-          >
-            PORTFOLIO
-          </Typography>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1 }}
-        >
-          <div className="text-container mx-auto max-w-4xl mb-4 md:mb-12">
-            <Typography
-              variant="body1"
-              component="p"
-              color="white"
-              sx={{
-                fontSize: { xs: "14px", sm: "20px", md: "24px" },
-                textAlign: "center",
-              }}
-            >
-              We specialize in creating unforgettable set designs and custom
-              fabrications for photoshoots that demand visual excellence. From
-              concept to construction, our team works with photographers,
-              stylists, and brands to craft striking, camera-ready environments
-              that captivate audiences.
-            </Typography>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1 }}
-          className="mb-8 md:mb-12"
-        >
-          <Typography
-            variant="h2"
-            component="h2"
-            color="white"
-            sx={{
-              fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            FEATURED PROJECTS
-          </Typography>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1.5 }}
-        >
-          <FeaturedProjects />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1.5 }}
-        >
-          <PhotoPageCarousels />
-        </motion.div>
-
-        <div className="mt-16">
-          <PressSection />
-        </div>
-        <div className="mt-8 py-12 px-8 bg-black text-white">
-          <Contact />
-        </div>
-      </div>
-    </Box>
-  );
+export default function PortfolioPage() {
+  return <PortfolioContent />;
 }

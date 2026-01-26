@@ -1,7 +1,45 @@
-import React from "react";
+import { Metadata } from "next";
 import { Box, Typography } from "@mui/material";
 import RentalGrid from "../components/RentalGrid";
-export default function page() {
+import RentalForm from "./RentalForm";
+import Footer from "../ui/Footer";
+
+export const metadata: Metadata = {
+  title: "Rentals | DripDome - Props & Set Piece Rentals NYC",
+  description:
+    "Rent props, set pieces, and production equipment from DripDome in New York City. Quality rentals for film, TV, commercial, and event productions.",
+  alternates: {
+    canonical: "https://www.dripdome.com/rentals",
+  },
+  openGraph: {
+    title: "Rentals | DripDome - Props & Set Piece Rentals",
+    description:
+      "Rent props and set pieces from DripDome for your next production in NYC or LA.",
+    url: "https://www.dripdome.com/rentals",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Rentals - Props & Set Piece Rentals NYC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rentals | DripDome - Props & Set Piece Rentals NYC",
+    description:
+      "Rent props and set pieces from DripDome for your next production in NYC or LA.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+};
+
+export default function RentalsPage() {
   return (
     <>
       <Box sx={{ backgroundColor: "black" }}>
@@ -13,16 +51,17 @@ export default function page() {
             sx={{
               fontSize: { xs: "55px", sm: "95px", lg: "150px" },
               fontWeight: "bold",
-              paddingTop: { xs: "120px", md: "150px" },
+              paddingTop: { xs: 4, md: 8 },
               paddingLeft: "10px",
               paddingRight: "10px",
               textAlign: "center",
             }}
           >
-            RENTALS
+            Rentals
           </Typography>
-          <Box sx={{ backgroundColor: "black", minHeight: "100vh" }}>
-            {/* <RentalGrid /> */}
+
+          {/* Equipment Grid */}
+          <Box sx={{ backgroundColor: "black", py: 4, px: { xs: 0, md: 8 } }}>
             <Typography
               variant="h2"
               component="h2"
@@ -34,11 +73,18 @@ export default function page() {
                 textAlign: "center",
               }}
             >
-              Rentals are currently unavailable. Please check back soon.
+              Rental Periods are minimum 1 week.
             </Typography>
+            <RentalGrid />
+          </Box>
+
+          {/* Rental Request Form */}
+          <Box sx={{ backgroundColor: "black", py: 4 }}>
+            <RentalForm />
           </Box>
         </Box>
       </Box>
+      <Footer />
     </>
   );
 }

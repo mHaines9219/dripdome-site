@@ -1,48 +1,66 @@
-import React, { useRef } from "react";
-import { Typography } from "@mui/material";
+"use client";
+
+import { useRef, FormEvent } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import Footer from "../ui/Footer";
-import { sendData } from "../hooks/sendData";
+import { sendData } from "@/hooks/sendData";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contact() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   return (
     <>
-      <div className="mx-4 md:mx-16 lg:mx-48 ">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          px: { xs: 4, md: 8 },
+        }}
+      >
         <Typography
           variant="h2"
           component="h2"
-          color="primary"
           sx={{
-            fontSize: { xs: "50px", md: "80px", lg: "90px" }, // Define different font sizes for different breakpoints
-            fontWeight: "bold", // Optional: Adjust font weight
+            fontSize: { xs: "50px", md: "80px", lg: "90px" },
+            fontWeight: "bold",
             marginBottom: "15px",
             justifyContent: "center",
             display: "flex",
+            color: "white",
             whiteSpace: "nowrap",
           }}
         >
-          CONTACT US{" "}
+          Contact Us
         </Typography>
 
         <Typography
-          variant="body1"
+          variant="body2"
           component="p"
-          color="primary"
           sx={{
-            fontSize: { sm: "20px", md: "25px", lg: "30px" }, // Define different font sizes for different breakpoints
+            fontSize: { sm: "20px", md: "25px", lg: "30px" },
             display: "flex",
             textAlign: "center",
+            maxWidth: 900,
             marginBottom: "30px",
-            fontFamily: "Open Sans",
+            color: "white",
           }}
         >
-          BIG OR SMALL, EVERY IDEA HAS THE POTENTIAL TO SHINE. TELL US ABOUT
-          YOUR PROJECT AND LET'S BUILD SOMETHING AMAZING!
+          Big or small, every idea has the potential to shine. Tell us about
+          your project and let&apos;s build something amazing!
         </Typography>
-        <form
-          className="flex flex-col max-w-screen mx-auto mb-8 md:gap-y-4 "
-          onSubmit={async (e) => {
+        <Box
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            maxWidth: 900,
+            mx: "auto",
+            mb: 4,
+            gap: { xs: 2, md: 2.5 },
+          }}
+          onSubmit={async (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
 
             const captchaValue = recaptchaRef.current?.getValue();
@@ -51,13 +69,20 @@ export default function Contact() {
               return;
             }
 
-            // Form Data
+            const form = e.currentTarget;
+            const formElements = form.elements as HTMLFormControlsCollection & {
+              name: HTMLInputElement;
+              instagram: HTMLInputElement;
+              email: HTMLInputElement;
+              message: HTMLTextAreaElement;
+            };
+
             const formData = {
               recaptchaToken: captchaValue,
-              name: (e.target as any).name.value,
-              instagram: (e.target as any).instagram.value,
-              email: (e.target as any).email.value,
-              message: (e.target as any).message.value,
+              name: formElements.name.value,
+              instagram: formElements.instagram.value,
+              email: formElements.email.value,
+              message: formElements.message.value,
             };
 
             try {
@@ -71,59 +96,99 @@ export default function Contact() {
               await sendData(formData);
               if (response.ok) {
                 alert("Thank you! Your message has been sent.");
-                (e.target as any).reset(); // Clear the form
-                recaptchaRef.current?.reset(); // Reset the CAPTCHA
+                form.reset();
+                recaptchaRef.current?.reset();
               } else {
                 throw new Error("Failed to send message");
               }
-            } catch (error) {
+            } catch {
               alert("An error occurred. Please try again.");
             }
           }}
         >
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="text"
+          <TextField
             name="name"
             placeholder="NAME"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Name" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="instagram"
+          <TextField
             name="instagram"
             placeholder="INSTAGRAM"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Instagram" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <input
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
-            type="email"
+          <TextField
             name="email"
+            type="email"
             placeholder="EMAIL"
             required
+            fullWidth
+            inputProps={{ "aria-label": "Email" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
           />
-          <textarea
-            className="mb-4 p-3 rounded-md bg-white text-black font-nova"
+          <TextField
             name="message"
-            rows={4}
             placeholder="YOUR MESSAGE"
             required
-          ></textarea>
-          <div className="mb-4">
+            fullWidth
+            multiline
+            minRows={4}
+            inputProps={{ "aria-label": "Message" }}
+            sx={{
+              "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+              "& .MuiInputBase-input::placeholder": {
+                color: "rgba(0,0,0,0.7)",
+                opacity: 1,
+              },
+            }}
+          />
+          <Box sx={{ mb: 1, display: "flex", justifyContent: "center" }}>
             <ReCAPTCHA
               ref={recaptchaRef}
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-              className="flex justify-center"
             />
-          </div>
-          <button
-            className="bg-green-600 font-nova hover:bg-blue-700 px-6 py-3 rounded-md font-semibold transition duration-200"
+          </Box>
+          <Button
             type="submit"
+            variant="contained"
+            sx={{
+              alignSelf: "center",
+              px: 4,
+              py: 1.5,
+              width: "80dvw",
+              maxWidth: 900,
+              fontWeight: 700,
+              bgcolor: "#16a34a",
+              "&:hover": { bgcolor: "#1d4ed8" },
+            }}
           >
-            SEND{" "}
-          </button>
-        </form>
-      </div>
+            SEND
+          </Button>
+        </Box>
+      </Box>
       <Footer />
     </>
   );

@@ -1,93 +1,192 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { name: 'ABOUT US', href: '/about-us' },
-    { name: 'PORTFOLIO', href: '/portfolio' },
-    { name: 'SERVICES', href: '/services' },
-    { name: 'RENTALS', href: '/rentals' },
+    { name: "ABOUT US", href: "/about-us" },
+    { name: "PORTFOLIO", href: "/portfolio" },
+    { name: "SERVICES", href: "/services" },
+    { name: "RENTALS", href: "/rentals" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-black font-nova text-white fixed top-0 left-0 w-screen z-50 h-[95px] md:h-[120px] flex items-center md:pr-[43px]">
-      <div className="w-full flex items-center justify-between md:justify-start mt-[19px] mb-[19px] pl-4 md:mt-[30px] md:mb-[30px]">
-        <Link href="/" className="flex items-center space-x-3 md:hidden">
-          <HomeTwoToneIcon
-            sx={{ height: '45px', width: '45px' }}
-            className="rounded-xl bg-black bg-opacity-60 p-2"
-          />
-        </Link>
-        <div className="flex-grow flex justify-center md:justify-start">
-          <Link href="/">
-            <Image
-              alt="Company Logo"
-              src="/assets/dd_logo.png"
-              width={90}
-              height={90}
-              className="md:ml-4 md:w-[120px] md:h-[120px]"
-            />
-          </Link>
-        </div>
-        <button
-          className="md:hidden text-white mr-6 text-3xl z-50"
-          onClick={toggleMenu}
-        >
-          ☰
-        </button>
-      </div>
+    <>
+      <AppBar
+        component="nav"
+        position="fixed"
+        elevation={0}
+        sx={{
+          bgcolor: "black",
+          left: 0,
+          right: 0,
+          width: "100%",
 
-      {/* Desktop Menu */}
-      <ul className="hidden md:flex md:flex-row md:space-x-4 bg-[var(--main-brown)]">
-        {links.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={clsx(
-              'flex h-[48px] items-center justify-center gap-2 p-3 text-lg font-medium transition hover:text-[var(--main-gold)] whitespace-nowrap',
-              {
-                'border-b-2 border-yellow-500': pathname === link.href,
-                'text-white': pathname !== link.href,
-              }
-            )}
-          >
-            {link.name}
-          </Link>
-        ))}
-      </ul>
-
-      {/* Mobile Menu */}
-      <ul
-        className={clsx(
-          'md:hidden fixed top-0 -mt-12 left-0 w-screen h-screen flex flex-col items-center bg-black justify-center bg-[var(--main-brown)] transition-all ease-in-out duration-300',
-          {
-            'opacity-100 pointer-events-auto': isOpen, // Show menu when open
-            'opacity-0 pointer-events-none': !isOpen, // Hide menu when closed
-          }
-        )}
+          mx: "auto",
+          color: "common.white",
+          height: { xs: 95, md: 120 },
+          justifyContent: "center",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          px: { md: 5.5 },
+        }}
       >
-        {links.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className="text-xl font-medium text-white p-4 hover:text-[var(--main-gold)] transition bg-black w-3/4 text-center my-1 rounded-xl bg-opacity-70"
-            onClick={() => setIsOpen(false)} // Close menu after click
-          >
-            {link.name}
-          </Link>
-        ))}
-      </ul>
-    </nav>
+        <Container
+          maxWidth={false}
+          sx={{ maxWidth: 2000, px: { xs: 2, md: 0 } }}
+        >
+          <Toolbar disableGutters sx={{ minHeight: "unset" }}>
+            <IconButton
+              component={Link}
+              href="/"
+              aria-label="Home"
+              sx={{
+                display: { md: "none" },
+                ml: 0.5,
+                bgcolor: "rgba(0,0,0,0.6)",
+                borderRadius: 2,
+                p: 1,
+                "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
+              }}
+            >
+              <HomeTwoToneIcon sx={{ width: 28, height: 28 }} />
+            </IconButton>
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: "flex",
+                justifyContent: { xs: "center", md: "flex-start" },
+                alignItems: "center",
+              }}
+            >
+              <Box
+                component={Link}
+                href="/"
+                aria-label="DripDome home"
+                sx={{ display: "inline-flex", ml: { md: 2 } }}
+              >
+                <Image
+                  alt="DripDome - Set Design & Production Design Studio"
+                  src="/assets/dd_logo_200.png"
+                  width={100}
+                  height={100}
+                  priority
+                />
+              </Box>
+            </Box>
+
+            <IconButton
+              aria-label="Open navigation menu"
+              onClick={toggleMenu}
+              sx={{ display: { md: "none" }, mr: 1.5, color: "common.white" }}
+            >
+              <MenuIcon sx={{ width: 32, height: 32 }} />
+            </IconButton>
+
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+              {links.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Button
+                    key={link.name}
+                    component={Link}
+                    href={link.href}
+                    sx={{
+                      color: "common.white",
+                      fontSize: 18,
+                      fontWeight: 600,
+                      borderRadius: 0,
+                      borderBottom: isActive
+                        ? "2px solid #FF00AA"
+                        : "2px solid transparent",
+                      "&:hover": { color: "#FF00AA", bgcolor: "transparent" },
+                    }}
+                  >
+                    {link.name}
+                  </Button>
+                );
+              })}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Drawer
+        anchor="top"
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: "black",
+            color: "common.white",
+            height: "100vh",
+          },
+        }}
+      >
+        <Box
+          role="presentation"
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            px: 2,
+          }}
+        >
+          <List sx={{ width: "100%", maxWidth: 420 }}>
+            {links.map((link) => (
+              <ListItem key={link.name} disablePadding sx={{ my: 0.75 }}>
+                <ListItemButton
+                  component={Link}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  sx={{
+                    bgcolor: "rgba(0,0,0,0.7)",
+                    borderRadius: 2,
+                    "&:hover": { color: "#FF00AA" },
+                  }}
+                >
+                  <ListItemText
+                    primary={link.name}
+                    primaryTypographyProps={{
+                      align: "center",
+                      fontSize: 22,
+                      fontWeight: 600,
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+
+      {/* Spacer so content isn't hidden behind the fixed AppBar */}
+      <Box sx={{ height: { xs: 95, md: 120 } }} />
+    </>
   );
 }

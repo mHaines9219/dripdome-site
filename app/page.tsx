@@ -1,50 +1,99 @@
-'use client';
-import './globals.css';
-import Hero from './components/Hero';
-import { Typography } from '@mui/material';
-import Contact from './components/Contact';
-import HomeBlurb from './components/HomeBlurb';
-import PageButtons from './components/PageButtons';
-import LogoWall from './components/LogoWall';
+import { Box } from "@mui/material";
+import type { Metadata } from "next";
+import HomeBlurb from "./components/HomeBlurb";
+import Navbar from "./ui/Navbar";
+import ProjectsContributed from "./components/ProjectsContributed";
+import OurServices from "./components/OurServices";
+import Contact from "./components/Contact";
+
+export const metadata: Metadata = {
+  title: "DripDome | Set Design, Pop-Up Activations & Experiential Design - NYC & LA",
+  description:
+    "We build worlds. Set design, pop-up activations & experiential design trusted by world-class brands and A-list talent. Custom fabrication for brand experiences, immersive environments & productions in NYC & LA.",
+  keywords:
+    "set design NYC, pop-up activations, experiential design, brand activations NYC, immersive experiences, custom fabrication, production design, pop-up shops NYC, experiential marketing, event design",
+  openGraph: {
+    title: "DripDome | Set Design, Pop-Up Activations & Experiential Design - NYC & LA",
+    description:
+      "We build worlds. Set design, pop-up activations & experiential design trusted by world-class brands. Custom fabrication for brand experiences & immersive environments in NYC & LA.",
+    url: "https://www.dripdome.com",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome - Set Design, Pop-Up Activations & Experiential Design NYC & LA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DripDome | Set Design, Pop-Up Activations & Experiential Design - NYC & LA",
+    description:
+      "We build worlds. Set design, pop-up activations & experiential design trusted by world-class brands. Custom fabrication for brand experiences & immersive environments in NYC & LA.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+  alternates: {
+    canonical: "https://www.dripdome.com",
+  },
+};
 
 export default function Home() {
   return (
-    <main className="main-container text-white   overflow-hidden ">
-      <section className="hero-container flex flex-col items-center justify-center h-[500px] overflow-x-hidden ">
-        <Hero />
-      </section>
-
-      <section
-        id="home"
-        className="flex flex-col items-center justify-center text-center px-8 bg-black p  "
+    <>
+      <Box
+        component="main"
+        sx={{
+          zIndex: 10,
+          minHeight: "100dvh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          width: "100dvw",
+          maxWidth: "2500px",
+          margin: "0 auto",
+          color: "common.white",
+        }}
       >
-        <HomeBlurb />
-      </section>
-
-      <div className="w-full flex justify-center items-center bg-white text-center mt-4 -mb-8 md:-mb-2">
-        <Typography
-          variant="h2"
-          component="h2"
-          color="black"
+        <Navbar />
+        <Box
+          component="section"
+          id="home"
           sx={{
-            fontSize: { xs: '30px', sm: '45px', lg: '50px' }, // Define different font sizes for different breakpoints
-            fontWeight: 'bold', // Optional: Adjust font weight
-            marginBottom: '15px',
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            justifyContent: 'center',
-            display: 'flex',
+            zIndex: 10,
+
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start ",
+            justifyContent: "center",
+            textAlign: "left",
+            px: { xs: 0, md: 8 },
+            mb: 2,
+            // border: "1px solid white",
           }}
         >
-          PROJECTS WE'VE CONTRIBUTED TO
-        </Typography>
-      </div>
-      <LogoWall />
-
-      <PageButtons />
-      <section id="contact" className="pt-8 pb-8  px-8 bg-black text-white">
+          <HomeBlurb />
+        </Box>
+        <Box
+          sx={{
+            // width: "100%",
+            // height: "500px",
+            bgcolor: "black",
+          }}
+        >
+          {/* <LogoWall /> */}
+          <OurServices />
+        </Box>
+        <ProjectsContributed />
+        {/* <OurServices /> */}
         <Contact />
-      </section>
-    </main>
+      </Box>
+    </>
   );
 }

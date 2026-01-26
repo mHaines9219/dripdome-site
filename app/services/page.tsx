@@ -1,112 +1,43 @@
-'use client';
-import React from 'react';
-import { Typography } from '@mui/material';
-import ServicesCarousel from '../components/ServicesCarousel';
-import { motion } from 'framer-motion';
-import '../globals.css';
+import { Metadata } from "next";
+import ServicesContent from "./ServicesContent";
 
-import Contact from '../components/Contact';
+export const metadata: Metadata = {
+  title: "Services | DripDome - Set Design, Pop-Up Activations & Experiential Design NYC",
+  description:
+    "Explore DripDome's services: set design, pop-up activations, experiential design, brand activations, carpentry, CNC routing, murals, props, and immersive environments. Custom fabrication for film, TV, events, and experiential marketing in NYC and LA.",
+  keywords:
+    "pop-up activation services, experiential design services, brand activation NYC, set design services, custom fabrication, immersive experiences, trade show design, retail pop-ups, event fabrication",
+  alternates: {
+    canonical: "https://www.dripdome.com/services",
+  },
+  openGraph: {
+    title: "Services | DripDome - Set Design, Pop-Up Activations & Experiential Design",
+    description:
+      "Full-service set design, pop-up activations, and experiential design. Carpentry, scenic painting, props, murals, LED integrations, and immersive brand experiences.",
+    url: "https://www.dripdome.com/services",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Services - Set Design, Pop-Up Activations & Experiential Design NYC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | DripDome - Set Design, Pop-Up Activations & Experiential Design NYC",
+    description:
+      "Full-service set design, pop-up activations, and experiential design. Carpentry, scenic painting, props, murals, LED integrations, and immersive brand experiences.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
+  },
+};
 
 export default function ServicesPage() {
-  const services = [
-    'Carpentry',
-    'Set Design',
-    'PHOTOGRAPHY',
-
-    'CNC Routing',
-    '3D Renders',
-
-    'Production',
-    'Printing',
-    'Murals',
-    'Rentals',
-    'Props',
-  ];
-  return (
-    <div className="bg-black overflow-hidden ">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0, duration: 0.5 }}
-      >
-        <Typography
-          variant="h1"
-          component="h1"
-          color="white"
-          sx={{
-            fontSize: { xs: '55px', sm: '95px', lg: '96px' },
-            fontWeight: 'bold',
-            paddingTop: { xs: '120px', md: '150px' },
-            marginBottom: { xs: '20px', md: '30px' },
-            paddingLeft: '10px',
-            paddingRight: '10px',
-            textAlign: 'center',
-          }}
-        >
-          SERVICES
-        </Typography>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        <div className="text-container mx-2 md:mx-10">
-          <Typography
-            variant="body1"
-            component="p"
-            color="white"
-            sx={{
-              fontSize: { xs: '14px', sm: '20px', md: '24px' },
-              marginTop: '10px',
-              marginLeft: '30px',
-              marginRight: '30px',
-              textAlign: 'center',
-            }}
-          >
-            From the first spark of an idea to the final reveal, we handle every
-            detail of the design and build process. Our expertise spans across a
-            variety of services, including custom carpentry, scenic painting,
-            props, murals, LED integrations, and more. Whether you're looking to
-            create an unforgettable photo set, a dynamic event installation, or
-            a large-scale art piece, Drip Dome Productions has the tools and
-            talent to make it happen.
-          </Typography>
-        </div>
-      </motion.div>
-      <div className="w-full  mx-auto p-4">
-        <div className="grid grid-cols-2 gap-4 text-lg text-white border  md:border-4 my-8 py-12 rounded-xl mx-2 px-2 md:mx-4 md:my-20">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-            >
-              <Typography
-                variant="h2"
-                align="center"
-                sx={{
-                  fontSize: { xs: '20px', sm: '35px', md: '55px', lg: '55px' },
-                }}
-              >
-                {service.toUpperCase()}
-              </Typography>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0, duration: 3.0 }}
-      >
-        {/* <ServicesCarousel /> */}
-      </motion.div>
-      <div className="bg-black  py-10">
-        <Contact />
-      </div>
-    </div>
-  );
+  return <ServicesContent />;
 }

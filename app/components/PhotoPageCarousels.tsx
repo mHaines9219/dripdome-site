@@ -1,21 +1,33 @@
-import React, { useRef, useEffect } from "react";
+"use client";
+
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, EffectCoverflow } from "swiper/modules";
-import { Typography } from "@mui/material";
+import { Autoplay } from "swiper/modules";
+import { Box, Typography } from "@mui/material";
 import { photographyData } from "../portfolio/data";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
-import type { Swiper as SwiperInstance } from "swiper";
 
 const PhotoPageCarousels: React.FC = () => {
   return (
     <>
       {/* Mobile Container */}
-      <div className="lg:hidden w-screen overflow-hidden pr-8">
+      <Box
+        sx={{
+          width: "100%",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 1,
+        }}
+      >
         {photographyData.map((section, index) => (
-          <div key={index} className="max-w-screen overflow-hidden">
+          <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
             <Typography
               variant="h1"
               component="h1"
@@ -50,8 +62,10 @@ const PhotoPageCarousels: React.FC = () => {
               {section.images.map((image, idx) => (
                 <SwiperSlide
                   key={idx}
-                  className="flex justify-center items-center rounded-lg"
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     width: "100%",
                     height: "100%",
                     maxWidth: "500px",
@@ -68,17 +82,21 @@ const PhotoPageCarousels: React.FC = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </div>
+          </Box>
         ))}
-      </div>
+      </Box>
 
       {/* Desktop Container */}
-      <div className="hidden lg:block overflow-hidden  ">
+      <Box
+        sx={{
+          display: { xs: "none", lg: "block" },
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         {photographyData.map((section, index) => {
-          // Offset index for desktop containers to avoid collision with mobile ones
-          const desktopIndex = index + photographyData.length;
           return (
-            <div key={index} className="max-w-screen overflow-hidden">
+            <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
               <Typography
                 variant="h1"
                 component="h1"
@@ -116,8 +134,10 @@ const PhotoPageCarousels: React.FC = () => {
                 {section.images.map((image, idx) => (
                   <SwiperSlide
                     key={idx}
-                    className="flex justify-center items-center rounded-lg"
                     style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                       width: "500px",
                       height: "600px",
                     }}
@@ -131,10 +151,10 @@ const PhotoPageCarousels: React.FC = () => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            </div>
+            </Box>
           );
         })}
-      </div>
+      </Box>
     </>
   );
 };
