@@ -64,7 +64,7 @@ export default function ProjectsContributed() {
             }}
           >
             <Image
-              src={`/logos/${logo}`}
+              src={`https://dripdome-site.s3.us-east-2.amazonaws.com/nu_logo/${logo}`}
               alt={logo.replace(".png", "")}
               width={250}
               height={250}
