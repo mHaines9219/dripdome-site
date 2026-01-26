@@ -16,6 +16,26 @@ export const metadata: Metadata = {
     description:
       "Rent props and set pieces from DripDome for your next production in NYC or LA.",
     url: "https://www.dripdome.com/rentals",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Rentals - Props & Set Piece Rentals NYC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rentals | DripDome - Props & Set Piece Rentals NYC",
+    description:
+      "Rent props and set pieces from DripDome for your next production in NYC or LA.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
   },
 };
 
@@ -53,7 +73,7 @@ export default function RentalsPage() {
                 textAlign: "center",
               }}
             >
-              Available Equipment
+              Rental Periods are minimum 1 week.
             </Typography>
             <RentalGrid />
           </Box>

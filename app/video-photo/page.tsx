@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
   description:
-    "Explore DripDome&apos;s video and photo production work. Custom set design and fabrication for film, TV, commercials, and photography in New York City.",
+    "Explore DripDome's video and photo production work. Custom set design and fabrication for film, TV, commercials, and photography in New York City.",
   alternates: {
     canonical: "https://www.dripdome.com/video-photo",
   },
@@ -20,6 +20,26 @@ export const metadata: Metadata = {
     description:
       "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
     url: "https://www.dripdome.com/video-photo",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Video & Photo - Set Design for Productions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
+    description:
+      "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
   },
 };
 

@@ -13,6 +13,26 @@ export const metadata: Metadata = {
     description:
       "View our portfolio of custom set designs, fabrications, and production work for film, TV, and events.",
     url: "https://www.dripdome.com/portfolio",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome Portfolio - Set Design & Fabrication Projects",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio | DripDome - Set Design & Fabrication Work NYC",
+    description:
+      "View our portfolio of custom set designs, fabrications, and production work for film, TV, and events.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
   },
 };
 

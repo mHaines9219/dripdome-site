@@ -4,13 +4,28 @@ import { Box, Container, Typography } from "@mui/material";
 export const metadata: Metadata = {
   title: "Privacy Policy | DripDome",
   description:
-    "Read DripDome&apos;s privacy policy. Learn how we collect, use, and protect your personal information.",
+    "Read DripDome's privacy policy. Learn how we collect, use, and protect your personal information.",
   alternates: {
     canonical: "https://www.dripdome.com/privacy",
   },
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    title: "Privacy Policy | DripDome",
+    description:
+      "Read DripDome's privacy policy. Learn how we collect, use, and protect your personal information.",
+    url: "https://www.dripdome.com/privacy",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy | DripDome",
+    description:
+      "Read DripDome's privacy policy. Learn how we collect, use, and protect your personal information.",
   },
 };
 
@@ -50,8 +65,8 @@ export default function PrivacyPolicy() {
           <Typography variant="body1" component="p">
             We only ask for personal information when we truly need it to
             provide a service to you. We collect it by fair and lawful means,
-            with your knowledge and consent. We also let you know why
-            we&apos;re collecting it and how it will be used.
+            with your knowledge and consent. We also let you know why we&apos;re
+            collecting it and how it will be used.
           </Typography>
 
           <Typography variant="body1" component="p">
@@ -87,7 +102,11 @@ export default function PrivacyPolicy() {
             information, feel free to contact us.
           </Typography>
 
-          <Typography variant="body1" component="p" sx={{ fontStyle: "italic" }}>
+          <Typography
+            variant="body1"
+            component="p"
+            sx={{ fontStyle: "italic" }}
+          >
             This policy is effective as of January 1, 2025.
           </Typography>
         </Box>

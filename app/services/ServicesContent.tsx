@@ -19,7 +19,7 @@ const services = [
     ],
   },
   {
-    number: "05",
+    number: "02",
     title: "Brand Activations & Experiential",
     description:
       "Pop ups, retail displays, immersive environments, and experiential moments.",
@@ -31,7 +31,6 @@ const services = [
       "Festival and convention booth design",
     ],
   },
-
   {
     number: "03",
     title: "Custom Fabrication",
@@ -48,6 +47,32 @@ const services = [
   },
   {
     number: "04",
+    title: "CNC Routing",
+    description:
+      "Precision cutting and custom shapes for signage, props, and detailed fabrication work.",
+    details: [
+      "Custom signage and lettering",
+      "Precision-cut props and set pieces",
+      "Intricate patterns and detailed cutouts",
+      "Wood, foam, acrylic, and composite materials",
+      "Prototyping and production runs",
+    ],
+  },
+  {
+    number: "05",
+    title: "3D Printing",
+    description:
+      "Rapid prototyping and custom parts for props, set pieces, and specialty elements.",
+    details: [
+      "Custom prop fabrication",
+      "Rapid prototyping",
+      "Scaled models and miniatures",
+      "Specialty hardware and fittings",
+      "Complex geometries and detailed pieces",
+    ],
+  },
+  {
+    number: "06",
     title: "Vinyl Services",
     description:
       "Custom decals, wall and floor vinyl, branded graphics, and specialty textures.",
@@ -59,7 +84,7 @@ const services = [
     ],
   },
   {
-    number: "05",
+    number: "07",
     title: "Set Design",
     description:
       "Concepts, design decks, 3D renderings, and on site art direction.",
@@ -72,7 +97,7 @@ const services = [
     ],
   },
   {
-    number: "06",
+    number: "08",
     title: "Photo & Video Set Builds",
     description:
       "Campaign sets, e-commerce, studio backdrops, and performance builds.",
@@ -84,7 +109,7 @@ const services = [
     ],
   },
   {
-    number: "07",
+    number: "09",
     title: "Content Production Support",
     description:
       "Behind the scenes, timelapses, and brand friendly social content.",
@@ -96,7 +121,7 @@ const services = [
     ],
   },
   {
-    number: "08",
+    number: "10",
     title: "Styling & Artful Details",
     description:
       "Prop styling, scenic finishing, hand painted textures, and custom color palettes.",
@@ -109,7 +134,7 @@ const services = [
     ],
   },
   {
-    number: "09",
+    number: "11",
     title: "Creative Consulting",
     description:
       "Concept development, budget friendly solutions, sourcing, and pre-production support.",

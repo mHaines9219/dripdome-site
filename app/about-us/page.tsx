@@ -16,6 +16,26 @@ export const metadata: Metadata = {
     description:
       "Meet the team behind DripDome. A women-owned, family-run production design studio specializing in set design and fabrication.",
     url: "https://www.dripdome.com/about-us",
+    type: "website",
+    locale: "en_US",
+    siteName: "DripDome",
+    images: [
+      {
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "DripDome - Women-Owned Set Design Studio NYC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | DripDome - Women-Owned Set Design Studio NYC",
+    description:
+      "Meet the team behind DripDome. A women-owned, family-run production design studio specializing in set design and fabrication.",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+    ],
   },
 };
 

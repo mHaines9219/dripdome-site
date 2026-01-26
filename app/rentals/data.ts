@@ -9,9 +9,10 @@ export interface RentalItem {
 export const rentalEquipment: RentalItem[] = [
   {
     id: 1,
-    name: "Wall Flats",
+    name: "Wall Flats (Various Configurations)",
     category: "Set Pieces",
-    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/flats.webp",
+    image:
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/flats.webp",
   },
   {
     id: 2,
@@ -27,9 +28,24 @@ export const rentalEquipment: RentalItem[] = [
   },
   {
     id: 4,
-    name: "Artificial Flowers",
+    name: "Hedge Wall Panels (120 sqft)",
     category: "Props",
-    image: "", // TODO: Add image
+    image:
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/hedge_panels.png",
+  },
+  {
+    id: 5,
+    name: "Checkerboard Flooring (10' x 8')",
+    category: "Set Pieces",
+    image:
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/checker_floor.jpeg",
+  },
+  {
+    id: 6,
+    name: 'Oversized Playing Cards (11"x17")',
+    category: "Props",
+    image:
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/oversized cards.png",
   },
 ];
 

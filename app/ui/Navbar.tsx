@@ -89,8 +89,8 @@ export default function Navbar() {
                 sx={{ display: "inline-flex", ml: { md: 2 } }}
               >
                 <Image
-                  alt="Company Logo"
-                  src="/assets/dd_logo.png"
+                  alt="DripDome - Set Design & Production Design Studio"
+                  src="/assets/dd_logo_200.png"
                   width={100}
                   height={100}
                   priority

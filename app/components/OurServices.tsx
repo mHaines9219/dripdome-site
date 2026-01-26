@@ -12,7 +12,7 @@ export default function OurServices() {
       label: "PRODUCTION & SET DESIGN",
       image: `${S3_BASE}/website-assets/setdes.png`,
     },
-    { label: "RENTALS", image: `${S3_BASE}/website-assets/rentals.png` },
+    { label: "RENTALS", image: `${S3_BASE}/website-assets/rentals_mag.jpg` },
     { label: "CONSULTING", image: `${S3_BASE}/website-assets/consulting.png` },
   ];
 
