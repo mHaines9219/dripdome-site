@@ -18,7 +18,7 @@ const PhotoPageCarousels: React.FC = () => {
         sx={{
           width: "100%",
           overflow: "hidden",
-          display: "flex",
+          display: { xs: "flex", md: "none" },
           flexDirection: "column",
           gap: "20px",
           justifyContent: "center",
@@ -46,7 +46,9 @@ const PhotoPageCarousels: React.FC = () => {
             </Typography>
             <Swiper
               key={index}
-              style={{ borderRadius: "40px" }}
+              style={{
+                borderRadius: "20px",
+              }}
               loop={true}
               autoplay={{
                 delay: 0,
@@ -90,7 +92,8 @@ const PhotoPageCarousels: React.FC = () => {
       <Box
         sx={{
           display: { xs: "none", lg: "block" },
-          width: "100%",
+          width: "90dvw",
+          justifySelf: "center",
           overflow: "hidden",
         }}
       >
@@ -128,7 +131,6 @@ const PhotoPageCarousels: React.FC = () => {
                 freeMode={true}
                 style={{
                   borderRadius: "50px",
-                  border: "8px solid",
                 }}
               >
                 {section.images.map((image, idx) => (
