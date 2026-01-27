@@ -8,6 +8,28 @@ import { Autoplay, EffectCards } from "swiper/modules";
 
 const sections = [
   {
+    header: "LOWER EAST SIDE GIRLS CLUB CHARITY EVENT",
+    blurb: `For a charity event hosted by Lower East Side Girls Club, DripDome Productions created a 10’ × 8’ Alice in Wonderland–inspired photo moment featuring custom, vinyl-wrapped playing cards with the organization’s initials, set against a lush garden wall backdrop. Fabricated off-site and installed in under two hours despite strict venue constraints, the installation was experienced by roughly 200 guests and cited by organizers as the highlight of the evening.
+`,
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/render.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/frame.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/mattdiana.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/twogirls.jpg",
+    ],
+  },
+  {
+    header: "GOOGLE PHOTOS VIDEO RECAP CAMPAIGN",
+    blurb: `For a branded project with Google Photos, DripDome Productions led production design, including set design, prop and furniture sourcing, and full set dressing. The shoot featured K-pop star EJAE as the model, with every visual element curated to support a clean, lifestyle-driven aesthetic aligned with the brand.`,
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/ejae.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/purple.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/red.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/laydown.jpg",
+    ],
+  },
+  {
     header: "THE SET OF NOTLOVELINE",
     blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors.`,
     images: [
@@ -36,27 +58,6 @@ const sections = [
       "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb2.png",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb1.png",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/jennifersbody/jb3.png",
-    ],
-  },
-  {
-    header: "X3 EXPO",
-    blurb: `At the X3 Expo, held at the historic Hollywood Palladium, we designed and constructed a multi-set activation featuring three distinct environments. This eye-catching setup significantly enhanced attendee engagement, leading our client to report a doubling of sign-up numbers compared to the previous year, all within the first day of the event. This success underscores our ability to create immersive and effective brand experiences that drive measurable results.`,
-    images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_4.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_2.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_1.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/about-us/x3/x3_3.png",
-    ],
-  },
-  {
-    header: "GOOD DYE YOUNG BRAND SHOOT",
-    blurb: `We partnered with Good Dye Young to create surreal, colorful sets that brought their vibrant hair dye products to life. Our team fabricated custom picket fences, reimagined window blinds, and curated unique props to craft immersive environments that perfectly captured the brand's creative spirit.`,
-    images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy1.jpeg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy2.jpeg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy3.jpeg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy5.jpeg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/gooddyeyoung/gdy4.jpeg",
     ],
   },
 ];
