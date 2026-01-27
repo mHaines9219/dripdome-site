@@ -14,8 +14,8 @@ const sections = [
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.JPG",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.jpeg",
     ],
   },
   {
