@@ -47,6 +47,13 @@ export const rentalEquipment: RentalItem[] = [
     image:
       "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/oversized cards.png",
   },
+  {
+    id: 6,
+    name: 'White Plynth/Pedestal (42"H, 15"W, 15"D) ',
+    category: "Props",
+    image:
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/rentals/plyth_1.png",
+  },
 ];
 
 export const categories = ["All", "Set Pieces", "Props"];
