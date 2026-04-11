@@ -109,29 +109,86 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "behind-the-build-podcast-studio-set-design",
-    title: "Behind the Build: Designing a Podcast Studio From Scratch",
+    slug: "notloveline-podcast-studio-build-trisha-paytas",
+    title: "How DripDome Built the NotLoveLine Podcast Studio in 4 Days",
     excerpt:
-      "A look inside our process for designing and fabricating custom podcast studio sets, from concept sketches to the final reveal.",
-    content: `<p>Every great podcast studio starts with a conversation. We sit down with our clients to understand their brand, their audience, and the feeling they want to create on camera. From there, we move into mood boards, 3D renderings, and material sourcing before a single nail is driven.</p>
+      "DripDome built the NotLoveLine podcast studio for Trisha Paytas and Tana Mongeau. A Y2K vaporwave set with a custom neon heart wall, completed in 4 days.",
+    content: `<p>DripDome designed and built a custom podcast studio for Trisha Paytas and Tana Mongeau's NotLoveLine show, turning a home space into a vaporwave-inspired set in just four days. A three-person crew handled everything: wallpaper sourcing, neon heart wall fabrication, wire splicing, and laser-precise installation. The show has since crossed 20 million views and 230,000 subscribers across 65 episodes, and the set is a permanent build that performs on camera every single one. Custom podcast studio construction requires scenic design thinking, not just carpentry. Every material, color, and prop has to hold up across hundreds of hours of content and millions of impressions.</p>
 
-<p>Our approach combines scenic design principles with practical production needs like lighting positions, camera angles, cable management, and acoustic considerations all factor into the design before fabrication begins.</p>
+<h2>What Did Trisha Paytas and Tana Mongeau Want?</h2>
 
-<p>The result is a space that looks incredible on screen and functions seamlessly for the crew behind the cameras.</p>`,
-    date: "2026-04-10",
+<p>Trisha and Tana loved the original NotLoveLine show on MTV and wanted to create their own version with a distinct Y2K aesthetic. The brief called for a space that felt nostalgic and bold, mixing retro references with the kind of visual punch that reads on camera and stops a scroll on social media.</p>
+
+<p>The challenge was translating that energy into a permanent studio build inside a home space. This wasn't a one-night set. It had to look sharp on day one and on episode sixty-five.</p>
+
+<h2>How One Wallpaper Sample Drove the Entire Design</h2>
+
+<p>Design direction clicked when DripDome found a vaporwave-style wallpaper that captured the Y2K mood perfectly. That single sample became the anchor. The color palette, the prop selection, the lighting direction all expanded outward from that wallpaper.</p>
+
+<p>This is a common approach in scenic design: find one element that defines the visual language, then let everything else respond to it. It keeps a set cohesive instead of feeling like a collection of unrelated choices. The team iterated many times on concepts, but once the palette was locked through that wallpaper, the rest of the studio design moved fast.</p>
+
+<h2>How DripDome Solved the Neon Heart Wall Wiring Problem</h2>
+
+<p>The signature piece of the NotLoveLine set is a wall of LED neon hearts arranged in a repeating pattern of alternating colors. Building it was the hardest part of the project.</p>
+
+<p>The LED neon hearts DripDome sourced came with bulky battery packs that wouldn't fit through the small holes needed to mount them flush on the wall. Two options emerged: cut larger holes and patch them with plaster afterward, or cut every heart's wires, feed them through small holes, and splice them back together on the other side.</p>
+
+<p>The team chose the harder, cleaner path. Every single heart had its wires cut, threaded through a small hole, and reconnected on the back of the wall. This kept the front surface completely clean with no visible wiring or bulky packs.</p>
+
+<p>Then came alignment. Because the hearts followed a repeating pattern, every single one had to be equidistant and perfectly lined up. A laser level was essential. The team spent significant time ensuring each heart sat precisely in its grid position. One heart off by half an inch would throw the entire pattern out of alignment. The result is a wall that looks effortless, which is usually the sign that serious precision work went into it.</p>
+
+<p>When co-host Tana Mongeau saw the finished studio for the first time, she started screaming and chanting "DRIP DOME." That's the kind of reveal moment you work for.</p>
+
+<h2>Why Brands Should Invest in Custom Podcast Studios</h2>
+
+<p>Here's the business case for spending real money on a podcast studio: the set receives millions of eyes. NotLoveLine pulls nearly a million views per month and has crossed 20 million total. The show holds a 4.8-star rating across almost 3,000 reviews and ranks in the top 15 US relationship podcasts. Every single frame of every episode features DripDome's work. Sponsors want their products placed in beautiful, distinctive studios. A well-designed set isn't a cost. It's a revenue-generating asset.</p>
+
+<p>If you're planning a podcast studio build, the set is the single most visible element of your show. It communicates professionalism, taste, and identity before anyone says a word. Cheap backgrounds and bare walls tell your audience and your sponsors exactly how seriously you take the project.</p>
+
+<h2>Lessons from the Build: Expect the Unknown Unknowns</h2>
+
+<p>The neon heart wall taught DripDome a lesson that applies to every custom fabrication project: expect the unexpected. The battery pack issue was something nobody anticipated during planning. There was no way to know until the hearts arrived and the team realized the hardware wouldn't cooperate with the mounting plan.</p>
+
+<p>This is what the team calls "unknown unknowns." You can plan for tight timelines, tricky materials, and difficult installs. But certain props or installations will create problems you never even considered. The difference between a smooth project and a disaster often comes down to the crew's ability to problem-solve on the spot.</p>
+
+<p>Two practical skills made the difference on this build. First, knowing how to use a laser level, which is non-negotiable for any repeating pattern or grid installation. Second, basic wire splicing. Hiding power supplies and wiring behind surfaces makes any installation look dramatically more professional, and it's a skill every scenic fabricator should have in their toolkit.</p>
+
+<h2>What's Next</h2>
+
+<p>The NotLoveLine studio build sits right in the middle of a bigger cultural moment. The Y2K revival is driving aesthetic choices across fashion, design, and content production. This project proved that a small crew with the right skills can deliver a permanent, broadcast-quality podcast set on an aggressive timeline.</p>
+
+<p>DripDome has done extensive work with Trisha Paytas across multiple photo shoots and projects. If you're building a podcast studio or planning a content space that needs to perform on camera, that's where the team lives.</p>`,
+    date: "2025-01-31",
     author: {
       name: "DripDome Team",
       role: "Production Design Studio",
     },
     category: "Behind the Scenes",
-    tags: ["set design", "podcast studio", "fabrication", "production design"],
+    tags: [
+      "podcast studio build",
+      "custom podcast studio",
+      "Y2K set design",
+      "neon wall installation",
+      "NotLoveLine",
+      "Trisha Paytas",
+      "Tana Mongeau",
+      "scenic fabrication",
+      "vaporwave design",
+    ],
     image: {
-      url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
-      alt: "DripDome podcast studio set design process from concept to completion",
+      url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+      alt: "DripDome custom NotLoveLine podcast studio set featuring a neon heart wall and vaporwave Y2K design for Trisha Paytas and Tana Mongeau",
       width: 1200,
       height: 630,
     },
-    readingTime: "4 min read",
+    readingTime: "5 min read",
+    gallery: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_4.jpeg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_5.jpeg",
+    ],
   },
   {
     slug: "pop-up-activation-design-tips-for-brands",
