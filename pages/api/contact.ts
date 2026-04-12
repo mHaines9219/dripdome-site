@@ -20,6 +20,7 @@ export default async function handler(
       rentalEndDate,
       projectDescription,
       instagram,
+      referral,
     } = req.body;
 
     // Verify reCAPTCHA token
@@ -93,7 +94,7 @@ export default async function handler(
           name: "Drip Dome Productions",
         },
         subject: "Thank you for contacting us",
-        text: `Hi ${name},\n\nThank you for reaching out. We have received your message and will be in touch shortly!: "${message}".\n\nBest regards,\nDrip Dome Productions`,
+        text: `Hi ${name},\n\nThank you for reaching out. We have received your message and will be in touch shortly!: "${message}".\n\n${referral ? `How they heard about us: ${referral}` : ""}\n\nBest regards,\nDrip Dome Productions`,
         cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
         bcc: [
           { email: "diana@dripdome.com", name: "Diana Haines" },

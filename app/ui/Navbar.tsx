@@ -29,6 +29,7 @@ export default function Navbar() {
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "SERVICES", href: "/services" },
     { name: "RENTALS", href: "/rentals" },
+    { name: "BLOG", href: "/blog" },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
