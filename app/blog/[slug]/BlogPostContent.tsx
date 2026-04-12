@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import ContactForm from "../../components/ContactForm";
 import { getPostBySlug } from "../data";
 
 export default function BlogPostContent({ slug }: { slug: string }) {
@@ -340,6 +341,14 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 fontSize: "14px",
                 mt: 1,
               },
+              "& a": {
+                color: "#FF00AA",
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+                "&:hover": {
+                  opacity: 0.8,
+                },
+              },
               "& ul, & ol": {
                 pl: { xs: 2.5, md: 3.5 },
                 mb: 3,
@@ -421,6 +430,51 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 Back to all posts
               </Typography>
             </Link>
+          </Box>
+        </motion.div>
+
+        {/* Contact CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
+          <Box
+            sx={{
+              mt: { xs: 6, md: 8 },
+              pt: { xs: 5, md: 6 },
+              borderTop: "1px solid rgba(255,255,255,0.1)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h2"
+              component="h2"
+              sx={{
+                fontSize: { xs: "28px", sm: "36px", md: "44px" },
+                fontWeight: 800,
+                color: "white",
+                textAlign: "center",
+                mb: 1.5,
+              }}
+            >
+              Need Our Services?
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "16px", md: "18px" },
+                color: "rgba(255,255,255,0.6)",
+                textAlign: "center",
+                mb: { xs: 3, md: 4 },
+                maxWidth: 500,
+              }}
+            >
+              Tell us about your project and let&apos;s build something
+              together.
+            </Typography>
+            <ContactForm />
           </Box>
         </motion.div>
       </Box>
