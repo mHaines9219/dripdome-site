@@ -23,7 +23,7 @@ import {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const isOverlay = pathname === "/brand-activations";
+  const isOverlay = pathname === "/brand-activations" || pathname === "/";
 
   const links = [
     { name: "ABOUT US", href: "/about-us" },

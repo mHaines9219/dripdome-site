@@ -1,9 +1,11 @@
 import { Box } from "@mui/material";
 import type { Metadata } from "next";
-import HomeBlurb from "./components/HomeBlurb";
-import Navbar from "./ui/Navbar";
-import ProjectsContributed from "./components/ProjectsContributed";
+import HomeHero from "./components/HomeHero";
+import SocialProofBar from "./components/SocialProofBar";
+import HomeFeaturedWork from "./components/HomeFeaturedWork";
+import TrustWall, { TrustPress } from "./components/TrustWall";
 import OurServices from "./components/OurServices";
+import HowWeWork from "./components/HowWeWork";
 import Contact from "./components/Contact";
 
 export const metadata: Metadata = {
@@ -45,55 +47,17 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      <Box
-        component="main"
-        sx={{
-          zIndex: 10,
-          minHeight: "100dvh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          width: "100dvw",
-          maxWidth: "2500px",
-          margin: "0 auto",
-          color: "common.white",
-        }}
-      >
-        <Navbar />
-        <Box
-          component="section"
-          id="home"
-          sx={{
-            zIndex: 10,
-
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start ",
-            justifyContent: "center",
-            textAlign: "left",
-            px: { xs: 0, md: 8 },
-            mb: 2,
-            // border: "1px solid white",
-          }}
-        >
-          <HomeBlurb />
-        </Box>
-        <Box
-          sx={{
-            // width: "100%",
-            // height: "500px",
-            bgcolor: "black",
-          }}
-        >
-          {/* <LogoWall /> */}
-          <OurServices />
-        </Box>
-        <ProjectsContributed />
-        {/* <OurServices /> */}
+    <Box component="main" sx={{ bgcolor: "black", color: "common.white" }}>
+      <HomeHero />
+      <SocialProofBar />
+      <HomeFeaturedWork />
+      <TrustWall />
+      <OurServices />
+      <HowWeWork />
+      <TrustPress />
+      <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
         <Contact />
       </Box>
-    </>
+    </Box>
   );
 }
