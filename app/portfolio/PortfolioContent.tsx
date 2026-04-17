@@ -6,6 +6,7 @@ import Contact from "../components/Contact";
 import { motion } from "framer-motion";
 import FeaturedProjects from "../components/FeaturedProjects";
 import PressSection from "../components/PressSection";
+import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
 
 export default function PortfolioContent() {
   return (
@@ -87,7 +88,7 @@ export default function PortfolioContent() {
                 sx={{
                   fontSize: { xs: "30px", sm: "55px", lg: "70px" },
                   fontWeight: "bold",
-                  color: "#FF00AA",
+                  ...BRAND_GRADIENT_TEXT_SX,
                 }}
               >
                 PROJECTS

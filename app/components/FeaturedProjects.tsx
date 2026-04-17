@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
 import { Autoplay, EffectCards } from "swiper/modules";
+import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
 
 const sections = [
   {
@@ -90,7 +91,7 @@ const FeaturedProjects = () => {
               width: "100%",
               gap: "1.5rem",
               overflow: "hidden",
-              border: "4px solid rgba(255, 0, 170, 0.3)",
+              border: "4px solid rgba(229, 199, 103, 0.3)",
               borderRadius: "30px",
               backgroundColor: "#121212",
               paddingTop: {
@@ -208,7 +209,7 @@ const FeaturedProjects = () => {
                   fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
                   mb: "1.5rem",
                   color: "white",
-                  "& span": { color: "#FF00AA" },
+                  "& span": BRAND_GRADIENT_TEXT_SX,
                 }}
               >
                 {section.header}

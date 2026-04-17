@@ -14,7 +14,7 @@ export default function ClientLayout({
 
   return (
     <>
-      {pathname !== "/" && <Navbar />}
+      {pathname !== "/" && pathname !== "/brand-activations" && <Navbar />}
       {children}
       <Chatbot />
     </>

@@ -28,6 +28,7 @@ export default function Navbar() {
     { name: "ABOUT US", href: "/about-us" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "SERVICES", href: "/services" },
+    { name: "ACTIVATIONS", href: "/brand-activations" },
     { name: "RENTALS", href: "/rentals" },
     { name: "BLOG", href: "/blog" },
   ];
@@ -121,9 +122,9 @@ export default function Navbar() {
                       fontWeight: 600,
                       borderRadius: 0,
                       borderBottom: isActive
-                        ? "2px solid #FF00AA"
+                        ? "2px solid #E5C767"
                         : "2px solid transparent",
-                      "&:hover": { color: "#FF00AA", bgcolor: "transparent" },
+                      "&:hover": { color: "#E5C767", bgcolor: "transparent" },
                     }}
                   >
                     {link.name}
@@ -168,7 +169,7 @@ export default function Navbar() {
                   sx={{
                     bgcolor: "rgba(0,0,0,0.7)",
                     borderRadius: 2,
-                    "&:hover": { color: "#FF00AA" },
+                    "&:hover": { color: "#E5C767" },
                   }}
                 >
                   <ListItemText

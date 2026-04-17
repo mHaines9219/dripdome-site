@@ -7,6 +7,7 @@ import { motion, useInView } from "framer-motion";
 import WomanIcon from "@mui/icons-material/Woman";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
+import { BRAND_GRADIENT } from "@/lib/theme";
 export default function HomeBlurb() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Trigger once when in view
@@ -62,12 +63,13 @@ export default function HomeBlurb() {
     fontWeight: 800,
     letterSpacing: "0.08em",
     fontSize: { xs: "12px", sm: "13px" },
-    color: "common.white",
-    backgroundColor: "#FF00AA",
-    boxShadow: "0 10px 30px rgba(255,0,170,0.25)",
+    color: "black",
+    background: BRAND_GRADIENT,
+    boxShadow: "0 10px 30px rgba(229,199,103,0.25)",
     "&:hover": {
-      backgroundColor: "#E0009A",
-      boxShadow: "0 12px 34px rgba(255,0,170,0.35)",
+      background: BRAND_GRADIENT,
+      filter: "brightness(0.92)",
+      boxShadow: "0 12px 34px rgba(229,199,103,0.35)",
     },
   } as const;
 

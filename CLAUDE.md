@@ -27,7 +27,7 @@ The home page (`app/page.tsx`) is a single scroll of section components imported
 
 Hybrid approach: **MUI sx prop** for component-level styles, **Tailwind** for utility classes, **Emotion** under the hood for MUI. The `cn()` helper in `lib/utils.ts` merges clsx + tailwind-merge.
 
-Brand colors defined in `app/theme.ts`: surface `#FFFFFF`, ink `#111111`, accent `#FF00AA`. MUI palette uses `#FCF5EC` (brown/cream) as primary and `#DD9F28` (gold) as secondary.
+Brand colors defined in `app/theme.ts`: surface `#FFFFFF`, ink `#111111`, accent `#E5C767` (champagne gold). MUI palette uses `#FCF5EC` (brown/cream) as primary and `#DD9F28` (gold) as secondary.
 
 ### Routes
 

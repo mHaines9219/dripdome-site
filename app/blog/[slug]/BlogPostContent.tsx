@@ -118,7 +118,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               sx={{
                 fontSize: "13px",
                 fontWeight: 700,
-                color: "#FF00AA",
+                color: "#E5C767",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
                 mb: 2,
@@ -342,7 +342,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 mt: 1,
               },
               "& a": {
-                color: "#FF00AA",
+                color: "#E5C767",
                 textDecoration: "underline",
                 textUnderlineOffset: "3px",
                 "&:hover": {
@@ -357,7 +357,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                   color: "rgba(255,255,255,0.85)",
                   lineHeight: 1.8,
                   mb: 1,
-                  "&::marker": { color: "#FF00AA" },
+                  "&::marker": { color: "#E5C767" },
                 },
               },
             }}
@@ -417,13 +417,13 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               }}
             >
               <ArrowBackIcon
-                sx={{ fontSize: 18, color: "#FF00AA" }}
+                sx={{ fontSize: 18, color: "#E5C767" }}
               />
               <Typography
                 sx={{
                   fontSize: "15px",
                   fontWeight: 600,
-                  color: "#FF00AA",
+                  color: "#E5C767",
                   "&:hover": { textDecoration: "underline" },
                 }}
               >

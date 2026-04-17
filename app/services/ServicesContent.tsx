@@ -5,6 +5,7 @@ import { Box, Typography, Collapse, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Contact from "../components/Contact";
+import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
 
 const services = [
   {
@@ -176,13 +177,13 @@ function ServiceCard({
           bgcolor: "rgba(255,255,255,0.03)",
           border: "1px solid",
           borderColor: isExpanded
-            ? "rgba(255,0,170,0.5)"
+            ? "rgba(229,199,103,0.5)"
             : "rgba(255,255,255,0.1)",
           transition: "all 0.3s ease",
           "&:hover": {
             bgcolor: "rgba(255,255,255,0.06)",
             borderColor: isExpanded
-              ? "rgba(255,0,170,0.7)"
+              ? "rgba(229,199,103,0.7)"
               : "rgba(255,255,255,0.2)",
             transform: "translateY(-2px)",
           },
@@ -202,7 +203,7 @@ function ServiceCard({
                 sx={{
                   fontSize: { xs: "12px", md: "14px" },
                   fontWeight: 700,
-                  color: "#FF00AA",
+                  color: "#E5C767",
                   letterSpacing: "0.1em",
                 }}
               >
@@ -270,7 +271,7 @@ function ServiceCard({
                     fontSize: { xs: "13px", md: "15px" },
                     lineHeight: 1.6,
                     "&::marker": {
-                      color: "#FF00AA",
+                      color: "#E5C767",
                     },
                   }}
                 >
@@ -321,7 +322,10 @@ export default function ServicesContent() {
             }}
           >
             WHAT WE{" "}
-            <Box component="span" sx={{ color: "#FF00AA", display: "inline" }}>
+            <Box
+              component="span"
+              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
+            >
               DO
             </Box>
           </Typography>
@@ -344,7 +348,7 @@ export default function ServicesContent() {
             }}
           >
             At{" "}
-            <Box component="span" sx={{ color: "#FF00AA", fontWeight: 600 }}>
+            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
               Drip Dome Productions
             </Box>
             , we bring ideas to life through design, fabrication, and
@@ -375,14 +379,14 @@ export default function ServicesContent() {
                 height: "2px",
                 flex: 1,
                 background:
-                  "linear-gradient(90deg, transparent, rgba(255,0,170,0.5))",
+                  "linear-gradient(90deg, transparent, rgba(229,199,103,0.5))",
               }}
             />
             <Typography
               sx={{
                 fontSize: { xs: "12px", md: "14px" },
                 fontWeight: 700,
-                color: "#FF00AA",
+                color: "#E5C767",
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
               }}
@@ -394,7 +398,7 @@ export default function ServicesContent() {
                 height: "2px",
                 flex: 1,
                 background:
-                  "linear-gradient(90deg, rgba(255,0,170,0.5), transparent)",
+                  "linear-gradient(90deg, rgba(229,199,103,0.5), transparent)",
               }}
             />
           </Box>
@@ -448,7 +452,7 @@ export default function ServicesContent() {
               p: { xs: 4, md: 6 },
               borderRadius: 4,
               background:
-                "linear-gradient(135deg, rgba(255,0,170,0.1) 0%, rgba(59,130,246,0.1) 100%)",
+                "linear-gradient(135deg, rgba(229,199,103,0.1) 0%, rgba(59,130,246,0.1) 100%)",
               border: "1px solid rgba(255,255,255,0.1)",
               textAlign: "center",
             }}

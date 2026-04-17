@@ -27,6 +27,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     {
+      path: "/brand-activations",
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+    },
+    {
       path: "/video-photo",
       priority: 0.7,
       changeFrequency: "monthly" as const,
