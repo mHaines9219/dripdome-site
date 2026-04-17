@@ -17,9 +17,9 @@ npx tsc --noEmit     # Type-check without emitting
 
 ### Rendering & Layout Stack
 
-`app/layout.tsx` (server) loads Google Fonts (Source Sans 3), JSON-LD, and Vercel Analytics. It wraps children in:
+`app/layout.tsx` (server) loads Google Fonts (Source Sans 3), JSON-LD, Vercel Analytics, and the GTM container (conditional on `NEXT_PUBLIC_GTM_ID`). It wraps children in:
 - `ThemeRegistry.tsx` - MUI Emotion cache + ThemeProvider
-- `ClientLayout.tsx` - conditionally hides Navbar on the home page
+- `ClientLayout.tsx` - hides Navbar on the home route (`/`) only; all other routes show it
 
 The home page (`app/page.tsx`) is a single scroll of section components imported from `app/components/`.
 
@@ -29,11 +29,20 @@ Hybrid approach: **MUI sx prop** for component-level styles, **Tailwind** for ut
 
 Brand colors defined in `app/theme.ts`: surface `#FFFFFF`, ink `#111111`, accent `#E5C767` (champagne gold). MUI palette uses `#FCF5EC` (brown/cream) as primary and `#DD9F28` (gold) as secondary.
 
+Shared brand tokens live in `lib/theme.ts`:
+- `BRAND_ACCENT` (`#E5C767`) and `BRAND_ACCENT_DEEP` (`#C9A227`) — solid colors for icons, pill borders, active-nav underline, hover states, and any UI under ~20px where a gradient would read as muddy
+- `BRAND_GRADIENT` — `linear-gradient(135deg, #E5C767 → #E89B3C)`
+- `BRAND_GRADIENT_TEXT_SX` — spread into an sx object on big accent text (hero H1 spans, section H2 accent words, the huge case-study numbers)
+- `BRAND_GRADIENT_BUTTON_SX` — spread into an sx object on primary CTA buttons (uses `filter: brightness(0.92)` on hover)
+
+**Rule of thumb for the gradient**: apply only to hero-scale text and primary CTAs. Keep icons, tiny borders, navbar underline, and body-copy accents on the solid `BRAND_ACCENT` color.
+
 ### Routes
 
 | Route | Purpose |
 |-------|---------|
 | `/` | Home (scroll sections) |
+| `/brand-activations` | Google Ads landing page. Budget-qualified inquiry form fires `generate_lead` conversion |
 | `/blog` | Blog listing with category filtering |
 | `/blog/[slug]` | Dynamic blog post pages |
 | `/blog/feed.xml` | RSS feed (route handler) |
@@ -50,7 +59,25 @@ Blog, portfolio, rentals, and services data live in co-located `data.ts` files (
 
 ### API
 
-Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Handles contact and rental form submissions via SendGrid. Validates reCAPTCHA server-side.
+Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Validates reCAPTCHA server-side then routes on `formType`:
+- `"rental"` — rental form (`app/rentals/RentalForm.tsx`)
+- `"brandActivation"` — brand activation inquiry form (`app/brand-activations/BrandActivationForm.tsx`), includes company/projectDate/budgetRange/brief and marks source as "Google Ads landing page"
+- default (unset) — general contact form (`app/components/ContactForm.tsx`)
+
+All three variants email the user and BCC the team via SendGrid.
+
+### Analytics & Tracking
+
+GTM + GA4 + Google Ads conversions are wired through a single GTM container loaded in `app/layout.tsx` (conditional on `NEXT_PUBLIC_GTM_ID`). GA4 loads inside the GTM container, not separately — avoids double-tagging.
+
+Client-side event helpers live in `lib/analytics.ts`:
+- `pushDataLayer(event, payload)` — SSR-safe primitive
+- `trackGenerateLead({ form, value })` — called on successful form submit; pushes `generate_lead` with `form_type`, `currency: 'USD'`, `value` (default 500)
+- `trackPageView({ page })` — called from `PageViewTracker` components on landing pages (e.g., `app/brand-activations/PageViewTracker.tsx`)
+
+Required env vars (populate in Vercel before launch):
+- `NEXT_PUBLIC_GTM_ID` (format: `GTM-XXXXXXX`) — gates the whole tracking stack
+- `NEXT_PUBLIC_GA4_ID`, `NEXT_PUBLIC_GOOGLE_ADS_ID`, `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` — documented for future direct-tag use if needed
 
 ### Images
 
@@ -62,7 +89,15 @@ All project/blog images hosted on S3: `dripdome-site.s3.us-east-2.amazonaws.com`
 
 ### SEO
 
-Every page route exports `metadata` with Open Graph, Twitter cards, and canonical URLs. `app/sitemap.ts` generates a dynamic sitemap including all blog slugs. `app/components/JsonLd.tsx` provides site-wide structured data. Blog post pages add per-post Article structured data.
+Every page route exports `metadata` with Open Graph, Twitter cards, and canonical URLs. `app/sitemap.ts` generates a dynamic sitemap including all blog slugs. `app/components/JsonLd.tsx` provides site-wide `LocalBusiness` structured data. Pages with distinct service offerings add per-page schemas (e.g., `app/brand-activations/BrandActivationsServiceJsonLd.tsx` emits a `Service` schema). Blog post pages add per-post `Article` structured data.
+
+### Reusable Section Components
+
+`app/components/` holds sections reused across multiple pages:
+- `SocialProofBar` — 4-stat animated counter row (used on home and `/brand-activations`)
+- `TrustWall` (default) — "Trusted By" + logo marquee. `TrustPress` (named export) — "In the Press" link list. Originally one component, split so each page can place them independently
+- `FeaturedProjects` — Swiper card-effect carousel of project case studies
+- `HowWeWork` — 3-step numbered process timeline with CTA
 
 ## Writing Rules
 

@@ -23,6 +23,7 @@ import {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const isOverlay = pathname === "/brand-activations";
 
   const links = [
     { name: "ABOUT US", href: "/about-us" },
@@ -42,7 +43,9 @@ export default function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: "black",
+          bgcolor: isOverlay ? "rgba(0,0,0,0.25)" : "black",
+          backdropFilter: isOverlay ? "blur(10px)" : undefined,
+          WebkitBackdropFilter: isOverlay ? "blur(10px)" : undefined,
           left: 0,
           right: 0,
           width: "100%",
@@ -187,8 +190,9 @@ export default function Navbar() {
         </Box>
       </Drawer>
 
-      {/* Spacer so content isn't hidden behind the fixed AppBar */}
-      <Box sx={{ height: { xs: 95, md: 120 } }} />
+      {/* Spacer so content isn't hidden behind the fixed AppBar.
+          Skipped on overlay routes where the hero intentionally sits under the navbar. */}
+      {!isOverlay && <Box sx={{ height: { xs: 95, md: 120 } }} />}
     </>
   );
 }
