@@ -132,7 +132,7 @@ const FoundersSection = () => {
                             display: "block",
                             width: "40px",
                             height: "2px",
-                            bgcolor: "#FF00AA",
+                            bgcolor: "#E5C767",
                             mx: "auto",
                             mt: 1,
                           },

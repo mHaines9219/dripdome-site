@@ -11,7 +11,7 @@ export const APP_COLORS = {
   /** Used for all text/icons */
   ink: "#111111",
   /** Used for buttons/links/highlights */
-  accent: "#FF00AA",
+  accent: "#E5C767",
 } as const;
 
 const FONT_FALLBACK =

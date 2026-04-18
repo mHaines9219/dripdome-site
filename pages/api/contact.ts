@@ -21,6 +21,11 @@ export default async function handler(
       projectDescription,
       instagram,
       referral,
+      // Brand activation-specific fields
+      company,
+      projectDate,
+      budgetRange,
+      brief,
     } = req.body;
 
     // Verify reCAPTCHA token
@@ -76,6 +81,35 @@ export default async function handler(
       try {
         await sgMail.send(msg);
         res.status(200).json({ message: "Rental request sent successfully" });
+      } catch (error) {
+        console.error("SendGrid Error:", error);
+        const errorMessage = error instanceof Error ? error.message : "Failed to send email";
+        res.status(500).json({ error: errorMessage });
+      }
+    } else if (formType === "brandActivation") {
+      if (!name || !email || !company || !projectDate || !budgetRange || !brief) {
+        return res.status(400).json({ error: "Missing required fields for brand activation inquiry" });
+      }
+
+      const msg = {
+        to: email,
+        from: {
+          email: "info@dripdome.com",
+          name: "Drip Dome Productions",
+        },
+        subject: `New Brand Activation Inquiry: ${company}`,
+        text: `Hi ${name},\n\nThank you for reaching out about your brand activation project. We received your inquiry and will review it within 48 hours.\n\nProject Details:\n- Company: ${company}\n- Estimated Project Date: ${projectDate}\n- Budget Range: ${budgetRange}\n- Brief: ${brief}\n${referral ? `- How they heard about us: ${referral}\n` : ""}\nSource: Google Ads landing page\n\nSpeak soon,\nDrip Dome Productions`,
+        cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
+        bcc: [
+          { email: "diana@dripdome.com", name: "Diana Haines" },
+          { email: "matt@dripdome.com", name: "Matt Haines" },
+          { email: "patricia@dripdome.com", name: "Patricia Kwiatkowski" },
+        ],
+      };
+
+      try {
+        await sgMail.send(msg);
+        res.status(200).json({ message: "Brand activation inquiry sent successfully" });
       } catch (error) {
         console.error("SendGrid Error:", error);
         const errorMessage = error instanceof Error ? error.message : "Failed to send email";

@@ -55,7 +55,7 @@ export default function AboutUs() {
                 textAlign: "center",
               }}
             >
-              <Box component="span" sx={{ color: "#FF00AA", fontWeight: 600 }}>
+              <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
                 Drip Dome Productions
               </Box>{" "}
               is a majority women-owned, family-run business based in New York

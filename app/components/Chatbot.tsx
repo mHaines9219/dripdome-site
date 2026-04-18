@@ -75,9 +75,9 @@ export default function Chatbot() {
             zIndex: 1300,
             width: 56,
             height: 56,
-            bgcolor: "#FF00AA",
+            bgcolor: "#E5C767",
             color: "#FFFFFF",
-            boxShadow: "0 4px 20px rgba(255,0,170,0.4)",
+            boxShadow: "0 4px 20px rgba(229,199,103,0.4)",
             "&:hover": { bgcolor: "#111111" },
             transition: "background-color 0.2s",
           }}
@@ -129,7 +129,7 @@ export default function Chatbot() {
               onClick={() => setOpen(false)}
               size="small"
               aria-label="Close chat"
-              sx={{ color: "#FFFFFF", "&:hover": { color: "#FF00AA" } }}
+              sx={{ color: "#FFFFFF", "&:hover": { color: "#E5C767" } }}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
@@ -268,7 +268,7 @@ export default function Chatbot() {
               aria-label="Send message"
               sx={{
                 color: "#111111",
-                "&:hover": { color: "#FF00AA" },
+                "&:hover": { color: "#E5C767" },
                 "&.Mui-disabled": { color: "#CCC" },
               }}
             >

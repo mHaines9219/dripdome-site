@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Box, Typography, Chip } from "@mui/material";
 import { motion } from "framer-motion";
 import { blogPosts, getAllCategories } from "./data";
+import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
 
 export default function BlogContent() {
   const categories = getAllCategories();
@@ -44,7 +45,10 @@ export default function BlogContent() {
             }}
           >
             THE{" "}
-            <Box component="span" sx={{ color: "#FF00AA", display: "inline" }}>
+            <Box
+              component="span"
+              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
+            >
               BLOG
             </Box>
           </Typography>
@@ -67,7 +71,7 @@ export default function BlogContent() {
           >
             Behind-the-scenes looks at our builds, fabrication deep dives, and
             insights from the{" "}
-            <Box component="span" sx={{ color: "#FF00AA", fontWeight: 600 }}>
+            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
               DripDome
             </Box>{" "}
             studio.
@@ -104,14 +108,14 @@ export default function BlogContent() {
               onClick={() => setActiveCategory(null)}
               sx={{
                 bgcolor: !activeCategory
-                  ? "#FF00AA"
+                  ? "#E5C767"
                   : "rgba(255,255,255,0.08)",
                 color: "white",
                 fontWeight: 600,
                 fontSize: "14px",
                 "&:hover": {
                   bgcolor: !activeCategory
-                    ? "#FF00AA"
+                    ? "#E5C767"
                     : "rgba(255,255,255,0.15)",
                 },
               }}
@@ -124,7 +128,7 @@ export default function BlogContent() {
                 sx={{
                   bgcolor:
                     activeCategory === category
-                      ? "#FF00AA"
+                      ? "#E5C767"
                       : "rgba(255,255,255,0.08)",
                   color: "white",
                   fontWeight: 600,
@@ -132,7 +136,7 @@ export default function BlogContent() {
                   "&:hover": {
                     bgcolor:
                       activeCategory === category
-                        ? "#FF00AA"
+                        ? "#E5C767"
                         : "rgba(255,255,255,0.15)",
                   },
                 }}
@@ -187,7 +191,7 @@ export default function BlogContent() {
                     flexDirection: "column",
                     "&:hover": {
                       bgcolor: "rgba(255,255,255,0.06)",
-                      borderColor: "rgba(255,0,170,0.5)",
+                      borderColor: "rgba(229,199,103,0.5)",
                       transform: "translateY(-4px)",
                     },
                   }}
@@ -232,7 +236,7 @@ export default function BlogContent() {
                         sx={{
                           fontSize: "12px",
                           fontWeight: 700,
-                          color: "#FF00AA",
+                          color: "#E5C767",
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
                         }}

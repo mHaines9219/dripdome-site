@@ -23,11 +23,13 @@ import {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const isOverlay = pathname === "/brand-activations" || pathname === "/";
 
   const links = [
     { name: "ABOUT US", href: "/about-us" },
     { name: "PORTFOLIO", href: "/portfolio" },
     { name: "SERVICES", href: "/services" },
+    { name: "ACTIVATIONS", href: "/brand-activations" },
     { name: "RENTALS", href: "/rentals" },
     { name: "BLOG", href: "/blog" },
   ];
@@ -41,7 +43,9 @@ export default function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: "black",
+          bgcolor: isOverlay ? "rgba(0,0,0,0.25)" : "black",
+          backdropFilter: isOverlay ? "blur(10px)" : undefined,
+          WebkitBackdropFilter: isOverlay ? "blur(10px)" : undefined,
           left: 0,
           right: 0,
           width: "100%",
@@ -121,9 +125,9 @@ export default function Navbar() {
                       fontWeight: 600,
                       borderRadius: 0,
                       borderBottom: isActive
-                        ? "2px solid #FF00AA"
+                        ? "2px solid #E5C767"
                         : "2px solid transparent",
-                      "&:hover": { color: "#FF00AA", bgcolor: "transparent" },
+                      "&:hover": { color: "#E5C767", bgcolor: "transparent" },
                     }}
                   >
                     {link.name}
@@ -168,7 +172,7 @@ export default function Navbar() {
                   sx={{
                     bgcolor: "rgba(0,0,0,0.7)",
                     borderRadius: 2,
-                    "&:hover": { color: "#FF00AA" },
+                    "&:hover": { color: "#E5C767" },
                   }}
                 >
                   <ListItemText
@@ -186,8 +190,9 @@ export default function Navbar() {
         </Box>
       </Drawer>
 
-      {/* Spacer so content isn't hidden behind the fixed AppBar */}
-      <Box sx={{ height: { xs: 95, md: 120 } }} />
+      {/* Spacer so content isn't hidden behind the fixed AppBar.
+          Skipped on overlay routes where the hero intentionally sits under the navbar. */}
+      {!isOverlay && <Box sx={{ height: { xs: 95, md: 120 } }} />}
     </>
   );
 }

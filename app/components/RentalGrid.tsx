@@ -39,16 +39,16 @@ export default function RentalGrid() {
             variant={selectedCategory === cat ? "filled" : "outlined"}
             color={selectedCategory === cat ? "primary" : "default"}
             sx={{
-              bgcolor: selectedCategory === cat ? "#FF00AA" : "black",
+              bgcolor: selectedCategory === cat ? "#E5C767" : "black",
               color: "white",
               borderColor:
-                selectedCategory === cat ? "#FF00AA" : "rgba(255,255,255,0.3)",
+                selectedCategory === cat ? "#E5C767" : "rgba(255,255,255,0.3)",
               "&:hover": {
                 bgcolor:
                   selectedCategory === cat
                     ? "#d1008f"
-                    : "rgba(255, 0, 170, 0.1)",
-                borderColor: "#FF00AA",
+                    : "rgba(229, 199, 103, 0.1)",
+                borderColor: "#E5C767",
               },
             }}
           />
@@ -118,7 +118,7 @@ export default function RentalGrid() {
                   variant="body2"
                   sx={{
                     fontSize: "12px",
-                    color: "#FF00AA",
+                    color: "#E5C767",
                   }}
                   gutterBottom
                 >

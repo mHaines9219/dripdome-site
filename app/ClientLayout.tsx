@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname } from "next/navigation";
-import Navbar from "./ui/Navbar"; // Adjust the path to your Navbar component
+import Navbar from "./ui/Navbar";
 import Chatbot from "./components/Chatbot";
 
 export default function ClientLayout({
@@ -10,11 +9,9 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-
   return (
     <>
-      {pathname !== "/" && <Navbar />}
+      <Navbar />
       {children}
       <Chatbot />
     </>
