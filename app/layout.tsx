@@ -80,6 +80,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={sourceSans.variable}>
       <head>
+        <Script
+          id="google-ads-gtag"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18099031816"
+          strategy="afterInteractive"
+          async
+        />
+        <Script id="google-ads-gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-18099031816');`}
+        </Script>
         <JsonLd />
         {GTM_ID && (
           <Script id="gtm-init" strategy="afterInteractive">

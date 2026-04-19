@@ -39,6 +39,7 @@ type CaseStudy = {
   copy: string;
   image: string;
   imageAlt: string;
+  youtubeId?: string;
   hero: HeroMetric;
   breakdown?: { title: string; slices: DonutSlice[] };
   stats?: StatTile[];
@@ -113,6 +114,28 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     number: "04",
+    client: "WHETHAN x EMEI",
+    category: "PROMOTIONAL MUSIC VIDEO",
+    headline: "Sunny D coded world built for the 'SUNNYD' music video.",
+    copy: "Transformed a vacant office building into the world of the 'SUNNYD' music video for Whethan and Emei. Instead of building a set from scratch, we worked with the bones of the space, trucking in custom props, branded vinyl, and layered dressing to modify what was already there. Empty corridors, lobbies, and offices became distinct performance and narrative beats inside the track's saturated Sunny D palette.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/sunnyd/still.jpg",
+    imageAlt: "Whethan x Emei SUNNYD music video set design",
+    youtubeId: "zLY71gPk8Ms",
+    hero: {
+      kind: "count",
+      target: 444,
+      suffix: "K+",
+      label: "YOUTUBE VIEWS",
+      note: "Official 'SUNNYD' music video, Whethan x Emei",
+    },
+    stats: [
+      { value: "7K+", label: "LIKES" },
+      { value: "400+", label: "COMMENTS" },
+      { value: "OFFICIAL", label: "MUSIC VIDEO" },
+    ],
+  },
+  {
+    number: "05",
     client: "THE ORIGINAL SOUTHSIDE",
     category: "AD CAMPAIGN + PRODUCT LAUNCH",
     headline: "Forbes-featured launch for a modern bottled cocktail brand.",
@@ -424,19 +447,40 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
             direction: "ltr",
             position: "relative",
             width: "100%",
-            aspectRatio: { xs: "4 / 3", md: "5 / 4" },
+            aspectRatio: study.youtubeId
+              ? "16 / 9"
+              : { xs: "4 / 3", md: "5 / 4" },
             borderRadius: "18px",
             overflow: "hidden",
             boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+            bgcolor: "black",
           }}
         >
-          <Image
-            src={study.image}
-            alt={study.imageAlt}
-            fill
-            sizes="(max-width: 900px) 100vw, 55vw"
-            style={{ objectFit: "cover" }}
-          />
+          {study.youtubeId ? (
+            <Box
+              component="iframe"
+              src={`https://www.youtube-nocookie.com/embed/${study.youtubeId}?rel=0`}
+              title={study.imageAlt}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: 0,
+              }}
+            />
+          ) : (
+            <Image
+              src={study.image}
+              alt={study.imageAlt}
+              fill
+              sizes="(max-width: 900px) 100vw, 55vw"
+              style={{ objectFit: "cover" }}
+            />
+          )}
         </Box>
 
         <Box
@@ -570,8 +614,8 @@ export default function CaseStudiesSection() {
               mx: "auto",
             }}
           >
-            Four recent builds across charity, tech, creator, and CPG. Same
-            studio. Same team. Very different briefs.
+            Five recent builds across charity, tech, creator, music, and CPG.
+            Same studio. Same team. Very different briefs.
           </Typography>
         </Box>
 
