@@ -70,8 +70,8 @@ export default function Navbar() {
               sx={{
                 display: { md: "none" },
                 ml: 0.5,
-                bgcolor: "rgba(0,0,0,0.6)",
                 borderRadius: 2,
+                color: "common.white",
                 p: 1,
                 "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
               }}

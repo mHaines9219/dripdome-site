@@ -28,6 +28,7 @@ export default function HomeHero() {
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "black",
+        pt: { xs: "95px", md: "40px" },
       }}
     >
       <Image
@@ -52,7 +53,7 @@ export default function HomeHero() {
           position: "relative",
           zIndex: 1,
           px: { xs: 3, md: 8 },
-          py: { xs: 10, md: 12 },
+          py: { xs: 10, md: 10, lg: 10, xl: 12 },
           maxWidth: 1200,
           width: "100%",
           textAlign: "center",
@@ -102,11 +103,17 @@ export default function HomeHero() {
             variant="h1"
             component="h1"
             sx={{
-              fontSize: { xs: "40px", sm: "60px", md: "80px", lg: "96px" },
+              fontSize: {
+                xs: "40px",
+                sm: "56px",
+                md: "64px",
+                lg: "72px",
+                xl: "96px",
+              },
               fontWeight: "bold",
               lineHeight: 1.05,
               color: "white",
-              mb: 3,
+              mb: { xs: 3, lg: 2.5, xl: 3 },
             }}
           >
             WE BUILD WORLDS.
@@ -124,11 +131,11 @@ export default function HomeHero() {
         >
           <Typography
             sx={{
-              fontSize: { xs: "16px", md: "22px" },
+              fontSize: { xs: "16px", md: "18px", lg: "18px", xl: "22px" },
               color: "rgba(255,255,255,0.9)",
               maxWidth: 820,
               mx: "auto",
-              mb: 5,
+              mb: { xs: 4, lg: 4, xl: 5 },
             }}
           >
             Production design and custom fabrication trusted by world-class
