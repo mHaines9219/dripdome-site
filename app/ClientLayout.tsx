@@ -2,7 +2,8 @@
 
 import React from "react";
 import Navbar from "./ui/Navbar";
-import Chatbot from "./components/Chatbot";
+// Chatbot temporarily disabled — not working in prod
+// import Chatbot from "./components/Chatbot";
 
 export default function ClientLayout({
   children,
@@ -13,7 +14,7 @@ export default function ClientLayout({
     <>
       <Navbar />
       {children}
-      <Chatbot />
+      {/* <Chatbot /> */}
     </>
   );
 }
