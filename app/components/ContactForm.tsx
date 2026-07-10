@@ -4,6 +4,31 @@ import { useRef, FormEvent } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendData } from "@/hooks/sendData";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BUTTON_SX,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
+
+const inputSx = {
+  "& .MuiOutlinedInput-root": {
+    bgcolor: SURFACE,
+    color: INK,
+    borderRadius: 0,
+    transition: "box-shadow 120ms ease",
+    "& fieldset": { border: NB_BORDER },
+    "&:hover fieldset": { border: NB_BORDER },
+    "&.Mui-focused fieldset": { border: `3px solid ${ACCENT}` },
+    "&.Mui-focused": { boxShadow: nbShadow(4) },
+  },
+  "& .MuiInputBase-input::placeholder": {
+    color: "rgba(17,17,17,0.6)",
+    opacity: 1,
+  },
+} as const;
 
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -74,13 +99,7 @@ export default function ContactForm() {
         required
         fullWidth
         inputProps={{ "aria-label": "Name" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={inputSx}
       />
       <TextField
         name="instagram"
@@ -88,13 +107,7 @@ export default function ContactForm() {
         required
         fullWidth
         inputProps={{ "aria-label": "Instagram" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={inputSx}
       />
       <TextField
         name="email"
@@ -103,13 +116,7 @@ export default function ContactForm() {
         required
         fullWidth
         inputProps={{ "aria-label": "Email" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={inputSx}
       />
       <TextField
         name="referral"
@@ -117,13 +124,7 @@ export default function ContactForm() {
         required
         fullWidth
         inputProps={{ "aria-label": "How did you hear about us" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={inputSx}
       />
       <TextField
         name="message"
@@ -133,13 +134,7 @@ export default function ContactForm() {
         multiline
         minRows={4}
         inputProps={{ "aria-label": "Message" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={inputSx}
       />
       <Box sx={{ mb: 1, display: "flex", justifyContent: "center" }}>
         <ReCAPTCHA
@@ -150,15 +145,15 @@ export default function ContactForm() {
       <Button
         type="submit"
         variant="contained"
+        disableElevation
         sx={{
           alignSelf: "center",
           px: 4,
           py: 1.5,
           width: "80dvw",
           maxWidth: 900,
-          fontWeight: 700,
-          bgcolor: "#16a34a",
-          "&:hover": { bgcolor: "#1d4ed8" },
+          letterSpacing: "0.08em",
+          ...NB_BUTTON_SX,
         }}
       >
         SEND

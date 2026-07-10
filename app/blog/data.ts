@@ -167,13 +167,13 @@ export const blogPosts: BlogPost[] = [
 <p>Before anything was built, DripDome created a full 3D render of the installation to iterate on the concept with the client. This let both teams align on scale, prop placement, and how the set would interact with the venue's existing greenery before a single material was sourced.</p>
 
 <figure style="margin: 2rem 0;">
-<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/render.jpg" alt="3D render of DripDome's Alice in Wonderland hedge wall set design for the Lower East Side Girls Club gala" style="width: 100%; border-radius: 12px;" />
-<figcaption style="text-align: center; color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 8px;">The 3D render used during pre-production to finalize the concept with the client.</figcaption>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/render.jpg" alt="3D render of DripDome's Alice in Wonderland hedge wall set design for the Lower East Side Girls Club gala" style="width: 100%; border-radius: 0; border: 3px solid #111111; box-shadow: 6px 6px 0 0 #111111;" />
+<figcaption style="text-align: center; color: rgba(17,17,17,0.6); font-size: 14px; margin-top: 14px;">The 3D render used during pre-production to finalize the concept with the client.</figcaption>
 </figure>
 
 <figure style="margin: 2rem 0;">
-<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg" alt="The finished Alice in Wonderland hedge wall set at the Lower East Side Girls Club gala, a near 1:1 match of the 3D render" style="width: 100%; border-radius: 12px;" />
-<figcaption style="text-align: center; color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 8px;">The finished set on the night of the event. Nearly a 1:1 match from render to reality.</figcaption>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg" alt="The finished Alice in Wonderland hedge wall set at the Lower East Side Girls Club gala, a near 1:1 match of the 3D render" style="width: 100%; border-radius: 0; border: 3px solid #111111; box-shadow: 6px 6px 0 0 #111111;" />
+<figcaption style="text-align: center; color: rgba(17,17,17,0.6); font-size: 14px; margin-top: 14px;">The finished set on the night of the event. Nearly a 1:1 match from render to reality.</figcaption>
 </figure>
 
 <p>The result was a set that felt like it grew out of the room rather than being dropped into it. The hedge wall flat served as the foundation, covered in faux hedging that blended seamlessly with the venue's natural greenery. Oversized flowers and hanging frames pushed the scene into Wonderland territory without losing the elegance a gala demands.</p>
@@ -204,7 +204,7 @@ export const blogPosts: BlogPost[] = [
 
 <h2>What's Next</h2>
 
-<p>DripDome's Wonderland work didn't start or end with LESGC. The team also designed sets for pop artist Emei's Into the Rabbit Hole EP, creating the environments for the full series of <a href="http://youtube.com/playlist?list=PLhBeWmAWC98WAZJ2tgc7hTVRT2T50ZL_2" target="_blank" rel="noopener noreferrer" style="color: #E5C767;">visualizers on YouTube</a>. Another project where the Alice in Wonderland thread drove the creative direction. When a concept keeps finding new contexts, it's not a coincidence. It's a creative language worth building on.</p>`,
+<p>DripDome's Wonderland work didn't start or end with LESGC. The team also designed sets for pop artist Emei's Into the Rabbit Hole EP, creating the environments for the full series of <a href="http://youtube.com/playlist?list=PLhBeWmAWC98WAZJ2tgc7hTVRT2T50ZL_2" target="_blank" rel="noopener noreferrer">visualizers on YouTube</a>. Another project where the Alice in Wonderland thread drove the creative direction. When a concept keeps finding new contexts, it's not a coincidence. It's a creative language worth building on.</p>`,
     date: "2026-04-11",
     author: {
       name: "DripDome Team",

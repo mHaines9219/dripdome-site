@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 const founders = [
   {
@@ -31,18 +32,18 @@ const FoundersSection = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box sx={{ bgcolor: "black" }}>
+    <Box sx={{ bgcolor: INK }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0, duration: 0.5 }}
       >
-        <Box sx={{ pt: 12, bgcolor: "black" }}>
+        <Box sx={{ pt: 12, bgcolor: INK }}>
           <Box
             sx={{
               paddingTop: "0px",
               textAlign: "center",
-              background: "black",
+              background: INK,
             }}
           >
             {/* <Typography
@@ -65,7 +66,7 @@ const FoundersSection = () => {
             <Box
               sx={{
                 padding: "2rem",
-                backgroundColor: "black",
+                backgroundColor: INK,
               }}
             >
               <Box
@@ -97,7 +98,8 @@ const FoundersSection = () => {
                         sx={{
                           width: { xs: 192, lg: 288 },
                           height: { xs: 192, lg: 288 },
-                          borderRadius: "50%",
+                          border: `3px solid ${PAPER}`,
+                          boxShadow: nbShadow(6, ACCENT),
                           overflow: "hidden",
                           display: "flex",
                           justifyContent: "center",
@@ -131,8 +133,8 @@ const FoundersSection = () => {
                             content: '""',
                             display: "block",
                             width: "40px",
-                            height: "2px",
-                            bgcolor: "#E5C767",
+                            height: "3px",
+                            bgcolor: ACCENT,
                             mx: "auto",
                             mt: 1,
                           },

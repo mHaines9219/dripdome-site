@@ -7,7 +7,13 @@ import { motion, useInView } from "framer-motion";
 import WomanIcon from "@mui/icons-material/Woman";
 import Diversity3Icon from "@mui/icons-material/Diversity3";
 import AirplaneTicketIcon from "@mui/icons-material/AirplaneTicket";
-import { BRAND_GRADIENT } from "@/lib/theme";
+import {
+  ACCENT,
+  INK,
+  NB_BUTTON_OUTLINE_DARK_SX,
+  NB_BUTTON_SX,
+  NB_TAG_DARK_SX,
+} from "@/lib/theme";
 export default function HomeBlurb() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true }); // Trigger once when in view
@@ -36,57 +42,35 @@ export default function HomeBlurb() {
   ] as const;
 
   const badgeSx = {
-    borderRadius: 999,
+    ...NB_TAG_DARK_SX,
     px: 1.25,
     py: 0.5,
     minHeight: 0,
-    borderColor: "rgba(255,255,255,0.6)",
-    color: "common.white",
-    letterSpacing: "0.08em",
-    fontWeight: 700,
     zIndex: 10,
-
     fontSize: { xs: "10px", sm: "12px" },
     lineHeight: 1,
-    backgroundColor: "rgba(255,255,255,0.04)",
     "& .MuiButton-startIcon": { mr: 0.75 },
     "&:hover": {
-      borderColor: "rgba(255,255,255,0.85)",
-      backgroundColor: "rgba(255,255,255,0.08)",
+      bgcolor: INK,
+      borderColor: ACCENT,
+      color: ACCENT,
     },
   } as const;
 
   const ctaPrimarySx = {
-    borderRadius: 999,
+    ...NB_BUTTON_SX,
     px: { xs: 2, sm: 2.5 },
     py: { xs: 1, sm: 1.1 },
-    fontWeight: 800,
     letterSpacing: "0.08em",
     fontSize: { xs: "12px", sm: "13px" },
-    color: "black",
-    background: BRAND_GRADIENT,
-    boxShadow: "0 10px 30px rgba(229,199,103,0.25)",
-    "&:hover": {
-      background: BRAND_GRADIENT,
-      filter: "brightness(0.92)",
-      boxShadow: "0 12px 34px rgba(229,199,103,0.35)",
-    },
   } as const;
 
   const ctaSecondarySx = {
-    borderRadius: 999,
+    ...NB_BUTTON_OUTLINE_DARK_SX,
     px: { xs: 2, sm: 2.5 },
     py: { xs: 1, sm: 1.1 },
-    fontWeight: 800,
     letterSpacing: "0.08em",
     fontSize: { xs: "12px", sm: "13px" },
-    color: "common.white",
-    bgcolor: "rgba(255,255,255,0.12)",
-    border: "1px solid rgba(255,255,255,0.18)",
-    "&:hover": {
-      bgcolor: "rgba(255,255,255,0.18)",
-      borderColor: "rgba(255,255,255,0.28)",
-    },
   } as const;
 
   return (
@@ -113,7 +97,6 @@ export default function HomeBlurb() {
           color="primary"
           sx={{
             fontSize: { xs: "24px", sm: "60px", lg: "70px" },
-            fontWeight: "bold",
             color: "white",
           }}
         >

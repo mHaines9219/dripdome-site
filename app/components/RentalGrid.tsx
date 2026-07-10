@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { rentalEquipment, categories } from "../rentals/data";
+import { ACCENT, INK, NB_CARD_DARK_SX, PAPER, nbShadow } from "@/lib/theme";
 
 export default function RentalGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -36,19 +37,29 @@ export default function RentalGrid() {
             key={cat}
             label={cat.toUpperCase()}
             onClick={() => setSelectedCategory(cat)}
-            variant={selectedCategory === cat ? "filled" : "outlined"}
-            color={selectedCategory === cat ? "primary" : "default"}
             sx={{
-              bgcolor: selectedCategory === cat ? "#E5C767" : "black",
-              color: "white",
-              borderColor:
-                selectedCategory === cat ? "#E5C767" : "rgba(255,255,255,0.3)",
+              borderRadius: 0,
+              fontWeight: 700,
+              letterSpacing: "0.06em",
+              border: `2px solid ${PAPER}`,
+              bgcolor: selectedCategory === cat ? ACCENT : INK,
+              color: selectedCategory === cat ? INK : PAPER,
+              boxShadow:
+                selectedCategory === cat ? nbShadow(3, PAPER) : "none",
+              transition: "transform 120ms ease, box-shadow 120ms ease",
               "&:hover": {
-                bgcolor:
-                  selectedCategory === cat
-                    ? "#d1008f"
-                    : "rgba(229, 199, 103, 0.1)",
-                borderColor: "#E5C767",
+                bgcolor: selectedCategory === cat ? ACCENT : INK,
+                color: selectedCategory === cat ? INK : ACCENT,
+                borderColor: ACCENT,
+                transform: "translate(-2px, -2px)",
+                boxShadow: nbShadow(
+                  3,
+                  selectedCategory === cat ? PAPER : ACCENT,
+                ),
+              },
+              "&:active": {
+                transform: "translate(2px, 2px)",
+                boxShadow: "none",
               },
             }}
           />
@@ -64,13 +75,13 @@ export default function RentalGrid() {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "rgba(100, 100, 100, 0.5)",
                 justifyContent: "center",
                 alignItems: "center",
-                transition: "box-shadow 0.3s ease",
-                borderRadius: "10px",
+                ...NB_CARD_DARK_SX,
+                transition: "transform 120ms ease, box-shadow 120ms ease",
                 "&:hover": {
-                  boxShadow: 4,
+                  transform: "translate(-2px, -2px)",
+                  boxShadow: nbShadow(10, ACCENT),
                 },
               }}
             >
@@ -118,7 +129,7 @@ export default function RentalGrid() {
                   variant="body2"
                   sx={{
                     fontSize: "12px",
-                    color: "#E5C767",
+                    color: ACCENT,
                   }}
                   gutterBottom
                 >

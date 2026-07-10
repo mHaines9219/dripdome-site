@@ -3,12 +3,13 @@
 import { useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { ACCENT, INK } from "@/lib/theme";
 
 export default function AboutUs() {
   const ref = useRef(null);
 
   return (
-    <Box ref={ref} sx={{ bgcolor: "black" }}>
+    <Box ref={ref} sx={{ bgcolor: INK }}>
       <Box
         sx={{
           width: "100%",
@@ -26,7 +27,6 @@ export default function AboutUs() {
             color="white"
             sx={{
               fontSize: { xs: "55px", sm: "95px" },
-              fontWeight: "bold",
               paddingTop: { xs: 8 },
               marginBottom: { xs: "20px", md: "30px" },
               paddingLeft: "10px",
@@ -55,7 +55,7 @@ export default function AboutUs() {
                 textAlign: "center",
               }}
             >
-              <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
+              <Box component="span" sx={{ color: ACCENT, fontWeight: 700 }}>
                 Drip Dome Productions
               </Box>{" "}
               is a majority women-owned, family-run business based in New York

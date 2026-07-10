@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import { ACCENT, INK, NB_BORDER, PAPER, SURFACE, nbShadow } from "@/lib/theme";
 
 // TODO: refine copy with founder-voice answers. Draft answers below are
 // placeholders that reflect the Ads plan's positioning (2 week turnaround,
@@ -36,8 +36,9 @@ export default function BrandActivationsFAQ() {
   return (
     <Box
       sx={{
-        bgcolor: "black",
-        color: "white",
+        bgcolor: PAPER,
+        color: INK,
+        borderTop: `4px solid ${ACCENT}`,
         px: { xs: 3, md: 8 },
         py: { xs: 8, md: 12 },
       }}
@@ -48,35 +49,37 @@ export default function BrandActivationsFAQ() {
           component="h2"
           sx={{
             fontSize: { xs: "32px", md: "50px", lg: "60px" },
-            fontWeight: "bold",
             textAlign: "center",
             mb: { xs: 4, md: 6 },
           }}
         >
-          <Box component="span" sx={{ color: "white" }}>
+          <Box component="span" sx={{ color: INK }}>
             COMMONLY{" "}
           </Box>
-          <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
+          <Box component="span" sx={{ color: ACCENT }}>
             ASKED
           </Box>
         </Typography>
 
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
           {FAQS.map((item, i) => (
             <Accordion
               key={i}
               disableGutters
+              square
+              elevation={0}
               sx={{
-                bgcolor: "rgba(255,255,255,0.04)",
-                color: "white",
-                border: "1px solid rgba(229,199,103,0.2)",
-                borderRadius: "12px !important",
+                bgcolor: SURFACE,
+                color: INK,
+                border: NB_BORDER,
+                borderRadius: "0 !important",
+                boxShadow: nbShadow(6),
                 "&:before": { display: "none" },
                 overflow: "hidden",
               }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{ color: "#E5C767" }} />}
+                expandIcon={<ExpandMoreIcon sx={{ color: INK }} />}
                 sx={{
                   px: { xs: 2, md: 3 },
                   py: 1,
@@ -86,7 +89,7 @@ export default function BrandActivationsFAQ() {
                 <Typography
                   sx={{
                     fontSize: { xs: "16px", md: "18px" },
-                    fontWeight: 600,
+                    fontWeight: 700,
                   }}
                 >
                   {item.q}
@@ -96,7 +99,7 @@ export default function BrandActivationsFAQ() {
                 <Typography
                   sx={{
                     fontSize: { xs: "15px", md: "16px" },
-                    color: "rgba(255,255,255,0.85)",
+                    color: "rgba(17,17,17,0.8)",
                     lineHeight: 1.6,
                   }}
                 >

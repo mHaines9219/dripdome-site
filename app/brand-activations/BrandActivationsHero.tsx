@@ -3,7 +3,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { BRAND_GRADIENT_BUTTON_SX, BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  ACCENT,
+  INK,
+  NB_BUTTON_OUTLINE_DARK_SX,
+  NB_BUTTON_SX,
+  NB_TAG_DARK_SX,
+  nbShadow,
+} from "@/lib/theme";
 
 // TODO: replace hero image with a 15s branded reel once produced
 // (use <video autoPlay muted loop playsInline> with a webm/mp4 hosted on S3).
@@ -23,7 +30,8 @@ export default function BrandActivationsHero() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "black",
+        bgcolor: INK,
+        borderBottom: `4px solid ${ACCENT}`,
         pt: { xs: "95px", md: "40px" },
       }}
     >
@@ -39,8 +47,7 @@ export default function BrandActivationsHero() {
         sx={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 100%)",
+          bgcolor: "rgba(17,17,17,0.55)",
         }}
       />
 
@@ -73,15 +80,8 @@ export default function BrandActivationsHero() {
               <Box
                 key={badge}
                 sx={{
-                  px: 2,
-                  py: 0.75,
-                  border: "1px solid rgba(229,199,103,0.6)",
-                  borderRadius: "999px",
+                  ...NB_TAG_DARK_SX,
                   fontSize: { xs: "11px", md: "13px" },
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  color: "white",
-                  bgcolor: "rgba(229,199,103,0.08)",
                 }}
               >
                 {badge}
@@ -106,15 +106,26 @@ export default function BrandActivationsHero() {
                 lg: "72px",
                 xl: "96px",
               },
-              fontWeight: "bold",
-              lineHeight: 1.05,
+              lineHeight: 1.1,
               color: "white",
               mb: { xs: 3, lg: 2.5, xl: 3 },
             }}
           >
             NYC BRAND ACTIVATION STUDIO.
             <br />
-            <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
+            <Box
+              component="span"
+              sx={{
+                display: "inline-block",
+                bgcolor: ACCENT,
+                color: INK,
+                px: { xs: 1.5, md: 3 },
+                py: { xs: 0.5, md: 1 },
+                mt: { xs: 1.5, md: 2 },
+                boxShadow: nbShadow(8),
+                transform: "rotate(-1.5deg)",
+              }}
+            >
               DESIGNED. BUILT. INSTALLED.
             </Box>
           </Typography>
@@ -156,13 +167,13 @@ export default function BrandActivationsHero() {
               component="a"
               href="#inquiry"
               variant="contained"
+              disableElevation
               sx={{
                 px: 4,
                 py: 1.75,
                 fontSize: { xs: "14px", md: "16px" },
-                fontWeight: 700,
                 letterSpacing: "0.08em",
-                ...BRAND_GRADIENT_BUTTON_SX,
+                ...NB_BUTTON_SX,
               }}
             >
               REQUEST A QUOTE
@@ -181,14 +192,8 @@ export default function BrandActivationsHero() {
                 px: 4,
                 py: 1.75,
                 fontSize: { xs: "14px", md: "16px" },
-                fontWeight: 700,
                 letterSpacing: "0.08em",
-                color: "white",
-                borderColor: "rgba(255,255,255,0.6)",
-                "&:hover": {
-                  borderColor: "white",
-                  bgcolor: "rgba(255,255,255,0.08)",
-                },
+                ...NB_BUTTON_OUTLINE_DARK_SX,
               }}
             >
               SEE THE WORK

@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
 import { Autoplay, EffectCards } from "swiper/modules";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 
@@ -53,20 +54,21 @@ export default function HomeFeaturedWork() {
         variant="h2"
         sx={{
           fontSize: { xs: "28px", sm: "45px", lg: "55px" },
-          fontWeight: "bold",
           color: "white",
           textAlign: "center",
           mb: { xs: 3, md: 5 },
         }}
       >
-        Featured Work
+        Featured{" "}
+        <Box component="span" sx={{ color: ACCENT }}>
+          Work
+        </Box>
       </Typography>
 
       {projects.map((section, index) => (
         <Box
           key={index}
           sx={{
-            borderRadius: 4,
             pt: { md: 4, lg: 4 },
             mb: 4,
           }}
@@ -84,9 +86,10 @@ export default function HomeFeaturedWork() {
               width: "100%",
               gap: "1.5rem",
               overflow: "hidden",
-              border: "4px solid rgba(229, 199, 103, 0.3)",
-              borderRadius: "30px",
-              backgroundColor: "#121212",
+              border: `3px solid ${PAPER}`,
+              borderRadius: 0,
+              backgroundColor: INK,
+              boxShadow: nbShadow(8, ACCENT),
               p: { xs: "20px 0 0 0", sm: "20px" },
             }}
           >
@@ -110,7 +113,7 @@ export default function HomeFeaturedWork() {
                   perSlideOffset: 8,
                   perSlideRotate: 2,
                   rotate: true,
-                  slideShadows: true,
+                  slideShadows: false,
                 }}
                 modules={[EffectCards, Autoplay]}
                 style={{ width: "100%" }}
@@ -134,9 +137,8 @@ export default function HomeFeaturedWork() {
                           lg: "600px",
                         },
                         position: "relative",
-                        borderRadius: "15px",
+                        borderRadius: 0,
                         overflow: "hidden",
-                        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
                       }}
                     >
                       <Image
@@ -144,7 +146,7 @@ export default function HomeFeaturedWork() {
                         alt={section.header}
                         fill
                         sizes="(max-width: 600px) 90vw, 40vw"
-                        style={{ objectFit: "contain", borderRadius: "15px" }}
+                        style={{ objectFit: "contain" }}
                       />
                     </Box>
                   </SwiperSlide>
@@ -167,7 +169,6 @@ export default function HomeFeaturedWork() {
                   fontSize: { xs: "24px", sm: "32px", md: "36px", lg: "44px" },
                   mb: "1.5rem",
                   color: "white",
-                  fontWeight: "bold",
                 }}
               >
                 {section.header}
@@ -176,7 +177,7 @@ export default function HomeFeaturedWork() {
                 variant="body1"
                 sx={{
                   fontSize: { xs: "14px", sm: "18px", md: "20px" },
-                  color: "#e0e0e0",
+                  color: PAPER,
                 }}
               >
                 {section.blurb}
@@ -191,12 +192,16 @@ export default function HomeFeaturedWork() {
           component={Link}
           href="/portfolio"
           sx={{
-            color: "#E5C767",
+            display: "inline-block",
+            color: ACCENT,
             fontSize: { xs: "14px", sm: "16px" },
             fontWeight: 700,
             letterSpacing: "0.06em",
+            textTransform: "uppercase",
             textDecoration: "none",
-            "&:hover": { textDecoration: "underline" },
+            px: 1,
+            py: 0.5,
+            "&:hover": { bgcolor: ACCENT, color: INK },
           }}
         >
           See All Projects &rarr;

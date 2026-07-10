@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useInView } from "framer-motion";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 function AnimatedNumber({
   target,
@@ -41,7 +42,7 @@ function AnimatedNumber({
       sx={{
         fontSize: { xs: "28px", sm: "36px", md: "44px" },
         fontWeight: 800,
-        color: "white",
+        color: ACCENT,
         lineHeight: 1,
       }}
     >
@@ -83,10 +84,10 @@ export default function SocialProofBar() {
           textAlign: "center",
           py: { xs: 3, md: 4 },
           px: { xs: 2, md: 4 },
-          borderRadius: "16px",
-          border: "1px solid rgba(229,199,103,0.15)",
-          background:
-            "linear-gradient(135deg, rgba(229,199,103,0.04) 0%, rgba(0,0,0,0) 100%)",
+          borderRadius: 0,
+          border: `3px solid ${PAPER}`,
+          bgcolor: INK,
+          boxShadow: nbShadow(8, ACCENT),
         }}
       >
         {stats.map((stat) => (
@@ -101,7 +102,7 @@ export default function SocialProofBar() {
               sx={{
                 mt: 0.5,
                 fontSize: { xs: "11px", sm: "13px" },
-                color: "rgba(255,255,255,0.6)",
+                color: PAPER,
                 letterSpacing: "0.08em",
                 fontWeight: 600,
                 textTransform: "uppercase",
@@ -118,7 +119,7 @@ export default function SocialProofBar() {
           mt: 2.5,
           textAlign: "center",
           fontSize: { xs: "12px", sm: "14px" },
-          color: "rgba(255,255,255,0.5)",
+          color: "rgba(243,237,226,0.7)",
           letterSpacing: "0.06em",
         }}
       >

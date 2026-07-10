@@ -10,7 +10,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        brutal: "4px 4px 0 0 #111111",
+        "brutal-lg": "8px 8px 0 0 #111111",
+        "brutal-silver": "4px 4px 0 0 #C0C0C0",
+        "brutal-paper": "4px 4px 0 0 #F3EDE2",
+      },
       colors: {
+        ink: "#111111",
+        paper: "#F3EDE2",
+        silver: "#C0C0C0",
+        pop: "#FF5C00",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

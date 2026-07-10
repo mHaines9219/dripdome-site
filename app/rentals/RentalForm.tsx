@@ -15,6 +15,14 @@ import {
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { rentalEquipment } from "./data";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BUTTON_SX,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 export default function RentalForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -26,16 +34,30 @@ export default function RentalForm() {
   };
 
   const inputStyles = {
-    "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+    "& .MuiOutlinedInput-root": {
+      bgcolor: SURFACE,
+      color: INK,
+      borderRadius: 0,
+      transition: "box-shadow 120ms ease",
+      "& fieldset": { border: NB_BORDER },
+      "&:hover fieldset": { border: NB_BORDER },
+      "&.Mui-focused fieldset": { border: `3px solid ${ACCENT}` },
+      "&.Mui-focused": { boxShadow: nbShadow(4) },
+    },
     "& .MuiInputBase-input::placeholder": {
-      color: "rgba(0,0,0,0.7)",
+      color: "rgba(17,17,17,0.6)",
       opacity: 1,
     },
+    // Resting labels sit inside the white input; shrunk labels float over
+    // the dark page background, so they flip to light.
     "& .MuiInputLabel-root": {
-      color: "rgba(0,0,0,0.7)",
+      color: "rgba(17,17,17,0.7)",
     },
-    "& .MuiOutlinedInput-notchedOutline": {
-      borderColor: "rgba(0,0,0,0.23)",
+    "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+      color: "rgba(243,237,226,0.85)",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: ACCENT,
     },
   };
 
@@ -54,7 +76,6 @@ export default function RentalForm() {
         component="h2"
         sx={{
           fontSize: { xs: "40px", md: "60px", lg: "70px" },
-          fontWeight: "bold",
           marginBottom: "15px",
           justifyContent: "center",
           display: "flex",
@@ -177,15 +198,7 @@ export default function RentalForm() {
         />
 
         {/* Equipment Desired - Dropdown */}
-        <FormControl
-          fullWidth
-          sx={{
-            "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-            "& .MuiInputLabel-root": { color: "rgba(0,0,0,0.7)" },
-            "& .MuiInputLabel-root.Mui-focused": { color: "black" },
-            "& .MuiSelect-select": { color: "black" },
-          }}
-        >
+        <FormControl fullWidth sx={inputStyles}>
           <InputLabel id="equipment-label">EQUIPMENT DESIRED</InputLabel>
           <Select
             labelId="equipment-label"
@@ -252,15 +265,14 @@ export default function RentalForm() {
         <Button
           type="submit"
           variant="contained"
+          disableElevation
           sx={{
             alignSelf: "center",
             px: 4,
             py: 1.5,
             width: "80dvw",
             maxWidth: 900,
-            fontWeight: 700,
-            bgcolor: "#16a34a",
-            "&:hover": { bgcolor: "#1d4ed8" },
+            ...NB_BUTTON_SX,
           }}
         >
           SUBMIT RENTAL REQUEST

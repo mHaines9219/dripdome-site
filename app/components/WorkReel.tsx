@@ -2,6 +2,7 @@
 
 import { Box } from "@mui/material";
 import Image from "next/image";
+import { INK, PAPER } from "@/lib/theme";
 
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 
@@ -64,7 +65,8 @@ function MarqueeRow({
               width: { xs: 200, sm: 280, md: 320 },
               height: { xs: 140, sm: 190, md: 220 },
               flexShrink: 0,
-              borderRadius: "12px",
+              border: `2px solid ${PAPER}`,
+              borderRadius: 0,
               overflow: "hidden",
             }}
           >
@@ -90,6 +92,7 @@ export default function WorkReel() {
       sx={{
         width: "100%",
         overflow: "hidden",
+        bgcolor: INK,
         py: { xs: 2, md: 4 },
         display: "flex",
         flexDirection: "column",

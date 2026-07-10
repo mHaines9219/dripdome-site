@@ -19,6 +19,7 @@ import {
   ListItemText,
   Toolbar,
 } from "@mui/material";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -43,9 +44,8 @@ export default function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: isOverlay ? "rgba(0,0,0,0.25)" : "black",
-          backdropFilter: isOverlay ? "blur(10px)" : undefined,
-          WebkitBackdropFilter: isOverlay ? "blur(10px)" : undefined,
+          bgcolor: INK,
+          borderBottom: `4px solid ${ACCENT}`,
           left: 0,
           right: 0,
           width: "100%",
@@ -70,10 +70,11 @@ export default function Navbar() {
               sx={{
                 display: { md: "none" },
                 ml: 0.5,
-                borderRadius: 2,
+                borderRadius: 0,
+                border: `2px solid ${PAPER}`,
                 color: "common.white",
                 p: 1,
-                "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
+                "&:hover": { bgcolor: ACCENT, color: INK, borderColor: PAPER },
               }}
             >
               <HomeTwoToneIcon sx={{ width: 28, height: 28 }} />
@@ -106,7 +107,14 @@ export default function Navbar() {
             <IconButton
               aria-label="Open navigation menu"
               onClick={toggleMenu}
-              sx={{ display: { md: "none" }, mr: 1.5, color: "common.white" }}
+              sx={{
+                display: { md: "none" },
+                mr: 1.5,
+                color: "common.white",
+                borderRadius: 0,
+                border: `2px solid ${PAPER}`,
+                "&:hover": { bgcolor: ACCENT, color: INK },
+              }}
             >
               <MenuIcon sx={{ width: 32, height: 32 }} />
             </IconButton>
@@ -120,14 +128,22 @@ export default function Navbar() {
                     component={Link}
                     href={link.href}
                     sx={{
-                      color: "common.white",
-                      fontSize: 18,
-                      fontWeight: 600,
+                      color: isActive ? INK : "common.white",
+                      bgcolor: isActive ? ACCENT : "transparent",
+                      fontSize: 17,
+                      fontWeight: 700,
                       borderRadius: 0,
-                      borderBottom: isActive
-                        ? "2px solid #E5C767"
+                      px: 1.75,
+                      border: isActive
+                        ? `2px solid ${PAPER}`
                         : "2px solid transparent",
-                      "&:hover": { color: "#E5C767", bgcolor: "transparent" },
+                      boxShadow: isActive ? nbShadow(3, PAPER) : "none",
+                      "&:hover": {
+                        bgcolor: ACCENT,
+                        color: INK,
+                        border: `2px solid ${PAPER}`,
+                        boxShadow: nbShadow(3, PAPER),
+                      },
                     }}
                   >
                     {link.name}
@@ -145,7 +161,7 @@ export default function Navbar() {
         onClose={() => setIsOpen(false)}
         PaperProps={{
           sx: {
-            bgcolor: "black",
+            bgcolor: INK,
             color: "common.white",
             height: "100vh",
           },
@@ -164,15 +180,21 @@ export default function Navbar() {
         >
           <List sx={{ width: "100%", maxWidth: 420 }}>
             {links.map((link) => (
-              <ListItem key={link.name} disablePadding sx={{ my: 0.75 }}>
+              <ListItem key={link.name} disablePadding sx={{ my: 1.25 }}>
                 <ListItemButton
                   component={Link}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   sx={{
-                    bgcolor: "rgba(0,0,0,0.7)",
-                    borderRadius: 2,
-                    "&:hover": { color: "#E5C767" },
+                    bgcolor: INK,
+                    borderRadius: 0,
+                    border: `3px solid ${PAPER}`,
+                    boxShadow: nbShadow(5, ACCENT),
+                    "&:hover": {
+                      bgcolor: ACCENT,
+                      color: INK,
+                      boxShadow: nbShadow(5, PAPER),
+                    },
                   }}
                 >
                   <ListItemText
@@ -180,7 +202,7 @@ export default function Navbar() {
                     primaryTypographyProps={{
                       align: "center",
                       fontSize: 22,
-                      fontWeight: 600,
+                      fontWeight: 700,
                     }}
                   />
                 </ListItemButton>

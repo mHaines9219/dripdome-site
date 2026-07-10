@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import type { Metadata } from "next";
+import { INK } from "@/lib/theme";
 import HomeHero from "./components/HomeHero";
 import SocialProofBar from "./components/SocialProofBar";
 import HomeFeaturedWork from "./components/HomeFeaturedWork";
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <Box component="main" sx={{ bgcolor: "black", color: "common.white" }}>
+    <Box component="main" sx={{ bgcolor: INK, color: "common.white" }}>
       <HomeHero />
       <SocialProofBar />
       <HomeFeaturedWork />

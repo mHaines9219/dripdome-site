@@ -34,7 +34,6 @@ const PhotoPageCarousels: React.FC = () => {
               color="white"
               sx={{
                 fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                fontWeight: "bold",
                 paddingTop: { xs: "30px", sm: "50px", md: "80px" },
                 marginBottom: { xs: "20px", md: "30px", lg: "40px" },
                 paddingLeft: "10px",
@@ -46,9 +45,6 @@ const PhotoPageCarousels: React.FC = () => {
             </Typography>
             <Swiper
               key={index}
-              style={{
-                borderRadius: "20px",
-              }}
               loop={true}
               autoplay={{
                 delay: 0,
@@ -72,7 +68,6 @@ const PhotoPageCarousels: React.FC = () => {
                     height: "100%",
                     maxWidth: "500px",
                     aspectRatio: "1",
-                    borderRadius: "20px",
                   }}
                 >
                   <Image
@@ -106,7 +101,6 @@ const PhotoPageCarousels: React.FC = () => {
                 color="white"
                 sx={{
                   fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
                   paddingTop: { xs: "30px", md: "30px" },
                   marginBottom: { xs: "20px", md: "30px" },
                   paddingLeft: "10px",
@@ -129,9 +123,6 @@ const PhotoPageCarousels: React.FC = () => {
                 spaceBetween={40}
                 modules={[Autoplay]}
                 freeMode={true}
-                style={{
-                  borderRadius: "50px",
-                }}
               >
                 {section.images.map((image, idx) => (
                   <SwiperSlide

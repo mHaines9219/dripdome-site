@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Box, Container, Typography } from "@mui/material";
+import { INK, PAPER } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | DripDome",
@@ -34,7 +35,7 @@ export default function PrivacyPolicy() {
     <Box
       component="main"
       sx={{
-        bgcolor: "black",
+        bgcolor: PAPER,
         minHeight: "100vh",
         pt: { xs: 12, md: 16 },
         pb: 8,
@@ -44,10 +45,9 @@ export default function PrivacyPolicy() {
         <Typography
           variant="h1"
           component="h1"
-          color="white"
           sx={{
             fontSize: { xs: "36px", sm: "48px", md: "56px" },
-            fontWeight: "bold",
+            color: INK,
             mb: 4,
             textAlign: "center",
           }}
@@ -55,7 +55,7 @@ export default function PrivacyPolicy() {
           Privacy Policy
         </Typography>
 
-        <Box sx={{ color: "grey.300", "& > p": { mb: 3 } }}>
+        <Box sx={{ color: "rgba(17,17,17,0.85)", "& > p": { mb: 3 } }}>
           <Typography variant="body1" component="p">
             Your privacy is important to us. It is our policy to respect your
             privacy regarding any information we may collect from you across our

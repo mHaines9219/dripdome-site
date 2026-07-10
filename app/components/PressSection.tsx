@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { ACCENT, INK, PAPER, SURFACE, nbShadow } from "@/lib/theme";
 
 const pressItems = [
   {
@@ -41,22 +42,32 @@ const PressSection = () => {
             fontSize: { xs: "30px", sm: "80px" },
           }}
         >
-          Our Work in the Press
+          Our Work in the{" "}
+          <Box component="span" sx={{ color: ACCENT }}>
+            Press
+          </Box>
         </Typography>
         {pressItems.map((item, index) => (
           <Box
             key={index}
             sx={{
               padding: 2,
-              border: "1px solid #ccc",
-              borderRadius: 1,
-              backgroundColor: "white",
+              border: `3px solid ${PAPER}`,
+              borderRadius: 0,
+              backgroundColor: SURFACE,
+              boxShadow: nbShadow(6, ACCENT),
               textAlign: "center",
-              color: "black",
-              transition: "all 0.3s ease",
+              color: INK,
+              transition: "transform 120ms ease, box-shadow 120ms ease",
               "&:hover": {
-                backgroundColor: "black",
-                color: "white",
+                backgroundColor: ACCENT,
+                color: INK,
+                transform: "translate(-2px, -2px)",
+                boxShadow: nbShadow(8, ACCENT),
+              },
+              "&:active": {
+                transform: "translate(2px, 2px)",
+                boxShadow: nbShadow(0, ACCENT),
               },
             }}
           >

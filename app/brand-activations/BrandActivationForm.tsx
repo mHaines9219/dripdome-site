@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { trackGenerateLead } from "@/lib/analytics";
-import { BRAND_GRADIENT_BUTTON_SX } from "@/lib/theme";
+import { INK, NB_BUTTON_SX, PAPER, nbShadow } from "@/lib/theme";
 
 const BUDGET_RANGES = [
   "$10K – $25K",
@@ -24,14 +24,25 @@ const BUDGET_RANGES = [
 ];
 
 const inputStyles = {
-  "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
+  "& .MuiInputBase-root": {
+    bgcolor: "white",
+    color: INK,
+    borderRadius: 0,
+    boxShadow: nbShadow(4),
+  },
   "& .MuiInputBase-input::placeholder": {
-    color: "rgba(0,0,0,0.7)",
+    color: "rgba(17,17,17,0.7)",
     opacity: 1,
   },
-  "& .MuiInputLabel-root": { color: "rgba(0,0,0,0.7)" },
+  "& .MuiInputLabel-root": { color: "rgba(17,17,17,0.7)" },
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "rgba(0,0,0,0.23)",
+    border: `3px solid ${INK}`,
+  },
+  "& .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline": {
+    border: `3px solid ${INK}`,
+  },
+  "& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    border: `3px solid ${INK}`,
   },
 };
 
@@ -53,8 +64,8 @@ export default function BrandActivationForm() {
         alignItems: "center",
         px: { xs: 3, md: 8 },
         py: { xs: 6, md: 10 },
-        bgcolor: "black",
-        color: "white",
+        bgcolor: PAPER,
+        color: INK,
       }}
     >
       <Typography
@@ -62,10 +73,9 @@ export default function BrandActivationForm() {
         component="h2"
         sx={{
           fontSize: { xs: "36px", md: "56px", lg: "64px" },
-          fontWeight: "bold",
           mb: 1,
           textAlign: "center",
-          color: "white",
+          color: INK,
         }}
       >
         REQUEST A PROJECT QUOTE
@@ -76,7 +86,7 @@ export default function BrandActivationForm() {
           textAlign: "center",
           maxWidth: 720,
           mb: 4,
-          color: "rgba(255,255,255,0.85)",
+          color: "rgba(17,17,17,0.8)",
         }}
       >
         Tell us about your brief. We reply within 48 hours with next steps.
@@ -184,7 +194,7 @@ export default function BrandActivationForm() {
               fontSize: "12px",
               fontWeight: 700,
               letterSpacing: "0.1em",
-              color: "rgba(255,255,255,0.7)",
+              color: "rgba(17,17,17,0.7)",
               mb: 0.75,
             }}
           >
@@ -203,10 +213,9 @@ export default function BrandActivationForm() {
         <FormControl
           fullWidth
           sx={{
-            "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-            "& .MuiInputLabel-root": { color: "rgba(0,0,0,0.7)" },
-            "& .MuiInputLabel-root.Mui-focused": { color: "black" },
-            "& .MuiSelect-select": { color: "black" },
+            ...inputStyles,
+            "& .MuiInputLabel-root.Mui-focused": { color: INK },
+            "& .MuiSelect-select": { color: INK },
           }}
         >
           <InputLabel id="budget-label">BUDGET RANGE</InputLabel>
@@ -260,13 +269,14 @@ export default function BrandActivationForm() {
             py: 1.75,
             width: "100%",
             maxWidth: 780,
-            fontWeight: 700,
             fontSize: "16px",
             letterSpacing: "0.05em",
-            ...BRAND_GRADIENT_BUTTON_SX,
+            ...NB_BUTTON_SX,
             "&.Mui-disabled": {
-              background: "rgba(229,199,103,0.4)",
-              color: "white",
+              bgcolor: "white",
+              color: "rgba(17,17,17,0.5)",
+              border: `3px solid ${INK}`,
+              boxShadow: "none",
             },
           }}
         >

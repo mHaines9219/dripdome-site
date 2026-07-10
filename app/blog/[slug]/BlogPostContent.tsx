@@ -10,6 +10,15 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import ContactForm from "../../components/ContactForm";
 import { getPostBySlug } from "../data";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BORDER_THIN,
+  PAPER,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 export default function BlogPostContent({ slug }: { slug: string }) {
   const post = getPostBySlug(slug);
@@ -22,7 +31,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
   });
 
   return (
-    <Box sx={{ bgcolor: "black", overflow: "hidden", minHeight: "100vh" }}>
+    <Box sx={{ bgcolor: PAPER, overflow: "hidden", minHeight: "100vh" }}>
       <Box
         component="article"
         sx={{
@@ -56,7 +65,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               <Link
                 href="/"
                 style={{
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(17,17,17,0.6)",
                   textDecoration: "none",
                   fontSize: "14px",
                 }}
@@ -66,7 +75,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </Box>
             <Typography
               component="li"
-              sx={{ color: "rgba(255,255,255,0.3)", fontSize: "14px" }}
+              sx={{ color: "rgba(17,17,17,0.35)", fontSize: "14px" }}
               aria-hidden="true"
             >
               /
@@ -75,7 +84,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               <Link
                 href="/blog"
                 style={{
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(17,17,17,0.6)",
                   textDecoration: "none",
                   fontSize: "14px",
                 }}
@@ -85,7 +94,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </Box>
             <Typography
               component="li"
-              sx={{ color: "rgba(255,255,255,0.3)", fontSize: "14px" }}
+              sx={{ color: "rgba(17,17,17,0.35)", fontSize: "14px" }}
               aria-hidden="true"
             >
               /
@@ -93,7 +102,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             <Typography
               component="li"
               sx={{
-                color: "rgba(255,255,255,0.7)",
+                color: "rgba(17,17,17,0.8)",
                 fontSize: "14px",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -116,9 +125,15 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             {/* Category */}
             <Typography
               sx={{
+                display: "inline-block",
                 fontSize: "13px",
                 fontWeight: 700,
-                color: "#E5C767",
+                bgcolor: ACCENT,
+                color: INK,
+                border: NB_BORDER_THIN,
+                boxShadow: nbShadow(3),
+                px: 1.5,
+                py: 0.5,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
                 mb: 2,
@@ -132,8 +147,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               variant="h1"
               sx={{
                 fontSize: { xs: "28px", sm: "36px", md: "44px" },
-                fontWeight: 800,
-                color: "white",
+                color: INK,
                 lineHeight: 1.2,
                 mb: 3,
                 letterSpacing: "-0.02em",
@@ -151,14 +165,14 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 gap: { xs: 1.5, md: 2 },
                 mb: { xs: 4, md: 5 },
                 pb: { xs: 3, md: 4 },
-                borderBottom: "1px solid rgba(255,255,255,0.1)",
+                borderBottom: NB_BORDER_THIN,
               }}
             >
               <Typography
                 sx={{
                   fontSize: "14px",
-                  color: "rgba(255,255,255,0.7)",
-                  fontWeight: 600,
+                  color: INK,
+                  fontWeight: 700,
                 }}
               >
                 {post.author.name}
@@ -166,7 +180,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               {post.author.role && (
                 <>
                   <Typography
-                    sx={{ color: "rgba(255,255,255,0.3)", fontSize: "14px" }}
+                    sx={{ color: "rgba(17,17,17,0.35)", fontSize: "14px" }}
                     aria-hidden="true"
                   >
                     |
@@ -174,7 +188,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                   <Typography
                     sx={{
                       fontSize: "14px",
-                      color: "rgba(255,255,255,0.5)",
+                      color: "rgba(17,17,17,0.6)",
                     }}
                   >
                     {post.author.role}
@@ -182,7 +196,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 </>
               )}
               <Typography
-                sx={{ color: "rgba(255,255,255,0.3)", fontSize: "14px" }}
+                sx={{ color: "rgba(17,17,17,0.35)", fontSize: "14px" }}
                 aria-hidden="true"
               >
                 |
@@ -192,13 +206,13 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 dateTime={post.date}
                 sx={{
                   fontSize: "14px",
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(17,17,17,0.6)",
                 }}
               >
                 {formattedDate}
               </Typography>
               <Typography
-                sx={{ color: "rgba(255,255,255,0.3)", fontSize: "14px" }}
+                sx={{ color: "rgba(17,17,17,0.35)", fontSize: "14px" }}
                 aria-hidden="true"
               >
                 |
@@ -206,7 +220,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               <Typography
                 sx={{
                   fontSize: "14px",
-                  color: "rgba(255,255,255,0.5)",
+                  color: "rgba(17,17,17,0.6)",
                 }}
               >
                 {post.readingTime}
@@ -226,10 +240,11 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               position: "relative",
               width: "100%",
               height: { xs: 220, sm: 300, md: 400 },
-              borderRadius: 3,
+              border: NB_BORDER,
+              boxShadow: nbShadow(8),
               overflow: "hidden",
               mb: { xs: 4, md: 5 },
-              bgcolor: "rgba(255,255,255,0.05)",
+              bgcolor: SURFACE,
             }}
           >
             <Image
@@ -253,7 +268,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             <Box
               sx={{
                 mb: { xs: 4, md: 5 },
-                borderRadius: 3,
                 overflow: "hidden",
               }}
             >
@@ -275,9 +289,9 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                         position: "relative",
                         width: "100%",
                         height: { xs: 220, sm: 280, md: 340 },
-                        borderRadius: 3,
+                        border: NB_BORDER,
                         overflow: "hidden",
-                        bgcolor: "rgba(255,255,255,0.05)",
+                        bgcolor: SURFACE,
                       }}
                     >
                       <Image
@@ -305,22 +319,26 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             sx={{
               "& p": {
                 fontSize: { xs: "16px", md: "18px" },
-                color: "rgba(255,255,255,0.85)",
+                color: "rgba(17,17,17,0.85)",
                 lineHeight: 1.8,
                 mb: 3,
               },
               "& h2": {
+                fontFamily: "var(--font-display)",
+                fontWeight: 400,
+                textTransform: "uppercase",
                 fontSize: { xs: "22px", sm: "26px", md: "30px" },
-                fontWeight: 700,
-                color: "white",
+                color: INK,
                 mt: { xs: 5, md: 6 },
                 mb: { xs: 2, md: 3 },
                 lineHeight: 1.3,
               },
               "& h3": {
+                fontFamily: "var(--font-display)",
+                fontWeight: 400,
+                textTransform: "uppercase",
                 fontSize: { xs: "18px", sm: "20px", md: "24px" },
-                fontWeight: 700,
-                color: "white",
+                color: INK,
                 mt: { xs: 4, md: 5 },
                 mb: { xs: 1.5, md: 2 },
                 lineHeight: 1.3,
@@ -332,21 +350,24 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               "& figure img": {
                 width: "100%",
                 height: "auto",
-                borderRadius: 3,
+                border: NB_BORDER,
+                boxShadow: nbShadow(6),
                 display: "block",
               },
               "& figcaption": {
                 textAlign: "center",
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(17,17,17,0.6)",
                 fontSize: "14px",
-                mt: 1,
+                mt: 2,
               },
               "& a": {
-                color: "#E5C767",
+                color: INK,
+                fontWeight: 700,
                 textDecoration: "underline",
+                textDecorationThickness: "2px",
                 textUnderlineOffset: "3px",
                 "&:hover": {
-                  opacity: 0.8,
+                  bgcolor: ACCENT,
                 },
               },
               "& ul, & ol": {
@@ -354,10 +375,10 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 mb: 3,
                 "& li": {
                   fontSize: { xs: "16px", md: "18px" },
-                  color: "rgba(255,255,255,0.85)",
+                  color: "rgba(17,17,17,0.85)",
                   lineHeight: 1.8,
                   mb: 1,
-                  "&::marker": { color: "#E5C767" },
+                  "&::marker": { color: INK, fontWeight: 700 },
                 },
               },
             }}
@@ -375,10 +396,10 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              gap: 1,
+              gap: 1.5,
               mt: { xs: 4, md: 5 },
               pt: { xs: 3, md: 4 },
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderTop: NB_BORDER_THIN,
             }}
           >
             {post.tags.map((tag) => (
@@ -387,11 +408,12 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 sx={{
                   px: 2,
                   py: 0.5,
-                  borderRadius: 2,
-                  bgcolor: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  bgcolor: SURFACE,
+                  border: NB_BORDER_THIN,
+                  boxShadow: nbShadow(3),
                   fontSize: "13px",
-                  color: "rgba(255,255,255,0.6)",
+                  fontWeight: 700,
+                  color: INK,
                 }}
               >
                 {tag}
@@ -416,15 +438,15 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                 gap: "8px",
               }}
             >
-              <ArrowBackIcon
-                sx={{ fontSize: 18, color: "#E5C767" }}
-              />
+              <ArrowBackIcon sx={{ fontSize: 18, color: INK }} />
               <Typography
                 sx={{
                   fontSize: "15px",
-                  fontWeight: 600,
-                  color: "#E5C767",
-                  "&:hover": { textDecoration: "underline" },
+                  fontWeight: 700,
+                  color: INK,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  "&:hover": { bgcolor: ACCENT },
                 }}
               >
                 Back to all posts
@@ -432,52 +454,52 @@ export default function BlogPostContent({ slug }: { slug: string }) {
             </Link>
           </Box>
         </motion.div>
+      </Box>
 
-        {/* Contact CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+      {/* Contact CTA — dark section with accent seam */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
+      >
+        <Box
+          sx={{
+            bgcolor: INK,
+            borderTop: `4px solid ${ACCENT}`,
+            px: { xs: 2, md: 4 },
+            py: { xs: 6, md: 8 },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <Box
+          <Typography
+            variant="h2"
+            component="h2"
             sx={{
-              mt: { xs: 6, md: 8 },
-              pt: { xs: 5, md: 6 },
-              borderTop: "1px solid rgba(255,255,255,0.1)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              fontSize: { xs: "28px", sm: "36px", md: "44px" },
+              color: PAPER,
+              textAlign: "center",
+              mb: 1.5,
             }}
           >
-            <Typography
-              variant="h2"
-              component="h2"
-              sx={{
-                fontSize: { xs: "28px", sm: "36px", md: "44px" },
-                fontWeight: 800,
-                color: "white",
-                textAlign: "center",
-                mb: 1.5,
-              }}
-            >
-              Need Our Services?
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "16px", md: "18px" },
-                color: "rgba(255,255,255,0.6)",
-                textAlign: "center",
-                mb: { xs: 3, md: 4 },
-                maxWidth: 500,
-              }}
-            >
-              Tell us about your project and let&apos;s build something
-              together.
-            </Typography>
-            <ContactForm />
-          </Box>
-        </motion.div>
-      </Box>
+            Need Our Services?
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "16px", md: "18px" },
+              color: "rgba(243,237,226,0.75)",
+              textAlign: "center",
+              mb: { xs: 3, md: 4 },
+              maxWidth: 500,
+            }}
+          >
+            Tell us about your project and let&apos;s build something
+            together.
+          </Typography>
+          <ContactForm />
+        </Box>
+      </motion.div>
     </Box>
   );
 }

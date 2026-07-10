@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import AboutUs from "../components/AboutUs";
 import FoundersSection from "../components/FoundersSection";
 import Contact from "../components/Contact";
+import { ACCENT, INK } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "About Us | DripDome - Women-Owned Set Design Studio NYC",
@@ -44,7 +45,7 @@ export default function AboutUsPage() {
     <Box>
       <AboutUs />
       <FoundersSection />
-      <Box sx={{ bgcolor: "black", py: 10 }}>
+      <Box sx={{ bgcolor: INK, borderTop: `4px solid ${ACCENT}`, py: 10 }}>
         <Contact />
       </Box>
     </Box>

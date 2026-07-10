@@ -6,7 +6,15 @@ import Image from "next/image";
 import { Box, Typography, Chip } from "@mui/material";
 import { motion } from "framer-motion";
 import { blogPosts, getAllCategories } from "./data";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BORDER_THIN,
+  PAPER,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 export default function BlogContent() {
   const categories = getAllCategories();
@@ -16,8 +24,30 @@ export default function BlogContent() {
     ? blogPosts.filter((post) => post.category === activeCategory)
     : blogPosts;
 
+  const chipSx = (active: boolean) => ({
+    bgcolor: active ? ACCENT : SURFACE,
+    color: INK,
+    border: NB_BORDER_THIN,
+    borderRadius: 0,
+    boxShadow: active ? nbShadow(3) : "none",
+    fontWeight: 700,
+    fontSize: "14px",
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.04em",
+    transition: "transform 120ms ease, box-shadow 120ms ease",
+    "&:hover": {
+      bgcolor: active ? ACCENT : SURFACE,
+      transform: "translate(-2px, -2px)",
+      boxShadow: nbShadow(active ? 5 : 3),
+    },
+    "&:active": {
+      transform: "translate(2px, 2px)",
+      boxShadow: nbShadow(0),
+    },
+  });
+
   return (
-    <Box sx={{ bgcolor: "black", overflow: "hidden", minHeight: "100vh" }}>
+    <Box sx={{ bgcolor: PAPER, overflow: "hidden", minHeight: "100vh" }}>
       {/* Hero Section */}
       <Box
         sx={{
@@ -37,8 +67,7 @@ export default function BlogContent() {
             variant="h1"
             sx={{
               fontSize: { xs: "42px", sm: "64px", md: "80px", lg: "96px" },
-              fontWeight: 800,
-              color: "white",
+              color: INK,
               textAlign: "center",
               mb: { xs: 3, md: 4 },
               letterSpacing: "-0.02em",
@@ -47,7 +76,14 @@ export default function BlogContent() {
             THE{" "}
             <Box
               component="span"
-              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
+              sx={{
+                display: "inline-block",
+                bgcolor: ACCENT,
+                color: INK,
+                px: { xs: 1.5, md: 3 },
+                boxShadow: nbShadow(8),
+                transform: "rotate(-1.5deg)",
+              }}
             >
               BLOG
             </Box>
@@ -62,7 +98,7 @@ export default function BlogContent() {
           <Typography
             sx={{
               fontSize: { xs: "16px", sm: "18px", md: "22px" },
-              color: "rgba(255,255,255,0.85)",
+              color: INK,
               textAlign: "center",
               maxWidth: "900px",
               mx: "auto",
@@ -71,7 +107,7 @@ export default function BlogContent() {
           >
             Behind-the-scenes looks at our builds, fabrication deep dives, and
             insights from the{" "}
-            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
+            <Box component="span" sx={{ color: INK, fontWeight: 700 }}>
               DripDome
             </Box>{" "}
             studio.
@@ -99,47 +135,21 @@ export default function BlogContent() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              gap: 1,
+              gap: 1.5,
               justifyContent: "center",
             }}
           >
             <Chip
               label="All"
               onClick={() => setActiveCategory(null)}
-              sx={{
-                bgcolor: !activeCategory
-                  ? "#E5C767"
-                  : "rgba(255,255,255,0.08)",
-                color: "white",
-                fontWeight: 600,
-                fontSize: "14px",
-                "&:hover": {
-                  bgcolor: !activeCategory
-                    ? "#E5C767"
-                    : "rgba(255,255,255,0.15)",
-                },
-              }}
+              sx={chipSx(!activeCategory)}
             />
             {categories.map((category) => (
               <Chip
                 key={category}
                 label={category}
                 onClick={() => setActiveCategory(category)}
-                sx={{
-                  bgcolor:
-                    activeCategory === category
-                      ? "#E5C767"
-                      : "rgba(255,255,255,0.08)",
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  "&:hover": {
-                    bgcolor:
-                      activeCategory === category
-                        ? "#E5C767"
-                        : "rgba(255,255,255,0.15)",
-                  },
-                }}
+                sx={chipSx(activeCategory === category)}
               />
             ))}
           </Box>
@@ -174,25 +184,29 @@ export default function BlogContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
+              style={{ height: "100%" }}
             >
               <Link
                 href={`/blog/${post.slug}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", display: "block", height: "100%" }}
               >
                 <Box
                   sx={{
-                    borderRadius: 3,
-                    overflow: "hidden",
-                    bgcolor: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    transition: "all 0.3s ease",
+                    bgcolor: SURFACE,
+                    border: NB_BORDER,
+                    borderRadius: 0,
+                    boxShadow: nbShadow(6),
+                    transition: "transform 120ms ease, box-shadow 120ms ease",
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
                     "&:hover": {
-                      bgcolor: "rgba(255,255,255,0.06)",
-                      borderColor: "rgba(229,199,103,0.5)",
-                      transform: "translateY(-4px)",
+                      transform: "translate(-2px, -2px)",
+                      boxShadow: nbShadow(8),
+                    },
+                    "&:active": {
+                      transform: "translate(2px, 2px)",
+                      boxShadow: nbShadow(0),
                     },
                   }}
                 >
@@ -202,7 +216,8 @@ export default function BlogContent() {
                       position: "relative",
                       width: "100%",
                       height: 200,
-                      bgcolor: "rgba(255,255,255,0.05)",
+                      bgcolor: PAPER,
+                      borderBottom: NB_BORDER,
                     }}
                   >
                     <Image
@@ -236,7 +251,11 @@ export default function BlogContent() {
                         sx={{
                           fontSize: "12px",
                           fontWeight: 700,
-                          color: "#E5C767",
+                          bgcolor: ACCENT,
+                          color: INK,
+                          border: NB_BORDER_THIN,
+                          px: 1,
+                          py: 0.25,
                           letterSpacing: "0.1em",
                           textTransform: "uppercase",
                         }}
@@ -246,7 +265,7 @@ export default function BlogContent() {
                       <Typography
                         sx={{
                           fontSize: "12px",
-                          color: "rgba(255,255,255,0.5)",
+                          color: "rgba(17,17,17,0.6)",
                         }}
                       >
                         {post.readingTime}
@@ -259,7 +278,7 @@ export default function BlogContent() {
                       sx={{
                         fontSize: { xs: "18px", md: "20px" },
                         fontWeight: 700,
-                        color: "white",
+                        color: INK,
                         lineHeight: 1.3,
                         mb: 1.5,
                       }}
@@ -271,7 +290,7 @@ export default function BlogContent() {
                     <Typography
                       sx={{
                         fontSize: { xs: "14px", md: "15px" },
-                        color: "rgba(255,255,255,0.7)",
+                        color: "rgba(17,17,17,0.75)",
                         lineHeight: 1.6,
                         flex: 1,
                       }}
@@ -285,7 +304,7 @@ export default function BlogContent() {
                       dateTime={post.date}
                       sx={{
                         fontSize: "13px",
-                        color: "rgba(255,255,255,0.4)",
+                        color: "rgba(17,17,17,0.55)",
                         mt: 2,
                       }}
                     >

@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
+import { ACCENT, INK, PAPER } from "@/lib/theme";
 import Footer from "../ui/Footer";
 import ContactForm from "./ContactForm";
 
@@ -13,6 +14,10 @@ export default function Contact() {
           flexDirection: "column",
           alignItems: "center",
           px: { xs: 4, md: 8 },
+          py: { xs: 6, md: 8 },
+          bgcolor: PAPER,
+          borderTop: `4px solid ${ACCENT}`,
+          borderBottom: `4px solid ${INK}`,
         }}
       >
         <Typography
@@ -20,11 +25,10 @@ export default function Contact() {
           component="h2"
           sx={{
             fontSize: { xs: "50px", md: "80px", lg: "90px" },
-            fontWeight: "bold",
             marginBottom: "15px",
             justifyContent: "center",
             display: "flex",
-            color: "white",
+            color: INK,
             whiteSpace: "nowrap",
           }}
         >
@@ -40,7 +44,7 @@ export default function Contact() {
             textAlign: "center",
             maxWidth: 900,
             marginBottom: "30px",
-            color: "white",
+            color: INK,
           }}
         >
           Big or small, every idea has the potential to shine. Tell us about

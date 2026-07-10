@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { GlareCard } from "@/components/ui/glare-card";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 const S3_BASE = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 
@@ -22,6 +22,7 @@ export default function OurServices() {
       id="services"
       sx={{
         width: "100%",
+        bgcolor: INK,
         mb: 2,
         px: { xs: 2, md: 8 },
       }}
@@ -42,37 +43,51 @@ export default function OurServices() {
         }}
       >
         {services.map((service) => (
-          <GlareCard key={service.label}>
-            <Box
+          <Box
+            key={service.label}
+            sx={{
+              width: "100%",
+              maxWidth: { xs: 160, sm: 200, md: 280, lg: 340, xl: 400 },
+              aspectRatio: "17 / 21",
+              border: `3px solid ${PAPER}`,
+              borderRadius: 0,
+              boxShadow: nbShadow(6, ACCENT),
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              p: 2,
+              backgroundImage: `url(${service.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              transition: "transform 120ms ease, box-shadow 120ms ease",
+              "&:hover": {
+                transform: "translate(-2px, -2px)",
+                boxShadow: nbShadow(8, ACCENT),
+              },
+              "&:active": {
+                transform: "translate(2px, 2px)",
+                boxShadow: nbShadow(0, ACCENT),
+              },
+            }}
+          >
+            <Typography
+              component="span"
               sx={{
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                p: 2,
-                backgroundImage: `url(${service.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                color: PAPER,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                fontSize: { xs: 14, sm: 18, md: 20 },
+                bgcolor: INK,
+                border: `2px solid ${PAPER}`,
+                boxShadow: nbShadow(3, ACCENT),
+                p: 1,
               }}
             >
-              <Typography
-                component="span"
-                sx={{
-                  color: "white",
-                  fontWeight: 800,
-                  letterSpacing: "0.12em",
-                  fontSize: { xs: 14, sm: 18, md: 20 },
-                  textShadow: "0 2px 8px rgba(0,0,0,0.8)",
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  p: 1,
-                }}
-              >
-                {service.label}
-              </Typography>
-            </Box>
-          </GlareCard>
+              {service.label}
+            </Typography>
+          </Box>
         ))}
       </Box>
     </Box>
