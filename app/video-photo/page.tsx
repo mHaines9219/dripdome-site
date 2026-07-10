@@ -7,6 +7,7 @@ import {
   Container,
   Typography,
 } from "@mui/material";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Video & Photo | DripDome - Set Design for Film & Photography NYC",
@@ -57,7 +58,7 @@ export default function VideoPhotoPage() {
     <Box
       component="section"
       id="work-gallery"
-      sx={{ py: 16, bgcolor: "grey.100" }}
+      sx={{ py: 16, bgcolor: INK }}
     >
       <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
         <Typography
@@ -65,9 +66,8 @@ export default function VideoPhotoPage() {
           component="h2"
           sx={{
             textAlign: "center",
-            color: "grey.900",
+            color: PAPER,
             mb: 4,
-            fontWeight: 800,
           }}
         >
           Our Work
@@ -75,7 +75,7 @@ export default function VideoPhotoPage() {
         <Typography
           variant="body1"
           component="p"
-          sx={{ textAlign: "center", color: "grey.700", mb: 8 }}
+          sx={{ textAlign: "center", color: "rgba(243,237,226,0.8)", mb: 8 }}
         >
           Explore some of the amazing projects we&apos;ve worked on.
         </Typography>
@@ -98,10 +98,15 @@ export default function VideoPhotoPage() {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                borderRadius: 2,
-                boxShadow: 3,
-                "&:hover .MuiCardMedia-root": { transform: "scale(1.08)" },
-                "&:hover .MuiCardContent-root": { opacity: 1 },
+                borderRadius: 0,
+                bgcolor: INK,
+                border: `3px solid ${PAPER}`,
+                boxShadow: nbShadow(6, ACCENT),
+                transition: "transform 120ms ease, box-shadow 120ms ease",
+                "&:hover": {
+                  transform: "translate(-2px, -2px)",
+                  boxShadow: nbShadow(8, ACCENT),
+                },
               }}
             >
               <CardMedia
@@ -111,25 +116,22 @@ export default function VideoPhotoPage() {
                 height={192}
                 sx={{
                   height: 192,
-                  transition: "transform 300ms ease",
                   objectFit: "cover",
                 }}
               />
               <CardContent
                 sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  bgcolor: "rgba(0,0,0,0.5)",
-                  color: "common.white",
+                  bgcolor: INK,
+                  borderTop: `2px solid ${PAPER}`,
+                  color: PAPER,
                   textAlign: "center",
                   py: 1,
-                  opacity: 0,
-                  transition: "opacity 300ms ease",
+                  "&:last-child": { pb: 1 },
                 }}
               >
-                <Typography variant="body2">{image.caption}</Typography>
+                <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                  {image.caption}
+                </Typography>
               </CardContent>
             </Card>
           ))}

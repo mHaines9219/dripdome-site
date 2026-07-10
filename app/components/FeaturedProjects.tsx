@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
 import { Autoplay, EffectCards } from "swiper/modules";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import { ACCENT, INK, PAPER, nbShadow } from "@/lib/theme";
 
 const sections = [
   {
@@ -73,7 +73,6 @@ const FeaturedProjects = () => {
         <Box
           key={index}
           sx={{
-            borderRadius: 4,
             pt: { md: 8, lg: 8 },
             mb: 6,
           }}
@@ -91,9 +90,9 @@ const FeaturedProjects = () => {
               width: "100%",
               gap: "1.5rem",
               overflow: "hidden",
-              border: "4px solid rgba(229, 199, 103, 0.3)",
-              borderRadius: "30px",
-              backgroundColor: "#121212",
+              border: `3px solid ${PAPER}`,
+              backgroundColor: INK,
+              boxShadow: nbShadow(8, ACCENT),
               paddingTop: {
                 xs: "20px",
                 sm: "20px",
@@ -148,7 +147,7 @@ const FeaturedProjects = () => {
                   perSlideOffset: 8,
                   perSlideRotate: 2,
                   rotate: true,
-                  slideShadows: true,
+                  slideShadows: false,
                 }}
                 modules={[EffectCards, Autoplay]}
                 style={{ width: "100%" }}
@@ -172,9 +171,9 @@ const FeaturedProjects = () => {
                           lg: "600px",
                         },
                         position: "relative",
-                        borderRadius: "15px",
                         overflow: "hidden",
-                        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
+                        bgcolor: INK,
+                        border: `3px solid ${PAPER}`,
                       }}
                     >
                       <Image
@@ -184,7 +183,6 @@ const FeaturedProjects = () => {
                         sizes="(max-width: 600px) 90vw, (max-width: 900px) 40vw, 40vw"
                         style={{
                           objectFit: "contain",
-                          borderRadius: "15px",
                         }}
                       />
                     </Box>
@@ -209,7 +207,7 @@ const FeaturedProjects = () => {
                   fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
                   mb: "1.5rem",
                   color: "white",
-                  "& span": BRAND_GRADIENT_TEXT_SX,
+                  "& span": { color: ACCENT },
                 }}
               >
                 {section.header}
@@ -218,7 +216,7 @@ const FeaturedProjects = () => {
                 variant="body1"
                 sx={{
                   fontSize: { xs: "14px", sm: "18px", md: "20px" },
-                  color: "#e0e0e0",
+                  color: "rgba(243,237,226,0.85)",
                 }}
               >
                 {section.blurb}

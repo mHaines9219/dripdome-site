@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3 } from "next/font/google";
+import { Archivo_Black, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
@@ -9,10 +9,17 @@ import ThemeRegistry from "./ThemeRegistry";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-const sourceSans = Source_Sans_3({
+const archivoBlack = Archivo_Black({
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-source-sans",
+  variable: "--font-display",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
 });
 
 export const metadata: Metadata = {
@@ -69,7 +76,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#F3EDE2",
 };
 
 export default function RootLayout({
@@ -78,7 +85,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sourceSans.variable}>
+    <html
+      lang="en"
+      className={`${archivoBlack.variable} ${spaceGrotesk.variable}`}
+    >
       <head>
         <Script
           id="google-ads-gtag"
@@ -99,7 +109,7 @@ gtag('config', 'AW-18099031816');`}
           </Script>
         )}
       </head>
-      <body className={sourceSans.className}>
+      <body className={spaceGrotesk.className}>
         {GTM_ID && (
           <noscript>
             <iframe

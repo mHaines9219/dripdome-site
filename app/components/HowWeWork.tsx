@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import { BRAND_GRADIENT } from "@/lib/theme";
+import { ACCENT, INK, NB_BUTTON_SX, PAPER, nbShadow } from "@/lib/theme";
 
 const steps = [
   {
@@ -43,13 +43,15 @@ export default function HowWeWork() {
         variant="h2"
         sx={{
           fontSize: { xs: "28px", sm: "40px", lg: "50px" },
-          fontWeight: "bold",
           color: "white",
           textAlign: "center",
           mb: { xs: 4, md: 6 },
         }}
       >
-        How We Work
+        How We{" "}
+        <Box component="span" sx={{ color: ACCENT }}>
+          Work
+        </Box>
       </Typography>
 
       <Box
@@ -80,23 +82,24 @@ export default function HowWeWork() {
                 pb: { xs: 3, md: 0 },
               }}
             >
-              {/* Step number circle */}
+              {/* Step number block */}
               <Box
                 sx={{
-                  width: 48,
-                  height: 48,
-                  minWidth: 48,
-                  borderRadius: "50%",
-                  border: "2px solid #E5C767",
+                  width: 52,
+                  height: 52,
+                  minWidth: 52,
+                  bgcolor: ACCENT,
+                  border: `2px solid ${PAPER}`,
+                  boxShadow: nbShadow(4, PAPER),
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  mb: { md: 2 },
+                  mb: { md: 2.5 },
                 }}
               >
                 <Typography
                   sx={{
-                    color: "#E5C767",
+                    color: INK,
                     fontWeight: 800,
                     fontSize: "16px",
                   }}
@@ -112,10 +115,10 @@ export default function HowWeWork() {
                     display: { xs: "none", md: "block" },
                     position: "absolute",
                     top: 24,
-                    left: "calc(50% + 30px)",
-                    width: "calc(100% - 60px)",
-                    height: "2px",
-                    bgcolor: "rgba(229,199,103,0.25)",
+                    left: "calc(50% + 34px)",
+                    width: "calc(100% - 68px)",
+                    height: "3px",
+                    bgcolor: PAPER,
                   }}
                 />
               )}
@@ -126,11 +129,11 @@ export default function HowWeWork() {
                   sx={{
                     display: { xs: "block", md: "none" },
                     position: "absolute",
-                    top: 48,
-                    left: 23,
-                    width: "2px",
-                    height: "calc(100% - 48px)",
-                    bgcolor: "rgba(229,199,103,0.25)",
+                    top: 54,
+                    left: 24,
+                    width: "3px",
+                    height: "calc(100% - 54px)",
+                    bgcolor: PAPER,
                   }}
                 />
               )}
@@ -150,7 +153,7 @@ export default function HowWeWork() {
                 <Typography
                   sx={{
                     fontSize: { xs: "13px", sm: "14px" },
-                    color: "rgba(255,255,255,0.6)",
+                    color: "rgba(243,237,226,0.7)",
                   }}
                 >
                   {step.description}
@@ -168,20 +171,11 @@ export default function HowWeWork() {
           variant="contained"
           disableElevation
           sx={{
-            borderRadius: 999,
             px: 3,
-            py: 1.1,
-            fontWeight: 800,
+            py: 1.25,
             letterSpacing: "0.08em",
             fontSize: "13px",
-            color: "black",
-            background: BRAND_GRADIENT,
-            boxShadow: "0 10px 30px rgba(229,199,103,0.25)",
-            "&:hover": {
-              background: BRAND_GRADIENT,
-              filter: "brightness(0.92)",
-              boxShadow: "0 12px 34px rgba(229,199,103,0.35)",
-            },
+            ...NB_BUTTON_SX,
           }}
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();

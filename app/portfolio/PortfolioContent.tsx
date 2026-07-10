@@ -6,7 +6,7 @@ import Contact from "../components/Contact";
 import { motion } from "framer-motion";
 import FeaturedProjects from "../components/FeaturedProjects";
 import PressSection from "../components/PressSection";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import { ACCENT, INK } from "@/lib/theme";
 
 export default function PortfolioContent() {
   return (
@@ -14,7 +14,7 @@ export default function PortfolioContent() {
       sx={{
         minHeight: "100vh",
         width: "100%",
-        bgcolor: "black",
+        bgcolor: INK,
         px: 2,
         pt: { xs: 8, md: 6 },
         overflowX: "hidden",
@@ -32,7 +32,6 @@ export default function PortfolioContent() {
             color="white"
             sx={{
               fontSize: { xs: "45px", sm: "95px", lg: "96px" },
-              fontWeight: "bold",
               marginBottom: { xs: "20px", md: "30px" },
               textAlign: "center",
             }}
@@ -76,7 +75,6 @@ export default function PortfolioContent() {
                 color="white"
                 sx={{
                   fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
                   display: "inline",
                 }}
               >
@@ -87,8 +85,7 @@ export default function PortfolioContent() {
                 component="span"
                 sx={{
                   fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
-                  ...BRAND_GRADIENT_TEXT_SX,
+                  color: ACCENT,
                 }}
               >
                 PROJECTS
@@ -119,7 +116,7 @@ export default function PortfolioContent() {
             mt: 8,
             py: 12,
             px: { xs: 2, md: 8 },
-            bgcolor: "black",
+            bgcolor: INK,
             color: "white",
           }}
         >

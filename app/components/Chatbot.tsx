@@ -7,6 +7,15 @@ import { Box, IconButton, Typography, TextField, Chip } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BORDER_THIN,
+  PAPER,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 const QUICK_QUESTIONS = [
   "What services does DripDome offer?",
@@ -75,11 +84,21 @@ export default function Chatbot() {
             zIndex: 1300,
             width: 56,
             height: 56,
-            bgcolor: "#E5C767",
-            color: "#FFFFFF",
-            boxShadow: "0 4px 20px rgba(229,199,103,0.4)",
-            "&:hover": { bgcolor: "#111111" },
-            transition: "background-color 0.2s",
+            borderRadius: 0,
+            bgcolor: ACCENT,
+            color: INK,
+            border: NB_BORDER,
+            boxShadow: nbShadow(4),
+            transition: "transform 120ms ease, box-shadow 120ms ease",
+            "&:hover": {
+              bgcolor: ACCENT,
+              transform: "translate(-2px, -2px)",
+              boxShadow: nbShadow(6),
+            },
+            "&:active": {
+              transform: "translate(2px, 2px)",
+              boxShadow: nbShadow(0),
+            },
           }}
         >
           <ChatIcon />
@@ -98,9 +117,10 @@ export default function Chatbot() {
             maxHeight: { xs: "70vh", sm: 520 },
             display: "flex",
             flexDirection: "column",
-            bgcolor: "#FFFFFF",
-            borderRadius: 3,
-            boxShadow: "0 8px 40px rgba(0,0,0,0.2)",
+            bgcolor: SURFACE,
+            border: NB_BORDER,
+            borderRadius: 0,
+            boxShadow: nbShadow(8),
             overflow: "hidden",
           }}
         >
@@ -112,8 +132,9 @@ export default function Chatbot() {
               justifyContent: "space-between",
               px: 2,
               py: 1.5,
-              bgcolor: "#111111",
-              color: "#FFFFFF",
+              bgcolor: INK,
+              color: PAPER,
+              borderBottom: `3px solid ${ACCENT}`,
               flexShrink: 0,
             }}
           >
@@ -121,7 +142,7 @@ export default function Chatbot() {
               <Typography sx={{ fontWeight: 700, fontSize: 14, letterSpacing: "0.05em" }}>
                 NOVA
               </Typography>
-              <Typography sx={{ fontSize: 10, color: "#999", letterSpacing: "0.03em" }}>
+              <Typography sx={{ fontSize: 10, color: "rgba(243,237,226,0.7)", letterSpacing: "0.03em" }}>
                 DripDome&apos;s AI Assistant
               </Typography>
             </Box>
@@ -129,7 +150,7 @@ export default function Chatbot() {
               onClick={() => setOpen(false)}
               size="small"
               aria-label="Close chat"
-              sx={{ color: "#FFFFFF", "&:hover": { color: "#E5C767" } }}
+              sx={{ color: PAPER, borderRadius: 0, "&:hover": { color: ACCENT } }}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
@@ -165,12 +186,14 @@ export default function Chatbot() {
                         height: "auto",
                         py: 0.5,
                         "& .MuiChip-label": { whiteSpace: "normal", lineHeight: 1.3 },
-                        bgcolor: "#F5F5F5",
-                        color: "#111111",
-                        border: "1px solid #E0E0E0",
+                        bgcolor: SURFACE,
+                        color: INK,
+                        border: NB_BORDER_THIN,
+                        borderRadius: 0,
+                        fontWeight: 700,
                         cursor: "pointer",
-                        "&:hover": { bgcolor: "#111111", color: "#FFFFFF" },
-                        transition: "all 0.15s",
+                        "&:hover": { bgcolor: ACCENT, color: INK },
+                        transition: "background-color 0.15s, color 0.15s",
                       }}
                     />
                   ))}
@@ -197,9 +220,9 @@ export default function Chatbot() {
                     sx={{
                       px: 1.5,
                       py: 1,
-                      borderRadius: 2,
-                      bgcolor: m.role === "user" ? "#111111" : "#F5F5F5",
-                      color: m.role === "user" ? "#FFFFFF" : "#111111",
+                      border: NB_BORDER_THIN,
+                      bgcolor: m.role === "user" ? INK : PAPER,
+                      color: m.role === "user" ? PAPER : INK,
                     }}
                   >
                     <Typography sx={{ fontSize: 13, lineHeight: 1.5, whiteSpace: "pre-wrap" }}>
@@ -214,7 +237,7 @@ export default function Chatbot() {
                 <Typography sx={{ fontSize: 10, color: "#999", mb: 0.25, ml: 0.5 }}>
                   Nova
                 </Typography>
-                <Box sx={{ px: 1.5, py: 1, borderRadius: 2, bgcolor: "#F5F5F5" }}>
+                <Box sx={{ px: 1.5, py: 1, border: NB_BORDER_THIN, bgcolor: PAPER, color: INK }}>
                   <Typography sx={{ fontSize: 13, lineHeight: 1.5 }}>
                     {errorMsg}
                   </Typography>
@@ -226,7 +249,7 @@ export default function Chatbot() {
                 <Typography sx={{ fontSize: 10, color: "#999", mb: 0.25, ml: 0.5 }}>
                   Nova
                 </Typography>
-                <Box sx={{ px: 1.5, py: 1, borderRadius: 2, bgcolor: "#F5F5F5" }}>
+                <Box sx={{ px: 1.5, py: 1, border: NB_BORDER_THIN, bgcolor: PAPER }}>
                   <Typography sx={{ fontSize: 13, color: "#888" }}>...</Typography>
                 </Box>
               </Box>
@@ -244,7 +267,7 @@ export default function Chatbot() {
               gap: 1,
               px: 1.5,
               py: 1.5,
-              borderTop: "1px solid #E0E0E0",
+              borderTop: NB_BORDER_THIN,
               flexShrink: 0,
             }}
           >
@@ -258,7 +281,13 @@ export default function Chatbot() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   fontSize: 13,
-                  borderRadius: 2,
+                  borderRadius: 0,
+                  "& fieldset": { border: NB_BORDER_THIN },
+                  "&:hover fieldset": { border: NB_BORDER_THIN },
+                  "&.Mui-focused fieldset": {
+                    border: `2px solid ${ACCENT}`,
+                  },
+                  "&.Mui-focused": { boxShadow: nbShadow(3) },
                 },
               }}
             />
@@ -267,8 +296,9 @@ export default function Chatbot() {
               disabled={isLoading || !input.trim()}
               aria-label="Send message"
               sx={{
-                color: "#111111",
-                "&:hover": { color: "#E5C767" },
+                color: INK,
+                borderRadius: 0,
+                "&:hover": { color: ACCENT },
                 "&.Mui-disabled": { color: "#CCC" },
               }}
             >

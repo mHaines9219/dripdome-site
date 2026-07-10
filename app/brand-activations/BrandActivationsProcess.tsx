@@ -5,7 +5,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import BuildIcon from "@mui/icons-material/Build";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { motion } from "framer-motion";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import { ACCENT, INK, NB_BORDER, NB_CARD_SX, PAPER, nbShadow } from "@/lib/theme";
 
 const STEPS = [
   {
@@ -29,8 +29,9 @@ export default function BrandActivationsProcess() {
   return (
     <Box
       sx={{
-        bgcolor: "black",
-        color: "white",
+        bgcolor: PAPER,
+        color: INK,
+        borderBottom: `4px solid ${ACCENT}`,
         px: { xs: 3, md: 8 },
         py: { xs: 8, md: 12 },
       }}
@@ -41,21 +42,20 @@ export default function BrandActivationsProcess() {
           component="h2"
           sx={{
             fontSize: { xs: "32px", md: "50px", lg: "60px" },
-            fontWeight: "bold",
             mb: 2,
           }}
         >
-          <Box component="span" sx={{ color: "white" }}>
+          <Box component="span" sx={{ color: INK }}>
             EVERYTHING UNDER{" "}
           </Box>
-          <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
+          <Box component="span" sx={{ color: ACCENT }}>
             ONE ROOF
           </Box>
         </Typography>
         <Typography
           sx={{
             fontSize: { xs: "16px", md: "20px" },
-            color: "rgba(255,255,255,0.8)",
+            color: "rgba(17,17,17,0.75)",
             maxWidth: 720,
             mx: "auto",
             mb: { xs: 6, md: 8 },
@@ -84,10 +84,8 @@ export default function BrandActivationsProcess() {
               >
                 <Box
                   sx={{
+                    ...NB_CARD_SX,
                     p: { xs: 3, md: 4 },
-                    border: "1px solid rgba(229,199,103,0.2)",
-                    borderRadius: 3,
-                    bgcolor: "rgba(229,199,103,0.04)",
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
@@ -95,7 +93,21 @@ export default function BrandActivationsProcess() {
                     textAlign: "center",
                   }}
                 >
-                  <Icon sx={{ fontSize: 48, color: "#E5C767", mb: 2 }} />
+                  <Box
+                    sx={{
+                      width: 72,
+                      height: 72,
+                      bgcolor: ACCENT,
+                      border: NB_BORDER,
+                      boxShadow: nbShadow(4),
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mb: 2.5,
+                    }}
+                  >
+                    <Icon sx={{ fontSize: 40, color: INK }} />
+                  </Box>
                   <Typography
                     sx={{
                       fontSize: { xs: "20px", md: "24px" },
@@ -109,7 +121,7 @@ export default function BrandActivationsProcess() {
                   <Typography
                     sx={{
                       fontSize: { xs: "15px", md: "16px" },
-                      color: "rgba(255,255,255,0.8)",
+                      color: "rgba(17,17,17,0.75)",
                     }}
                   >
                     {step.desc}

@@ -2,6 +2,7 @@
 
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { ACCENT, PAPER } from "@/lib/theme";
 
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com/nu_logo";
 
@@ -40,10 +41,6 @@ function LogoMarquee() {
       sx={{
         overflow: "hidden",
         width: "100%",
-        maskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
       }}
     >
       <Box
@@ -65,9 +62,6 @@ function LogoMarquee() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              opacity: 0.7,
-              transition: "opacity 0.3s",
-              "&:hover": { opacity: 1 },
             }}
           >
             <Image
@@ -96,15 +90,18 @@ export function TrustPress() {
     >
       <Box sx={{ maxWidth: 900, mx: "auto" }}>
         <Typography
+          variant="h2"
           sx={{
             fontSize: { xs: "24px", sm: "40px", lg: "50px" },
-            fontWeight: "bold",
             color: "white",
             textAlign: "center",
             mb: { xs: 2, md: 3 },
           }}
         >
-          In the Press
+          In the{" "}
+          <Box component="span" sx={{ color: ACCENT }}>
+            Press
+          </Box>
         </Typography>
         <Box
           sx={{
@@ -122,18 +119,14 @@ export function TrustPress() {
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                color: "rgba(255,255,255,0.6)",
+                color: PAPER,
                 fontSize: { xs: "14px", sm: "16px", md: "18px" },
                 textDecoration: "none",
                 letterSpacing: "0.04em",
-                transition: "color 0.2s",
-                "&:hover": { color: "#E5C767" },
+                "&:hover": { color: ACCENT, "& span": { color: ACCENT } },
               }}
             >
-              <Box
-                component="span"
-                sx={{ fontWeight: 700, color: "rgba(255,255,255,0.85)" }}
-              >
+              <Box component="span" sx={{ fontWeight: 700, color: "white" }}>
                 {item.outlet}
               </Box>
               {" — "}
@@ -160,13 +153,15 @@ export default function TrustWall() {
         variant="h2"
         sx={{
           fontSize: { xs: "24px", sm: "40px", lg: "50px" },
-          fontWeight: "bold",
           color: "white",
           textAlign: "center",
           mb: { xs: 3, md: 5 },
         }}
       >
-        Trusted By
+        Trusted{" "}
+        <Box component="span" sx={{ color: ACCENT }}>
+          By
+        </Box>
       </Typography>
 
       <LogoMarquee />

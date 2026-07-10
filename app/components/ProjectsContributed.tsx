@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { INK } from "@/lib/theme";
 
 export default function ProjectsContributed() {
   return (
@@ -7,7 +8,7 @@ export default function ProjectsContributed() {
       sx={{
         zIndex: 10,
         width: "100%",
-        // border: "1px solid white",
+        bgcolor: INK,
         mb: 2,
         px: { xs: 2, md: 8 },
       }}
@@ -18,7 +19,6 @@ export default function ProjectsContributed() {
         color="white"
         sx={{
           fontSize: { xs: "24px", sm: "45px", lg: "50px" },
-          fontWeight: "bold",
           marginBottom: "15px",
           paddingLeft: "10px",
           paddingRight: "10px",
@@ -55,7 +55,7 @@ export default function ProjectsContributed() {
               width: "100%",
               maxWidth: { xs: 100, sm: 150, md: 200, lg: 250 },
               aspectRatio: "1 / 1",
-              borderRadius: 4,
+              borderRadius: 0,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

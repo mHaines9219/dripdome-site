@@ -5,7 +5,15 @@ import { Box, Typography, Collapse, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Contact from "../components/Contact";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  ACCENT,
+  INK,
+  NB_BORDER,
+  NB_BORDER_THIN,
+  PAPER,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 const services = [
   {
@@ -173,19 +181,18 @@ function ServiceCard({
           cursor: "pointer",
           position: "relative",
           p: { xs: 2.5, md: 3.5 },
-          borderRadius: 3,
-          bgcolor: "rgba(255,255,255,0.03)",
-          border: "1px solid",
-          borderColor: isExpanded
-            ? "rgba(229,199,103,0.5)"
-            : "rgba(255,255,255,0.1)",
-          transition: "all 0.3s ease",
+          borderRadius: 0,
+          bgcolor: SURFACE,
+          border: NB_BORDER,
+          boxShadow: isExpanded ? nbShadow(6) : nbShadow(4),
+          transition: "transform 120ms ease, box-shadow 120ms ease",
           "&:hover": {
-            bgcolor: "rgba(255,255,255,0.06)",
-            borderColor: isExpanded
-              ? "rgba(229,199,103,0.7)"
-              : "rgba(255,255,255,0.2)",
-            transform: "translateY(-2px)",
+            transform: "translate(-2px, -2px)",
+            boxShadow: nbShadow(6),
+          },
+          "&:active": {
+            transform: "translate(2px, 2px)",
+            boxShadow: nbShadow(0),
           },
         }}
       >
@@ -199,22 +206,25 @@ function ServiceCard({
         >
           <Box sx={{ flex: 1 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}>
-              <Typography
+              <Box
                 sx={{
+                  px: 1,
+                  py: 0.25,
+                  bgcolor: ACCENT,
+                  border: NB_BORDER_THIN,
                   fontSize: { xs: "12px", md: "14px" },
                   fontWeight: 700,
-                  color: "#E5C767",
+                  color: INK,
                   letterSpacing: "0.1em",
                 }}
               >
                 {service.number}
-              </Typography>
+              </Box>
               <Typography
                 variant="h3"
                 sx={{
                   fontSize: { xs: "18px", sm: "22px", md: "26px" },
-                  fontWeight: 700,
-                  color: "white",
+                  color: INK,
                   lineHeight: 1.2,
                 }}
               >
@@ -224,7 +234,7 @@ function ServiceCard({
             <Typography
               sx={{
                 fontSize: { xs: "14px", md: "16px" },
-                color: "rgba(255,255,255,0.7)",
+                color: "rgba(17,17,17,0.75)",
                 lineHeight: 1.6,
               }}
             >
@@ -234,10 +244,13 @@ function ServiceCard({
           <IconButton
             size="small"
             sx={{
-              color: "rgba(255,255,255,0.5)",
+              color: INK,
+              borderRadius: 0,
+              border: NB_BORDER_THIN,
+              bgcolor: isExpanded ? ACCENT : SURFACE,
               transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
               transition: "transform 0.3s ease",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
+              "&:hover": { bgcolor: ACCENT },
             }}
           >
             <ExpandMoreIcon />
@@ -249,7 +262,7 @@ function ServiceCard({
             sx={{
               mt: 2.5,
               pt: 2.5,
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              borderTop: NB_BORDER_THIN,
             }}
           >
             <Box
@@ -267,11 +280,11 @@ function ServiceCard({
                   component="li"
                   key={idx}
                   sx={{
-                    color: "rgba(255,255,255,0.85)",
+                    color: "rgba(17,17,17,0.85)",
                     fontSize: { xs: "13px", md: "15px" },
                     lineHeight: 1.6,
                     "&::marker": {
-                      color: "#E5C767",
+                      color: ACCENT,
                     },
                   }}
                 >
@@ -294,7 +307,7 @@ export default function ServicesContent() {
   };
 
   return (
-    <Box sx={{ bgcolor: "black", overflow: "hidden", minHeight: "100vh" }}>
+    <Box sx={{ bgcolor: INK, overflow: "hidden", minHeight: "100vh" }}>
       {/* Hero Section */}
       <Box
         sx={{
@@ -314,7 +327,6 @@ export default function ServicesContent() {
             variant="h1"
             sx={{
               fontSize: { xs: "42px", sm: "64px", md: "80px", lg: "96px" },
-              fontWeight: 800,
               color: "white",
               textAlign: "center",
               mb: { xs: 3, md: 4 },
@@ -324,7 +336,14 @@ export default function ServicesContent() {
             WHAT WE{" "}
             <Box
               component="span"
-              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
+              sx={{
+                display: "inline-block",
+                bgcolor: ACCENT,
+                color: INK,
+                px: { xs: 1.5, md: 2.5 },
+                boxShadow: nbShadow(8),
+                transform: "rotate(-1.5deg)",
+              }}
             >
               DO
             </Box>
@@ -348,7 +367,7 @@ export default function ServicesContent() {
             }}
           >
             At{" "}
-            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
+            <Box component="span" sx={{ color: ACCENT, fontWeight: 700 }}>
               Drip Dome Productions
             </Box>
             , we bring ideas to life through design, fabrication, and
@@ -359,132 +378,131 @@ export default function ServicesContent() {
         </motion.div>
       </Box>
 
-      {/* Core Services Header */}
-      <Box sx={{ maxWidth: "1200px", mx: "auto", px: { xs: 2, md: 6 } }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              mb: { xs: 3, md: 4 },
-            }}
+      {/* Services Section (paper) */}
+      <Box
+        sx={{
+          bgcolor: PAPER,
+          borderTop: `4px solid ${ACCENT}`,
+          borderBottom: `4px solid ${ACCENT}`,
+          py: { xs: 5, md: 8 },
+        }}
+      >
+        {/* Core Services Header */}
+        <Box sx={{ maxWidth: "1200px", mx: "auto", px: { xs: 2, md: 6 } }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
             <Box
               sx={{
-                height: "2px",
-                flex: 1,
-                background:
-                  "linear-gradient(90deg, transparent, rgba(229,199,103,0.5))",
-              }}
-            />
-            <Typography
-              sx={{
-                fontSize: { xs: "12px", md: "14px" },
-                fontWeight: 700,
-                color: "#E5C767",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                mb: { xs: 3, md: 4 },
               }}
             >
-              Our Core Services
-            </Typography>
-            <Box
-              sx={{
-                height: "2px",
-                flex: 1,
-                background:
-                  "linear-gradient(90deg, rgba(229,199,103,0.5), transparent)",
-              }}
-            />
-          </Box>
-        </motion.div>
-      </Box>
+              <Box sx={{ height: "3px", flex: 1, bgcolor: INK }} />
+              <Typography
+                sx={{
+                  fontSize: { xs: "12px", md: "14px" },
+                  fontWeight: 700,
+                  color: INK,
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Our Core Services
+              </Typography>
+              <Box sx={{ height: "3px", flex: 1, bgcolor: INK }} />
+            </Box>
+          </motion.div>
+        </Box>
 
-      {/* Services Grid */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
-        }}
-      >
+        {/* Services Grid */}
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: { xs: 2, md: 3 },
+            maxWidth: "1200px",
+            mx: "auto",
+            px: { xs: 2, md: 6 },
+            pb: { xs: 6, md: 10 },
           }}
         >
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.number}
-              service={service}
-              index={index}
-              isExpanded={expandedIndex === index}
-              onToggle={() => handleToggle(index)}
-            />
-          ))}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+              gap: { xs: 2, md: 3 },
+            }}
+          >
+            {services.map((service, index) => (
+              <ServiceCard
+                key={service.number}
+                service={service}
+                index={index}
+                isExpanded={expandedIndex === index}
+                onToggle={() => handleToggle(index)}
+              />
+            ))}
+          </Box>
+        </Box>
+
+        {/* CTA Section */}
+        <Box
+          sx={{
+            maxWidth: "1200px",
+            mx: "auto",
+            px: { xs: 2, md: 6 },
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            <Box
+              sx={{
+                p: { xs: 4, md: 6 },
+                borderRadius: 0,
+                bgcolor: INK,
+                border: NB_BORDER,
+                boxShadow: nbShadow(8, ACCENT),
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: "24px", sm: "32px", md: "40px" },
+                  color: "white",
+                  mb: 2,
+                }}
+              >
+                Ready to Build Something Amazing?
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: "14px", md: "18px" },
+                  color: "rgba(255,255,255,0.8)",
+                  maxWidth: "600px",
+                  mx: "auto",
+                }}
+              >
+                From the first spark of an idea to the final reveal, we handle
+                every detail. Let&apos;s create something unforgettable
+                together.
+              </Typography>
+            </Box>
+          </motion.div>
         </Box>
       </Box>
 
-      {/* CTA Section */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <Box
-            sx={{
-              p: { xs: 4, md: 6 },
-              borderRadius: 4,
-              background:
-                "linear-gradient(135deg, rgba(229,199,103,0.1) 0%, rgba(59,130,246,0.1) 100%)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "24px", sm: "32px", md: "40px" },
-                fontWeight: 700,
-                color: "white",
-                mb: 2,
-              }}
-            >
-              Ready to Build Something Amazing?
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "18px" },
-                color: "rgba(255,255,255,0.7)",
-                maxWidth: "600px",
-                mx: "auto",
-              }}
-            >
-              From the first spark of an idea to the final reveal, we handle
-              every detail. Let&apos;s create something unforgettable together.
-            </Typography>
-          </Box>
-        </motion.div>
-      </Box>
-
       {/* Contact Section */}
-      <Box component="section" id="contact" sx={{ py: { xs: 6, md: 10 } }}>
+      <Box
+        component="section"
+        id="contact"
+        sx={{ bgcolor: INK, py: { xs: 6, md: 10 } }}
+      >
         <Contact />
       </Box>
     </Box>

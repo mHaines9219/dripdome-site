@@ -4,7 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  ACCENT,
+  INK,
+  NB_CARD_DARK_SX,
+  PAPER,
+  POP,
+  SURFACE,
+  nbShadow,
+} from "@/lib/theme";
 
 // Metrics below reflect real numbers where available. LESGC reach is estimated
 // (see note field on the hero). Southside has no quantitative data yet, so the
@@ -45,7 +53,7 @@ type CaseStudy = {
   stats?: StatTile[];
 };
 
-const DONUT_COLORS = ["#E5C767", "#E89B3C", "#C9A227", "#D97706"];
+const DONUT_COLORS = [ACCENT, POP, PAPER, SURFACE];
 
 const CASE_STUDIES: CaseStudy[] = [
   {
@@ -188,7 +196,7 @@ function HeroMetricView({
     fontWeight: 900,
     lineHeight: 1,
     letterSpacing: "-0.03em",
-    ...BRAND_GRADIENT_TEXT_SX,
+    color: ACCENT,
   } as const;
 
   const count = useCountUp(
@@ -214,8 +222,8 @@ function HeroMetricView({
             ...headlineSx,
             textDecoration: "none",
             display: "inline-block",
-            transition: "filter 0.2s",
-            "&:hover": { filter: "brightness(1.1)" },
+            transition: "color 0.2s",
+            "&:hover": { color: POP },
           }}
         >
           {metric.value}
@@ -301,7 +309,7 @@ function DonutChart({
             cy={center}
             r={radius}
             fill="none"
-            stroke="rgba(255,255,255,0.08)"
+            stroke="#333333"
             strokeWidth={strokeWidth}
           />
           {arcs.map((arc) => (
@@ -350,7 +358,7 @@ function DonutChart({
                 width: 10,
                 height: 10,
                 bgcolor: arc.color,
-                borderRadius: "2px",
+                border: `1px solid ${PAPER}`,
                 flexShrink: 0,
               }}
             />
@@ -385,9 +393,10 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
           key={s.label}
           sx={{
             p: 2,
-            border: "1px solid rgba(229,199,103,0.25)",
-            borderRadius: 2,
-            bgcolor: "rgba(229,199,103,0.04)",
+            border: `2px solid ${PAPER}`,
+            borderRadius: 0,
+            bgcolor: INK,
+            boxShadow: nbShadow(3, ACCENT),
             textAlign: "center",
           }}
         >
@@ -395,7 +404,7 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
             sx={{
               fontSize: { xs: "22px", md: "28px" },
               fontWeight: 800,
-              ...BRAND_GRADIENT_TEXT_SX,
+              color: ACCENT,
             }}
           >
             {s.value}
@@ -426,11 +435,8 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Box
       sx={{
+        ...NB_CARD_DARK_SX,
         p: { xs: 2.5, md: 4 },
-        border: "1px solid rgba(229,199,103,0.15)",
-        borderRadius: "24px",
-        background:
-          "linear-gradient(180deg, rgba(229,199,103,0.03) 0%, rgba(0,0,0,0) 100%)",
       }}
     >
       <Box
@@ -450,10 +456,11 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
             aspectRatio: study.youtubeId
               ? "16 / 9"
               : { xs: "4 / 3", md: "5 / 4" },
-            borderRadius: "18px",
+            border: `3px solid ${PAPER}`,
+            borderRadius: 0,
             overflow: "hidden",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-            bgcolor: "black",
+            boxShadow: nbShadow(6, ACCENT),
+            bgcolor: INK,
           }}
         >
           {study.youtubeId ? (
@@ -498,7 +505,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                 lineHeight: 1,
                 fontWeight: 900,
                 letterSpacing: "-0.04em",
-                ...BRAND_GRADIENT_TEXT_SX,
+                color: ACCENT,
               }}
             >
               {study.number}
@@ -555,7 +562,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         sx={{
           mt: { xs: 4, md: 5 },
           pt: { xs: 3, md: 4 },
-          borderTop: "1px solid rgba(229,199,103,0.2)",
+          borderTop: `2px solid ${PAPER}`,
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "auto 1fr" },
           gap: { xs: 4, md: 6 },
@@ -581,7 +588,7 @@ export default function CaseStudiesSection() {
     <Box
       id="case-studies"
       sx={{
-        bgcolor: "black",
+        bgcolor: INK,
         color: "white",
         px: { xs: 2, md: 6 },
         py: { xs: 8, md: 14 },
@@ -595,14 +602,13 @@ export default function CaseStudiesSection() {
             component="h2"
             sx={{
               fontSize: { xs: "34px", md: "56px", lg: "68px" },
-              fontWeight: "bold",
               mb: 2,
             }}
           >
             <Box component="span" sx={{ color: "white" }}>
               SELECTED{" "}
             </Box>
-            <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
+            <Box component="span" sx={{ color: ACCENT }}>
               WORK
             </Box>
           </Typography>

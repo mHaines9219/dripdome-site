@@ -27,15 +27,20 @@ The home page (`app/page.tsx`) is a single scroll of section components imported
 
 Hybrid approach: **MUI sx prop** for component-level styles, **Tailwind** for utility classes, **Emotion** under the hood for MUI. The `cn()` helper in `lib/utils.ts` merges clsx + tailwind-merge.
 
-Brand colors defined in `app/theme.ts`: surface `#FFFFFF`, ink `#111111`, accent `#E5C767` (champagne gold). MUI palette uses `#FCF5EC` (brown/cream) as primary and `#DD9F28` (gold) as secondary.
+**Design language: neobrutalism.** Flat saturated color, thick ink borders, hard offset shadows with zero blur, zero border radius, press-down button mechanics. No gradients, no glassmorphism, no soft glows, no pills, anywhere.
 
-Shared brand tokens live in `lib/theme.ts`:
-- `BRAND_ACCENT` (`#E5C767`) and `BRAND_ACCENT_DEEP` (`#C9A227`) — solid colors for icons, pill borders, active-nav underline, hover states, and any UI under ~20px where a gradient would read as muddy
-- `BRAND_GRADIENT` — `linear-gradient(135deg, #E5C767 → #E89B3C)`
-- `BRAND_GRADIENT_TEXT_SX` — spread into an sx object on big accent text (hero H1 spans, section H2 accent words, the huge case-study numbers)
-- `BRAND_GRADIENT_BUTTON_SX` — spread into an sx object on primary CTA buttons (uses `filter: brightness(0.92)` on hover)
+Core tokens live in `lib/theme.ts`:
+- Colors: `INK` (`#111111`), `PAPER` (`#F3EDE2` warm bone), `SURFACE` (`#FFFFFF` cards on light bg), `ACCENT` (`#C0C0C0` metallic silver), `POP` (`#FF5C00` safety orange, sparingly)
+- `NB_BORDER` (3px ink) / `NB_BORDER_THIN` (2px ink) — cards/buttons/inputs get structural borders (PAPER-colored on dark backgrounds)
+- `nbShadow(px, color?)` — hard offset shadow, e.g. `nbShadow(4)` small UI, `nbShadow(8)` cards; pass `ACCENT` or `PAPER` on dark backgrounds
+- `NB_CARD_SX` / `NB_CARD_DARK_SX` — card styles for light/dark sections
+- `NB_BUTTON_SX` — primary CTA: flat silver, ink border, hover `translate(-2px,-2px)` + shadow grows, active `translate(2px,2px)` + shadow 0
+- `NB_BUTTON_OUTLINE_DARK_SX`, `NB_TAG_DARK_SX` — secondary button and square badge on dark backgrounds
+- Legacy names (`BRAND_ACCENT`, `BRAND_GRADIENT`, `BRAND_GRADIENT_TEXT_SX`, `BRAND_GRADIENT_BUTTON_SX`) still export but resolve to flat styles; prefer the `NB_*` names in new code
 
-**Rule of thumb for the gradient**: apply only to hero-scale text and primary CTAs. Keep icons, tiny borders, navbar underline, and body-copy accents on the solid `BRAND_ACCENT` color.
+Fonts (via `next/font` in `app/layout.tsx`): Archivo Black (`--font-display`, headings, single 400 weight — never set bold on `h*` variants, it faux-bolds) and Space Grotesk (`--font-body`). MUI theme in `app/theme.ts` sets `shape.borderRadius: 0` and uppercase display headings; Tailwind exposes `ink/paper/silver/pop` colors and `shadow-brutal[-lg|-silver|-paper]`.
+
+House style rules: every section declares an explicit background (`INK` for hero/photo sections, `PAPER` for content-heavy surfaces); dark-light seams get a 4px `ACCENT` or `INK` rule; hero-scale accent statements can use one silver highlight block per page (`bgcolor: ACCENT, color: INK, hard shadow, rotate(-1.5deg)`); everything else uses flat `ACCENT` text.
 
 ### Routes
 
