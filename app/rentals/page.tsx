@@ -3,6 +3,12 @@ import { Box, Typography } from "@mui/material";
 import RentalGrid from "../components/RentalGrid";
 import RentalForm from "./RentalForm";
 import Footer from "../ui/Footer";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Rentals | DripDome - Props & Set Piece Rentals NYC",
@@ -42,47 +48,61 @@ export const metadata: Metadata = {
 export default function RentalsPage() {
   return (
     <>
-      <Box sx={{ backgroundColor: "black" }}>
-        <Box sx={{ backgroundColor: "black" }}>
-          <Typography
-            variant="h1"
-            component="h1"
-            color="white"
+      <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
+        {/* Hero band */}
+        <Box component="section" sx={{ borderBottom: NB_RULE }}>
+          <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 5, md: 8 } }}>
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
+              INVENTORY · PROPS + SET PIECES · NYC
+            </Typography>
+            <Typography
+              variant="h1"
+              component="h1"
+              sx={{
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 56, sm: 96, lg: 140 },
+                color: NB_COLORS.ink,
+              }}
+            >
+              RENTALS
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Equipment index */}
+        <Box component="section" sx={{ borderBottom: NB_RULE }}>
+          <Box
             sx={{
-              fontSize: { xs: "55px", sm: "95px", lg: "150px" },
-              fontWeight: "bold",
-              paddingTop: { xs: 4, md: 8 },
-              paddingLeft: "10px",
-              paddingRight: "10px",
-              textAlign: "center",
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              px: { xs: 3, md: 6 },
+              py: { xs: 3, md: 4 },
+              borderBottom: NB_RULE,
+              flexWrap: "wrap",
+              gap: 1,
             }}
           >
-            Rentals
-          </Typography>
-
-          {/* Equipment Grid */}
-          <Box sx={{ backgroundColor: "black", py: 4, px: { xs: 0, md: 8 } }}>
             <Typography
               variant="h2"
               component="h2"
-              color="white"
               sx={{
-                fontSize: { xs: "30px", sm: "45px", lg: "50px" },
-                fontWeight: "bold",
-                marginBottom: { xs: "20px", md: "30px" },
-                textAlign: "center",
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 32, sm: 48, lg: 64 },
+                color: NB_COLORS.ink,
               }}
             >
-              Rental Periods are minimum 1 week.
+              EQUIPMENT INDEX
             </Typography>
-            <RentalGrid />
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+              RENTAL PERIODS ARE MINIMUM 1 WEEK.
+            </Typography>
           </Box>
-
-          {/* Rental Request Form */}
-          <Box sx={{ backgroundColor: "black", py: 4 }}>
-            <RentalForm />
-          </Box>
+          <RentalGrid />
         </Box>
+
+        {/* Rental Request Form */}
+        <RentalForm />
       </Box>
       <Footer />
     </>

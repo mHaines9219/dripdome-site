@@ -1,59 +1,73 @@
 "use client";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import PhotoPageCarousels from "../components/PhotoPageCarousels";
 import Contact from "../components/Contact";
-import { motion } from "framer-motion";
 import FeaturedProjects from "../components/FeaturedProjects";
 import PressSection from "../components/PressSection";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_OUTLINE_TEXT_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 export default function PortfolioContent() {
   return (
     <Box
+      component="main"
       sx={{
         minHeight: "100vh",
         width: "100%",
-        bgcolor: "black",
-        px: 2,
-        pt: { xs: 8, md: 6 },
-        overflowX: "hidden",
+        bgcolor: NB_COLORS.paper,
+        color: NB_COLORS.ink,
       }}
     >
-      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 4 } }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 0.5 }}
-        >
-          <Typography
-            variant="h1"
-            component="h1"
-            color="white"
-            sx={{
-              fontSize: { xs: "45px", sm: "95px", lg: "96px" },
-              fontWeight: "bold",
-              marginBottom: { xs: "20px", md: "30px" },
-              textAlign: "center",
-            }}
+      {/* Hero */}
+      <Box component="section" sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}>
+        <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 5, md: 8 }, maxWidth: 1440, mx: "auto" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            PORTFOLIO
-          </Typography>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1 }}
-        >
-          <Box sx={{ mx: "auto", maxWidth: "56rem", mb: { xs: 4, md: 12 } }}>
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
+              INDEX · SET DESIGN + CUSTOM FABRICATION · NYC + LA
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <Typography
-              variant="body1"
-              component="p"
-              color="white"
+              variant="h1"
+              component="h1"
               sx={{
-                fontSize: { xs: "14px", sm: "20px", md: "24px" },
-                textAlign: "center",
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 44, sm: 72, md: 96 },
+                color: NB_COLORS.ink,
+                mb: 3,
               }}
+            >
+              PORT
+              <Box component="span" sx={{ ...NB_OUTLINE_TEXT_SX, fontSize: "inherit" }}>
+                FOLIO
+              </Box>
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
+            <Typography
+              component="p"
+              sx={{ fontSize: { xs: 15, md: 18 }, color: NB_COLORS.ink, maxWidth: 720 }}
             >
               We specialize in creating unforgettable set designs and custom
               fabrications for photoshoots that demand visual excellence. From
@@ -61,71 +75,52 @@ export default function PortfolioContent() {
               stylists, and brands to craft striking, camera-ready environments
               that captivate audiences.
             </Typography>
-          </Box>
-        </motion.div>
-        <Box sx={{ mb: { xs: 4, md: 0 } }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0, duration: 1 }}
-          >
-            <Box sx={{ textAlign: "center" }}>
-              <Typography
-                variant="h2"
-                component="h2"
-                color="white"
-                sx={{
-                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
-                  display: "inline",
-                }}
-              >
-                FEATURED{" "}
-              </Typography>
-              <Typography
-                variant="h2"
-                component="span"
-                sx={{
-                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
-                  ...BRAND_GRADIENT_TEXT_SX,
-                }}
-              >
-                PROJECTS
-              </Typography>
-            </Box>
           </motion.div>
         </Box>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1.5 }}
-        >
-          <FeaturedProjects />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0, duration: 1.5 }}
-        >
-          <PhotoPageCarousels />
-        </motion.div>
+      </Box>
 
-        <Box sx={{ mt: 16 }}>
-          <PressSection />
-        </Box>
+      {/* Featured projects */}
+      <Box component="section" sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}>
         <Box
           sx={{
-            mt: 8,
-            py: 12,
-            px: { xs: 2, md: 8 },
-            bgcolor: "black",
-            color: "white",
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            px: { xs: 3, md: 6 },
+            py: { xs: 3, md: 4 },
+            borderBottom: NB_RULE,
+            flexWrap: "wrap",
+            gap: 1,
           }}
         >
-          <Contact />
+          <Typography
+            variant="h2"
+            component="h2"
+            sx={{
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 32, sm: 48, lg: 64 },
+              color: NB_COLORS.ink,
+            }}
+          >
+            FEATURED PROJECTS
+          </Typography>
+          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+            CASE FILES · 05 PROJECTS
+          </Typography>
         </Box>
-      </Container>
+        <FeaturedProjects />
+      </Box>
+
+      {/* Photography archive */}
+      <PhotoPageCarousels />
+
+      {/* Press */}
+      <PressSection />
+
+      {/* Contact */}
+      <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
+        <Contact />
+      </Box>
     </Box>
   );
 }

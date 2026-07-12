@@ -1,17 +1,27 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const pressItems = [
   {
-    headline: "BUSINESS INSIDER - BELLA THORNE COACHELLA AFTERPARTY",
+    outlet: "Business Insider",
+    headline: "Bella Thorne Coachella Afterparty",
     url: "https://www.businessinsider.com/bella-thorne-coachella-after-party-photos-diplo-2022-4",
   },
   {
-    headline: "FORBES - BEST CANNED COCKTAIL ORIGINAL SOUTHSIDE",
+    outlet: "Forbes",
+    headline: "Best Canned Cocktail Original Southside",
     url: "https://www.forbes.com/sites/karlaalindahao/2024/03/01/best-canned-cocktail-original-southside/",
   },
   {
-    headline: "ROLLING STONE - THEIA RETURNS TO ALT-POP",
+    outlet: "Rolling Stone",
+    headline: "Theia Returns to Alt-Pop",
     url: "https://au.rollingstone.com/music/music-news/theia-crucified-by-u-45218/",
   },
 ];
@@ -19,65 +29,95 @@ const pressItems = [
 const PressSection = () => {
   return (
     <Box
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      component="section"
+      sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
     >
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          textAlign: "center",
-          width: "80vw",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
         }}
       >
         <Typography
-          variant="h1"
-          component="h1"
+          variant="h2"
           sx={{
-            textDecoration: "none",
-            color: "white",
-
-            mb: 2,
-            fontSize: { xs: "30px", sm: "80px" },
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
           }}
         >
-          Our Work in the Press
+          OUR WORK IN THE PRESS
         </Typography>
-        {pressItems.map((item, index) => (
-          <Box
-            key={index}
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          PRESS INDEX · EXTERNAL LINKS
+        </Typography>
+      </Box>
+
+      {pressItems.map((item, i) => (
+        <Box
+          key={item.url}
+          component="a"
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "auto 1fr auto", md: "80px 240px 1fr auto" },
+            alignItems: "center",
+            gap: { xs: 2, md: 3 },
+            px: { xs: 3, md: 6 },
+            py: { xs: 2, md: 2.5 },
+            borderBottom: i < pressItems.length - 1 ? NB_RULE : "none",
+            textDecoration: "none",
+            color: NB_COLORS.ink,
+            "&:hover": {
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              "& .press-meta": { color: NB_COLORS.mutedOnInk },
+            },
+          }}
+        >
+          <Typography
+            className="press-meta"
+            sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
+          >
+            P.{String(i + 1).padStart(2, "0")}
+          </Typography>
+          <Typography
             sx={{
-              padding: 2,
-              border: "1px solid #ccc",
-              borderRadius: 1,
-              backgroundColor: "white",
-              textAlign: "center",
-              color: "black",
-              transition: "all 0.3s ease",
-              "&:hover": {
-                backgroundColor: "black",
-                color: "white",
-              },
+              ...NB_MONO_SX,
+              fontSize: { xs: 12, md: 14 },
+              fontWeight: 700,
+              color: "inherit",
             }}
           >
-            <Typography
-              variant="h2"
-              component="a"
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                display: "block",
-                textDecoration: "none",
-                color: "inherit",
-                fontSize: { xs: "20px", sm: "30px" },
-              }}
-            >
-              {item.headline}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
+            {item.outlet}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: 14, md: 17 },
+              color: "inherit",
+              gridColumn: { xs: "2 / 4", md: "auto" },
+            }}
+          >
+            {item.headline}
+          </Typography>
+          <ArrowOutwardIcon
+            sx={{
+              fontSize: 20,
+              color: "inherit",
+              display: { xs: "none", md: "block" },
+              justifySelf: "end",
+            }}
+          />
+        </Box>
+      ))}
     </Box>
   );
 };

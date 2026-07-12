@@ -1,7 +1,9 @@
 import { Box } from "@mui/material";
 import type { Metadata } from "next";
+import { NB_COLORS } from "@/lib/theme";
 import HomeHero from "./components/HomeHero";
 import SocialProofBar from "./components/SocialProofBar";
+import Specialties from "./components/Specialties";
 import HomeFeaturedWork from "./components/HomeFeaturedWork";
 import TrustWall, { TrustPress } from "./components/TrustWall";
 import OurServices from "./components/OurServices";
@@ -50,9 +52,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <Box component="main" sx={{ bgcolor: "black", color: "common.white" }}>
+    <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <HomeHero />
       <SocialProofBar />
+      <Specialties />
       <HomeFeaturedWork />
       <TrustWall />
       {/* <OurServices /> */}

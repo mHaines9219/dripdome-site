@@ -19,7 +19,7 @@ npx tsc --noEmit     # Type-check without emitting
 
 `app/layout.tsx` (server) loads Google Fonts (Source Sans 3), JSON-LD, Vercel Analytics, and the GTM container (conditional on `NEXT_PUBLIC_GTM_ID`). It wraps children in:
 - `ThemeRegistry.tsx` - MUI Emotion cache + ThemeProvider
-- `ClientLayout.tsx` - hides Navbar on the home route (`/`) only; all other routes show it
+- `ClientLayout.tsx` - renders the Navbar on every route (sticky, in normal flow, so no spacer hacks)
 
 The home page (`app/page.tsx`) is a single scroll of section components imported from `app/components/`.
 
@@ -27,22 +27,23 @@ The home page (`app/page.tsx`) is a single scroll of section components imported
 
 Hybrid approach: **MUI sx prop** for component-level styles, **Tailwind** for utility classes, **Emotion** under the hood for MUI. The `cn()` helper in `lib/utils.ts` merges clsx + tailwind-merge.
 
-Brand colors defined in `app/theme.ts`: surface `#FFFFFF`, ink `#111111`, accent `#E5C767` (champagne gold). MUI palette uses `#FCF5EC` (brown/cream) as primary and `#DD9F28` (gold) as secondary.
+**Neobrutalist design system (current direction)** lives in `lib/theme.ts`. The entire palette is centralized in the `NB_COLORS` object, currently a dark-mode white/black/silver scheme: near-black `paper` page background, off-white `ink` for text/borders/inverted bands, `silver` accents. Semantic tokens keep inversion safe: `paperOnInk` (text on ink bands), `onSilver` (text on silver fills, always dark), `mutedOnInk` (muted text/rules on ink bands), and `well` (media backdrop that must stay dark in ANY theme because the brand/press logo PNGs are white artwork). To retheme the site, edit `NB_COLORS` (plus `NB_BORDER_WIDTH` / `NB_SHADOW_OFFSET` for chunkier hardware). Never hardcode hex values in components; always import tokens.
 
-Shared brand tokens live in `lib/theme.ts`:
-- `BRAND_ACCENT` (`#E5C767`) and `BRAND_ACCENT_DEEP` (`#C9A227`) — solid colors for icons, pill borders, active-nav underline, hover states, and any UI under ~20px where a gradient would read as muddy
-- `BRAND_GRADIENT` — `linear-gradient(135deg, #E5C767 → #E89B3C)`
-- `BRAND_GRADIENT_TEXT_SX` — spread into an sx object on big accent text (hero H1 spans, section H2 accent words, the huge case-study numbers)
-- `BRAND_GRADIENT_BUTTON_SX` — spread into an sx object on primary CTA buttons (uses `filter: brightness(0.92)` on hover)
+Derived tokens: `NB_RULE` (2px ink border used everywhere), `nbShadow()` (hard zero-blur offset shadow), `NB_DISPLAY_SX` (Archivo Black headline type), `NB_MONO_SX` (IBM Plex Mono spec-sheet labels), `NB_OUTLINE_TEXT_SX` (stroke-only display text), `NB_BUTTON_SX` / `NB_BUTTON_OUTLINE_SX` (press-down mechanic buttons), `NB_TAG_SX` (square chips). Fonts are registered in `app/layout.tsx` via next/font CSS variables (`--font-display`, `--font-mono`).
 
-**Rule of thumb for the gradient**: apply only to hero-scale text and primary CTAs. Keep icons, tiny borders, navbar underline, and body-copy accents on the solid `BRAND_ACCENT` color.
+Visual grammar: flat colors, 2px ink rules dividing full-width section bands, hard offset shadows, zero border radius, uppercase display type, mono metadata labels (job numbers, figure captions, indexes), inverted ink bands, marquee tickers (`nb-ticker` keyframe in `globals.css`).
+
+Every active route is converted to this system. The legacy champagne-gold tokens (`BRAND_ACCENT`, `BRAND_GRADIENT*` at the bottom of `lib/theme.ts`) are referenced only by dead components that are not imported anywhere (`HomeBlurb`, `Chatbot`, `ProjectsContributed`, `WorkReel`, `OurServices`); never use them in new work. Swiper card/fade carousels have been replaced site-wide with scroll-snap filmstrips (frame counter + square arrow controls, pattern in `JobFile.tsx`).
 
 ### Routes
 
+The site is organized around two specialty verticals (podcast studios, brand activations) with the home page acting as the master work archive. Set design and music videos are sunset services: kept in the archive index and taken "for the right project," but not promoted with dedicated pages or nav items. `/portfolio`, `/services`, and `/rentals` remain live but are intentionally out of the nav.
+
 | Route | Purpose |
 |-------|---------|
-| `/` | Home (scroll sections) |
-| `/brand-activations` | Google Ads landing page. Budget-qualified inquiry form fires `generate_lead` conversion |
+| `/` | Home: hero, specialties router ("What do you need built?"), master work archive (featured job files + full index) |
+| `/podcast-studios` | Vertical landing page for podcasters/networks. Hero, proof band, build spec sheet, shipped builds, intake |
+| `/brand-activations` | Vertical landing page + Google Ads LP. Budget-qualified inquiry form fires `generate_lead` conversion |
 | `/blog` | Blog listing with category filtering |
 | `/blog/[slug]` | Dynamic blog post pages |
 | `/blog/feed.xml` | RSS feed (route handler) |
@@ -56,6 +57,8 @@ Shared brand tokens live in `lib/theme.ts`:
 ### Data Pattern
 
 Blog, portfolio, rentals, and services data live in co-located `data.ts` files (e.g., `app/blog/data.ts`). No database. Blog posts store full HTML content as template literal strings in the `content` field.
+
+**Project registry**: `lib/projects.ts` is the single source of truth for build projects. Each `Project` has a `vertical` key (`podcast`, `activation`, `setDesign`, `musicVideo` — the latter two flagged `legacy`), images, stats, and a `featured` flag. The home archive renders featured projects as full job files plus a complete index table; vertical pages filter with `projectsByVertical()`. Add a project there and it flows to every surface.
 
 ### API
 
@@ -94,6 +97,8 @@ Every page route exports `metadata` with Open Graph, Twitter cards, and canonica
 ### Reusable Section Components
 
 `app/components/` holds sections reused across multiple pages:
+- `JobFile` — project case sheet (ink header bar with job no./vertical tag/client, scroll-snap filmstrip with frame counter, title + stat chips + blurb). Consumes a `Project` from `lib/projects.ts`. Used on home archive and vertical pages
+- `Specialties` — "What do you need built?" two-panel intent router (podcast studios / brand activations) with sunset-services strip
 - `SocialProofBar` — 4-stat animated counter row (used on home and `/brand-activations`)
 - `TrustWall` (default) — "Trusted By" + logo marquee. `TrustPress` (named export) — "In the Press" link list. Originally one component, split so each page can place them independently
 - `FeaturedProjects` — Swiper card-effect carousel of project case studies

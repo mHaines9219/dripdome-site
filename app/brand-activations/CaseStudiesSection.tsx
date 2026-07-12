@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 // Metrics below reflect real numbers where available. LESGC reach is estimated
 // (see note field on the hero). Southside has no quantitative data yet, so the
@@ -45,7 +50,12 @@ type CaseStudy = {
   stats?: StatTile[];
 };
 
-const DONUT_COLORS = ["#E5C767", "#E89B3C", "#C9A227", "#D97706"];
+export const DONUT_COLORS = [
+  NB_COLORS.silver,
+  NB_COLORS.steel,
+  NB_COLORS.silverLight,
+  NB_COLORS.mutedOnInk,
+];
 
 const CASE_STUDIES: CaseStudy[] = [
   {
@@ -184,11 +194,9 @@ function HeroMetricView({
   inView: boolean;
 }) {
   const headlineSx = {
-    fontSize: { xs: "56px", md: "80px", lg: "96px" },
-    fontWeight: 900,
-    lineHeight: 1,
-    letterSpacing: "-0.03em",
-    ...BRAND_GRADIENT_TEXT_SX,
+    ...NB_DISPLAY_SX,
+    fontSize: { xs: 48, md: 64, lg: 80 },
+    color: NB_COLORS.ink,
   } as const;
 
   const count = useCountUp(
@@ -197,7 +205,7 @@ function HeroMetricView({
   );
 
   return (
-    <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+    <Box>
       {metric.kind === "count" ? (
         <Typography component="div" sx={headlineSx}>
           {metric.prefix}
@@ -212,10 +220,14 @@ function HeroMetricView({
           rel="noopener noreferrer"
           sx={{
             ...headlineSx,
-            textDecoration: "none",
             display: "inline-block",
-            transition: "filter 0.2s",
-            "&:hover": { filter: "brightness(1.1)" },
+            textDecoration: "underline",
+            textDecorationThickness: 3,
+            textUnderlineOffset: 6,
+            "&:hover": {
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+            },
           }}
         >
           {metric.value}
@@ -228,11 +240,11 @@ function HeroMetricView({
 
       <Typography
         sx={{
+          ...NB_MONO_SX,
           mt: 1,
-          fontSize: { xs: "11px", md: "13px" },
-          letterSpacing: "0.18em",
-          color: "rgba(255,255,255,0.65)",
+          fontSize: { xs: 11, md: 12 },
           fontWeight: 700,
+          color: NB_COLORS.steel,
         }}
       >
         {metric.label}
@@ -241,10 +253,10 @@ function HeroMetricView({
       {metric.kind === "count" && metric.note ? (
         <Typography
           sx={{
+            ...NB_MONO_SX,
             mt: 0.75,
-            fontSize: { xs: "11px", md: "12px" },
-            color: "rgba(255,255,255,0.45)",
-            fontStyle: "italic",
+            fontSize: { xs: 10, md: 11 },
+            color: NB_COLORS.steel,
           }}
         >
           {metric.note}
@@ -270,15 +282,17 @@ function DonutChart({
   const circumference = 2 * Math.PI * radius;
   const total = slices.reduce((sum, s) => sum + s.value, 0);
 
-  let cumulative = 0;
-  const arcs = slices.map((slice) => {
+  const arcs = slices.reduce<
+    (DonutSlice & { dash: number; gap: number; offset: number; pct: number })[]
+  >((acc, slice) => {
     const fraction = slice.value / total;
     const dash = circumference * fraction;
     const gap = circumference - dash;
-    const offset = -cumulative;
-    cumulative += dash;
-    return { ...slice, dash, gap, offset, pct: Math.round(fraction * 100) };
-  });
+    const prev = acc[acc.length - 1];
+    const offset = prev ? prev.offset - prev.dash : 0;
+    acc.push({ ...slice, dash, gap, offset, pct: Math.round(fraction * 100) });
+    return acc;
+  }, []);
 
   return (
     <Box
@@ -301,7 +315,7 @@ function DonutChart({
             cy={center}
             r={radius}
             fill="none"
-            stroke="rgba(255,255,255,0.08)"
+            stroke={NB_COLORS.silverLight}
             strokeWidth={strokeWidth}
           />
           {arcs.map((arc) => (
@@ -324,10 +338,10 @@ function DonutChart({
       <Box sx={{ minWidth: 160 }}>
         <Typography
           sx={{
-            fontSize: { xs: "10px", md: "11px" },
-            letterSpacing: "0.18em",
-            color: "rgba(255,255,255,0.55)",
+            ...NB_MONO_SX,
+            fontSize: { xs: 10, md: 11 },
             fontWeight: 700,
+            color: NB_COLORS.steel,
             mb: 1,
           }}
         >
@@ -341,16 +355,16 @@ function DonutChart({
               alignItems: "center",
               gap: 1.25,
               py: 0.4,
-              fontSize: { xs: "13px", md: "14px" },
-              color: "rgba(255,255,255,0.9)",
+              fontSize: { xs: 13, md: 14 },
+              color: NB_COLORS.ink,
             }}
           >
             <Box
               sx={{
-                width: 10,
-                height: 10,
+                width: 12,
+                height: 12,
                 bgcolor: arc.color,
-                borderRadius: "2px",
+                border: NB_RULE,
                 flexShrink: 0,
               }}
             />
@@ -375,38 +389,39 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
     <Box
       sx={{
         display: "grid",
-        gridTemplateColumns: { xs: "1fr 1fr", sm: "repeat(auto-fit, minmax(140px, 1fr))" },
+        gridTemplateColumns: {
+          xs: "1fr 1fr",
+          sm: "repeat(auto-fit, minmax(140px, 1fr))",
+        },
         gap: 2,
         width: "100%",
       }}
     >
-      {stats.map((s) => (
+      {stats.map((s, i) => (
         <Box
           key={s.label}
           sx={{
             p: 2,
-            border: "1px solid rgba(229,199,103,0.25)",
-            borderRadius: 2,
-            bgcolor: "rgba(229,199,103,0.04)",
+            border: NB_RULE,
+            bgcolor: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.surface,
             textAlign: "center",
           }}
         >
           <Typography
             sx={{
-              fontSize: { xs: "22px", md: "28px" },
-              fontWeight: 800,
-              ...BRAND_GRADIENT_TEXT_SX,
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 22, md: 28 },
+              color: NB_COLORS.ink,
             }}
           >
             {s.value}
           </Typography>
           <Typography
             sx={{
-              mt: 0.5,
-              fontSize: { xs: "10px", md: "11px" },
-              letterSpacing: "0.15em",
-              color: "rgba(255,255,255,0.55)",
-              fontWeight: 700,
+              ...NB_MONO_SX,
+              mt: 0.75,
+              fontSize: { xs: 10, md: 11 },
+              color: NB_COLORS.steel,
             }}
           >
             {s.label}
@@ -418,42 +433,69 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
 }
 
 function CaseStudyCard({ study }: { study: CaseStudy }) {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const metricsRef = useRef<HTMLDivElement>(null);
   const metricsInView = useInView(metricsRef, { once: true, amount: 0.3 });
 
   return (
-    <Box
-      sx={{
-        p: { xs: 2.5, md: 4 },
-        border: "1px solid rgba(229,199,103,0.15)",
-        borderRadius: "24px",
-        background:
-          "linear-gradient(180deg, rgba(229,199,103,0.03) 0%, rgba(0,0,0,0) 100%)",
-      }}
-    >
+    <Box sx={{ borderTop: NB_RULE }}>
+      {/* Job header bar */}
+      <Box
+        sx={{
+          bgcolor: NB_COLORS.ink,
+          color: NB_COLORS.paperOnInk,
+          display: "flex",
+          alignItems: "center",
+          gap: { xs: 1.5, md: 3 },
+          px: { xs: 3, md: 6 },
+          py: 1.25,
+          flexWrap: "wrap",
+        }}
+      >
+        <Typography
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            fontWeight: 700,
+            bgcolor: NB_COLORS.silver,
+            color: NB_COLORS.onSilver,
+            px: 1,
+            py: 0.25,
+          }}
+        >
+          FILE {study.number}
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700 }}>
+          {study.client}
+        </Typography>
+        <Typography
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            ml: "auto",
+            color: NB_COLORS.mutedOnInk,
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          {study.category}
+        </Typography>
+      </Box>
+
+      {/* Plate + copy */}
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1.1fr 1fr" },
-          gap: { xs: 3, md: 6 },
-          alignItems: "center",
-          direction: !isMobile && parseInt(study.number) % 2 === 0 ? "rtl" : "ltr",
+          gridTemplateColumns: { xs: "1fr", md: "6fr 6fr" },
+          borderTop: NB_RULE,
         }}
       >
         <Box
           sx={{
-            direction: "ltr",
             position: "relative",
             width: "100%",
-            aspectRatio: study.youtubeId
-              ? "16 / 9"
-              : { xs: "4 / 3", md: "5 / 4" },
-            borderRadius: "18px",
-            overflow: "hidden",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-            bgcolor: "black",
+            aspectRatio: study.youtubeId ? "16 / 9" : "4 / 3",
+            bgcolor: NB_COLORS.well,
+            borderRight: { md: NB_RULE },
+            borderBottom: { xs: NB_RULE, md: "none" },
           }}
         >
           {study.youtubeId ? (
@@ -477,7 +519,7 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
               src={study.image}
               alt={study.imageAlt}
               fill
-              sizes="(max-width: 900px) 100vw, 55vw"
+              sizes="(max-width: 900px) 100vw, 50vw"
               style={{ objectFit: "cover" }}
             />
           )}
@@ -485,80 +527,43 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 
         <Box
           sx={{
-            direction: "ltr",
+            px: { xs: 3, md: 6 },
+            py: { xs: 3, md: 5 },
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
             gap: 2,
           }}
         >
-          <Box sx={{ display: "flex", alignItems: "baseline", gap: 2 }}>
-            <Typography
-              sx={{
-                fontSize: { xs: "60px", md: "96px" },
-                lineHeight: 1,
-                fontWeight: 900,
-                letterSpacing: "-0.04em",
-                ...BRAND_GRADIENT_TEXT_SX,
-              }}
-            >
-              {study.number}
-            </Typography>
-            <Box>
-              <Typography
-                sx={{
-                  fontSize: { xs: "10px", md: "12px" },
-                  letterSpacing: "0.15em",
-                  color: "rgba(255,255,255,0.6)",
-                  fontWeight: 600,
-                  mb: 0.5,
-                }}
-              >
-                {study.category}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: "18px", md: "22px" },
-                  fontWeight: 700,
-                  letterSpacing: "0.05em",
-                }}
-              >
-                {study.client}
-              </Typography>
-            </Box>
-          </Box>
-
+          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+            {study.category}
+          </Typography>
           <Typography
+            variant="h3"
             sx={{
-              fontSize: { xs: "22px", md: "30px" },
-              fontWeight: 600,
-              lineHeight: 1.25,
-              mb: 1,
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 24, sm: 30, md: 34 },
+              color: NB_COLORS.ink,
             }}
           >
             {study.headline}
           </Typography>
-
-          <Typography
-            sx={{
-              fontSize: { xs: "15px", md: "16px" },
-              color: "rgba(255,255,255,0.8)",
-              lineHeight: 1.6,
-            }}
-          >
+          <Typography sx={{ fontSize: { xs: 15, md: 16 }, color: NB_COLORS.steel }}>
             {study.copy}
           </Typography>
         </Box>
       </Box>
 
+      {/* Metrics band */}
       <Box
         ref={metricsRef}
         sx={{
-          mt: { xs: 4, md: 5 },
-          pt: { xs: 3, md: 4 },
-          borderTop: "1px solid rgba(229,199,103,0.2)",
+          borderTop: NB_RULE,
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "auto 1fr" },
-          gap: { xs: 4, md: 6 },
+          gap: { xs: 3, md: 6 },
           alignItems: "center",
         }}
       >
@@ -579,66 +584,59 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
 export default function CaseStudiesSection() {
   return (
     <Box
+      component="section"
       id="case-studies"
       sx={{
-        bgcolor: "black",
-        color: "white",
-        px: { xs: 2, md: 6 },
-        py: { xs: 8, md: 14 },
+        bgcolor: NB_COLORS.paper,
+        borderBottom: NB_RULE,
         scrollMarginTop: { xs: 24, md: 40 },
       }}
     >
-      <Box sx={{ maxWidth: 1280, mx: "auto" }}>
-        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
-          <Typography
-            variant="h2"
-            component="h2"
-            sx={{
-              fontSize: { xs: "34px", md: "56px", lg: "68px" },
-              fontWeight: "bold",
-              mb: 2,
-            }}
-          >
-            <Box component="span" sx={{ color: "white" }}>
-              SELECTED{" "}
-            </Box>
-            <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
-              WORK
-            </Box>
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: { xs: "16px", md: "20px" },
-              color: "rgba(255,255,255,0.8)",
-              maxWidth: 720,
-              mx: "auto",
-            }}
-          >
-            Five recent builds across charity, tech, creator, music, and CPG.
-            Same studio. Same team. Very different briefs.
-          </Typography>
-        </Box>
-
-        <Box
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
+        <Typography
+          variant="h2"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: { xs: 6, md: 10 },
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
           }}
         >
-          {CASE_STUDIES.map((study) => (
-            <motion.div
-              key={study.number}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-            >
-              <CaseStudyCard study={study} />
-            </motion.div>
-          ))}
-        </Box>
+          SELECTED WORK
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          CASE FILES · 05 ENTRIES
+        </Typography>
       </Box>
+
+      <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 3 } }}>
+        <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.steel, maxWidth: 720 }}>
+          Five recent builds across charity, tech, creator, music, and CPG.
+          Same studio. Same team. Very different briefs.
+        </Typography>
+      </Box>
+
+      {CASE_STUDIES.map((study) => (
+        <motion.div
+          key={study.number}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
+          <CaseStudyCard study={study} />
+        </motion.div>
+      ))}
     </Box>
   );
 }

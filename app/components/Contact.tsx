@@ -3,50 +3,101 @@
 import { Box, Typography } from "@mui/material";
 import Footer from "../ui/Footer";
 import ContactForm from "./ContactForm";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_OUTLINE_TEXT_SX,
+  NB_RULE,
+} from "@/lib/theme";
+
+const DETAILS = [
+  { label: "LOCATIONS", value: "NEW YORK CITY + LOS ANGELES" },
+  { label: "INSTAGRAM", value: "@DRIPDOME" },
+  { label: "RESPONSE TIME", value: "WITHIN 48 HOURS" },
+];
 
 export default function Contact() {
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          px: { xs: 4, md: 8 },
-        }}
-      >
-        <Typography
-          variant="h2"
-          component="h2"
+      <Box component="section" sx={{ bgcolor: NB_COLORS.paper }}>
+        <Box
           sx={{
-            fontSize: { xs: "50px", md: "80px", lg: "90px" },
-            fontWeight: "bold",
-            marginBottom: "15px",
-            justifyContent: "center",
-            display: "flex",
-            color: "white",
-            whiteSpace: "nowrap",
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", md: "5fr 7fr" },
           }}
         >
-          Contact Us
-        </Typography>
+          {/* Left: intake header */}
+          <Box
+            sx={{
+              px: { xs: 3, md: 6 },
+              py: { xs: 4, md: 6 },
+              borderRight: { md: NB_RULE },
+              borderBottom: { xs: NB_RULE, md: "none" },
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
+              PROJECT INTAKE · FORM A
+            </Typography>
+            <Typography
+              variant="h2"
+              sx={{
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 40, sm: 56, lg: 72 },
+                color: NB_COLORS.ink,
+                mb: 1,
+              }}
+            >
+              LET&apos;S BUILD
+            </Typography>
+            <Typography
+              sx={{
+                ...NB_OUTLINE_TEXT_SX,
+                fontSize: { xs: 40, sm: 56, lg: 72 },
+                mb: 3,
+              }}
+            >
+              SOMETHING.
+            </Typography>
+            <Typography
+              sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.ink, maxWidth: 420, mb: 4 }}
+            >
+              Big or small, every idea has the potential to shine. Tell us about
+              your project and let&apos;s build something amazing.
+            </Typography>
 
-        <Typography
-          variant="body2"
-          component="p"
-          sx={{
-            fontSize: { sm: "20px", md: "25px", lg: "30px" },
-            display: "flex",
-            textAlign: "center",
-            maxWidth: 900,
-            marginBottom: "30px",
-            color: "white",
-          }}
-        >
-          Big or small, every idea has the potential to shine. Tell us about
-          your project and let&apos;s build something amazing!
-        </Typography>
-        <ContactForm />
+            <Box sx={{ mt: "auto" }}>
+              {DETAILS.map((row) => (
+                <Box
+                  key={row.label}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: 2,
+                    py: 1.25,
+                    borderTop: NB_RULE,
+                  }}
+                >
+                  <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
+                    {row.label}
+                  </Typography>
+                  <Typography
+                    sx={{ ...NB_MONO_SX, fontSize: 11, fontWeight: 700, color: NB_COLORS.ink }}
+                  >
+                    {row.value}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          {/* Right: form */}
+          <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 4, md: 6 } }}>
+            <ContactForm />
+          </Box>
+        </Box>
       </Box>
       <Footer />
     </>

@@ -4,6 +4,52 @@ import { useRef, FormEvent } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendData } from "@/hooks/sendData";
+import {
+  FONT_MONO,
+  NB_BUTTON_SX,
+  NB_COLORS,
+  NB_RULE,
+  nbShadow,
+} from "@/lib/theme";
+
+const FIELD_SX = {
+  "& .MuiInputBase-root": {
+    bgcolor: NB_COLORS.surface,
+    color: NB_COLORS.ink,
+    borderRadius: 0,
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: NB_RULE,
+  },
+  "& .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline": {
+    border: NB_RULE,
+  },
+  "& .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    border: NB_RULE,
+  },
+  "& .MuiInputBase-root.Mui-focused": {
+    boxShadow: nbShadow(4),
+  },
+  "& .MuiInputBase-input::placeholder": {
+    fontFamily: FONT_MONO,
+    fontSize: 13,
+    letterSpacing: "0.08em",
+    color: NB_COLORS.steel,
+    opacity: 1,
+  },
+} as const;
+
+const FIELDS = [
+  { name: "name", placeholder: "NAME", type: "text", aria: "Name" },
+  { name: "instagram", placeholder: "INSTAGRAM", type: "text", aria: "Instagram" },
+  { name: "email", placeholder: "EMAIL", type: "email", aria: "Email" },
+  {
+    name: "referral",
+    placeholder: "HOW DID YOU HEAR ABOUT US?",
+    type: "text",
+    aria: "How did you hear about us",
+  },
+];
 
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -17,7 +63,6 @@ export default function ContactForm() {
         width: "100%",
         maxWidth: 900,
         mx: "auto",
-        mb: 4,
         gap: { xs: 2, md: 2.5 },
       }}
       onSubmit={async (e: FormEvent<HTMLFormElement>) => {
@@ -68,63 +113,18 @@ export default function ContactForm() {
         }
       }}
     >
-      <TextField
-        name="name"
-        placeholder="NAME"
-        required
-        fullWidth
-        inputProps={{ "aria-label": "Name" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
-      />
-      <TextField
-        name="instagram"
-        placeholder="INSTAGRAM"
-        required
-        fullWidth
-        inputProps={{ "aria-label": "Instagram" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
-      />
-      <TextField
-        name="email"
-        type="email"
-        placeholder="EMAIL"
-        required
-        fullWidth
-        inputProps={{ "aria-label": "Email" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
-      />
-      <TextField
-        name="referral"
-        placeholder="HOW DID YOU HEAR ABOUT US?"
-        required
-        fullWidth
-        inputProps={{ "aria-label": "How did you hear about us" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
-      />
+      {FIELDS.map((field) => (
+        <TextField
+          key={field.name}
+          name={field.name}
+          type={field.type}
+          placeholder={field.placeholder}
+          required
+          fullWidth
+          inputProps={{ "aria-label": field.aria }}
+          sx={FIELD_SX}
+        />
+      ))}
       <TextField
         name="message"
         placeholder="YOUR MESSAGE"
@@ -133,15 +133,9 @@ export default function ContactForm() {
         multiline
         minRows={4}
         inputProps={{ "aria-label": "Message" }}
-        sx={{
-          "& .MuiInputBase-root": { bgcolor: "white", color: "black" },
-          "& .MuiInputBase-input::placeholder": {
-            color: "rgba(0,0,0,0.7)",
-            opacity: 1,
-          },
-        }}
+        sx={FIELD_SX}
       />
-      <Box sx={{ mb: 1, display: "flex", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
         <ReCAPTCHA
           ref={recaptchaRef}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
@@ -149,19 +143,10 @@ export default function ContactForm() {
       </Box>
       <Button
         type="submit"
-        variant="contained"
-        sx={{
-          alignSelf: "center",
-          px: 4,
-          py: 1.5,
-          width: "80dvw",
-          maxWidth: 900,
-          fontWeight: 700,
-          bgcolor: "#16a34a",
-          "&:hover": { bgcolor: "#1d4ed8" },
-        }}
+        disableElevation
+        sx={{ ...NB_BUTTON_SX, width: "100%", py: 1.75, fontSize: 14 }}
       >
-        SEND
+        SEND IT →
       </Button>
     </Box>
   );

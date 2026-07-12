@@ -102,6 +102,21 @@ body {
   margin: 0;
 }
 
+/* Neobrutalist ticker: content is rendered twice, track slides one copy */
+@keyframes nb-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+::selection {
+  background: #c7cad0;
+  color: #131313;
+}
+
 @layer base {
   .theme {
     --animate-marquee: marquee var(--duration) infinite linear;

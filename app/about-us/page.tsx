@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import AboutUs from "../components/AboutUs";
 import FoundersSection from "../components/FoundersSection";
 import Contact from "../components/Contact";
+import { NB_COLORS } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "About Us | DripDome - Women-Owned Set Design Studio NYC",
@@ -41,10 +42,10 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <Box>
+    <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <AboutUs />
       <FoundersSection />
-      <Box sx={{ bgcolor: "black", py: 10 }}>
+      <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
         <Contact />
       </Box>
     </Box>

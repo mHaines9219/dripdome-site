@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Box } from "@mui/material";
+import { NB_COLORS } from "@/lib/theme";
 import TrustWall, { TrustPress } from "../components/TrustWall";
 import SocialProofBar from "../components/SocialProofBar";
 import Footer from "../ui/Footer";
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function BrandActivationsPage() {
   return (
-    <Box sx={{ bgcolor: "black" }}>
+    <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <BrandActivationsServiceJsonLd />
       <PageViewTracker />
       <BrandActivationsHero />
