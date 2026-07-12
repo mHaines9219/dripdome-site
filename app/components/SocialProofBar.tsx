@@ -23,10 +23,15 @@ function AnimatedNumber({
   duration?: number;
   inView: boolean;
 }) {
-  const [count, setCount] = useState(0);
+  // Initialize at the target so server HTML (and no-JS crawlers) carry the
+  // real numbers; the count-up runs client-side once the bar scrolls into view.
+  const [count, setCount] = useState(target);
 
   useEffect(() => {
     if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // No synchronous reset: the first interval tick (16ms) starts the
+    // count-up, so the SSR'd target value never visibly flashes.
     let start = 0;
     const increment = target / (duration / 16);
     const timer = setInterval(() => {
@@ -59,7 +64,7 @@ function AnimatedNumber({
 
 const stats = [
   { label: "PROJECTS DELIVERED", prefix: "", target: 100, suffix: "+" },
-  { label: "VIEWS ON OUR SET BUILDS", prefix: "", target: 19, suffix: "M+" },
+  { label: "VIEWS ON OUR SET BUILDS", prefix: "", target: 20, suffix: "M+" },
   { label: "BRANDS SERVED", prefix: "", target: 100, suffix: "+" },
   { label: "AVG TURNAROUND, DAYS", prefix: "", target: 14, suffix: "" },
 ];

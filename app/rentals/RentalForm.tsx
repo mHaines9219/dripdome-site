@@ -15,11 +15,13 @@ import {
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { rentalEquipment } from "./data";
+import FormStatus, { FormStatusState } from "../components/FormStatus";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
   NB_COLORS,
   NB_DISPLAY_SX,
+  NB_FIELD_LABEL_SX,
   NB_MONO_SX,
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
@@ -98,6 +100,8 @@ const DETAILS = [
 export default function RentalForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatusState>(null);
 
   const handleEquipmentChange = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value;
@@ -195,7 +199,10 @@ export default function RentalForm() {
 
               const captchaValue = recaptchaRef.current?.getValue();
               if (!captchaValue) {
-                alert("Please complete the CAPTCHA");
+                setStatus({
+                  type: "error",
+                  message: "PLEASE COMPLETE THE CAPTCHA BEFORE SENDING.",
+                });
                 return;
               }
 
@@ -221,6 +228,8 @@ export default function RentalForm() {
                 formType: "rental", // Identify this as a rental request
               };
 
+              setStatus(null);
+              setSubmitting(true);
               try {
                 const response = await fetch("/api/contact", {
                   method: "POST",
@@ -231,7 +240,10 @@ export default function RentalForm() {
                 });
 
                 if (response.ok) {
-                  alert("Thank you! Your rental request has been sent.");
+                  setStatus({
+                    type: "success",
+                    message: "RENTAL REQUEST RECEIVED. WE REPLY WITHIN 48 HOURS.",
+                  });
                   form.reset();
                   setSelectedEquipment([]);
                   recaptchaRef.current?.reset();
@@ -239,40 +251,52 @@ export default function RentalForm() {
                   throw new Error("Failed to send request");
                 }
               } catch {
-                alert("An error occurred. Please try again.");
+                setStatus({
+                  type: "error",
+                  message:
+                    "SOMETHING WENT WRONG. PLEASE TRY AGAIN OR EMAIL INFO@DRIPDOME.COM.",
+                });
+              } finally {
+                setSubmitting(false);
               }
             }}
           >
             {/* Name */}
-            <TextField
-              name="name"
-              placeholder="NAME"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Name" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography component="label" htmlFor="rental-name" sx={NB_FIELD_LABEL_SX}>
+                NAME
+              </Typography>
+              <TextField id="rental-name" name="name" required fullWidth sx={FIELD_SX} />
+            </Box>
 
             {/* Instagram */}
-            <TextField
-              name="instagram"
-              placeholder="INSTAGRAM"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Instagram" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography component="label" htmlFor="rental-instagram" sx={NB_FIELD_LABEL_SX}>
+                INSTAGRAM
+              </Typography>
+              <TextField
+                id="rental-instagram"
+                name="instagram"
+                required
+                fullWidth
+                sx={FIELD_SX}
+              />
+            </Box>
 
             {/* Email */}
-            <TextField
-              name="email"
-              type="email"
-              placeholder="EMAIL"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Email" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography component="label" htmlFor="rental-email" sx={NB_FIELD_LABEL_SX}>
+                EMAIL
+              </Typography>
+              <TextField
+                id="rental-email"
+                name="email"
+                type="email"
+                required
+                fullWidth
+                sx={FIELD_SX}
+              />
+            </Box>
 
             {/* Equipment Desired - Dropdown */}
             <FormControl fullWidth sx={FIELD_SX}>
@@ -320,32 +344,55 @@ export default function RentalForm() {
             </Box>
 
             {/* Project Description */}
-            <TextField
-              name="projectDescription"
-              placeholder="DESCRIPTION OF PROJECT"
-              required
-              fullWidth
-              multiline
-              minRows={4}
-              inputProps={{ "aria-label": "Project Description" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography
+                component="label"
+                htmlFor="rental-description"
+                sx={NB_FIELD_LABEL_SX}
+              >
+                DESCRIPTION OF PROJECT
+              </Typography>
+              <TextField
+                id="rental-description"
+                name="projectDescription"
+                required
+                fullWidth
+                multiline
+                minRows={4}
+                sx={FIELD_SX}
+              />
+            </Box>
 
             {/* ReCAPTCHA */}
             <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
               <ReCAPTCHA
                 ref={recaptchaRef}
+                theme="dark"
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               />
             </Box>
+
+            <FormStatus status={status} />
 
             {/* Submit Button */}
             <Button
               type="submit"
               disableElevation
-              sx={{ ...NB_BUTTON_SX, width: "100%", py: 1.75, fontSize: 14 }}
+              disabled={submitting}
+              sx={{
+                ...NB_BUTTON_SX,
+                width: "100%",
+                py: 1.75,
+                fontSize: 14,
+                "&.Mui-disabled": {
+                  bgcolor: NB_COLORS.silverLight,
+                  color: NB_COLORS.steel,
+                  border: NB_RULE,
+                  boxShadow: nbShadow(0),
+                },
+              }}
             >
-              SUBMIT RENTAL REQUEST
+              {submitting ? "SENDING..." : "SUBMIT RENTAL REQUEST"}
             </Button>
           </Box>
         </Box>

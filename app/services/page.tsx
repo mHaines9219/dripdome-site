@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/frame.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome Services - Set Design, Pop-Up Activations & Experiential Design NYC",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       "Full-service set design, pop-up activations, and experiential design. Carpentry, scenic painting, props, murals, LED integrations, and immersive brand experiences.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/frame.jpg",
     ],
   },
 };

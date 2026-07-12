@@ -11,6 +11,7 @@ import {
   FONT_DISPLAY,
   NB_BUTTON_SX,
   NB_COLORS,
+  NB_FOCUS_VISIBLE_SX,
   NB_MONO_SX,
   NB_RULE,
 } from "@/lib/theme";
@@ -41,12 +42,13 @@ export default function Navbar() {
           borderBottom: NB_RULE,
         }}
       >
-        {/* Tier 1: spec-sheet microbar */}
+        {/* Tier 1: spec-sheet microbar. Hidden on phones to keep the sticky
+            bar short and make room for the persistent CTA. */}
         <Box
           sx={{
             bgcolor: NB_COLORS.ink,
             color: NB_COLORS.paperOnInk,
-            display: "flex",
+            display: { xs: "none", md: "flex" },
             justifyContent: "space-between",
             px: { xs: 2, md: 4 },
             py: 0.5,
@@ -112,6 +114,7 @@ export default function Navbar() {
                   disableRipple
                   sx={{
                     ...NB_MONO_SX,
+                    ...NB_FOCUS_VISIBLE_SX,
                     fontSize: 13,
                     fontWeight: 700,
                     borderRadius: 0,
@@ -137,13 +140,18 @@ export default function Navbar() {
             disableElevation
             sx={{
               ...NB_BUTTON_SX,
-              display: { xs: "none", md: "inline-flex" },
-              px: 2.5,
+              display: "inline-flex",
+              px: { xs: 1.75, md: 2.5 },
               py: 1,
               fontSize: 12,
             }}
           >
-            START A PROJECT
+            <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+              START A PROJECT
+            </Box>
+            <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+              START
+            </Box>
           </Button>
 
           <Button
@@ -153,6 +161,7 @@ export default function Navbar() {
             sx={{
               display: { xs: "inline-flex", lg: "none" },
               ...NB_MONO_SX,
+              ...NB_FOCUS_VISIBLE_SX,
               fontSize: 13,
               fontWeight: 700,
               color: NB_COLORS.ink,
@@ -201,6 +210,7 @@ export default function Navbar() {
             aria-label="Close navigation menu"
             onClick={() => setIsOpen(false)}
             sx={{
+              ...NB_FOCUS_VISIBLE_SX,
               color: NB_COLORS.ink,
               border: NB_RULE,
               borderRadius: 0,
@@ -219,6 +229,7 @@ export default function Navbar() {
               href={link.href}
               onClick={() => setIsOpen(false)}
               sx={{
+                ...NB_FOCUS_VISIBLE_SX,
                 display: "flex",
                 alignItems: "baseline",
                 gap: 2,
@@ -254,6 +265,7 @@ export default function Navbar() {
             href="/#contact"
             onClick={() => setIsOpen(false)}
             sx={{
+              ...NB_FOCUS_VISIBLE_SX,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
         width: 1200,
         height: 630,
         alt: "DripDome Rentals - Props & Set Piece Rentals NYC",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description:
       "Rent props and set pieces from DripDome for your next production in NYC or LA.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_2.JPG",
     ],
   },
 };

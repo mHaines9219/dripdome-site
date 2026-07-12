@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
         width: 1200,
         height: 630,
         alt: "DripDome - Set Design, Pop-Up Activations & Experiential Design NYC & LA",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description:
       "We build worlds. Set design, pop-up activations & experiential design trusted by world-class brands. Custom fabrication for brand experiences & immersive environments in NYC & LA.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
     ],
   },
   alternates: {

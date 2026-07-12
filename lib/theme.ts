@@ -76,6 +76,25 @@ export const NB_OUTLINE_TEXT_SX = {
 
 /* ---------- Interactive hardware ---------- */
 
+/** Keyboard focus ring: hard silver outline, offset so the 2px ink
+ *  border stays visible underneath. Spread into any interactive sx. */
+export const NB_FOCUS_VISIBLE_SX = {
+  "&:focus-visible": {
+    outline: `3px solid ${NB_COLORS.silver}`,
+    outlineOffset: "2px",
+  },
+} as const;
+
+/** Mono label that sits above a form field (pairs with htmlFor/id) */
+export const NB_FIELD_LABEL_SX = {
+  ...NB_MONO_SX,
+  display: "block",
+  fontSize: 12,
+  fontWeight: 700,
+  color: NB_COLORS.steel,
+  mb: 0.75,
+} as const;
+
 const NB_PRESS_MECHANIC = {
   transition: "transform 120ms ease, box-shadow 120ms ease",
   "&:hover": {
@@ -103,6 +122,7 @@ export const NB_BUTTON_SX = {
     bgcolor: NB_COLORS.ink,
   },
   "&:active": NB_PRESS_MECHANIC["&:active"],
+  ...NB_FOCUS_VISIBLE_SX,
   transition: NB_PRESS_MECHANIC.transition,
 } as const;
 
@@ -121,6 +141,7 @@ export const NB_BUTTON_OUTLINE_SX = {
     bgcolor: NB_COLORS.silverLight,
   },
   "&:active": NB_PRESS_MECHANIC["&:active"],
+  ...NB_FOCUS_VISIBLE_SX,
   transition: NB_PRESS_MECHANIC.transition,
 } as const;
 

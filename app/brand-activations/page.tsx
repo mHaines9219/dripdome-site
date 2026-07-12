@@ -10,6 +10,7 @@ import CaseStudiesSection from "./CaseStudiesSection";
 import BrandActivationsFAQ from "./BrandActivationsFAQ";
 import BrandActivationForm from "./BrandActivationForm";
 import BrandActivationsServiceJsonLd from "./BrandActivationsServiceJsonLd";
+import BrandActivationsFAQJsonLd from "./BrandActivationsFAQJsonLd";
 import PageViewTracker from "./PageViewTracker";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome Brand Activation Studio NYC",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     description:
       "From brief to install in 2 weeks. Turnkey brand activation design and fabrication studio in NYC and LA.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg",
     ],
   },
   alternates: {
@@ -52,6 +53,7 @@ export default function BrandActivationsPage() {
   return (
     <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <BrandActivationsServiceJsonLd />
+      <BrandActivationsFAQJsonLd />
       <PageViewTracker />
       <BrandActivationsHero />
       <BrandActivationsProcess />

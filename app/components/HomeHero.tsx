@@ -75,6 +75,7 @@ function Ticker() {
           display: "flex",
           width: "max-content",
           animation: "nb-ticker 28s linear infinite",
+          "&:hover": { animationPlayState: "paused" },
         }}
       >
         {strip("a")}
@@ -260,7 +261,7 @@ export default function HomeHero() {
                   FIG. 01 · NOTLOVELINE SET
                 </Typography>
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  19M+ VIEWS
+                  20M+ VIEWS
                 </Typography>
               </Box>
             </Box>

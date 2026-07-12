@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 import {
   NB_COLORS,
   NB_DISPLAY_SX,
+  NB_FOCUS_VISIBLE_SX,
   NB_MONO_SX,
 } from "@/lib/theme";
 
@@ -15,9 +16,14 @@ const NAV = [
   { name: "ACTIVATIONS", href: "/brand-activations" },
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },
-  // Legacy pages kept live but out of nav: /portfolio, /services
-  // Rentals page taken down from nav for now; route still live at /rentals
-  // { name: "RENTALS", href: "/rentals" },
+];
+
+// Legacy pages: out of the main nav but kept crawlable via the footer
+const ARCHIVE = [
+  { name: "PORTFOLIO", href: "/portfolio" },
+  { name: "SERVICES", href: "/services" },
+  { name: "RENTALS", href: "/rentals" },
+  { name: "VIDEO + PHOTO", href: "/video-photo" },
 ];
 
 const STEEL_RULE = `2px solid ${NB_COLORS.mutedOnInk}`;
@@ -73,6 +79,33 @@ export default function Footer() {
                 href={link.href}
                 sx={{
                   ...NB_MONO_SX,
+                  ...NB_FOCUS_VISIBLE_SX,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: NB_COLORS.paperOnInk,
+                  textDecoration: "none",
+                  "&:hover": { color: NB_COLORS.mutedOnInk },
+                }}
+              >
+                {link.name}
+              </Typography>
+            ))}
+          </Box>
+
+          <Typography
+            sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.mutedOnInk, mt: 3, mb: 1.5 }}
+          >
+            ARCHIVE
+          </Typography>
+          <Box sx={{ display: "flex", flexWrap: "wrap", columnGap: 3, rowGap: 1 }}>
+            {ARCHIVE.map((link) => (
+              <Typography
+                key={link.href}
+                component={Link}
+                href={link.href}
+                sx={{
+                  ...NB_MONO_SX,
+                  ...NB_FOCUS_VISIBLE_SX,
                   fontSize: 13,
                   fontWeight: 700,
                   color: NB_COLORS.paperOnInk,
@@ -107,7 +140,24 @@ export default function Footer() {
 
         <Box sx={{ px: { xs: 3, md: 4 }, py: 3 }}>
           <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.mutedOnInk, mb: 1.5 }}>
-            FOLLOW
+            CONTACT
+          </Typography>
+          <Typography
+            component="a"
+            href="mailto:info@dripdome.com"
+            sx={{
+              ...NB_MONO_SX,
+              ...NB_FOCUS_VISIBLE_SX,
+              display: "block",
+              fontSize: 13,
+              fontWeight: 700,
+              color: NB_COLORS.paperOnInk,
+              textDecoration: "none",
+              mb: 1,
+              "&:hover": { color: NB_COLORS.mutedOnInk },
+            }}
+          >
+            INFO@DRIPDOME.COM
           </Typography>
           <Box
             component="a"
@@ -116,6 +166,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="DripDome Instagram"
             sx={{
+              ...NB_FOCUS_VISIBLE_SX,
               display: "inline-flex",
               alignItems: "center",
               gap: 1,
@@ -152,6 +203,7 @@ export default function Footer() {
           href="/privacy"
           sx={{
             ...NB_MONO_SX,
+            ...NB_FOCUS_VISIBLE_SX,
             fontSize: 10,
             color: NB_COLORS.mutedOnInk,
             textDecoration: "none",

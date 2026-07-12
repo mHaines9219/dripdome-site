@@ -14,11 +14,13 @@ import {
 } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { trackGenerateLead } from "@/lib/analytics";
+import FormStatus, { FormStatusState } from "../components/FormStatus";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
   NB_COLORS,
   NB_DISPLAY_SX,
+  NB_FIELD_LABEL_SX,
   NB_MONO_SX,
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
@@ -72,6 +74,7 @@ export default function BrandActivationForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [budgetRange, setBudgetRange] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatusState>(null);
 
   const handleBudgetChange = (event: SelectChangeEvent<string>) => {
     setBudgetRange(event.target.value);
@@ -166,11 +169,17 @@ export default function BrandActivationForm() {
 
               const captchaValue = recaptchaRef.current?.getValue();
               if (!captchaValue) {
-                alert("Please complete the CAPTCHA");
+                setStatus({
+                  type: "error",
+                  message: "PLEASE COMPLETE THE CAPTCHA BEFORE SENDING.",
+                });
                 return;
               }
               if (!budgetRange) {
-                alert("Please select a budget range");
+                setStatus({
+                  type: "error",
+                  message: "PLEASE SELECT A BUDGET RANGE.",
+                });
                 return;
               }
 
@@ -196,6 +205,7 @@ export default function BrandActivationForm() {
                 formType: "brandActivation",
               };
 
+              setStatus(null);
               setSubmitting(true);
               try {
                 const response = await fetch("/api/contact", {
@@ -206,7 +216,10 @@ export default function BrandActivationForm() {
 
                 if (response.ok) {
                   trackGenerateLead({ form: "brandActivation", value: 500 });
-                  alert("Thank you. Your inquiry is in. We reply within 48 hours.");
+                  setStatus({
+                    type: "success",
+                    message: "INQUIRY RECEIVED. WE REPLY WITHIN 48 HOURS.",
+                  });
                   form.reset();
                   setBudgetRange("");
                   recaptchaRef.current?.reset();
@@ -214,49 +227,46 @@ export default function BrandActivationForm() {
                   throw new Error("Failed to send inquiry");
                 }
               } catch {
-                alert("An error occurred. Please try again.");
+                setStatus({
+                  type: "error",
+                  message:
+                    "SOMETHING WENT WRONG. PLEASE TRY AGAIN OR EMAIL INFO@DRIPDOME.COM.",
+                });
               } finally {
                 setSubmitting(false);
               }
             }}
           >
-            <TextField
-              name="name"
-              placeholder="NAME"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Name" }}
-              sx={FIELD_SX}
-            />
-            <TextField
-              name="email"
-              type="email"
-              placeholder="EMAIL"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Email" }}
-              sx={FIELD_SX}
-            />
-            <TextField
-              name="company"
-              placeholder="COMPANY / AGENCY"
-              required
-              fullWidth
-              inputProps={{ "aria-label": "Company" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography component="label" htmlFor="ba-name" sx={NB_FIELD_LABEL_SX}>
+                NAME
+              </Typography>
+              <TextField id="ba-name" name="name" required fullWidth sx={FIELD_SX} />
+            </Box>
+            <Box>
+              <Typography component="label" htmlFor="ba-email" sx={NB_FIELD_LABEL_SX}>
+                EMAIL
+              </Typography>
+              <TextField
+                id="ba-email"
+                name="email"
+                type="email"
+                required
+                fullWidth
+                sx={FIELD_SX}
+              />
+            </Box>
+            <Box>
+              <Typography component="label" htmlFor="ba-company" sx={NB_FIELD_LABEL_SX}>
+                COMPANY / AGENCY
+              </Typography>
+              <TextField id="ba-company" name="company" required fullWidth sx={FIELD_SX} />
+            </Box>
             <Box>
               <Typography
                 component="label"
                 htmlFor="projectDate"
-                sx={{
-                  ...NB_MONO_SX,
-                  display: "block",
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: NB_COLORS.steel,
-                  mb: 0.75,
-                }}
+                sx={NB_FIELD_LABEL_SX}
               >
                 ESTIMATED PROJECT DATE
               </Typography>
@@ -329,30 +339,36 @@ export default function BrandActivationForm() {
                 ))}
               </Select>
             </FormControl>
-            <TextField
-              name="referral"
-              placeholder="HOW DID YOU HEAR ABOUT US?"
-              fullWidth
-              inputProps={{ "aria-label": "How did you hear about us" }}
-              sx={FIELD_SX}
-            />
-            <TextField
-              name="brief"
-              placeholder="TELL US ABOUT THE PROJECT"
-              required
-              fullWidth
-              multiline
-              minRows={5}
-              inputProps={{ "aria-label": "Brief" }}
-              sx={FIELD_SX}
-            />
+            <Box>
+              <Typography component="label" htmlFor="ba-referral" sx={NB_FIELD_LABEL_SX}>
+                HOW DID YOU HEAR ABOUT US? (OPTIONAL)
+              </Typography>
+              <TextField id="ba-referral" name="referral" fullWidth sx={FIELD_SX} />
+            </Box>
+            <Box>
+              <Typography component="label" htmlFor="ba-brief" sx={NB_FIELD_LABEL_SX}>
+                TELL US ABOUT THE PROJECT
+              </Typography>
+              <TextField
+                id="ba-brief"
+                name="brief"
+                required
+                fullWidth
+                multiline
+                minRows={5}
+                sx={FIELD_SX}
+              />
+            </Box>
 
             <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
               <ReCAPTCHA
                 ref={recaptchaRef}
+                theme="dark"
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               />
             </Box>
+
+            <FormStatus status={status} />
 
             <Button
               type="submit"

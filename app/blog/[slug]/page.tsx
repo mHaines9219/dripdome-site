@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { blogPosts, getPostBySlug } from "../data";
 import BlogPostContent from "./BlogPostContent";
+import Footer from "../../ui/Footer";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -141,6 +142,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <>
       <BlogPostingJsonLd slug={slug} />
       <BlogPostContent slug={slug} />
+      <Footer />
     </>
   );
 }

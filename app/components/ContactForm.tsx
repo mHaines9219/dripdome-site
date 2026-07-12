@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, FormEvent } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { useRef, useState, FormEvent } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendData } from "@/hooks/sendData";
+import FormStatus, { FormStatusState } from "./FormStatus";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
   NB_COLORS,
+  NB_FIELD_LABEL_SX,
   NB_RULE,
   nbShadow,
 } from "@/lib/theme";
@@ -40,19 +42,16 @@ const FIELD_SX = {
 } as const;
 
 const FIELDS = [
-  { name: "name", placeholder: "NAME", type: "text", aria: "Name" },
-  { name: "instagram", placeholder: "INSTAGRAM", type: "text", aria: "Instagram" },
-  { name: "email", placeholder: "EMAIL", type: "email", aria: "Email" },
-  {
-    name: "referral",
-    placeholder: "HOW DID YOU HEAR ABOUT US?",
-    type: "text",
-    aria: "How did you hear about us",
-  },
+  { name: "name", label: "NAME", type: "text" },
+  { name: "instagram", label: "INSTAGRAM", type: "text" },
+  { name: "email", label: "EMAIL", type: "email" },
+  { name: "referral", label: "HOW DID YOU HEAR ABOUT US?", type: "text" },
 ];
 
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatusState>(null);
 
   return (
     <Box
@@ -70,7 +69,10 @@ export default function ContactForm() {
 
         const captchaValue = recaptchaRef.current?.getValue();
         if (!captchaValue) {
-          alert("Please complete the CAPTCHA");
+          setStatus({
+            type: "error",
+            message: "PLEASE COMPLETE THE CAPTCHA BEFORE SENDING.",
+          });
           return;
         }
 
@@ -92,6 +94,8 @@ export default function ContactForm() {
           message: formElements.message.value,
         };
 
+        setStatus(null);
+        setSubmitting(true);
         try {
           const response = await fetch("/api/contact", {
             method: "POST",
@@ -100,53 +104,92 @@ export default function ContactForm() {
             },
             body: JSON.stringify(formData),
           });
-          await sendData(formData);
           if (response.ok) {
-            alert("Thank you! Your message has been sent.");
+            // Fire-and-forget: the CRM webhook must not affect user feedback
+            void sendData(formData).catch(() => {});
+            setStatus({
+              type: "success",
+              message: "MESSAGE RECEIVED. WE REPLY WITHIN 48 HOURS.",
+            });
             form.reset();
             recaptchaRef.current?.reset();
           } else {
             throw new Error("Failed to send message");
           }
         } catch {
-          alert("An error occurred. Please try again.");
+          setStatus({
+            type: "error",
+            message:
+              "SOMETHING WENT WRONG. PLEASE TRY AGAIN OR EMAIL INFO@DRIPDOME.COM.",
+          });
+        } finally {
+          setSubmitting(false);
         }
       }}
     >
       {FIELDS.map((field) => (
+        <Box key={field.name}>
+          <Typography
+            component="label"
+            htmlFor={`contact-${field.name}`}
+            sx={NB_FIELD_LABEL_SX}
+          >
+            {field.label}
+          </Typography>
+          <TextField
+            id={`contact-${field.name}`}
+            name={field.name}
+            type={field.type}
+            required
+            fullWidth
+            sx={FIELD_SX}
+          />
+        </Box>
+      ))}
+      <Box>
+        <Typography
+          component="label"
+          htmlFor="contact-message"
+          sx={NB_FIELD_LABEL_SX}
+        >
+          YOUR MESSAGE
+        </Typography>
         <TextField
-          key={field.name}
-          name={field.name}
-          type={field.type}
-          placeholder={field.placeholder}
+          id="contact-message"
+          name="message"
           required
           fullWidth
-          inputProps={{ "aria-label": field.aria }}
+          multiline
+          minRows={4}
           sx={FIELD_SX}
         />
-      ))}
-      <TextField
-        name="message"
-        placeholder="YOUR MESSAGE"
-        required
-        fullWidth
-        multiline
-        minRows={4}
-        inputProps={{ "aria-label": "Message" }}
-        sx={FIELD_SX}
-      />
+      </Box>
       <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
         <ReCAPTCHA
           ref={recaptchaRef}
+          theme="dark"
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
         />
       </Box>
+      <FormStatus status={status} />
       <Button
         type="submit"
         disableElevation
-        sx={{ ...NB_BUTTON_SX, width: "100%", py: 1.75, fontSize: 14 }}
+        disabled={submitting}
+        sx={{
+          ...NB_BUTTON_SX,
+          width: "100%",
+          py: 1.75,
+          fontSize: 14,
+          "&.Mui-disabled": {
+            bgcolor: NB_COLORS.silverLight,
+            color: NB_COLORS.steel,
+            border: NB_RULE,
+            boxShadow: nbShadow(0),
+          },
+        }}
       >
-        SEND IT →
+        {submitting ? "SENDING..." : "SEND IT →"}
       </Button>
     </Box>
   );

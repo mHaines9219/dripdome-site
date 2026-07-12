@@ -79,6 +79,7 @@ function LogoBelt() {
           display: "flex",
           width: "max-content",
           animation: "nb-ticker 24s linear infinite",
+          "&:hover": { animationPlayState: "paused" },
         }}
       >
         {strip("a")}

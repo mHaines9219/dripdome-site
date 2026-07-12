@@ -167,9 +167,15 @@ const CASE_STUDIES: CaseStudy[] = [
 ];
 
 function useCountUp(target: number, inView: boolean, duration = 1600) {
-  const [count, setCount] = useState(0);
+  // Starts at the target so server HTML carries the real number; the
+  // count-up only runs client-side once in view (and never for
+  // reduced-motion users).
+  const [count, setCount] = useState(target);
   useEffect(() => {
     if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // No synchronous reset: the first interval tick (16ms) starts the
+    // count-up, so the SSR'd target value never visibly flashes.
     let start = 0;
     const increment = target / (duration / 16);
     const timer = setInterval(() => {

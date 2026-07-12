@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/sunnyd/still.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome Video & Photo - Set Design for Productions",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "View our portfolio of video and photo production sets crafted by DripDome in NYC and LA.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/sunnyd/still.jpg",
     ],
   },
 };

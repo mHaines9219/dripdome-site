@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/mattdiana.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome - Women-Owned Set Design Studio NYC",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description:
       "Meet the team behind DripDome. A women-owned, family-run production design studio specializing in set design and fabrication.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/mattdiana.jpg",
     ],
   },
 };

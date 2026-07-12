@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Typography, Collapse } from "@mui/material";
+import { Box, ButtonBase, Typography, Collapse } from "@mui/material";
 import { motion } from "framer-motion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Contact from "../components/Contact";
 import {
   NB_COLORS,
   NB_DISPLAY_SX,
+  NB_FOCUS_VISIBLE_SX,
   NB_MONO_SX,
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
@@ -174,29 +175,33 @@ function ServiceCard({
       transition={{ delay: index * 0.08, duration: 0.5 }}
     >
       <Box
-        onClick={onToggle}
-        role="button"
-        aria-expanded={isExpanded}
         sx={{
-          cursor: "pointer",
-          px: { xs: 3, md: 6 },
-          py: { xs: 2.5, md: 3 },
           borderBottom: NB_RULE,
           color: NB_COLORS.ink,
           bgcolor: isExpanded ? NB_COLORS.silverLight : NB_COLORS.paper,
-          "&:hover": {
-            bgcolor: NB_COLORS.ink,
-            color: NB_COLORS.paperOnInk,
-            "& .svc-muted": { color: NB_COLORS.mutedOnInk },
-          },
         }}
       >
-        <Box
+        <ButtonBase
+          onClick={onToggle}
+          aria-expanded={isExpanded}
+          aria-controls={`service-details-${service.number}`}
           sx={{
+            ...NB_FOCUS_VISIBLE_SX,
+            width: "100%",
+            px: { xs: 3, md: 6 },
+            py: { xs: 2.5, md: 3 },
+            borderRadius: 0,
+            color: "inherit",
+            textAlign: "left",
             display: "grid",
             gridTemplateColumns: { xs: "auto 1fr auto", md: "100px 1fr auto" },
             alignItems: "start",
             gap: { xs: 2, md: 3 },
+            "&:hover": {
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              "& .svc-muted": { color: NB_COLORS.mutedOnInk },
+            },
           }}
         >
           <Typography
@@ -236,18 +241,23 @@ function ServiceCard({
               transition: "transform 0.3s ease",
             }}
           />
-        </Box>
+        </ButtonBase>
 
-        <Collapse in={isExpanded} timeout={300}>
+        <Collapse in={isExpanded} timeout={300} id={`service-details-${service.number}`}>
           <Box
             sx={{
-              mt: 2.5,
-              pt: 2.5,
-              ml: { md: "100px" },
-              pl: { md: 3 },
-              borderTop: "2px solid currentColor",
+              px: { xs: 3, md: 6 },
+              pb: { xs: 2.5, md: 3 },
             }}
           >
+            <Box
+              sx={{
+                pt: 2.5,
+                ml: { md: "100px" },
+                pl: { md: 3 },
+                borderTop: "2px solid currentColor",
+              }}
+            >
             <Typography
               className="svc-muted"
               sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel, mb: 1.5 }}
@@ -279,6 +289,7 @@ function ServiceCard({
                 </Box>
               ))}
             </Box>
+          </Box>
           </Box>
         </Collapse>
       </Box>

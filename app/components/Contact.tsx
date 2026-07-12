@@ -11,8 +11,9 @@ import {
   NB_RULE,
 } from "@/lib/theme";
 
-const DETAILS = [
+const DETAILS: { label: string; value: string; href?: string }[] = [
   { label: "LOCATIONS", value: "NEW YORK CITY + LOS ANGELES" },
+  { label: "EMAIL", value: "INFO@DRIPDOME.COM", href: "mailto:info@dripdome.com" },
   { label: "INSTAGRAM", value: "@DRIPDOME" },
   { label: "RESPONSE TIME", value: "WITHIN 48 HOURS" },
 ];
@@ -84,7 +85,16 @@ export default function Contact() {
                     {row.label}
                   </Typography>
                   <Typography
-                    sx={{ ...NB_MONO_SX, fontSize: 11, fontWeight: 700, color: NB_COLORS.ink }}
+                    component={row.href ? "a" : "p"}
+                    href={row.href}
+                    sx={{
+                      ...NB_MONO_SX,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: NB_COLORS.ink,
+                      textDecoration: row.href ? "underline" : "none",
+                      textUnderlineOffset: 3,
+                    }}
                   >
                     {row.value}
                   </Typography>
