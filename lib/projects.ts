@@ -158,6 +158,28 @@ export const PROJECTS: Project[] = [
       { value: "OFFICIAL", label: "MUSIC VIDEO" },
     ],
   },
+  {
+    slug: "this-is-not-a-billboard",
+    jobNo: "06",
+    client: "VITA KARI",
+    title: "THIS IS NOT A BILLBOARD",
+    vertical: "activation",
+    scope: "PUBLIC ART · SCENIC FABRICATION · ON-SITE INSTALL",
+    blurb: `Fabricated and installed THIS IS NOT A BILLBOARD, a large scale public art installation by artist Vita Kari presented during West Hollywood Pride 2026. From a distance the custom monochromatic structure read as a functioning digital billboard. Up close it revealed live performers inside, turning a commercial advertising format into a living performance piece. Positioned along the Pride parade route, the project was funded through Instagram's Drafts Fund, featured by Instagram Creators, and covered by WeHo Times.`,
+    images: [
+      `${S3}/vita_tinab/1.png`,
+      `${S3}/vita_tinab/2.png`,
+      `${S3}/vita_tinab/3.png`,
+      `${S3}/vita_tinab/4.png`,
+    ],
+    stats: [
+      { value: "8.8M+", label: "SOCIAL VIEWS" },
+      { value: "100K+", label: "WEHO PRIDE ATTENDEES" },
+      { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
+      { value: "PRESS", label: "WEHO TIMES FEATURE" },
+    ],
+    featured: true,
+  },
 ];
 
 export const featuredProjects = () => PROJECTS.filter((p) => p.featured);
