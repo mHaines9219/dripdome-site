@@ -6,7 +6,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {
-  NB_BUTTON_SX,
+  NB_BUTTON_DARK_SX,
   NB_COLORS,
   NB_DISPLAY_SX,
   NB_MONO_SX,
@@ -146,7 +146,7 @@ export default function HowWeWork() {
           href="/#contact"
           disableElevation
           endIcon={<ArrowForwardIcon />}
-          sx={{ ...NB_BUTTON_SX, px: 3.5, py: 1.25, fontSize: 13 }}
+          sx={{ ...NB_BUTTON_DARK_SX, px: 3.5, py: 1.25, fontSize: 13 }}
         >
           START YOUR PROJECT
         </Button>

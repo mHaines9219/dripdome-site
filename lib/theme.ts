@@ -95,15 +95,22 @@ export const NB_FIELD_LABEL_SX = {
   mb: 0.75,
 } as const;
 
+/** Depth color for the button offset shadow. A mid-tone (not the white
+ *  button face) so the raised face and the shadow beneath it read as two
+ *  distinct layers — the 3D press effect. Steel is dark enough to step down
+ *  from the white face, yet light enough to stay visible on the dark paper
+ *  sections where most buttons live. */
+const NB_BUTTON_SHADOW = NB_COLORS.steel;
+
 const NB_PRESS_MECHANIC = {
   transition: "transform 120ms ease, box-shadow 120ms ease",
   "&:hover": {
     transform: "translate(2px, 2px)",
-    boxShadow: nbShadow(NB_SHADOW_OFFSET - 3),
+    boxShadow: nbShadow(NB_SHADOW_OFFSET - 3, NB_BUTTON_SHADOW),
   },
   "&:active": {
     transform: `translate(${NB_SHADOW_OFFSET}px, ${NB_SHADOW_OFFSET}px)`,
-    boxShadow: nbShadow(0),
+    boxShadow: nbShadow(0, NB_BUTTON_SHADOW),
   },
 } as const;
 
@@ -116,7 +123,7 @@ export const NB_BUTTON_SX = {
   border: NB_RULE,
   bgcolor: NB_COLORS.ink,
   color: NB_COLORS.paperOnInk,
-  boxShadow: nbShadow(),
+  boxShadow: nbShadow(NB_SHADOW_OFFSET, NB_BUTTON_SHADOW),
   "&:hover": {
     ...NB_PRESS_MECHANIC["&:hover"],
     bgcolor: NB_COLORS.ink,
@@ -135,10 +142,31 @@ export const NB_BUTTON_OUTLINE_SX = {
   border: NB_RULE,
   bgcolor: NB_COLORS.surface,
   color: NB_COLORS.ink,
-  boxShadow: nbShadow(),
+  boxShadow: nbShadow(NB_SHADOW_OFFSET, NB_BUTTON_SHADOW),
   "&:hover": {
     ...NB_PRESS_MECHANIC["&:hover"],
     bgcolor: NB_COLORS.silverLight,
+  },
+  "&:active": NB_PRESS_MECHANIC["&:active"],
+  ...NB_FOCUS_VISIBLE_SX,
+  transition: NB_PRESS_MECHANIC.transition,
+} as const;
+
+/** Dark button for LIGHT (silver) bands: paper face, ink text. A white
+ *  button washes out on a silver background; this dark face keeps the CTA
+ *  high-contrast. Same border, press mechanic, and depth shadow. */
+export const NB_BUTTON_DARK_SX = {
+  fontFamily: FONT_MONO,
+  fontWeight: 700,
+  letterSpacing: "0.1em",
+  borderRadius: 0,
+  border: NB_RULE,
+  bgcolor: NB_COLORS.paper,
+  color: NB_COLORS.ink,
+  boxShadow: nbShadow(NB_SHADOW_OFFSET, NB_BUTTON_SHADOW),
+  "&:hover": {
+    ...NB_PRESS_MECHANIC["&:hover"],
+    bgcolor: NB_COLORS.paper,
   },
   "&:active": NB_PRESS_MECHANIC["&:active"],
   ...NB_FOCUS_VISIBLE_SX,
