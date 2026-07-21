@@ -4,195 +4,288 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
-import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
 import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-} from "@mui/material";
+  FONT_DISPLAY,
+  NB_BUTTON_SX,
+  NB_COLORS,
+  NB_FOCUS_VISIBLE_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
+
+const links = [
+  { name: "PODCAST STUDIOS", href: "/podcast-studios" },
+  { name: "ACTIVATIONS", href: "/brand-activations" },
+  { name: "ABOUT", href: "/about-us" },
+  { name: "BLOG", href: "/blog" },
+  // Legacy pages kept live but out of nav: /portfolio, /services
+  // Rentals page taken down from nav for now; route still live at /rentals
+  // { name: "RENTALS", href: "/rentals" },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const isOverlay = pathname === "/brand-activations" || pathname === "/";
-
-  const links = [
-    { name: "ABOUT US", href: "/about-us" },
-    { name: "PORTFOLIO", href: "/portfolio" },
-    { name: "SERVICES", href: "/services" },
-    { name: "ACTIVATIONS", href: "/brand-activations" },
-    { name: "RENTALS", href: "/rentals" },
-    { name: "BLOG", href: "/blog" },
-  ];
-
-  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <>
       <AppBar
         component="nav"
-        position="fixed"
+        position="sticky"
         elevation={0}
         sx={{
-          bgcolor: isOverlay ? "rgba(0,0,0,0.25)" : "black",
-          backdropFilter: isOverlay ? "blur(10px)" : undefined,
-          WebkitBackdropFilter: isOverlay ? "blur(10px)" : undefined,
-          left: 0,
-          right: 0,
-          width: "100%",
-
-          mx: "auto",
-          color: "common.white",
-          height: { xs: 95, md: 120 },
-          justifyContent: "center",
-          zIndex: (theme) => theme.zIndex.drawer + 1,
-          px: { md: 5.5 },
+          bgcolor: NB_COLORS.paper,
+          color: NB_COLORS.ink,
+          borderBottom: NB_RULE,
         }}
       >
-        <Container
-          maxWidth={false}
-          sx={{ maxWidth: 2000, px: { xs: 2, md: 0 } }}
+        {/* Tier 1: spec-sheet microbar. Hidden on phones to keep the sticky
+            bar short and make room for the persistent CTA. */}
+        <Box
+          sx={{
+            bgcolor: NB_COLORS.ink,
+            color: NB_COLORS.paperOnInk,
+            display: { xs: "none", md: "flex" },
+            justifyContent: "space-between",
+            px: { xs: 2, md: 4 },
+            py: 0.5,
+          }}
         >
-          <Toolbar disableGutters sx={{ minHeight: "unset" }}>
-            <IconButton
-              component={Link}
-              href="/"
-              aria-label="Home"
+          <Typography sx={{ ...NB_MONO_SX, fontSize: { xs: 10, md: 11 } }}>
+            SET DESIGN + FABRICATION STUDIO
+          </Typography>
+          <Typography sx={{ ...NB_MONO_SX, fontSize: { xs: 10, md: 11 } }}>
+            NYC / LA · NOW BOOKING
+          </Typography>
+        </Box>
+
+        {/* Tier 2: main nav */}
+        <Toolbar
+          disableGutters
+          sx={{
+            minHeight: { xs: 64, md: 76 },
+            px: { xs: 2, md: 4 },
+            gap: 2,
+          }}
+        >
+          <Box
+            component={Link}
+            href="/"
+            aria-label="DripDome home"
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 1.5,
+              textDecoration: "none",
+              color: NB_COLORS.ink,
+              mr: "auto",
+            }}
+          >
+            <Image
+              alt="DripDome logo"
+              src="/assets/dd_logo_200.png"
+              width={48}
+              height={48}
+              priority
+            />
+            <Typography
               sx={{
-                display: { md: "none" },
-                ml: 0.5,
-                borderRadius: 2,
-                color: "common.white",
-                p: 1,
-                "&:hover": { bgcolor: "rgba(0,0,0,0.75)" },
+                fontFamily: FONT_DISPLAY,
+                fontSize: { xs: 18, md: 22 },
+                letterSpacing: "0.02em",
+                display: { xs: "none", sm: "block" },
               }}
             >
-              <HomeTwoToneIcon sx={{ width: 28, height: 28 }} />
-            </IconButton>
+              DRIPDOME
+            </Typography>
+          </Box>
 
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: "flex",
-                justifyContent: { xs: "center", md: "flex-start" },
-                alignItems: "center",
-              }}
-            >
-              <Box
-                component={Link}
-                href="/"
-                aria-label="DripDome home"
-                sx={{ display: "inline-flex", ml: { md: 2 } }}
-              >
-                <Image
-                  alt="DripDome - Set Design & Production Design Studio"
-                  src="/assets/dd_logo_200.png"
-                  width={100}
-                  height={100}
-                  priority
-                />
-              </Box>
+          <Box sx={{ display: { xs: "none", lg: "flex" } }}>
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Button
+                  key={link.name}
+                  component={Link}
+                  href={link.href}
+                  disableRipple
+                  sx={{
+                    ...NB_MONO_SX,
+                    ...NB_FOCUS_VISIBLE_SX,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    borderRadius: 0,
+                    px: 1.75,
+                    py: 1,
+                    color: isActive ? NB_COLORS.paperOnInk : NB_COLORS.ink,
+                    bgcolor: isActive ? NB_COLORS.ink : "transparent",
+                    "&:hover": {
+                      bgcolor: NB_COLORS.ink,
+                      color: NB_COLORS.paperOnInk,
+                    },
+                  }}
+                >
+                  {link.name}
+                </Button>
+              );
+            })}
+          </Box>
+
+          <Button
+            component={Link}
+            href="/#contact"
+            disableElevation
+            sx={{
+              ...NB_BUTTON_SX,
+              display: "inline-flex",
+              px: { xs: 1.75, md: 2.5 },
+              py: 1,
+              fontSize: 12,
+            }}
+          >
+            <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+              START A PROJECT
             </Box>
-
-            <IconButton
-              aria-label="Open navigation menu"
-              onClick={toggleMenu}
-              sx={{ display: { md: "none" }, mr: 1.5, color: "common.white" }}
-            >
-              <MenuIcon sx={{ width: 32, height: 32 }} />
-            </IconButton>
-
-            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
-              {links.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Button
-                    key={link.name}
-                    component={Link}
-                    href={link.href}
-                    sx={{
-                      color: "common.white",
-                      fontSize: 18,
-                      fontWeight: 600,
-                      borderRadius: 0,
-                      borderBottom: isActive
-                        ? "2px solid #E5C767"
-                        : "2px solid transparent",
-                      "&:hover": { color: "#E5C767", bgcolor: "transparent" },
-                    }}
-                  >
-                    {link.name}
-                  </Button>
-                );
-              })}
+            <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+              START
             </Box>
-          </Toolbar>
-        </Container>
+          </Button>
+
+          <Button
+            aria-label="Open navigation menu"
+            onClick={() => setIsOpen(true)}
+            disableRipple
+            sx={{
+              display: { xs: "inline-flex", lg: "none" },
+              ...NB_MONO_SX,
+              ...NB_FOCUS_VISIBLE_SX,
+              fontSize: 13,
+              fontWeight: 700,
+              color: NB_COLORS.ink,
+              border: NB_RULE,
+              borderRadius: 0,
+              px: 2,
+              py: 0.75,
+              "&:hover": {
+                bgcolor: NB_COLORS.ink,
+                color: NB_COLORS.paperOnInk,
+              },
+            }}
+          >
+            MENU
+          </Button>
+        </Toolbar>
       </AppBar>
 
+      {/* Full-screen takeover menu */}
       <Drawer
         anchor="top"
         open={isOpen}
         onClose={() => setIsOpen(false)}
         PaperProps={{
           sx: {
-            bgcolor: "black",
-            color: "common.white",
-            height: "100vh",
+            bgcolor: NB_COLORS.paper,
+            color: NB_COLORS.ink,
+            height: "100dvh",
           },
         }}
       >
         <Box
-          role="presentation"
           sx={{
-            width: "100%",
-            height: "100%",
             display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            justifyContent: "center",
             px: 2,
+            py: 1.5,
+            borderBottom: NB_RULE,
           }}
         >
-          <List sx={{ width: "100%", maxWidth: 420 }}>
-            {links.map((link) => (
-              <ListItem key={link.name} disablePadding sx={{ my: 0.75 }}>
-                <ListItemButton
-                  component={Link}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  sx={{
-                    bgcolor: "rgba(0,0,0,0.7)",
-                    borderRadius: 2,
-                    "&:hover": { color: "#E5C767" },
-                  }}
-                >
-                  <ListItemText
-                    primary={link.name}
-                    primaryTypographyProps={{
-                      align: "center",
-                      fontSize: 22,
-                      fontWeight: 600,
-                    }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+          <Typography sx={{ ...NB_MONO_SX, fontSize: 11 }}>
+            DRIPDOME · INDEX
+          </Typography>
+          <IconButton
+            aria-label="Close navigation menu"
+            onClick={() => setIsOpen(false)}
+            sx={{
+              ...NB_FOCUS_VISIBLE_SX,
+              color: NB_COLORS.ink,
+              border: NB_RULE,
+              borderRadius: 0,
+              p: 0.75,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        <Box component="nav" sx={{ flex: 1, overflowY: "auto" }}>
+          {links.map((link, i) => (
+            <Box
+              key={link.name}
+              component={Link}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              sx={{
+                ...NB_FOCUS_VISIBLE_SX,
+                display: "flex",
+                alignItems: "baseline",
+                gap: 2,
+                px: 2.5,
+                py: 2,
+                borderBottom: NB_RULE,
+                textDecoration: "none",
+                color: NB_COLORS.ink,
+                "&:hover": {
+                  bgcolor: NB_COLORS.ink,
+                  color: NB_COLORS.paperOnInk,
+                },
+              }}
+            >
+              <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+                {String(i + 1).padStart(2, "0")}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: FONT_DISPLAY,
+                  fontSize: { xs: 34, sm: 44 },
+                  lineHeight: 1,
+                  color: "inherit",
+                }}
+              >
+                {link.name}
+              </Typography>
+            </Box>
+          ))}
+
+          <Box
+            component={Link}
+            href="/#contact"
+            onClick={() => setIsOpen(false)}
+            sx={{
+              ...NB_FOCUS_VISIBLE_SX,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              px: 2.5,
+              py: 2.5,
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              textDecoration: "none",
+              "&:hover": { bgcolor: NB_COLORS.steel },
+            }}
+          >
+            <Typography
+              sx={{ fontFamily: FONT_DISPLAY, fontSize: { xs: 34, sm: 44 }, lineHeight: 1 }}
+            >
+              START A PROJECT
+            </Typography>
+            <ArrowOutwardIcon sx={{ fontSize: 36 }} />
+          </Box>
         </Box>
       </Drawer>
-
-      {/* Spacer so content isn't hidden behind the fixed AppBar.
-          Skipped on overlay routes where the hero intentionally sits under the navbar. */}
-      {!isOverlay && <Box sx={{ height: { xs: 95, md: 120 } }} />}
     </>
   );
 }

@@ -3,10 +3,47 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { blogPosts, getAllCategories } from "./data";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+  NB_TAG_SX,
+} from "@/lib/theme";
+
+function FilterButton({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <ButtonBase
+      onClick={onClick}
+      aria-pressed={active}
+      sx={{
+        ...NB_TAG_SX,
+        fontSize: 11,
+        fontWeight: 700,
+        cursor: "pointer",
+        bgcolor: active ? NB_COLORS.ink : NB_COLORS.surface,
+        color: active ? NB_COLORS.paperOnInk : NB_COLORS.ink,
+        "&:hover": {
+          bgcolor: active ? NB_COLORS.ink : NB_COLORS.silverLight,
+        },
+      }}
+    >
+      {label}
+    </ButtonBase>
+  );
+}
 
 export default function BlogContent() {
   const categories = getAllCategories();
@@ -17,290 +54,251 @@ export default function BlogContent() {
     : blogPosts;
 
   return (
-    <Box sx={{ bgcolor: "black", overflow: "hidden", minHeight: "100vh" }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pt: { xs: 6, md: 10 },
-          pb: { xs: 4, md: 6 },
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+    <Box component="main" sx={{ bgcolor: NB_COLORS.paper, minHeight: "100vh" }}>
+      {/* Hero band */}
+      <Box component="section" sx={{ borderBottom: NB_RULE }}>
+        <Box
+          sx={{
+            px: { xs: 3, md: 6 },
+            py: { xs: 5, md: 8 },
+            maxWidth: 1440,
+            mx: "auto",
+          }}
         >
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: "42px", sm: "64px", md: "80px", lg: "96px" },
-              fontWeight: 800,
-              color: "white",
-              textAlign: "center",
-              mb: { xs: 3, md: 4 },
-              letterSpacing: "-0.02em",
-            }}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            THE{" "}
-            <Box
-              component="span"
-              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
+            <Typography
+              sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}
             >
-              BLOG
-            </Box>
-          </Typography>
-        </motion.div>
+              DRIPDOME JOURNAL · FIELD NOTES FROM THE SHOP
+            </Typography>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-        >
-          <Typography
-            sx={{
-              fontSize: { xs: "16px", sm: "18px", md: "22px" },
-              color: "rgba(255,255,255,0.85)",
-              textAlign: "center",
-              maxWidth: "900px",
-              mx: "auto",
-              lineHeight: 1.7,
-            }}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Behind-the-scenes looks at our builds, fabrication deep dives, and
-            insights from the{" "}
-            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
-              DripDome
-            </Box>{" "}
-            studio.
-          </Typography>
-        </motion.div>
-      </Box>
-
-      {/* Category Filter */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 3, md: 4 },
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.6 }}
-        >
-          <Box
-            component="nav"
-            aria-label="Blog categories"
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 1,
-              justifyContent: "center",
-            }}
-          >
-            <Chip
-              label="All"
-              onClick={() => setActiveCategory(null)}
+            <Typography
+              variant="h1"
               sx={{
-                bgcolor: !activeCategory
-                  ? "#E5C767"
-                  : "rgba(255,255,255,0.08)",
-                color: "white",
-                fontWeight: 600,
-                fontSize: "14px",
-                "&:hover": {
-                  bgcolor: !activeCategory
-                    ? "#E5C767"
-                    : "rgba(255,255,255,0.15)",
-                },
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 44, sm: 64, md: 80, lg: 96 },
+                color: NB_COLORS.ink,
+                mb: 3,
               }}
-            />
-            {categories.map((category) => (
-              <Chip
-                key={category}
-                label={category}
-                onClick={() => setActiveCategory(category)}
-                sx={{
-                  bgcolor:
-                    activeCategory === category
-                      ? "#E5C767"
-                      : "rgba(255,255,255,0.08)",
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  "&:hover": {
-                    bgcolor:
-                      activeCategory === category
-                        ? "#E5C767"
-                        : "rgba(255,255,255,0.15)",
-                  },
-                }}
-              />
-            ))}
-          </Box>
-        </motion.div>
+            >
+              THE JOURNAL
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Typography
+              sx={{
+                fontSize: { xs: 16, md: 18 },
+                color: NB_COLORS.ink,
+                maxWidth: 640,
+              }}
+            >
+              Behind-the-scenes looks at our builds, fabrication deep dives,
+              and insights from the DripDome studio.
+            </Typography>
+          </motion.div>
+        </Box>
       </Box>
 
-      {/* Blog Post Grid */}
+      {/* Category filter band */}
       <Box
-        component="section"
-        aria-label="Blog posts"
+        component="nav"
+        aria-label="Blog categories"
         sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          px: { xs: 3, md: 6 },
+          py: { xs: 2, md: 2.5 },
+          borderBottom: NB_RULE,
         }}
       >
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "1fr",
-              sm: "1fr 1fr",
-              lg: "1fr 1fr 1fr",
-            },
-            gap: { xs: 3, md: 4 },
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: 1,
           }}
         >
-          {filteredPosts.map((post, index) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-            >
-              <Link
-                href={`/blog/${post.slug}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Box
-                  sx={{
-                    borderRadius: 3,
-                    overflow: "hidden",
-                    bgcolor: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    transition: "all 0.3s ease",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    "&:hover": {
-                      bgcolor: "rgba(255,255,255,0.06)",
-                      borderColor: "rgba(229,199,103,0.5)",
-                      transform: "translateY(-4px)",
-                    },
-                  }}
-                >
-                  {/* Post Image */}
-                  <Box
-                    sx={{
-                      position: "relative",
-                      width: "100%",
-                      height: 200,
-                      bgcolor: "rgba(255,255,255,0.05)",
-                    }}
-                  >
-                    <Image
-                      src={post.image.url}
-                      alt={post.image.alt}
-                      fill
-                      style={{ objectFit: "cover" }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </Box>
-
-                  {/* Post Content */}
-                  <Box
-                    sx={{
-                      p: { xs: 2.5, md: 3 },
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    {/* Category + Reading Time */}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        mb: 1.5,
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: "12px",
-                          fontWeight: 700,
-                          color: "#E5C767",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {post.category}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: "12px",
-                          color: "rgba(255,255,255,0.5)",
-                        }}
-                      >
-                        {post.readingTime}
-                      </Typography>
-                    </Box>
-
-                    {/* Title */}
-                    <Typography
-                      component="h2"
-                      sx={{
-                        fontSize: { xs: "18px", md: "20px" },
-                        fontWeight: 700,
-                        color: "white",
-                        lineHeight: 1.3,
-                        mb: 1.5,
-                      }}
-                    >
-                      {post.title}
-                    </Typography>
-
-                    {/* Excerpt */}
-                    <Typography
-                      sx={{
-                        fontSize: { xs: "14px", md: "15px" },
-                        color: "rgba(255,255,255,0.7)",
-                        lineHeight: 1.6,
-                        flex: 1,
-                      }}
-                    >
-                      {post.excerpt}
-                    </Typography>
-
-                    {/* Date */}
-                    <Typography
-                      component="time"
-                      dateTime={post.date}
-                      sx={{
-                        fontSize: "13px",
-                        color: "rgba(255,255,255,0.4)",
-                        mt: 2,
-                      }}
-                    >
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Link>
-            </motion.article>
+          <Typography
+            sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel, mr: 1 }}
+          >
+            FILTER:
+          </Typography>
+          <FilterButton
+            label="ALL"
+            active={!activeCategory}
+            onClick={() => setActiveCategory(null)}
+          />
+          {categories.map((category) => (
+            <FilterButton
+              key={category}
+              label={category}
+              active={activeCategory === category}
+              onClick={() => setActiveCategory(category)}
+            />
           ))}
         </Box>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
+          INDEX · {String(filteredPosts.length).padStart(2, "0")}{" "}
+          {filteredPosts.length === 1 ? "ENTRY" : "ENTRIES"}
+        </Typography>
+      </Box>
+
+      {/* Editorial index */}
+      <Box component="section" aria-label="Blog posts">
+        {filteredPosts.map((post, index) => (
+          <motion.article
+            key={post.slug}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.06, duration: 0.5 }}
+          >
+            <Box
+              component={Link}
+              href={`/blog/${post.slug}`}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "64px 260px 1fr 48px" },
+                gap: { xs: 2, md: 4 },
+                alignItems: "center",
+                px: { xs: 3, md: 6 },
+                py: { xs: 3, md: 3.5 },
+                borderBottom: NB_RULE,
+                textDecoration: "none",
+                color: NB_COLORS.ink,
+                "&:hover": {
+                  bgcolor: NB_COLORS.ink,
+                  color: NB_COLORS.paperOnInk,
+                  "& .journal-meta": { color: NB_COLORS.mutedOnInk },
+                },
+              }}
+            >
+              {/* Entry index */}
+              <Typography
+                className="journal-meta"
+                sx={{
+                  ...NB_MONO_SX,
+                  fontSize: 12,
+                  color: NB_COLORS.steel,
+                  display: { xs: "none", md: "block" },
+                }}
+              >
+                E.{String(index + 1).padStart(2, "0")}
+              </Typography>
+
+              {/* Thumbnail */}
+              <Box
+                sx={{
+                  position: "relative",
+                  width: "100%",
+                  height: { xs: 200, md: 150 },
+                  border: NB_RULE,
+                  bgcolor: NB_COLORS.well,
+                }}
+              >
+                <Image
+                  src={post.image.url}
+                  alt={post.image.alt}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 900px) 100vw, 260px"
+                />
+              </Box>
+
+              {/* Entry copy */}
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 1.5,
+                    mb: 1,
+                  }}
+                >
+                  <Typography
+                    className="journal-meta"
+                    sx={{
+                      ...NB_MONO_SX,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: NB_COLORS.steel,
+                    }}
+                  >
+                    {post.category}
+                  </Typography>
+                  <Typography
+                    className="journal-meta"
+                    component="time"
+                    dateTime={post.date}
+                    sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}
+                  >
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </Typography>
+                  <Typography
+                    className="journal-meta"
+                    sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}
+                  >
+                    {post.readingTime}
+                  </Typography>
+                </Box>
+
+                <Typography
+                  component="h2"
+                  sx={{
+                    ...NB_DISPLAY_SX,
+                    fontSize: { xs: 20, md: 24 },
+                    color: "inherit",
+                    mb: 1,
+                  }}
+                >
+                  {post.title}
+                </Typography>
+
+                <Typography
+                  className="journal-meta"
+                  sx={{
+                    fontSize: { xs: 14, md: 15 },
+                    lineHeight: 1.6,
+                    color: NB_COLORS.steel,
+                  }}
+                >
+                  {post.excerpt}
+                </Typography>
+              </Box>
+
+              <ArrowOutwardIcon
+                sx={{
+                  fontSize: 22,
+                  color: "inherit",
+                  display: { xs: "none", md: "block" },
+                  justifySelf: "end",
+                }}
+              />
+            </Box>
+          </motion.article>
+        ))}
       </Box>
     </Box>
   );

@@ -1,162 +1,165 @@
 "use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import { Box, Typography } from "@mui/material";
-import { photographyData } from "../portfolio/data";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, IconButton, Typography } from "@mui/material";
+import { photographyData } from "../portfolio/data";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
-const PhotoPageCarousels: React.FC = () => {
+function ArchiveFilmstrip({ images, alt }: { images: string[]; alt: string }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const handleScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    setIndex(Math.round((el.scrollLeft / maxScroll) * (images.length - 1)));
+  };
+
+  const nudge = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.75, behavior: "smooth" });
+  };
+
   return (
-    <>
-      {/* Mobile Container */}
+    <Box>
       <Box
+        ref={trackRef}
+        onScroll={handleScroll}
         sx={{
-          width: "100%",
-          overflow: "hidden",
-          display: { xs: "flex", md: "none" },
-          flexDirection: "column",
-          gap: "20px",
-          justifyContent: "center",
-          alignItems: "center",
-          p: 1,
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
         }}
       >
-        {photographyData.map((section, index) => (
-          <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
-            <Typography
-              variant="h1"
-              component="h1"
-              color="white"
-              sx={{
-                fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                fontWeight: "bold",
-                paddingTop: { xs: "30px", sm: "50px", md: "80px" },
-                marginBottom: { xs: "20px", md: "30px", lg: "40px" },
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                textAlign: "center",
-              }}
-            >
-              {section.category}
-            </Typography>
-            <Swiper
-              key={index}
-              style={{
-                borderRadius: "20px",
-              }}
-              loop={true}
-              autoplay={{
-                delay: 0,
-                disableOnInteraction: true,
-                reverseDirection: index % 2 === 1,
-              }}
-              speed={1000}
-              slidesPerView={2.5}
-              spaceBetween={30}
-              modules={[Autoplay]}
-              freeMode={true}
-            >
-              {section.images.map((image, idx) => (
-                <SwiperSlide
-                  key={idx}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    height: "100%",
-                    maxWidth: "500px",
-                    aspectRatio: "1",
-                    borderRadius: "20px",
-                  }}
-                >
-                  <Image
-                    src={image}
-                    fill
-                    objectFit="contain"
-                    alt={`${section.category} ${idx + 1}`}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+        {images.map((image, idx) => (
+          <Box
+            key={image}
+            sx={{
+              flex: "0 0 auto",
+              width: { xs: "72%", sm: "44%", md: "30%", lg: "24%" },
+              scrollSnapAlign: "start",
+              borderRight: idx < images.length - 1 ? NB_RULE : "none",
+              position: "relative",
+              aspectRatio: "3 / 4",
+              bgcolor: NB_COLORS.well,
+            }}
+          >
+            <Image
+              src={image}
+              alt={`${alt}, frame ${idx + 1}`}
+              fill
+              sizes="(max-width: 600px) 72vw, (max-width: 900px) 44vw, 24vw"
+              style={{ objectFit: "cover" }}
+              loading="lazy"
+            />
           </Box>
         ))}
       </Box>
 
-      {/* Desktop Container */}
-      <Box
-        sx={{
-          display: { xs: "none", lg: "block" },
-          width: "90dvw",
-          justifySelf: "center",
-          overflow: "hidden",
-        }}
-      >
-        {photographyData.map((section, index) => {
-          return (
-            <Box key={index} sx={{ width: "100%", overflow: "hidden" }}>
-              <Typography
-                variant="h1"
-                component="h1"
-                color="white"
-                sx={{
-                  fontSize: { xs: "30px", sm: "55px", lg: "70px" },
-                  fontWeight: "bold",
-                  paddingTop: { xs: "30px", md: "30px" },
-                  marginBottom: { xs: "20px", md: "30px" },
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  textAlign: "center",
-                }}
-              >
-                {section.category}
-              </Typography>
-              <Swiper
-                key={index}
-                loop={true}
-                autoplay={{
-                  delay: 0,
-                  disableOnInteraction: true,
-                  reverseDirection: index % 2 === 1,
-                }}
-                speed={3000}
-                slidesPerView={3}
-                spaceBetween={40}
-                modules={[Autoplay]}
-                freeMode={true}
-                style={{
-                  borderRadius: "50px",
-                }}
-              >
-                {section.images.map((image, idx) => (
-                  <SwiperSlide
-                    key={idx}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "500px",
-                      height: "600px",
-                    }}
-                  >
-                    <Image
-                      src={image}
-                      fill
-                      objectFit="contain"
-                      alt={`${section.category} ${idx + 1}`}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
-          );
-        })}
+      {/* Control bar */}
+      <Box sx={{ display: "flex", alignItems: "center", borderTop: NB_RULE }}>
+        <IconButton
+          aria-label="Previous frame"
+          onClick={() => nudge(-1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2.5,
+            py: 1,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+        <IconButton
+          aria-label="Next frame"
+          onClick={() => nudge(1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2.5,
+            py: 1,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowForwardIcon />
+        </IconButton>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
+          FRAME {String(index + 1).padStart(2, "0")} /{" "}
+          {String(images.length).padStart(2, "0")}
+        </Typography>
+        <Typography
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            px: 2,
+            ml: "auto",
+            color: NB_COLORS.steel,
+            display: { xs: "none", sm: "block" },
+          }}
+        >
+          DRAG OR SCROLL →
+        </Typography>
       </Box>
+    </Box>
+  );
+}
+
+const PhotoPageCarousels: React.FC = () => {
+  return (
+    <>
+      {photographyData.map((section, index) => (
+        <Box
+          key={section.category}
+          component="section"
+          sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              px: { xs: 3, md: 6 },
+              py: { xs: 3, md: 4 },
+              borderBottom: NB_RULE,
+              flexWrap: "wrap",
+              gap: 1,
+            }}
+          >
+            <Typography
+              variant="h2"
+              sx={{
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 32, sm: 48, lg: 64 },
+                color: NB_COLORS.ink,
+              }}
+            >
+              {section.category}
+            </Typography>
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+              ARCHIVE {String(index + 1).padStart(2, "0")} ·{" "}
+              {String(section.images.length).padStart(2, "0")} FRAMES
+            </Typography>
+          </Box>
+
+          <ArchiveFilmstrip images={section.images} alt={section.category} />
+        </Box>
+      ))}
     </>
   );
 };

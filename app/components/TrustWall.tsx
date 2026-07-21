@@ -2,6 +2,13 @@
 
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com/nu_logo";
 
@@ -22,7 +29,7 @@ const pressLinks = [
   },
   {
     outlet: "Forbes",
-    headline: "Best Canned Cocktail — Original Southside",
+    headline: "Best Canned Cocktail, Original Southside",
     url: "https://www.forbes.com/sites/karlaalindahao/2024/03/01/best-canned-cocktail-original-southside/",
   },
   {
@@ -32,115 +39,51 @@ const pressLinks = [
   },
 ];
 
-function LogoMarquee() {
-  const doubled = [...logos, ...logos];
+function LogoBelt() {
+  const strip = (key: string) => (
+    <Box
+      key={key}
+      aria-hidden={key === "b"}
+      sx={{ display: "flex", alignItems: "center", flexShrink: 0 }}
+    >
+      {logos.map((logo) => (
+        <Box
+          key={logo.alt}
+          sx={{
+            width: { xs: 120, md: 170 },
+            height: { xs: 88, md: 120 },
+            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRight: `2px solid ${NB_COLORS.mutedOnInk}`,
+            px: { xs: 2, md: 3 },
+          }}
+        >
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={140}
+            height={140}
+            style={{ width: "100%", height: "70%", objectFit: "contain" }}
+          />
+        </Box>
+      ))}
+    </Box>
+  );
 
   return (
-    <Box
-      sx={{
-        overflow: "hidden",
-        width: "100%",
-        maskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-      }}
-    >
+    <Box sx={{ overflow: "hidden", display: "flex", bgcolor: NB_COLORS.well }}>
       <Box
         sx={{
           display: "flex",
-          gap: { xs: 4, md: 6 },
           width: "max-content",
-          animation: "marquee-logos 30s linear infinite",
-          alignItems: "center",
+          animation: "nb-ticker 24s linear infinite",
+          "&:hover": { animationPlayState: "paused" },
         }}
       >
-        {doubled.map((logo, i) => (
-          <Box
-            key={i}
-            sx={{
-              width: { xs: 80, sm: 110, md: 140 },
-              height: { xs: 80, sm: 110, md: 140 },
-              flexShrink: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: 0.7,
-              transition: "opacity 0.3s",
-              "&:hover": { opacity: 1 },
-            }}
-          >
-            <Image
-              src={logo.src}
-              alt={logo.alt}
-              width={140}
-              height={140}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            />
-          </Box>
-        ))}
-      </Box>
-    </Box>
-  );
-}
-
-export function TrustPress() {
-  return (
-    <Box
-      component="section"
-      sx={{
-        width: "100%",
-        py: { xs: 5, md: 8 },
-        px: { xs: 2, md: 4 },
-      }}
-    >
-      <Box sx={{ maxWidth: 900, mx: "auto" }}>
-        <Typography
-          sx={{
-            fontSize: { xs: "24px", sm: "40px", lg: "50px" },
-            fontWeight: "bold",
-            color: "white",
-            textAlign: "center",
-            mb: { xs: 2, md: 3 },
-          }}
-        >
-          In the Press
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 1.5,
-            alignItems: "center",
-          }}
-        >
-          {pressLinks.map((item) => (
-            <Typography
-              key={item.url}
-              component="a"
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                color: "rgba(255,255,255,0.6)",
-                fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                textDecoration: "none",
-                letterSpacing: "0.04em",
-                transition: "color 0.2s",
-                "&:hover": { color: "#E5C767" },
-              }}
-            >
-              <Box
-                component="span"
-                sx={{ fontWeight: 700, color: "rgba(255,255,255,0.85)" }}
-              >
-                {item.outlet}
-              </Box>
-              {" — "}
-              {item.headline}
-            </Typography>
-          ))}
-        </Box>
+        {strip("a")}
+        {strip("b")}
       </Box>
     </Box>
   );
@@ -150,26 +93,130 @@ export default function TrustWall() {
   return (
     <Box
       component="section"
-      sx={{
-        width: "100%",
-        py: { xs: 5, md: 8 },
-        px: { xs: 2, md: 4 },
-      }}
+      sx={{ bgcolor: NB_COLORS.ink, borderBottom: NB_RULE }}
     >
-      <Typography
-        variant="h2"
+      <Box
         sx={{
-          fontSize: { xs: "24px", sm: "40px", lg: "50px" },
-          fontWeight: "bold",
-          color: "white",
-          textAlign: "center",
-          mb: { xs: 3, md: 5 },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: 1.25,
+          borderBottom: `2px solid ${NB_COLORS.mutedOnInk}`,
         }}
       >
-        Trusted By
-      </Typography>
+        <Typography
+          variant="h2"
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            fontWeight: 700,
+            color: NB_COLORS.paperOnInk,
+          }}
+        >
+          TRUSTED BY
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.mutedOnInk }}>
+          WORLD-CLASS BRANDS + A-LIST TALENT
+        </Typography>
+      </Box>
+      <LogoBelt />
+    </Box>
+  );
+}
 
-      <LogoMarquee />
+export function TrustPress() {
+  return (
+    <Box
+      component="section"
+      sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
+          }}
+        >
+          IN THE PRESS
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          PRESS INDEX · EXTERNAL LINKS
+        </Typography>
+      </Box>
+
+      {pressLinks.map((item, i) => (
+        <Box
+          key={item.url}
+          component="a"
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "auto 1fr auto", md: "80px 240px 1fr auto" },
+            alignItems: "center",
+            gap: { xs: 2, md: 3 },
+            px: { xs: 3, md: 6 },
+            py: { xs: 2, md: 2.5 },
+            borderBottom: i < pressLinks.length - 1 ? NB_RULE : "none",
+            textDecoration: "none",
+            color: NB_COLORS.ink,
+            "&:hover": {
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              "& .press-meta": { color: NB_COLORS.mutedOnInk },
+            },
+          }}
+        >
+          <Typography
+            className="press-meta"
+            sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
+          >
+            P.{String(i + 1).padStart(2, "0")}
+          </Typography>
+          <Typography
+            sx={{
+              ...NB_MONO_SX,
+              fontSize: { xs: 12, md: 14 },
+              fontWeight: 700,
+              color: "inherit",
+            }}
+          >
+            {item.outlet}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: 14, md: 17 },
+              color: "inherit",
+              gridColumn: { xs: "2 / 4", md: "auto" },
+            }}
+          >
+            {item.headline}
+          </Typography>
+          <ArrowOutwardIcon
+            sx={{
+              fontSize: 20,
+              color: "inherit",
+              display: { xs: "none", md: "block" },
+              justifySelf: "end",
+            }}
+          />
+        </Box>
+      ))}
     </Box>
   );
 }

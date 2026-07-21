@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3 } from "next/font/google";
+import { Source_Sans_3, Archivo_Black, IBM_Plex_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
@@ -15,28 +15,42 @@ const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
 });
 
+const archivoBlack = Archivo_Black({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-display",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.dripdome.com"),
   title:
-    "DripDome | Interior Design, Podcast Studio Builders, Experiential Design & Pop-Up Activations NYC",
+    "DripDome | Set Design, Podcast Studio Builds & Brand Activations | NYC + LA",
   description:
-    "DripDome is a premier interior design, podcast studio builders, and experiential design studio in NYC & LA. We specialize in pop-up activations, brand experiences, custom fabrication, and immersive environments for film, TV, commercials, and experiential marketing campaigns.",
+    "DripDome is a women-owned set design and custom fabrication studio in NYC & LA. We design and build permanent podcast studios, brand activations, pop-ups, and immersive environments. 20M+ views on our set builds. Trusted by Google.",
   keywords:
-    "interior design, podcast studio builders, set design, experiential design, pop-up activations, brand activations, experiential marketing, immersive experiences, pop-up shops, production design, fabrication, New York City, NYC, Los Angeles, custom fabrication, event design, trade show design, retail activations, interactive installations, brand experiences",
+    "set design, podcast studio builders, podcast studio design, brand activations, custom fabrication, experiential design, pop-up activations, experiential marketing, immersive experiences, production design, New York City, NYC, Los Angeles, event design, trade show design, retail activations, interactive installations, brand experiences",
   openGraph: {
     title:
-      "DripDome | Interior Design, Podcast Studio Builders, Experiential Design & Pop-Up Activations NYC",
+      "DripDome | Set Design, Podcast Studio Builds & Brand Activations | NYC + LA",
     description:
-      "Expert interior design, podcast studio builders, set design, experiential design, and pop-up activations in NYC & LA. Custom fabrication for film, TV, brand activations, and immersive experiences.",
+      "Women-owned set design and custom fabrication studio in NYC & LA. Podcast studios, brand activations, and immersive environments designed, built, and installed in-house.",
     type: "website",
     locale: "en_US",
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
         width: 1200,
         height: 630,
-        alt: "DripDome | Interior Design, Podcast Studio Builders, Experiential Design & Pop-Up Activations NYC",
+        alt: "DripDome set build for the NotLoveline podcast studio",
       },
     ],
   },
@@ -54,11 +68,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "DripDome | Interior Design, Podcast Studio Builders, Experiential Design & Pop-Up Activations NYC",
+      "DripDome | Set Design, Podcast Studio Builds & Brand Activations | NYC + LA",
     description:
-      "Expert interior design, podcast studio builders, set design, experiential design, and pop-up activations in NYC & LA. Custom fabrication for film, TV, brand activations, and immersive experiences.",
+      "Women-owned set design and custom fabrication studio in NYC & LA. Podcast studios, brand activations, and immersive environments designed, built, and installed in-house.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
     ],
   },
   alternates: {
@@ -69,7 +83,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: "#131313",
 };
 
 export default function RootLayout({
@@ -78,7 +92,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sourceSans.variable}>
+    <html
+      lang="en"
+      className={`${sourceSans.variable} ${archivoBlack.variable} ${plexMono.variable}`}
+    >
       <head>
         <Script
           id="google-ads-gtag"

@@ -1,5 +1,12 @@
 import { Metadata } from "next";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import Footer from "../ui/Footer";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | DripDome",
@@ -31,31 +38,59 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <Box
-      component="main"
-      sx={{
-        bgcolor: "black",
-        minHeight: "100vh",
-        pt: { xs: 12, md: 16 },
-        pb: 8,
-      }}
-    >
-      <Container maxWidth="md" sx={{ px: { xs: 2, md: 4 } }}>
-        <Typography
-          variant="h1"
-          component="h1"
-          color="white"
+    <>
+      <Box
+        component="main"
+        sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink, minHeight: "60vh" }}
+      >
+        {/* Section header */}
+        <Box
           sx={{
-            fontSize: { xs: "36px", sm: "48px", md: "56px" },
-            fontWeight: "bold",
-            mb: 4,
-            textAlign: "center",
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            px: { xs: 3, md: 6 },
+            py: { xs: 3, md: 4 },
+            borderBottom: NB_RULE,
+            flexWrap: "wrap",
+            gap: 1,
           }}
         >
-          Privacy Policy
-        </Typography>
+          <Typography
+            variant="h1"
+            component="h1"
+            sx={{
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 32, sm: 48, lg: 64 },
+              color: NB_COLORS.ink,
+            }}
+          >
+            PRIVACY POLICY
+          </Typography>
+          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+            LEGAL · DRIPDOME.COM
+          </Typography>
+        </Box>
 
-        <Box sx={{ color: "grey.300", "& > p": { mb: 3 } }}>
+        {/* Policy body */}
+        <Box
+          sx={{
+            px: { xs: 3, md: 6 },
+            py: { xs: 4, md: 6 },
+            maxWidth: 720,
+            "& > p": {
+              mb: 3,
+              fontSize: { xs: 15, md: 17 },
+              lineHeight: 1.7,
+              color: NB_COLORS.ink,
+            },
+            "& a": {
+              color: NB_COLORS.ink,
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+            },
+          }}
+        >
           <Typography variant="body1" component="p">
             Your privacy is important to us. It is our policy to respect your
             privacy regarding any information we may collect from you across our
@@ -103,14 +138,14 @@ export default function PrivacyPolicy() {
           </Typography>
 
           <Typography
-            variant="body1"
             component="p"
-            sx={{ fontStyle: "italic" }}
+            sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, pt: 1 }}
           >
             This policy is effective as of January 1, 2025.
           </Typography>
         </Box>
-      </Container>
-    </Box>
+      </Box>
+      <Footer />
+    </>
   );
 }

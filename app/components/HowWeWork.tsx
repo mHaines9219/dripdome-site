@@ -1,25 +1,34 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { Box, Button, Typography } from "@mui/material";
 import { motion, useInView } from "framer-motion";
-import { BRAND_GRADIENT } from "@/lib/theme";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {
+  NB_BUTTON_DARK_SX,
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_OUTLINE_TEXT_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const steps = [
   {
     number: "01",
     title: "TELL US YOUR VISION",
-    description: "Share your idea — any stage is fine",
+    description: "Share your idea. Any stage is fine.",
   },
   {
     number: "02",
-    title: "WE DESIGN & BUILD",
-    description: "We handle concept, fabrication & logistics",
+    title: "WE DESIGN + BUILD",
+    description: "We handle concept, fabrication and logistics.",
   },
   {
     number: "03",
     title: "YOU SHOW UP TO SOMETHING AMAZING",
-    description: "On-time, on-budget, every time",
+    description: "On-time, on-budget, every time.",
   },
 ];
 
@@ -31,164 +40,113 @@ export default function HowWeWork() {
     <Box
       component="section"
       ref={ref}
-      sx={{
-        width: "100%",
-        maxWidth: "1200px",
-        mx: "auto",
-        px: { xs: 3, md: 6 },
-        py: { xs: 6, md: 10 },
-      }}
+      sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
     >
-      <Typography
-        variant="h2"
-        sx={{
-          fontSize: { xs: "28px", sm: "40px", lg: "50px" },
-          fontWeight: "bold",
-          color: "white",
-          textAlign: "center",
-          mb: { xs: 4, md: 6 },
-        }}
-      >
-        How We Work
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          alignItems: { xs: "flex-start", md: "flex-start" },
-          gap: { xs: 0, md: 3 },
-          position: "relative",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
+          }}
+        >
+          HOW WE WORK
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          PROCESS · THREE STEPS, NO MYSTERY
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
         }}
       >
         {steps.map((step, i) => (
           <motion.div
             key={step.number}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: i * 0.2 }}
-            style={{ flex: 1, width: "100%" }}
+            transition={{ duration: 0.5, delay: i * 0.15 }}
           >
             <Box
               sx={{
-                display: "flex",
-                flexDirection: { xs: "row", md: "column" },
-                alignItems: { xs: "flex-start", md: "center" },
-                textAlign: { xs: "left", md: "center" },
-                gap: { xs: 2, md: 0 },
-                position: "relative",
-                pb: { xs: 3, md: 0 },
+                height: "100%",
+                px: { xs: 3, md: 4 },
+                py: { xs: 3, md: 5 },
+                borderRight: { md: i < steps.length - 1 ? NB_RULE : "none" },
+                borderBottom: { xs: i < steps.length - 1 ? NB_RULE : "none", md: "none" },
               }}
             >
-              {/* Step number circle */}
-              <Box
+              <Typography
                 sx={{
-                  width: 48,
-                  height: 48,
-                  minWidth: 48,
-                  borderRadius: "50%",
-                  border: "2px solid #E5C767",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mb: { md: 2 },
+                  ...NB_OUTLINE_TEXT_SX,
+                  fontSize: { xs: 64, md: 96 },
+                  mb: 2,
                 }}
               >
-                <Typography
-                  sx={{
-                    color: "#E5C767",
-                    fontWeight: 800,
-                    fontSize: "16px",
-                  }}
-                >
-                  {step.number}
-                </Typography>
-              </Box>
-
-              {/* Connecting line (desktop only, between steps) */}
-              {i < steps.length - 1 && (
-                <Box
-                  sx={{
-                    display: { xs: "none", md: "block" },
-                    position: "absolute",
-                    top: 24,
-                    left: "calc(50% + 30px)",
-                    width: "calc(100% - 60px)",
-                    height: "2px",
-                    bgcolor: "rgba(229,199,103,0.25)",
-                  }}
-                />
-              )}
-
-              {/* Connecting line (mobile only, vertical) */}
-              {i < steps.length - 1 && (
-                <Box
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                    position: "absolute",
-                    top: 48,
-                    left: 23,
-                    width: "2px",
-                    height: "calc(100% - 48px)",
-                    bgcolor: "rgba(229,199,103,0.25)",
-                  }}
-                />
-              )}
-
-              <Box>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "14px", sm: "16px", md: "18px" },
-                    fontWeight: 800,
-                    color: "white",
-                    letterSpacing: "0.06em",
-                    mb: 0.5,
-                  }}
-                >
-                  {step.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "13px", sm: "14px" },
-                    color: "rgba(255,255,255,0.6)",
-                  }}
-                >
-                  {step.description}
-                </Typography>
-              </Box>
+                {step.number}
+              </Typography>
+              <Typography
+                sx={{
+                  ...NB_DISPLAY_SX,
+                  fontSize: { xs: 18, md: 22 },
+                  color: NB_COLORS.ink,
+                  mb: 1.5,
+                }}
+              >
+                {step.title}
+              </Typography>
+              <Typography sx={{ fontSize: { xs: 14, md: 16 }, color: NB_COLORS.steel }}>
+                {step.description}
+              </Typography>
             </Box>
           </motion.div>
         ))}
       </Box>
 
-      <Box sx={{ textAlign: "center", mt: { xs: 4, md: 6 } }}>
-        <Button
-          component="a"
-          href="#contact"
-          variant="contained"
-          disableElevation
+      {/* CTA band */}
+      <Box
+        sx={{
+          borderTop: NB_RULE,
+          bgcolor: NB_COLORS.silver,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 2,
+          px: { xs: 3, md: 6 },
+          py: { xs: 2.5, md: 3 },
+          flexWrap: "wrap",
+        }}
+      >
+        <Typography
           sx={{
-            borderRadius: 999,
-            px: 3,
-            py: 1.1,
-            fontWeight: 800,
-            letterSpacing: "0.08em",
-            fontSize: "13px",
-            color: "black",
-            background: BRAND_GRADIENT,
-            boxShadow: "0 10px 30px rgba(229,199,103,0.25)",
-            "&:hover": {
-              background: BRAND_GRADIENT,
-              filter: "brightness(0.92)",
-              boxShadow: "0 12px 34px rgba(229,199,103,0.35)",
-            },
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 20, md: 28 },
+            color: NB_COLORS.onSilver,
           }}
-          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            document
-              .getElementById("contact")
-              ?.scrollIntoView({ behavior: "smooth" });
-          }}
+        >
+          READY WHEN YOU ARE.
+        </Typography>
+        <Button
+          component={Link}
+          href="/#contact"
+          disableElevation
+          endIcon={<ArrowForwardIcon />}
+          sx={{ ...NB_BUTTON_DARK_SX, px: 3.5, py: 1.25, fontSize: 13 }}
         >
           START YOUR PROJECT
         </Button>

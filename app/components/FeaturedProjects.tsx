@@ -1,17 +1,21 @@
 "use client";
 
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { Autoplay, EffectCards } from "swiper/modules";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Box, IconButton, Typography } from "@mui/material";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const sections = [
   {
     header: "LOWER EAST SIDE GIRLS CLUB CHARITY EVENT",
-    blurb: `For a charity event hosted by Lower East Side Girls Club, DripDome Productions created a 10’ × 8’ Alice in Wonderland–inspired photo moment featuring custom, vinyl-wrapped playing cards with the organization’s initials, set against a lush garden wall backdrop. Fabricated off-site and installed in under two hours despite strict venue constraints, the installation was experienced by roughly 200 guests and cited by organizers as the highlight of the evening.
-`,
+    blurb: `For a charity event hosted by Lower East Side Girls Club, DripDome Productions created a 10' × 8' Alice in Wonderland inspired photo moment featuring custom, vinyl-wrapped playing cards with the organization's initials, set against a lush garden wall backdrop. Fabricated off-site and installed in under two hours despite strict venue constraints, the installation was experienced by roughly 200 guests and cited by organizers as the highlight of the evening.`,
     images: [
       "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg",
       "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/render.jpg",
@@ -63,164 +67,193 @@ const sections = [
   },
 ];
 
-const FeaturedProjects = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+function Filmstrip({ images, alt }: { images: string[]; alt: string }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const handleScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    setIndex(Math.round((el.scrollLeft / maxScroll) * (images.length - 1)));
+  };
+
+  const nudge = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.75, behavior: "smooth" });
+  };
 
   return (
-    <Box sx={{ px: 3, width: "100%", overflow: "hidden" }}>
-      {sections.map((section, index) => (
-        <Box
-          key={index}
-          sx={{
-            borderRadius: 4,
-            pt: { md: 8, lg: 8 },
-            mb: 6,
-          }}
-        >
+    <Box>
+      <Box
+        ref={trackRef}
+        onScroll={handleScroll}
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
+        }}
+      >
+        {images.map((image, idx) => (
           <Box
+            key={image}
             sx={{
-              display: "flex",
-              flexDirection: isMobile
-                ? "column"
-                : index % 2 === 0
-                  ? "row"
-                  : "row-reverse",
-              alignItems: "center",
-              mb: "2rem",
-              width: "100%",
-              gap: "1.5rem",
-              overflow: "hidden",
-              border: "4px solid rgba(229, 199, 103, 0.3)",
-              borderRadius: "30px",
-              backgroundColor: "#121212",
-              paddingTop: {
-                xs: "20px",
-                sm: "20px",
-                md: "20px",
-                lg: "20px",
-                xl: "20px",
-              },
-              paddingBottom: {
-                xs: "0px",
-                sm: "20px",
-                md: "20px",
-                lg: "20px",
-                xl: "20px",
-              },
-              paddingLeft: {
-                xs: "0px",
-                sm: "20px",
-                md: "20px",
-                lg: "20px",
-                xl: "20px",
-              },
-              paddingRight: {
-                xs: "0px",
-                sm: "20px",
-                md: "20px",
-                lg: "20px",
-                xl: "20px",
-              },
+              flex: "0 0 auto",
+              width: { xs: "82%", sm: "60%", md: "44%" },
+              scrollSnapAlign: "start",
+              borderRight: idx < images.length - 1 ? NB_RULE : "none",
+              position: "relative",
+              aspectRatio: "4 / 3",
+              bgcolor: NB_COLORS.well,
             }}
           >
-            {/* Swiper with Cards Effect */}
-            <Box
+            <Image
+              src={image}
+              alt={`${alt}, frame ${idx + 1}`}
+              fill
+              sizes="(max-width: 600px) 82vw, 44vw"
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
+        ))}
+      </Box>
+
+      {/* Control bar */}
+      <Box sx={{ display: "flex", alignItems: "center", borderTop: NB_RULE }}>
+        <IconButton
+          aria-label="Previous frame"
+          onClick={() => nudge(-1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2.5,
+            py: 1,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+        <IconButton
+          aria-label="Next frame"
+          onClick={() => nudge(1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2.5,
+            py: 1,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowForwardIcon />
+        </IconButton>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
+          FRAME {String(index + 1).padStart(2, "0")} /{" "}
+          {String(images.length).padStart(2, "0")}
+        </Typography>
+        <Typography
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            px: 2,
+            ml: "auto",
+            color: NB_COLORS.steel,
+            display: { xs: "none", sm: "block" },
+          }}
+        >
+          DRAG OR SCROLL →
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
+const FeaturedProjects = () => {
+  return (
+    <Box sx={{ bgcolor: NB_COLORS.paper }}>
+      {sections.map((section, index) => (
+        <Box
+          key={section.header}
+          sx={{ borderBottom: index < sections.length - 1 ? NB_RULE : "none" }}
+        >
+          {/* Project header bar */}
+          <Box
+            sx={{
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 1.5, md: 3 },
+              px: { xs: 3, md: 6 },
+              py: 1.25,
+              flexWrap: "wrap",
+            }}
+          >
+            <Typography
               sx={{
-                flex: 1,
-                width: "100%",
-                maxWidth: isMobile ? "100%" : "50%",
-                minWidth: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                overflow: "hidden",
+                ...NB_MONO_SX,
+                fontSize: 12,
+                fontWeight: 700,
+                bgcolor: NB_COLORS.silver,
+                color: NB_COLORS.onSilver,
+                px: 1,
+                py: 0.25,
               }}
             >
-              <Swiper
-                effect="cards"
-                grabCursor={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: true,
-                }}
-                cardsEffect={{
-                  perSlideOffset: 8,
-                  perSlideRotate: 2,
-                  rotate: true,
-                  slideShadows: true,
-                }}
-                modules={[EffectCards, Autoplay]}
-                style={{ width: "100%" }}
-              >
-                {section.images.map((image, idx) => (
-                  <SwiperSlide
-                    key={idx}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "100%",
-                        height: {
-                          xs: "300px",
-                          sm: "400px",
-                          md: "500px",
-                          lg: "600px",
-                        },
-                        position: "relative",
-                        borderRadius: "15px",
-                        overflow: "hidden",
-                        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
-                      }}
-                    >
-                      <Image
-                        src={image}
-                        alt={`${section.header}`}
-                        fill
-                        sizes="(max-width: 600px) 90vw, (max-width: 900px) 40vw, 40vw"
-                        style={{
-                          objectFit: "contain",
-                          borderRadius: "15px",
-                        }}
-                      />
-                    </Box>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
+              PROJECT {String(index + 1).padStart(2, "0")}
+            </Typography>
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700 }}>
+              CASE FILE
+            </Typography>
+            <Typography
+              sx={{
+                ...NB_MONO_SX,
+                fontSize: 12,
+                ml: "auto",
+                color: NB_COLORS.mutedOnInk,
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              {String(section.images.length).padStart(2, "0")} FRAMES ON FILE
+            </Typography>
+          </Box>
 
-            {/* Header and Blurb */}
+          <Filmstrip images={section.images} alt={section.header} />
+
+          {/* Project sheet copy */}
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "5fr 7fr" },
+              borderTop: NB_RULE,
+            }}
+          >
             <Box
               sx={{
-                flex: 1,
-                maxWidth: isMobile ? "100%" : "50%",
-                minWidth: 0,
-                textAlign: isMobile ? "center" : "left",
-                p: "0 10px 20px 10px",
+                px: { xs: 3, md: 6 },
+                py: { xs: 2.5, md: 4 },
+                borderRight: { md: NB_RULE },
+                borderBottom: { xs: NB_RULE, md: "none" },
               }}
             >
               <Typography
-                variant="h1"
+                variant="h3"
                 sx={{
-                  fontSize: { xs: "28px", sm: "36px", md: "40px", lg: "50px" },
-                  mb: "1.5rem",
-                  color: "white",
-                  "& span": BRAND_GRADIENT_TEXT_SX,
+                  ...NB_DISPLAY_SX,
+                  fontSize: { xs: 26, sm: 32, md: 38 },
+                  color: NB_COLORS.ink,
                 }}
               >
                 {section.header}
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: { xs: "14px", sm: "18px", md: "20px" },
-                  color: "#e0e0e0",
-                }}
-              >
+            </Box>
+            <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 4 } }}>
+              <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.ink }}>
                 {section.blurb}
               </Typography>
             </Box>

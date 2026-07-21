@@ -1,11 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Typography, Collapse, IconButton } from "@mui/material";
+import { Box, ButtonBase, Typography, Collapse } from "@mui/material";
 import { motion } from "framer-motion";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Contact from "../components/Contact";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_FOCUS_VISIBLE_SX,
+  NB_MONO_SX,
+  NB_OUTLINE_TEXT_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const services = [
   {
@@ -168,90 +175,95 @@ function ServiceCard({
       transition={{ delay: index * 0.08, duration: 0.5 }}
     >
       <Box
-        onClick={onToggle}
         sx={{
-          cursor: "pointer",
-          position: "relative",
-          p: { xs: 2.5, md: 3.5 },
-          borderRadius: 3,
-          bgcolor: "rgba(255,255,255,0.03)",
-          border: "1px solid",
-          borderColor: isExpanded
-            ? "rgba(229,199,103,0.5)"
-            : "rgba(255,255,255,0.1)",
-          transition: "all 0.3s ease",
-          "&:hover": {
-            bgcolor: "rgba(255,255,255,0.06)",
-            borderColor: isExpanded
-              ? "rgba(229,199,103,0.7)"
-              : "rgba(255,255,255,0.2)",
-            transform: "translateY(-2px)",
-          },
+          borderBottom: NB_RULE,
+          color: NB_COLORS.ink,
+          bgcolor: isExpanded ? NB_COLORS.silverLight : NB_COLORS.paper,
         }}
       >
-        <Box
+        <ButtonBase
+          onClick={onToggle}
+          aria-expanded={isExpanded}
+          aria-controls={`service-details-${service.number}`}
           sx={{
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            gap: 2,
+            ...NB_FOCUS_VISIBLE_SX,
+            width: "100%",
+            px: { xs: 3, md: 6 },
+            py: { xs: 2.5, md: 3 },
+            borderRadius: 0,
+            color: "inherit",
+            textAlign: "left",
+            display: "grid",
+            gridTemplateColumns: { xs: "auto 1fr auto", md: "100px 1fr auto" },
+            alignItems: "start",
+            gap: { xs: 2, md: 3 },
+            "&:hover": {
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              "& .svc-muted": { color: NB_COLORS.mutedOnInk },
+            },
           }}
         >
-          <Box sx={{ flex: 1 }}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}>
-              <Typography
-                sx={{
-                  fontSize: { xs: "12px", md: "14px" },
-                  fontWeight: 700,
-                  color: "#E5C767",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                {service.number}
-              </Typography>
-              <Typography
-                variant="h3"
-                sx={{
-                  fontSize: { xs: "18px", sm: "22px", md: "26px" },
-                  fontWeight: 700,
-                  color: "white",
-                  lineHeight: 1.2,
-                }}
-              >
-                {service.title}
-              </Typography>
-            </Box>
+          <Typography
+            className="svc-muted"
+            sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, pt: 0.5 }}
+          >
+            SVC.{service.number}
+          </Typography>
+          <Box>
             <Typography
+              variant="h3"
               sx={{
-                fontSize: { xs: "14px", md: "16px" },
-                color: "rgba(255,255,255,0.7)",
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 18, sm: 22, md: 26 },
+                color: "inherit",
+                mb: 1,
+              }}
+            >
+              {service.title}
+            </Typography>
+            <Typography
+              className="svc-muted"
+              sx={{
+                fontSize: { xs: 14, md: 16 },
+                color: NB_COLORS.steel,
                 lineHeight: 1.6,
               }}
             >
               {service.description}
             </Typography>
           </Box>
-          <IconButton
-            size="small"
+          <ExpandMoreIcon
             sx={{
-              color: "rgba(255,255,255,0.5)",
+              fontSize: 24,
+              color: "inherit",
               transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
               transition: "transform 0.3s ease",
-              "&:hover": { bgcolor: "rgba(255,255,255,0.1)" },
             }}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </Box>
+          />
+        </ButtonBase>
 
-        <Collapse in={isExpanded} timeout={300}>
+        <Collapse in={isExpanded} timeout={300} id={`service-details-${service.number}`}>
           <Box
             sx={{
-              mt: 2.5,
-              pt: 2.5,
-              borderTop: "1px solid rgba(255,255,255,0.1)",
+              px: { xs: 3, md: 6 },
+              pb: { xs: 2.5, md: 3 },
             }}
           >
+            <Box
+              sx={{
+                pt: 2.5,
+                ml: { md: "100px" },
+                pl: { md: 3 },
+                borderTop: "2px solid currentColor",
+              }}
+            >
+            <Typography
+              className="svc-muted"
+              sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel, mb: 1.5 }}
+            >
+              INCLUDES
+            </Typography>
             <Box
               component="ul"
               sx={{
@@ -267,18 +279,17 @@ function ServiceCard({
                   component="li"
                   key={idx}
                   sx={{
-                    color: "rgba(255,255,255,0.85)",
-                    fontSize: { xs: "13px", md: "15px" },
+                    color: "inherit",
+                    fontSize: { xs: 13, md: 15 },
                     lineHeight: 1.6,
-                    "&::marker": {
-                      color: "#E5C767",
-                    },
+                    "&::marker": { color: "inherit" },
                   }}
                 >
                   {detail}
                 </Box>
               ))}
             </Box>
+          </Box>
           </Box>
         </Collapse>
       </Box>
@@ -294,197 +305,141 @@ export default function ServicesContent() {
   };
 
   return (
-    <Box sx={{ bgcolor: "black", overflow: "hidden", minHeight: "100vh" }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pt: { xs: 6, md: 10 },
-          pb: { xs: 4, md: 8 },
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: "42px", sm: "64px", md: "80px", lg: "96px" },
-              fontWeight: 800,
-              color: "white",
-              textAlign: "center",
-              mb: { xs: 3, md: 4 },
-              letterSpacing: "-0.02em",
-            }}
+    <Box sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink, minHeight: "100vh" }}>
+      {/* Hero band */}
+      <Box component="section" sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}>
+        <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 5, md: 8 }, maxWidth: 1440, mx: "auto" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            WHAT WE{" "}
-            <Box
-              component="span"
-              sx={{ display: "inline", ...BRAND_GRADIENT_TEXT_SX }}
-            >
-              DO
-            </Box>
-          </Typography>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-        >
-          <Typography
-            sx={{
-              fontSize: { xs: "16px", sm: "18px", md: "22px" },
-              color: "rgba(255,255,255,0.85)",
-              textAlign: "center",
-              maxWidth: "900px",
-              mx: "auto",
-              lineHeight: 1.7,
-              mb: { xs: 2, md: 3 },
-            }}
-          >
-            At{" "}
-            <Box component="span" sx={{ color: "#E5C767", fontWeight: 600 }}>
-              Drip Dome Productions
-            </Box>
-            , we bring ideas to life through design, fabrication, and
-            storytelling. Our studio blends creativity, technical skill, and
-            resourceful problem solving to create sets, environments, and brand
-            moments that stand out.
-          </Typography>
-        </motion.div>
-      </Box>
-
-      {/* Core Services Header */}
-      <Box sx={{ maxWidth: "1200px", mx: "auto", px: { xs: 2, md: 6 } }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              mb: { xs: 3, md: 4 },
-            }}
-          >
-            <Box
+            <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
+              SERVICES INDEX · NYC + LA
+            </Typography>
+            <Typography
+              variant="h1"
               sx={{
-                height: "2px",
-                flex: 1,
-                background:
-                  "linear-gradient(90deg, transparent, rgba(229,199,103,0.5))",
+                ...NB_DISPLAY_SX,
+                fontSize: { xs: 42, sm: 64, md: 80, lg: 96 },
+                color: NB_COLORS.ink,
+                mb: { xs: 3, md: 4 },
               }}
-            />
+            >
+              WHAT WE{" "}
+              <Box component="span" sx={{ ...NB_OUTLINE_TEXT_SX }}>
+                DO
+              </Box>
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
             <Typography
               sx={{
-                fontSize: { xs: "12px", md: "14px" },
-                fontWeight: 700,
-                color: "#E5C767",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
+                fontSize: { xs: 16, sm: 18, md: 20 },
+                color: NB_COLORS.ink,
+                maxWidth: 820,
+                lineHeight: 1.7,
               }}
             >
-              Our Core Services
+              At{" "}
+              <Box component="span" sx={{ fontWeight: 700 }}>
+                Drip Dome Productions
+              </Box>
+              , we bring ideas to life through design, fabrication, and
+              storytelling. Our studio blends creativity, technical skill, and
+              resourceful problem solving to create sets, environments, and brand
+              moments that stand out.
             </Typography>
-            <Box
-              sx={{
-                height: "2px",
-                flex: 1,
-                background:
-                  "linear-gradient(90deg, rgba(229,199,103,0.5), transparent)",
-              }}
-            />
-          </Box>
-        </motion.div>
-      </Box>
-
-      {/* Services Grid */}
-      <Box
-        sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
-        }}
-      >
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
-            gap: { xs: 2, md: 3 },
-          }}
-        >
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.number}
-              service={service}
-              index={index}
-              isExpanded={expandedIndex === index}
-              onToggle={() => handleToggle(index)}
-            />
-          ))}
+          </motion.div>
         </Box>
       </Box>
 
-      {/* CTA Section */}
+      {/* Services index */}
+      <Box component="section" sx={{ bgcolor: NB_COLORS.paper }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "space-between",
+            px: { xs: 3, md: 6 },
+            py: { xs: 3, md: 4 },
+            borderBottom: NB_RULE,
+            flexWrap: "wrap",
+            gap: 1,
+          }}
+        >
+          <Typography
+            variant="h2"
+            sx={{
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 32, sm: 48, lg: 64 },
+              color: NB_COLORS.ink,
+            }}
+          >
+            OUR CORE SERVICES
+          </Typography>
+          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+            11 LINES · TAP TO EXPAND
+          </Typography>
+        </Box>
+
+        {services.map((service, index) => (
+          <ServiceCard
+            key={service.number}
+            service={service}
+            index={index}
+            isExpanded={expandedIndex === index}
+            onToggle={() => handleToggle(index)}
+          />
+        ))}
+      </Box>
+
+      {/* CTA band */}
       <Box
+        component="section"
         sx={{
-          maxWidth: "1200px",
-          mx: "auto",
-          px: { xs: 2, md: 6 },
-          pb: { xs: 6, md: 10 },
+          bgcolor: NB_COLORS.silver,
+          borderBottom: NB_RULE,
+          px: { xs: 3, md: 6 },
+          py: { xs: 4, md: 6 },
         }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <Box
+          <Typography
+            variant="h2"
             sx={{
-              p: { xs: 4, md: 6 },
-              borderRadius: 4,
-              background:
-                "linear-gradient(135deg, rgba(229,199,103,0.1) 0%, rgba(59,130,246,0.1) 100%)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              textAlign: "center",
+              ...NB_DISPLAY_SX,
+              fontSize: { xs: 24, sm: 32, md: 40 },
+              color: NB_COLORS.onSilver,
+              mb: 2,
             }}
           >
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "24px", sm: "32px", md: "40px" },
-                fontWeight: 700,
-                color: "white",
-                mb: 2,
-              }}
-            >
-              Ready to Build Something Amazing?
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "18px" },
-                color: "rgba(255,255,255,0.7)",
-                maxWidth: "600px",
-                mx: "auto",
-              }}
-            >
-              From the first spark of an idea to the final reveal, we handle
-              every detail. Let&apos;s create something unforgettable together.
-            </Typography>
-          </Box>
+            Ready to Build Something Amazing?
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: 14, md: 18 },
+              color: NB_COLORS.onSilver,
+              maxWidth: 600,
+            }}
+          >
+            From the first spark of an idea to the final reveal, we handle
+            every detail. Let&apos;s create something unforgettable together.
+          </Typography>
         </motion.div>
       </Box>
 
       {/* Contact Section */}
-      <Box component="section" id="contact" sx={{ py: { xs: 6, md: 10 } }}>
+      <Box component="section" id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
         <Contact />
       </Box>
     </Box>

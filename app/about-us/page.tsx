@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import AboutUs from "../components/AboutUs";
 import FoundersSection from "../components/FoundersSection";
 import Contact from "../components/Contact";
+import { NB_COLORS } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "About Us | DripDome - Women-Owned Set Design Studio NYC",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/mattdiana.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome - Women-Owned Set Design Studio NYC",
@@ -34,17 +35,17 @@ export const metadata: Metadata = {
     description:
       "Meet the team behind DripDome. A women-owned, family-run production design studio specializing in set design and fabrication.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/mattdiana.jpg",
     ],
   },
 };
 
 export default function AboutUsPage() {
   return (
-    <Box>
+    <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <AboutUs />
       <FoundersSection />
-      <Box sx={{ bgcolor: "black", py: 10 }}>
+      <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
         <Contact />
       </Box>
     </Box>

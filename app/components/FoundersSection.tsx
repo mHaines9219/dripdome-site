@@ -1,8 +1,15 @@
 "use client";
 import React from "react";
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+  nbShadow,
+} from "@/lib/theme";
 
 const founders = [
   {
@@ -27,127 +34,108 @@ const founders = [
 ];
 
 const FoundersSection = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
-    <Box sx={{ bgcolor: "black" }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0, duration: 0.5 }}
+    <Box
+      component="section"
+      sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
+    >
+      {/* Slim index bar */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: 1.25,
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
       >
-        <Box sx={{ pt: 12, bgcolor: "black" }}>
-          <Box
-            sx={{
-              paddingTop: "0px",
-              textAlign: "center",
-              background: "black",
-            }}
-          >
-            {/* <Typography
-              variant="h3"
-              sx={{
-                fontSize: {
-                  xs: '35px',
-                  sm: '50px',
-                  md: '50px',
-                  lg: '80px',
-                  xl: '80px',
-                },
-              }}
-              gutterBottom
-            >
-              MEET OUR FOUNDERS
-            </Typography> */}
+        <Typography
+          variant="h2"
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 12,
+            fontWeight: 700,
+            color: NB_COLORS.ink,
+          }}
+        >
+          FOUNDERS
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          PERSONNEL FILE · 03 ENTRIES
+        </Typography>
+      </Box>
 
-            {/* Founders Box */}
+      {/* Founder plates */}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "repeat(3, 1fr)" },
+        }}
+      >
+        {founders.map((founder, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2, duration: 0.5 }}
+            style={{ height: "100%" }}
+          >
             <Box
               sx={{
-                padding: "2rem",
-                backgroundColor: "black",
+                height: "100%",
+                px: { xs: 3, md: 4 },
+                py: { xs: 4, md: 5 },
+                borderRight: { sm: index < founders.length - 1 ? NB_RULE : "none" },
+                borderBottom: {
+                  xs: index < founders.length - 1 ? NB_RULE : "none",
+                  sm: "none",
+                },
               }}
             >
+              <Typography
+                sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}
+              >
+                FOUNDER {String(index + 1).padStart(2, "0")}
+              </Typography>
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: isMobile ? "column" : "row",
-                  gap: "2rem",
-                  justifyContent: "center",
-                  alignItems: "center",
+                  position: "relative",
+                  aspectRatio: "1 / 1",
+                  border: NB_RULE,
+                  boxShadow: nbShadow(),
+                  bgcolor: NB_COLORS.surface,
+                  mb: 3,
                 }}
               >
-                {founders.map((founder, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2, duration: 0.5 }}
-                  >
-                    <Box
-                      sx={{
-                        textAlign: "center",
-                        flexShrink: 0,
-                        flexBasis: "12rem",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          width: { xs: 192, lg: 288 },
-                          height: { xs: 192, lg: 288 },
-                          borderRadius: "50%",
-                          overflow: "hidden",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          mb: 4,
-                        }}
-                      >
-                        <Image
-                          src={founder.photo}
-                          width={192}
-                          height={192}
-                          alt={
-                            typeof founder.name === "string"
-                              ? founder.name
-                              : "Founder image"
-                          }
-                          style={{
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "100%",
-                          }}
-                        />
-                      </Box>
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          color: "white",
-                          textAlign: "center",
-                          position: "relative",
-                          "&::after": {
-                            content: '""',
-                            display: "block",
-                            width: "40px",
-                            height: "2px",
-                            bgcolor: "#E5C767",
-                            mx: "auto",
-                            mt: 1,
-                          },
-                        }}
-                      >
-                        {founder.name}
-                      </Typography>
-                    </Box>
-                  </motion.div>
-                ))}
+                <Image
+                  src={founder.photo}
+                  fill
+                  sizes="(max-width: 600px) 90vw, 33vw"
+                  alt={
+                    typeof founder.name === "string"
+                      ? founder.name
+                      : "Founder image"
+                  }
+                  style={{ objectFit: "cover" }}
+                />
               </Box>
+              <Typography
+                variant="h3"
+                sx={{
+                  ...NB_DISPLAY_SX,
+                  fontSize: { xs: 20, md: 24 },
+                  color: NB_COLORS.ink,
+                }}
+              >
+                {founder.name}
+              </Typography>
             </Box>
-          </Box>
-        </Box>
-      </motion.div>
+          </motion.div>
+        ))}
+      </Box>
     </Box>
   );
 };

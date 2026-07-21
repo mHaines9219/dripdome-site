@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
         width: 1200,
         height: 630,
         alt: "DripDome Portfolio - Set Design, Pop-Up Activations & Experiential Projects",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description:
       "View our portfolio of set designs, pop-up activations, brand experiences, and immersive installations for film, TV, and experiential marketing.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/dripdome_logo.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
     ],
   },
 };

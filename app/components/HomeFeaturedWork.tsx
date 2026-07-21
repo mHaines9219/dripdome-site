@@ -1,207 +1,152 @@
 "use client";
 
 import Link from "next/link";
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import Image from "next/image";
-import { Autoplay, EffectCards } from "swiper/modules";
-
-const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com";
-
-const projects = [
-  {
-    header: "GOOGLE PHOTOS VIDEO RECAP CAMPAIGN",
-    blurb: `For a branded project with Google Photos, DripDome Productions led production design, including set design, prop and furniture sourcing, and full set dressing. The shoot featured K-pop star EJAE as the model, with every visual element curated to support a clean, lifestyle-driven aesthetic aligned with the brand.`,
-    images: [
-      `${S3}/goog-photos/ejae.png`,
-      `${S3}/goog-photos/purple.jpg`,
-      `${S3}/goog-photos/red.jpg`,
-      `${S3}/goog-photos/laydown.jpg`,
-    ],
-  },
-  {
-    header: "THE SET OF NOTLOVELINE",
-    blurb: `Our team designed and fabricated the podcast set for Trisha Paytas and Tana Mongeau's NotLoveline show — racking up 19M+ views. We created a vaporwave inspired set with retro wallpaper, a neon sign, and a custom built and wired heart wall with alternating colors.`,
-    images: [
-      `${S3}/NLL/IMG_1.JPG`,
-      `${S3}/NLL/IMG_2.JPG`,
-      `${S3}/NLL/IMG_3.JPG`,
-      `${S3}/NLL/IMG_4.jpeg`,
-      `${S3}/NLL/IMG_5.jpeg`,
-    ],
-  },
-];
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { Box, Typography } from "@mui/material";
+import JobFile from "./JobFile";
+import { PROJECTS, VERTICALS, featuredProjects } from "@/lib/projects";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 export default function HomeFeaturedWork() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const featured = featuredProjects();
 
   return (
     <Box
       component="section"
       id="featured-work"
       sx={{
-        px: 3,
-        width: "100%",
-        overflow: "hidden",
-        py: { xs: 4, md: 6 },
-        scrollMarginTop: "80px",
+        bgcolor: NB_COLORS.paper,
+        borderBottom: NB_RULE,
+        scrollMarginTop: "120px",
       }}
     >
-      <Typography
-        variant="h2"
+      {/* Section header */}
+      <Box
         sx={{
-          fontSize: { xs: "28px", sm: "45px", lg: "55px" },
-          fontWeight: "bold",
-          color: "white",
-          textAlign: "center",
-          mb: { xs: 3, md: 5 },
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
         }}
       >
-        Featured Work
-      </Typography>
-
-      {projects.map((section, index) => (
-        <Box
-          key={index}
-          sx={{
-            borderRadius: 4,
-            pt: { md: 4, lg: 4 },
-            mb: 4,
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: isMobile
-                ? "column"
-                : index % 2 === 0
-                  ? "row"
-                  : "row-reverse",
-              alignItems: "center",
-              mb: "2rem",
-              width: "100%",
-              gap: "1.5rem",
-              overflow: "hidden",
-              border: "4px solid rgba(229, 199, 103, 0.3)",
-              borderRadius: "30px",
-              backgroundColor: "#121212",
-              p: { xs: "20px 0 0 0", sm: "20px" },
-            }}
-          >
-            <Box
-              sx={{
-                flex: 1,
-                width: "100%",
-                maxWidth: isMobile ? "100%" : "50%",
-                minWidth: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                overflow: "hidden",
-              }}
-            >
-              <Swiper
-                effect="cards"
-                grabCursor={true}
-                autoplay={{ delay: 2500, disableOnInteraction: true }}
-                cardsEffect={{
-                  perSlideOffset: 8,
-                  perSlideRotate: 2,
-                  rotate: true,
-                  slideShadows: true,
-                }}
-                modules={[EffectCards, Autoplay]}
-                style={{ width: "100%" }}
-              >
-                {section.images.map((image, idx) => (
-                  <SwiperSlide
-                    key={idx}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "100%",
-                        height: {
-                          xs: "300px",
-                          sm: "400px",
-                          md: "500px",
-                          lg: "600px",
-                        },
-                        position: "relative",
-                        borderRadius: "15px",
-                        overflow: "hidden",
-                        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.3)",
-                      }}
-                    >
-                      <Image
-                        src={image}
-                        alt={section.header}
-                        fill
-                        sizes="(max-width: 600px) 90vw, 40vw"
-                        style={{ objectFit: "contain", borderRadius: "15px" }}
-                      />
-                    </Box>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </Box>
-
-            <Box
-              sx={{
-                flex: 1,
-                maxWidth: isMobile ? "100%" : "50%",
-                minWidth: 0,
-                textAlign: isMobile ? "center" : "left",
-                p: "0 10px 20px 10px",
-              }}
-            >
-              <Typography
-                variant="h3"
-                sx={{
-                  fontSize: { xs: "24px", sm: "32px", md: "36px", lg: "44px" },
-                  mb: "1.5rem",
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                {section.header}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: { xs: "14px", sm: "18px", md: "20px" },
-                  color: "#e0e0e0",
-                }}
-              >
-                {section.blurb}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      ))}
-
-      <Box sx={{ textAlign: "center", mt: 2 }}>
         <Typography
-          component={Link}
-          href="/portfolio"
+          variant="h2"
           sx={{
-            color: "#E5C767",
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: 700,
-            letterSpacing: "0.06em",
-            textDecoration: "none",
-            "&:hover": { textDecoration: "underline" },
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
           }}
         >
-          See All Projects &rarr;
+          THE ARCHIVE
+        </Typography>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          MASTER INDEX · EVERY BUILD ON FILE
         </Typography>
       </Box>
+
+      {featured.map((project) => (
+        <JobFile key={project.slug} project={project} />
+      ))}
+
+      {/* Full index: every job, including legacy verticals */}
+      <Box
+        sx={{
+          px: { xs: 3, md: 6 },
+          py: 1.25,
+          bgcolor: NB_COLORS.silverLight,
+          borderBottom: NB_RULE,
+        }}
+      >
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700, color: NB_COLORS.ink }}>
+          FULL INDEX · {String(PROJECTS.length).padStart(2, "0")} JOBS
+        </Typography>
+      </Box>
+
+      {PROJECTS.map((project, i) => {
+        const vertical = VERTICALS[project.vertical];
+        const href = vertical.href ?? "/#contact";
+        return (
+          <Box
+            key={project.slug}
+            component={Link}
+            href={href}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "auto 1fr auto",
+                md: "80px 240px 1fr auto auto",
+              },
+              alignItems: "center",
+              gap: { xs: 2, md: 3 },
+              px: { xs: 3, md: 6 },
+              py: { xs: 1.75, md: 2 },
+              borderBottom: i < PROJECTS.length - 1 ? NB_RULE : "none",
+              textDecoration: "none",
+              color: NB_COLORS.ink,
+              "&:hover": {
+                bgcolor: NB_COLORS.ink,
+                color: NB_COLORS.paperOnInk,
+                "& .index-meta": { color: NB_COLORS.mutedOnInk },
+              },
+            }}
+          >
+            <Typography
+              className="index-meta"
+              sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
+            >
+              JOB {project.jobNo}
+            </Typography>
+            <Typography
+              sx={{
+                ...NB_MONO_SX,
+                fontSize: { xs: 11, md: 13 },
+                fontWeight: 700,
+                color: "inherit",
+              }}
+            >
+              {project.client}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: 13, md: 16 },
+                color: "inherit",
+                gridColumn: { xs: "2 / 4", md: "auto" },
+              }}
+            >
+              {project.title}
+            </Typography>
+            <Typography
+              className="index-meta"
+              sx={{
+                ...NB_MONO_SX,
+                fontSize: 11,
+                color: NB_COLORS.steel,
+                display: { xs: "none", md: "block" },
+              }}
+            >
+              {vertical.label}
+              {vertical.legacy ? " · LEGACY" : ""}
+            </Typography>
+            <ArrowOutwardIcon
+              sx={{
+                fontSize: 18,
+                color: "inherit",
+                display: { xs: "none", md: "block" },
+                justifySelf: "end",
+              }}
+            />
+          </Box>
+        );
+      })}
     </Box>
   );
 }

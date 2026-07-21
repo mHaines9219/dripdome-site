@@ -1,25 +1,28 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import BrushIcon from "@mui/icons-material/Brush";
-import BuildIcon from "@mui/icons-material/Build";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import { motion } from "framer-motion";
-import { BRAND_GRADIENT_TEXT_SX } from "@/lib/theme";
+import {
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_OUTLINE_TEXT_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 const STEPS = [
   {
-    icon: BrushIcon,
+    number: "01",
     label: "DESIGN",
     desc: "Concept, renders, and brand alignment in the first week.",
   },
   {
-    icon: BuildIcon,
+    number: "02",
     label: "FABRICATION",
     desc: "Built in our NYC shop. No third party vendors, no miscommunication.",
   },
   {
-    icon: LocalShippingIcon,
+    number: "03",
     label: "INSTALL",
     desc: "Turnkey install and strike. Shot ready on day one.",
   },
@@ -28,97 +31,97 @@ const STEPS = [
 export default function BrandActivationsProcess() {
   return (
     <Box
-      sx={{
-        bgcolor: "black",
-        color: "white",
-        px: { xs: 3, md: 8 },
-        py: { xs: 8, md: 12 },
-      }}
+      component="section"
+      sx={{ bgcolor: NB_COLORS.paper, borderBottom: NB_RULE }}
     >
-      <Box sx={{ maxWidth: 1200, mx: "auto", textAlign: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          px: { xs: 3, md: 6 },
+          py: { xs: 3, md: 4 },
+          borderBottom: NB_RULE,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
+      >
         <Typography
           variant="h2"
-          component="h2"
           sx={{
-            fontSize: { xs: "32px", md: "50px", lg: "60px" },
-            fontWeight: "bold",
-            mb: 2,
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 32, sm: 48, lg: 64 },
+            color: NB_COLORS.ink,
           }}
         >
-          <Box component="span" sx={{ color: "white" }}>
-            EVERYTHING UNDER{" "}
-          </Box>
-          <Box component="span" sx={BRAND_GRADIENT_TEXT_SX}>
-            ONE ROOF
-          </Box>
+          EVERYTHING UNDER ONE ROOF
         </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: "16px", md: "20px" },
-            color: "rgba(255,255,255,0.8)",
-            maxWidth: 720,
-            mx: "auto",
-            mb: { xs: 6, md: 8 },
-          }}
-        >
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          PROCESS · DESIGN, FAB, INSTALL
+        </Typography>
+      </Box>
+
+      <Box
+        sx={{
+          px: { xs: 3, md: 6 },
+          py: { xs: 2.5, md: 3 },
+          borderBottom: NB_RULE,
+        }}
+      >
+        <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.steel, maxWidth: 720 }}>
           No handoffs between design and build. Brief to install in a single
           team.
         </Typography>
+      </Box>
 
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
-            gap: { xs: 4, md: 6 },
-          }}
-        >
-          {STEPS.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <motion.div
-                key={step.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+        }}
+      >
+        {STEPS.map((step, i) => (
+          <motion.div
+            key={step.label}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            style={{ height: "100%" }}
+          >
+            <Box
+              sx={{
+                height: "100%",
+                px: { xs: 3, md: 4 },
+                py: { xs: 3, md: 5 },
+                borderRight: { md: i < STEPS.length - 1 ? NB_RULE : "none" },
+                borderBottom: {
+                  xs: i < STEPS.length - 1 ? NB_RULE : "none",
+                  md: "none",
+                },
+              }}
+            >
+              <Typography
+                sx={{ ...NB_OUTLINE_TEXT_SX, fontSize: { xs: 64, md: 96 }, mb: 2 }}
               >
-                <Box
-                  sx={{
-                    p: { xs: 3, md: 4 },
-                    border: "1px solid rgba(229,199,103,0.2)",
-                    borderRadius: 3,
-                    bgcolor: "rgba(229,199,103,0.04)",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                  }}
-                >
-                  <Icon sx={{ fontSize: 48, color: "#E5C767", mb: 2 }} />
-                  <Typography
-                    sx={{
-                      fontSize: { xs: "20px", md: "24px" },
-                      fontWeight: 700,
-                      letterSpacing: "0.05em",
-                      mb: 1.5,
-                    }}
-                  >
-                    {step.label}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: { xs: "15px", md: "16px" },
-                      color: "rgba(255,255,255,0.8)",
-                    }}
-                  >
-                    {step.desc}
-                  </Typography>
-                </Box>
-              </motion.div>
-            );
-          })}
-        </Box>
+                {step.number}
+              </Typography>
+              <Typography
+                sx={{
+                  ...NB_DISPLAY_SX,
+                  fontSize: { xs: 18, md: 22 },
+                  color: NB_COLORS.ink,
+                  mb: 1.5,
+                }}
+              >
+                {step.label}
+              </Typography>
+              <Typography sx={{ fontSize: { xs: 14, md: 16 }, color: NB_COLORS.steel }}>
+                {step.desc}
+              </Typography>
+            </Box>
+          </motion.div>
+        ))}
       </Box>
     </Box>
   );

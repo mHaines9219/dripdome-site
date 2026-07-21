@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 import { rentalEquipment, categories } from "../rentals/data";
+import {
+  NB_BORDER_WIDTH,
+  NB_COLORS,
+  NB_DISPLAY_SX,
+  NB_MONO_SX,
+  NB_RULE,
+} from "@/lib/theme";
 
 export default function RentalGrid() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -21,114 +20,150 @@ export default function RentalGrid() {
       : rentalEquipment.filter((item) => item.category === selectedCategory);
 
   return (
-    <Box sx={{ p: 3, width: "100%" }}>
+    <Box sx={{ width: "100%" }}>
+      {/* Filter bar */}
       <Box
         sx={{
           display: "flex",
-          gap: 2,
+          alignItems: "center",
           flexWrap: "wrap",
-          mb: 6,
-          justifyContent: "center",
+          gap: 1.5,
+          px: { xs: 3, md: 6 },
+          py: { xs: 2, md: 2.5 },
+          borderBottom: NB_RULE,
         }}
       >
-        {categories.map((cat) => (
-          <Chip
-            key={cat}
-            label={cat.toUpperCase()}
-            onClick={() => setSelectedCategory(cat)}
-            variant={selectedCategory === cat ? "filled" : "outlined"}
-            color={selectedCategory === cat ? "primary" : "default"}
-            sx={{
-              bgcolor: selectedCategory === cat ? "#E5C767" : "black",
-              color: "white",
-              borderColor:
-                selectedCategory === cat ? "#E5C767" : "rgba(255,255,255,0.3)",
-              "&:hover": {
-                bgcolor:
-                  selectedCategory === cat
-                    ? "#d1008f"
-                    : "rgba(229, 199, 103, 0.1)",
-                borderColor: "#E5C767",
-              },
-            }}
-          />
-        ))}
-      </Box>
-
-      <Grid container spacing={3} justifyContent="center">
-        {filtered.map((item) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
-            <Card
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mr: 0.5 }}>
+          FILTER:
+        </Typography>
+        {categories.map((cat) => {
+          const selected = selectedCategory === cat;
+          return (
+            <ButtonBase
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              aria-pressed={selected}
               sx={{
-                height: { xs: "300px", sm: "350px", md: "400px" },
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: "rgba(100, 100, 100, 0.5)",
-                justifyContent: "center",
-                alignItems: "center",
-                transition: "box-shadow 0.3s ease",
-                borderRadius: "10px",
+                ...NB_MONO_SX,
+                fontSize: 12,
+                fontWeight: 700,
+                px: 1.5,
+                py: 0.5,
+                border: NB_RULE,
+                borderRadius: 0,
+                bgcolor: selected ? NB_COLORS.ink : NB_COLORS.surface,
+                color: selected ? NB_COLORS.paperOnInk : NB_COLORS.ink,
                 "&:hover": {
-                  boxShadow: 4,
+                  bgcolor: selected ? NB_COLORS.ink : NB_COLORS.silverLight,
                 },
               }}
             >
+              {cat.toUpperCase()}
+            </ButtonBase>
+          );
+        })}
+      </Box>
+
+      {/* Equipment index grid: cells share NB_RULE dividers; the outer
+          negative margin hides the trailing right/bottom rules so the
+          section band supplies the outer frame. */}
+      <Box sx={{ overflow: "hidden" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(4, 1fr)",
+            },
+            mr: `-${NB_BORDER_WIDTH}px`,
+            mb: `-${NB_BORDER_WIDTH}px`,
+          }}
+        >
+          {filtered.map((item, i) => (
+            <Box
+              key={item.name}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                borderRight: NB_RULE,
+                borderBottom: NB_RULE,
+                bgcolor: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.paper,
+              }}
+            >
+              {/* Framed image plate */}
               <Box
                 sx={{
-                  height: "60%",
-                  width: "100%",
+                  borderBottom: NB_RULE,
+                  bgcolor: NB_COLORS.surface,
+                  aspectRatio: "4 / 3",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   overflow: "hidden",
+                  p: 2,
                 }}
               >
-                <CardMedia
-                  component="img"
-                  image={
-                    item.image ||
-                    "https://placehold.co/400x300/1a1a1a/666666?text=Coming+Soon"
-                  }
-                  alt={item.name}
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
-                />
+                {item.image ? (
+                  <Box
+                    component="img"
+                    src={item.image}
+                    alt={item.name}
+                    sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                  />
+                ) : (
+                  <Typography
+                    sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}
+                  >
+                    IMAGE COMING SOON
+                  </Typography>
+                )}
               </Box>
-              <CardContent
+
+              {/* Spec sheet */}
+              <Box sx={{ px: { xs: 2.5, md: 3 }, py: 2, flexGrow: 1 }}>
+                <Typography
+                  sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel, mb: 1 }}
+                >
+                  ITEM {String(i + 1).padStart(2, "0")} · {item.category.toUpperCase()}
+                </Typography>
+                <Typography
+                  component="h3"
+                  sx={{
+                    ...NB_DISPLAY_SX,
+                    fontSize: { xs: 16, md: 18 },
+                    color: NB_COLORS.ink,
+                  }}
+                >
+                  {item.name}
+                </Typography>
+              </Box>
+
+              {/* Terms strip */}
+              <Box
                 sx={{
+                  px: { xs: 2.5, md: 3 },
+                  py: 1,
+                  borderTop: NB_RULE,
                   display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  textAlign: "center",
+                  justifyContent: "space-between",
+                  gap: 1,
                 }}
               >
-                <Typography
-                  variant="h6"
-                  component="h3"
-                  gutterBottom
-                  sx={{ color: "white" }}
-                >
-                  {item.name.toUpperCase()}
+                <Typography sx={{ ...NB_MONO_SX, fontSize: 10, color: NB_COLORS.steel }}>
+                  MIN RENTAL
                 </Typography>
                 <Typography
-                  variant="body2"
-                  sx={{
-                    fontSize: "12px",
-                    color: "#E5C767",
-                  }}
-                  gutterBottom
+                  sx={{ ...NB_MONO_SX, fontSize: 10, fontWeight: 700, color: NB_COLORS.ink }}
                 >
-                  {item.category.toUpperCase()}
+                  1 WEEK
                 </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 }
