@@ -92,6 +92,7 @@ export default function HomeFeaturedWork() {
               borderBottom: i < PROJECTS.length - 1 ? NB_RULE : "none",
               textDecoration: "none",
               color: NB_COLORS.ink,
+              transition: "background-color 150ms ease, color 150ms ease",
               "&:hover": {
                 bgcolor: NB_COLORS.ink,
                 color: NB_COLORS.paperOnInk,

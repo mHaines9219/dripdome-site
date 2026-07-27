@@ -112,6 +112,18 @@ body {
   }
 }
 
+/* Image loading placeholder: mono label pulses on the silver well until the
+   image reports loaded. See NBImage. */
+@keyframes nb-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 /* WCAG 2.2.2 / 2.3.3: stop marquees, count-ups, and reveals for users who
    ask for reduced motion. Framer-motion is handled by MotionConfig in
    ClientLayout; this covers CSS keyframe animations and transitions. */
