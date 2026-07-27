@@ -19,7 +19,7 @@ const STEPS = [
   {
     number: "02",
     label: "FABRICATION",
-    desc: "Built in our NYC shop. No third party vendors, no miscommunication.",
+    desc: "Built in our NYC shop and with trusted specialist vendors, coordinated under one point of contact.",
   },
   {
     number: "03",

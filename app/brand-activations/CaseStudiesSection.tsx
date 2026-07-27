@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import Image from "next/image";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import NBImage from "../components/NBImage";
 import { motion, useInView } from "framer-motion";
 import {
   NB_COLORS,
@@ -43,7 +46,11 @@ type CaseStudy = {
   headline: string;
   copy: string;
   image: string;
+  /** When set, the plate renders a scroll-snap carousel instead of one image. */
+  images?: string[];
   imageAlt: string;
+  /** CSS object-position for the plate image when it crops badly at center. */
+  imagePosition?: string;
   youtubeId?: string;
   hero: HeroMetric;
   breakdown?: { title: string; slices: DonutSlice[] };
@@ -87,6 +94,7 @@ const CASE_STUDIES: CaseStudy[] = [
     image:
       "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/ejae.png",
     imageAlt: "Google Photos brand campaign set design with EJAE",
+    imagePosition: "50% 17%",
     hero: {
       kind: "count",
       target: 214,
@@ -103,27 +111,6 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     number: "03",
-    client: "TRISHA PAYTAS x TANA MONGEAU",
-    category: "PODCAST SET BUILD",
-    headline: "Vaporwave set delivered in 4 days for a show now past 20M views.",
-    copy: "Designed and fabricated the NotLoveLine podcast studio for Trisha Paytas and Tana Mongeau in four days. Vaporwave inspired environment anchored by a hand wired LED neon heart wall with alternating color sequences. The set has since carried 65+ episodes and crossed 20 million YouTube views with 230K+ subscribers.",
-    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
-    imageAlt: "NotLoveline podcast set build",
-    hero: {
-      kind: "count",
-      target: 20,
-      suffix: "M+",
-      label: "YOUTUBE VIEWS",
-      note: "Across 65+ episodes on the permanent build",
-    },
-    stats: [
-      { value: "230K+", label: "SUBSCRIBERS" },
-      { value: "65+", label: "EPISODES SHOT" },
-      { value: "4 DAYS", label: "BUILD TIMELINE" },
-    ],
-  },
-  {
-    number: "04",
     client: "WHETHAN x EMEI",
     category: "PROMOTIONAL MUSIC VIDEO",
     headline: "Sunny D coded world built for the 'SUNNYD' music video.",
@@ -145,12 +132,18 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "05",
+    number: "04",
     client: "THE ORIGINAL SOUTHSIDE",
     category: "AD CAMPAIGN + PRODUCT LAUNCH",
     headline: "Forbes-featured launch for a modern bottled cocktail brand.",
     copy: "Collaborated with The Original Southside on their launch ad campaign. Scope included prop sourcing, styling, and custom vinyl wraps that reinforced a modern twist on the classic 1920s Southside cocktail. The campaign and product were later named among Forbes' Best Canned Cocktails.",
     image: "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss3.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss4.png",
+    ],
     imageAlt: "The Original Southside ad campaign set",
     hero: {
       kind: "text",
@@ -438,6 +431,108 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
   );
 }
 
+function Carousel({ images, alt }: { images: string[]; alt: string }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const handleScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setIndex(Math.round(el.scrollLeft / el.clientWidth));
+  };
+
+  const nudge = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth, behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <Box
+        ref={trackRef}
+        onScroll={handleScroll}
+        sx={{
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          overflowX: "auto",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
+        }}
+      >
+        {images.map((image, i) => (
+          <Box
+            key={image}
+            sx={{
+              flex: "0 0 100%",
+              height: "100%",
+              position: "relative",
+              scrollSnapAlign: "start",
+            }}
+          >
+            <NBImage
+              src={image}
+              alt={`${alt}, frame ${i + 1}`}
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              style={{ objectFit: "cover" }}
+            />
+          </Box>
+        ))}
+      </Box>
+
+      {/* Overlaid NB controls: square arrows + frame counter */}
+      <Box
+        sx={{
+          position: "absolute",
+          left: 0,
+          bottom: 0,
+          display: "flex",
+          alignItems: "center",
+          bgcolor: NB_COLORS.paper,
+          borderTop: NB_RULE,
+          borderRight: NB_RULE,
+        }}
+      >
+        <IconButton
+          aria-label="Previous frame"
+          onClick={() => nudge(-1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2,
+            py: 0.75,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowBackIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          aria-label="Next frame"
+          onClick={() => nudge(1)}
+          sx={{
+            borderRadius: 0,
+            borderRight: NB_RULE,
+            color: NB_COLORS.ink,
+            px: 2,
+            py: 0.75,
+            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
+          }}
+        >
+          <ArrowForwardIcon fontSize="small" />
+        </IconButton>
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
+          {String(index + 1).padStart(2, "0")} /{" "}
+          {String(images.length).padStart(2, "0")}
+        </Typography>
+      </Box>
+    </>
+  );
+}
+
 function CaseStudyCard({ study }: { study: CaseStudy }) {
   const metricsRef = useRef<HTMLDivElement>(null);
   const metricsInView = useInView(metricsRef, { once: true, amount: 0.3 });
@@ -520,13 +615,18 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                 border: 0,
               }}
             />
+          ) : study.images ? (
+            <Carousel images={study.images} alt={study.imageAlt} />
           ) : (
             <Image
               src={study.image}
               alt={study.imageAlt}
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
-              style={{ objectFit: "cover" }}
+              style={{
+                objectFit: "cover",
+                objectPosition: study.imagePosition ?? "center",
+              }}
             />
           )}
         </Box>
@@ -621,13 +721,13 @@ export default function CaseStudiesSection() {
           SELECTED WORK
         </Typography>
         <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
-          CASE FILES · 05 ENTRIES
+          CASE FILES · 04 ENTRIES
         </Typography>
       </Box>
 
       <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 3 } }}>
         <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.steel, maxWidth: 720 }}>
-          Five recent builds across charity, tech, creator, music, and CPG.
+          Four recent builds across charity, tech, music, and CPG.
           Same studio. Same team. Very different briefs.
         </Typography>
       </Box>

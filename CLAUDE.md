@@ -37,13 +37,14 @@ Every active route is converted to this system. The legacy champagne-gold tokens
 
 ### Routes
 
-The site is organized around two specialty verticals (podcast studios, brand activations) with the home page acting as the master work archive. Set design and music videos are sunset services: kept in the archive index and taken "for the right project," but not promoted with dedicated pages or nav items. `/portfolio`, `/services`, and `/rentals` remain live but are intentionally out of the nav.
+The site is organized around three specialty verticals (podcast studios, brand activations, interior/office design) with the home page acting as the master work archive. Set design and music videos are sunset services: kept in the archive index and taken "for the right project," but not promoted with dedicated pages or nav items. `/portfolio`, `/services`, and `/rentals` remain live but are intentionally out of the nav.
 
 | Route | Purpose |
 |-------|---------|
 | `/` | Home: hero, specialties router ("What do you need built?"), master work archive (featured job files + full index) |
 | `/podcast-studios` | Vertical landing page for podcasters/networks. Hero, proof band, build spec sheet, shipped builds, intake |
 | `/brand-activations` | Vertical landing page + Google Ads LP. Budget-qualified inquiry form fires `generate_lead` conversion |
+| `/interior-office-design` | Vertical landing page for offices/interiors. Hero (Seismic HQ image), proof band, scope spec sheet, shipped builds, intake |
 | `/blog` | Blog listing with category filtering |
 | `/blog/[slug]` | Dynamic blog post pages |
 | `/blog/feed.xml` | RSS feed (route handler) |
@@ -58,7 +59,7 @@ The site is organized around two specialty verticals (podcast studios, brand act
 
 Blog, portfolio, rentals, and services data live in co-located `data.ts` files (e.g., `app/blog/data.ts`). No database. Blog posts store full HTML content as template literal strings in the `content` field.
 
-**Project registry**: `lib/projects.ts` is the single source of truth for build projects. Each `Project` has a `vertical` key (`podcast`, `activation`, `setDesign`, `musicVideo` — the latter two flagged `legacy`), images, stats, and a `featured` flag. The home archive renders featured projects as full job files plus a complete index table; vertical pages filter with `projectsByVertical()`. Add a project there and it flows to every surface.
+**Project registry**: `lib/projects.ts` is the single source of truth for build projects. Each `Project` has a `vertical` key (`podcast`, `activation`, `interior`, `setDesign`, `musicVideo` — the latter two flagged `legacy`), images, stats, and a `featured` flag. The home archive renders featured projects as full job files plus a complete index table; vertical pages filter with `projectsByVertical()`. Add a project there and it flows to every surface.
 
 ### API
 

@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: REDESIGN_DATE,
     },
     {
+      path: "/interior-office-design",
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+      lastModified: REDESIGN_DATE,
+    },
+    {
       path: "/blog",
       priority: 0.8,
       changeFrequency: "weekly" as const,

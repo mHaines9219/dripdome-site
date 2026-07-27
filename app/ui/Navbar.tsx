@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -19,6 +18,7 @@ import {
 const links = [
   { name: "PODCAST STUDIOS", href: "/podcast-studios" },
   { name: "ACTIVATIONS", href: "/brand-activations" },
+  { name: "OFFICE DESIGN", href: "/interior-office-design" },
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },
   // Legacy pages kept live but out of nav: /portfolio, /services
@@ -78,25 +78,16 @@ export default function Navbar() {
             sx={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 1.5,
               textDecoration: "none",
               color: NB_COLORS.ink,
               mr: "auto",
             }}
           >
-            <Image
-              alt="DripDome logo"
-              src="/assets/dd_logo_200.png"
-              width={48}
-              height={48}
-              priority
-            />
             <Typography
               sx={{
                 fontFamily: FONT_DISPLAY,
                 fontSize: { xs: 18, md: 22 },
                 letterSpacing: "0.02em",
-                display: { xs: "none", sm: "block" },
               }}
             >
               DRIPDOME

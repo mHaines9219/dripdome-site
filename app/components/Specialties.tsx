@@ -28,6 +28,14 @@ const SPECIALTIES = [
     proof: "TRUSTED BY GOOGLE · FEATURED IN FORBES",
     copy: "Pop-ups, photo moments, and launch campaigns. Concept to strike, fabricated in-house and installed on your timeline.",
   },
+  {
+    index: "S.03",
+    title: "OFFICE DESIGN",
+    href: "/interior-office-design",
+    buyer: "FOR FOUNDERS + OPERATORS",
+    proof: "FLATIRON HQ FOR SEISMIC SYSTEMS",
+    copy: "Offices, studios, and interiors that look like the company inside them. Space planning, custom signage, furniture, and styling, installed turnkey.",
+  },
 ];
 
 export default function Specialties() {
@@ -56,14 +64,14 @@ export default function Specialties() {
           WHAT DO YOU NEED BUILT?
         </Typography>
         <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
-          TWO SPECIALTIES · ONE SHOP
+          THREE SPECIALTIES · ONE SHOP
         </Typography>
       </Box>
 
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
         }}
       >
         {SPECIALTIES.map((spec, i) => (
@@ -75,12 +83,13 @@ export default function Specialties() {
               display: "flex",
               flexDirection: "column",
               gap: 2,
-              px: { xs: 3, md: 6 },
-              py: { xs: 4, md: 6 },
-              borderRight: { md: i === 0 ? NB_RULE : "none" },
-              borderBottom: { xs: i === 0 ? NB_RULE : "none", md: "none" },
+              px: { xs: 3, md: 4 },
+              py: { xs: 4, md: 5 },
+              borderRight: { md: i < SPECIALTIES.length - 1 ? NB_RULE : "none" },
+              borderBottom: { xs: i < SPECIALTIES.length - 1 ? NB_RULE : "none", md: "none" },
               textDecoration: "none",
               color: NB_COLORS.ink,
+              transition: "background-color 150ms ease, color 150ms ease",
               "&:hover": {
                 bgcolor: NB_COLORS.ink,
                 color: NB_COLORS.paperOnInk,
@@ -104,7 +113,7 @@ export default function Specialties() {
               className="spec-outline"
               sx={{
                 ...NB_OUTLINE_TEXT_SX,
-                fontSize: { xs: 36, sm: 48, lg: 60 },
+                fontSize: { xs: 36, sm: 44, md: 34, lg: 44 },
               }}
             >
               {spec.title}

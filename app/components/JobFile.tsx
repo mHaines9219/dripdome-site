@@ -2,11 +2,11 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import NBImage from "./NBImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
-import type { Project } from "@/lib/projects";
+import type { Project, ProjectImage } from "@/lib/projects";
 import { VERTICALS } from "@/lib/projects";
 import {
   NB_COLORS,
@@ -15,7 +15,15 @@ import {
   NB_RULE,
 } from "@/lib/theme";
 
-function Filmstrip({ images, alt }: { images: string[]; alt: string }) {
+function Filmstrip({
+  images,
+  alt,
+  objectPosition = "center",
+}: {
+  images: ProjectImage[];
+  alt: string;
+  objectPosition?: string;
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
 
@@ -46,9 +54,15 @@ function Filmstrip({ images, alt }: { images: string[]; alt: string }) {
           "&::-webkit-scrollbar": { display: "none" },
         }}
       >
-        {images.map((image, idx) => (
+        {images.map((image, idx) => {
+          const src = typeof image === "string" ? image : image.src;
+          const position =
+            typeof image === "string"
+              ? objectPosition
+              : image.position ?? objectPosition;
+          return (
           <Box
-            key={image}
+            key={src}
             sx={{
               flex: "0 0 auto",
               width: { xs: "82%", sm: "60%", md: "44%" },
@@ -59,15 +73,16 @@ function Filmstrip({ images, alt }: { images: string[]; alt: string }) {
               bgcolor: NB_COLORS.silverLight,
             }}
           >
-            <Image
-              src={image}
+            <NBImage
+              src={src}
               alt={`${alt}, frame ${idx + 1}`}
               fill
               sizes="(max-width: 600px) 82vw, 44vw"
-              style={{ objectFit: "cover" }}
+              style={{ objectFit: "cover", objectPosition: position }}
             />
           </Box>
-        ))}
+          );
+        })}
       </Box>
 
       {/* Control bar */}
@@ -189,7 +204,11 @@ export default function JobFile({ project }: { project: Project }) {
         </Typography>
       </Box>
 
-      <Filmstrip images={project.images} alt={project.title} />
+      <Filmstrip
+        images={project.images}
+        alt={project.title}
+        objectPosition={project.imagePosition}
+      />
 
       {/* Job sheet copy */}
       <Box
