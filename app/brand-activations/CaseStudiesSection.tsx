@@ -13,6 +13,7 @@ import {
   NB_MONO_SX,
   NB_RULE,
 } from "@/lib/theme";
+import { useDragScroll } from "@/lib/useDragScroll";
 
 // Metrics below reflect real numbers where available. LESGC reach is estimated
 // (see note field on the hero). Southside has no quantitative data yet, so the
@@ -433,6 +434,7 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
 
 function Carousel({ images, alt }: { images: string[]; alt: string }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const drag = useDragScroll(trackRef);
   const [index, setIndex] = useState(0);
 
   const handleScroll = () => {
@@ -452,7 +454,10 @@ function Carousel({ images, alt }: { images: string[]; alt: string }) {
       <Box
         ref={trackRef}
         onScroll={handleScroll}
+        {...drag}
         sx={{
+          cursor: "grab",
+          userSelect: "none",
           display: "flex",
           width: "100%",
           height: "100%",
