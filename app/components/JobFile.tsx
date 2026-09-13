@@ -24,15 +24,129 @@ const RENDER_WIDTH_MD = 0.22;
 // Silver gutter that separates the concept render from the build frames.
 const RENDER_DIVIDER_PX = 28;
 
+/**
+ * Concept render figure plus the silver "RENDER -> BUILD" gutter. Shared by
+ * the home / vertical job files and the brand activations case studies so a
+ * render reads the same on every surface. Stacks above the frames on phones.
+ */
+export function RenderPanel({
+  render,
+  alt,
+  widthMd = RENDER_WIDTH_MD,
+}: {
+  render: ProjectRender;
+  alt: string;
+  /** Fraction of the row the render column takes from tablet up. */
+  widthMd?: number;
+}) {
+  return (
+    <>
+      <Box
+        sx={{
+          flex: { xs: "none", md: `0 0 ${widthMd * 100}%` },
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: NB_COLORS.silverLight,
+          px: { xs: 3, md: 2.5 },
+          py: { xs: 2.5, md: 2 },
+        }}
+      >
+        {/* Outlined figure: ink frame + hard offset shadow, mono caption */}
+        <Box
+          component="figure"
+          sx={{
+            m: 0,
+            width: { xs: "62%", sm: "44%", md: "100%" },
+            maxWidth: 360,
+            bgcolor: NB_COLORS.paper,
+            border: NB_RULE,
+            boxShadow: nbShadow(),
+            // Leave room for the shadow inside the padded column.
+            mr: `${NB_SHADOW_OFFSET}px`,
+            mb: `${NB_SHADOW_OFFSET}px`,
+          }}
+        >
+          <Box
+            sx={{
+              position: "relative",
+              aspectRatio: "4 / 3",
+              borderBottom: NB_RULE,
+            }}
+          >
+            <NBImage
+              src={render.src}
+              alt={`${alt}, concept render`}
+              fill
+              sizes="(max-width: 900px) 60vw, 22vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: render.position ?? "center",
+              }}
+            />
+          </Box>
+          <Typography
+            component="figcaption"
+            sx={{
+              ...NB_MONO_SX,
+              px: 1,
+              py: 0.5,
+              fontSize: 10,
+              fontWeight: 700,
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+            }}
+          >
+            FIG. 00 · 3D RENDER
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        aria-hidden
+        sx={{
+          flex: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: NB_COLORS.silver,
+          color: NB_COLORS.onSilver,
+          width: { xs: "auto", md: RENDER_DIVIDER_PX },
+          height: { xs: RENDER_DIVIDER_PX, md: "auto" },
+          borderTop: { xs: NB_RULE, md: "none" },
+          borderBottom: { xs: NB_RULE, md: "none" },
+          borderLeft: { md: NB_RULE },
+          borderRight: { md: NB_RULE },
+        }}
+      >
+        <Typography
+          sx={{
+            ...NB_MONO_SX,
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            whiteSpace: "nowrap",
+            writingMode: { xs: "horizontal-tb", md: "vertical-rl" },
+            transform: { md: "rotate(180deg)" },
+          }}
+        >
+          RENDER → BUILD
+        </Typography>
+      </Box>
+    </>
+  );
+}
+
 function Filmstrip({
   images,
   alt,
   objectPosition = "center",
+  objectFit = "contain",
   render,
 }: {
   images: ProjectImage[];
   alt: string;
   objectPosition?: string;
+  objectFit?: "cover" | "contain";
   render?: ProjectRender;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -56,101 +170,7 @@ function Filmstrip({
   return (
     <Box>
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
-        {render && (
-          <Box
-            sx={{
-              flex: { xs: "none", md: `0 0 ${RENDER_WIDTH_MD * 100}%` },
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              bgcolor: NB_COLORS.silverLight,
-              px: { xs: 3, md: 2.5 },
-              py: { xs: 2.5, md: 2 },
-            }}
-          >
-            {/* Outlined figure: ink frame + hard offset shadow, mono caption */}
-            <Box
-              component="figure"
-              sx={{
-                m: 0,
-                width: { xs: "62%", sm: "44%", md: "100%" },
-                maxWidth: 360,
-                bgcolor: NB_COLORS.paper,
-                border: NB_RULE,
-                boxShadow: nbShadow(),
-                // Leave room for the shadow inside the padded column.
-                mr: `${NB_SHADOW_OFFSET}px`,
-                mb: `${NB_SHADOW_OFFSET}px`,
-              }}
-            >
-              <Box
-                sx={{
-                  position: "relative",
-                  aspectRatio: "4 / 3",
-                  borderBottom: NB_RULE,
-                }}
-              >
-                <NBImage
-                  src={render.src}
-                  alt={`${alt}, concept render`}
-                  fill
-                  sizes="(max-width: 900px) 60vw, 22vw"
-                  style={{
-                    objectFit: "cover",
-                    objectPosition: render.position ?? "center",
-                  }}
-                />
-              </Box>
-              <Typography
-                component="figcaption"
-                sx={{
-                  ...NB_MONO_SX,
-                  px: 1,
-                  py: 0.5,
-                  fontSize: 10,
-                  fontWeight: 700,
-                  bgcolor: NB_COLORS.ink,
-                  color: NB_COLORS.paperOnInk,
-                }}
-              >
-                FIG. 00 · 3D RENDER
-              </Typography>
-            </Box>
-          </Box>
-        )}
-        {render && (
-          <Box
-            aria-hidden
-            sx={{
-              flex: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              bgcolor: NB_COLORS.silver,
-              color: NB_COLORS.onSilver,
-              width: { xs: "auto", md: RENDER_DIVIDER_PX },
-              height: { xs: RENDER_DIVIDER_PX, md: "auto" },
-              borderTop: { xs: NB_RULE, md: "none" },
-              borderBottom: { xs: NB_RULE, md: "none" },
-              borderLeft: { md: NB_RULE },
-              borderRight: { md: NB_RULE },
-            }}
-          >
-            <Typography
-              sx={{
-                ...NB_MONO_SX,
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                whiteSpace: "nowrap",
-                writingMode: { xs: "horizontal-tb", md: "vertical-rl" },
-                transform: { md: "rotate(180deg)" },
-              }}
-            >
-              RENDER → BUILD
-            </Typography>
-          </Box>
-        )}
+        {render && <RenderPanel render={render} alt={alt} />}
         <Box
           ref={trackRef}
           onScroll={handleScroll}
@@ -183,7 +203,9 @@ function Filmstrip({
                   borderRight: idx < images.length - 1 ? NB_RULE : "none",
                   position: "relative",
                   aspectRatio: "4 / 3",
-                  bgcolor: NB_COLORS.silverLight,
+                  // Frames letterbox the whole photo; the dark well hides
+                  // the bars instead of drawing light bands around them.
+                  bgcolor: NB_COLORS.well,
                 }}
               >
                 <NBImage
@@ -191,7 +213,7 @@ function Filmstrip({
                   alt={`${alt}, frame ${idx + 1}`}
                   fill
                   sizes="(max-width: 600px) 82vw, 44vw"
-                  style={{ objectFit: "cover", objectPosition: position }}
+                  style={{ objectFit, objectPosition: position }}
                 />
               </Box>
             );
@@ -256,7 +278,17 @@ export default function JobFile({ project }: { project: Project }) {
   const vertical = VERTICALS[project.vertical];
 
   return (
-    <Box sx={{ borderBottom: NB_RULE }}>
+    // Job files sit in an 80% column of the page frame from tablet up (full
+    // bleed on phones), with side rules so each sheet reads as its own card.
+    <Box
+      sx={{
+        width: { xs: "100%", md: "80%" },
+        mx: "auto",
+        borderBottom: NB_RULE,
+        borderLeft: { md: NB_RULE },
+        borderRight: { md: NB_RULE },
+      }}
+    >
       {/* Job header bar */}
       <Box
         sx={{
@@ -324,6 +356,7 @@ export default function JobFile({ project }: { project: Project }) {
         images={project.images}
         alt={project.title}
         objectPosition={project.imagePosition}
+        objectFit={project.imageFit}
         render={project.render}
       />
 

@@ -38,6 +38,26 @@ export const NB_SHADOW_OFFSET = 6;
 /** 2px solid ink rule, the default border everywhere */
 export const NB_RULE = `${NB_BORDER_WIDTH}px solid ${NB_COLORS.ink}`;
 
+/* ---------- Page frame ---------- */
+/** Max content width of the page sheet. Every route renders inside a
+ *  centered frame of this width (see app/components/PageFrame.tsx), so
+ *  on wide monitors sections never run to the window edge. */
+export const NB_PAGE_MAX_WIDTH = 1440;
+
+/** Horizontal gutter between the page sheet and the window edge.
+ *  Zero on phones (full bleed), opens up from tablet width. Spread this
+ *  on any full-bleed wrapper that needs to line up with the sheet. */
+export const NB_PAGE_GUTTER_SX = {
+  px: { xs: 0, md: 3, lg: 5 },
+} as const;
+
+/** Centered, width-capped column that matches the page sheet */
+export const NB_PAGE_WIDTH_SX = {
+  width: "100%",
+  maxWidth: NB_PAGE_MAX_WIDTH,
+  mx: "auto",
+} as const;
+
 /** Hard zero-blur offset shadow */
 export const nbShadow = (
   px: number = NB_SHADOW_OFFSET,

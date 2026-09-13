@@ -43,6 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: REDESIGN_DATE,
     },
     {
+      path: "/set-design",
+      priority: 0.9,
+      changeFrequency: "monthly" as const,
+      lastModified: new Date("2026-09-12"),
+    },
+    {
       path: "/blog",
       priority: 0.8,
       changeFrequency: "weekly" as const,
