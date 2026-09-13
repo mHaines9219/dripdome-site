@@ -6,25 +6,37 @@ import NBImage from "./NBImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
-import type { Project, ProjectImage } from "@/lib/projects";
+import type { Project, ProjectImage, ProjectRender } from "@/lib/projects";
 import { VERTICALS } from "@/lib/projects";
 import {
   NB_COLORS,
   NB_DISPLAY_SX,
   NB_MONO_SX,
   NB_RULE,
+  NB_SHADOW_OFFSET,
+  nbShadow,
 } from "@/lib/theme";
+import { useDragScroll } from "@/lib/useDragScroll";
+
+// Concept render column: a small outlined figure pinned beside the build
+// frames, not a full-bleed panel. Frames keep their normal width.
+const RENDER_WIDTH_MD = 0.22;
+// Silver gutter that separates the concept render from the build frames.
+const RENDER_DIVIDER_PX = 28;
 
 function Filmstrip({
   images,
   alt,
   objectPosition = "center",
+  render,
 }: {
   images: ProjectImage[];
   alt: string;
   objectPosition?: string;
+  render?: ProjectRender;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const drag = useDragScroll(trackRef);
   const [index, setIndex] = useState(0);
 
   const handleScroll = () => {
@@ -43,46 +55,148 @@ function Filmstrip({
 
   return (
     <Box>
-      <Box
-        ref={trackRef}
-        onScroll={handleScroll}
-        sx={{
-          display: "flex",
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
-          scrollbarWidth: "none",
-          "&::-webkit-scrollbar": { display: "none" },
-        }}
-      >
-        {images.map((image, idx) => {
-          const src = typeof image === "string" ? image : image.src;
-          const position =
-            typeof image === "string"
-              ? objectPosition
-              : image.position ?? objectPosition;
-          return (
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
+        {render && (
           <Box
-            key={src}
             sx={{
-              flex: "0 0 auto",
-              width: { xs: "82%", sm: "60%", md: "44%" },
-              scrollSnapAlign: "start",
-              borderRight: idx < images.length - 1 ? NB_RULE : "none",
-              position: "relative",
-              aspectRatio: "4 / 3",
+              flex: { xs: "none", md: `0 0 ${RENDER_WIDTH_MD * 100}%` },
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               bgcolor: NB_COLORS.silverLight,
+              px: { xs: 3, md: 2.5 },
+              py: { xs: 2.5, md: 2 },
             }}
           >
-            <NBImage
-              src={src}
-              alt={`${alt}, frame ${idx + 1}`}
-              fill
-              sizes="(max-width: 600px) 82vw, 44vw"
-              style={{ objectFit: "cover", objectPosition: position }}
-            />
+            {/* Outlined figure: ink frame + hard offset shadow, mono caption */}
+            <Box
+              component="figure"
+              sx={{
+                m: 0,
+                width: { xs: "62%", sm: "44%", md: "100%" },
+                maxWidth: 360,
+                bgcolor: NB_COLORS.paper,
+                border: NB_RULE,
+                boxShadow: nbShadow(),
+                // Leave room for the shadow inside the padded column.
+                mr: `${NB_SHADOW_OFFSET}px`,
+                mb: `${NB_SHADOW_OFFSET}px`,
+              }}
+            >
+              <Box
+                sx={{
+                  position: "relative",
+                  aspectRatio: "4 / 3",
+                  borderBottom: NB_RULE,
+                }}
+              >
+                <NBImage
+                  src={render.src}
+                  alt={`${alt}, concept render`}
+                  fill
+                  sizes="(max-width: 900px) 60vw, 22vw"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: render.position ?? "center",
+                  }}
+                />
+              </Box>
+              <Typography
+                component="figcaption"
+                sx={{
+                  ...NB_MONO_SX,
+                  px: 1,
+                  py: 0.5,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  bgcolor: NB_COLORS.ink,
+                  color: NB_COLORS.paperOnInk,
+                }}
+              >
+                FIG. 00 · 3D RENDER
+              </Typography>
+            </Box>
           </Box>
-          );
-        })}
+        )}
+        {render && (
+          <Box
+            aria-hidden
+            sx={{
+              flex: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              bgcolor: NB_COLORS.silver,
+              color: NB_COLORS.onSilver,
+              width: { xs: "auto", md: RENDER_DIVIDER_PX },
+              height: { xs: RENDER_DIVIDER_PX, md: "auto" },
+              borderTop: { xs: NB_RULE, md: "none" },
+              borderBottom: { xs: NB_RULE, md: "none" },
+              borderLeft: { md: NB_RULE },
+              borderRight: { md: NB_RULE },
+            }}
+          >
+            <Typography
+              sx={{
+                ...NB_MONO_SX,
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+                whiteSpace: "nowrap",
+                writingMode: { xs: "horizontal-tb", md: "vertical-rl" },
+                transform: { md: "rotate(180deg)" },
+              }}
+            >
+              RENDER → BUILD
+            </Typography>
+          </Box>
+        )}
+        <Box
+          ref={trackRef}
+          onScroll={handleScroll}
+          {...drag}
+          sx={{
+            cursor: "grab",
+            userSelect: "none",
+            flex: 1,
+            minWidth: 0,
+            display: "flex",
+            overflowX: "auto",
+            scrollSnapType: "x mandatory",
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+          }}
+        >
+          {images.map((image, idx) => {
+            const src = typeof image === "string" ? image : image.src;
+            const position =
+              typeof image === "string"
+                ? objectPosition
+                : (image.position ?? objectPosition);
+            return (
+              <Box
+                key={src}
+                sx={{
+                  flex: "0 0 auto",
+                  width: { xs: "82%", sm: "60%", md: "44%" },
+                  scrollSnapAlign: "start",
+                  borderRight: idx < images.length - 1 ? NB_RULE : "none",
+                  position: "relative",
+                  aspectRatio: "4 / 3",
+                  bgcolor: NB_COLORS.silverLight,
+                }}
+              >
+                <NBImage
+                  src={src}
+                  alt={`${alt}, frame ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 600px) 82vw, 44vw"
+                  style={{ objectFit: "cover", objectPosition: position }}
+                />
+              </Box>
+            );
+          })}
+        </Box>
       </Box>
 
       {/* Control bar */}
@@ -115,7 +229,9 @@ function Filmstrip({
         >
           <ArrowForwardIcon />
         </IconButton>
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
+        <Typography
+          sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}
+        >
           FRAME {String(index + 1).padStart(2, "0")} /{" "}
           {String(images.length).padStart(2, "0")}
         </Typography>
@@ -208,6 +324,7 @@ export default function JobFile({ project }: { project: Project }) {
         images={project.images}
         alt={project.title}
         objectPosition={project.imagePosition}
+        render={project.render}
       />
 
       {/* Job sheet copy */}
@@ -239,19 +356,26 @@ export default function JobFile({ project }: { project: Project }) {
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
             {project.stats.map((stat) => (
-              <Box
-                key={stat.label}
-                sx={{ border: NB_RULE, px: 1.25, py: 0.5 }}
-              >
+              <Box key={stat.label} sx={{ border: NB_RULE, px: 1.25, py: 0.5 }}>
                 <Typography
                   component="span"
-                  sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700, color: NB_COLORS.ink }}
+                  sx={{
+                    ...NB_MONO_SX,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: NB_COLORS.ink,
+                  }}
                 >
                   {stat.value}
                 </Typography>
                 <Typography
                   component="span"
-                  sx={{ ...NB_MONO_SX, fontSize: 10, color: NB_COLORS.steel, ml: 0.75 }}
+                  sx={{
+                    ...NB_MONO_SX,
+                    fontSize: 10,
+                    color: NB_COLORS.steel,
+                    ml: 0.75,
+                  }}
                 >
                   {stat.label}
                 </Typography>
@@ -260,7 +384,9 @@ export default function JobFile({ project }: { project: Project }) {
           </Box>
         </Box>
         <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 4 } }}>
-          <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.ink }}>
+          <Typography
+            sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.ink }}
+          >
             {project.blurb}
           </Typography>
         </Box>

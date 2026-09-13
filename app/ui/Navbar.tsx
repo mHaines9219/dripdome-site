@@ -42,27 +42,6 @@ export default function Navbar() {
           borderBottom: NB_RULE,
         }}
       >
-        {/* Tier 1: spec-sheet microbar. Hidden on phones to keep the sticky
-            bar short and make room for the persistent CTA. */}
-        <Box
-          sx={{
-            bgcolor: NB_COLORS.ink,
-            color: NB_COLORS.paperOnInk,
-            display: { xs: "none", md: "flex" },
-            justifyContent: "space-between",
-            px: { xs: 2, md: 4 },
-            py: 0.5,
-          }}
-        >
-          <Typography sx={{ ...NB_MONO_SX, fontSize: { xs: 10, md: 11 } }}>
-            SET DESIGN + FABRICATION STUDIO
-          </Typography>
-          <Typography sx={{ ...NB_MONO_SX, fontSize: { xs: 10, md: 11 } }}>
-            NYC / LA · NOW BOOKING
-          </Typography>
-        </Box>
-
-        {/* Tier 2: main nav */}
         <Toolbar
           disableGutters
           sx={{
