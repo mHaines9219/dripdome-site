@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   title:
     "DripDome | Set Design, Podcast Studio Builds & Brand Activations | NYC + LA",
   description:
-    "DripDome is a women-owned set design and custom fabrication studio in NYC & LA. We design and build permanent podcast studios, brand activations, pop-ups, and immersive environments. 20M+ views on our set builds. Trusted by Google.",
+    "DripDome is a women-owned set design and custom fabrication studio in NYC & LA. We design and build permanent podcast studios, brand activations, pop-ups, and immersive environments. 30M+ views on our set builds. Trusted by Google.",
   keywords:
     "set design, podcast studio builders, podcast studio design, brand activations, custom fabrication, experiential design, pop-up activations, experiential marketing, immersive experiences, production design, New York City, NYC, Los Angeles, event design, trade show design, retail activations, interactive installations, brand experiences",
   openGraph: {

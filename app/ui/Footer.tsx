@@ -9,11 +9,14 @@ import {
   NB_DISPLAY_SX,
   NB_FOCUS_VISIBLE_SX,
   NB_MONO_SX,
+  NB_PAGE_MAX_WIDTH,
 } from "@/lib/theme";
 
 const NAV = [
   { name: "PODCAST STUDIOS", href: "/podcast-studios" },
   { name: "ACTIVATIONS", href: "/brand-activations" },
+  { name: "OFFICE DESIGN", href: "/interior-office-design" },
+  { name: "SET DESIGN", href: "/set-design" },
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },
 ];
@@ -40,7 +43,7 @@ export default function Footer() {
           aria-hidden
           sx={{
             ...NB_DISPLAY_SX,
-            fontSize: { xs: "17vw", md: "11vw" },
+            fontSize: { xs: "17vw", md: `min(11vw, ${NB_PAGE_MAX_WIDTH * 0.11}px)` },
             lineHeight: 0.85,
             color: NB_COLORS.paperOnInk,
             whiteSpace: "nowrap",

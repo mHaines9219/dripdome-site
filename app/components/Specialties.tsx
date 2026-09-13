@@ -17,7 +17,7 @@ const SPECIALTIES = [
     title: "PODCAST STUDIOS",
     href: "/podcast-studios",
     buyer: "FOR PODCASTERS + NETWORKS",
-    proof: "20M+ VIEWS SHOT ON OUR BUILDS",
+    proof: "30M+ VIEWS SHOT ON OUR BUILDS",
     copy: "Permanent, camera-ready studios designed and fabricated around your show. Acoustics, lighting, and a set your audience remembers.",
   },
   {
@@ -35,6 +35,14 @@ const SPECIALTIES = [
     buyer: "FOR FOUNDERS + OPERATORS",
     proof: "FLATIRON HQ FOR SEISMIC SYSTEMS",
     copy: "Offices, studios, and interiors that look like the company inside them. Space planning, custom signage, furniture, and styling, installed turnkey.",
+  },
+  {
+    index: "S.04",
+    title: "SET DESIGN",
+    href: "/set-design",
+    buyer: "FOR PRODUCERS + ART DIRECTORS",
+    proof: "325K+ VIEWS ON THE FRAIM FREESTYLE SET",
+    copy: "Sets, props, and production design for campaigns, music videos, and studio shows. Designed, fabricated, dressed, and struck by one shop.",
   },
 ];
 
@@ -64,14 +72,14 @@ export default function Specialties() {
           WHAT DO YOU NEED BUILT?
         </Typography>
         <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
-          THREE SPECIALTIES · ONE SHOP
+          FOUR SPECIALTIES · ONE SHOP
         </Typography>
       </Box>
 
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" },
         }}
       >
         {SPECIALTIES.map((spec, i) => (
@@ -85,8 +93,15 @@ export default function Specialties() {
               gap: 2,
               px: { xs: 3, md: 4 },
               py: { xs: 4, md: 5 },
-              borderRight: { md: i < SPECIALTIES.length - 1 ? NB_RULE : "none" },
-              borderBottom: { xs: i < SPECIALTIES.length - 1 ? NB_RULE : "none", md: "none" },
+              borderRight: {
+                md: i % 2 === 0 ? NB_RULE : "none",
+                lg: i < SPECIALTIES.length - 1 ? NB_RULE : "none",
+              },
+              borderBottom: {
+                xs: i < SPECIALTIES.length - 1 ? NB_RULE : "none",
+                md: i < 2 ? NB_RULE : "none",
+                lg: "none",
+              },
               textDecoration: "none",
               color: NB_COLORS.ink,
               transition: "background-color 150ms ease, color 150ms ease",
@@ -113,7 +128,7 @@ export default function Specialties() {
               className="spec-outline"
               sx={{
                 ...NB_OUTLINE_TEXT_SX,
-                fontSize: { xs: 36, sm: 44, md: 34, lg: 44 },
+                fontSize: { xs: 36, sm: 44, md: 40, lg: 34, xl: 44 },
               }}
             >
               {spec.title}
@@ -149,7 +164,7 @@ export default function Specialties() {
         }}
       >
         <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-          ALSO ON FILE: SET DESIGN · MUSIC VIDEOS
+          ALSO ON FILE: MUSIC VIDEOS · RENTALS
         </Typography>
         <Typography
           component={Link}

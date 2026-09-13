@@ -7,11 +7,7 @@
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com";
 
 export type VerticalKey =
-  | "podcast"
-  | "activation"
-  | "interior"
-  | "setDesign"
-  | "musicVideo";
+  "podcast" | "activation" | "interior" | "setDesign" | "musicVideo";
 
 export interface Vertical {
   key: VerticalKey;
@@ -38,7 +34,11 @@ export const VERTICALS: Record<VerticalKey, Vertical> = {
     label: "INTERIOR + OFFICE DESIGN",
     href: "/interior-office-design",
   },
-  setDesign: { key: "setDesign", label: "SET DESIGN", legacy: true },
+  setDesign: {
+    key: "setDesign",
+    label: "SET DESIGN",
+    href: "/set-design",
+  },
   musicVideo: { key: "musicVideo", label: "MUSIC VIDEOS", legacy: true },
 };
 
@@ -76,14 +76,26 @@ export interface Project {
   /** Optional concept render, displayed alongside the build filmstrip. */
   render?: ProjectRender;
   /**
-   * Default CSS object-position for the filmstrip frames (which crop to 4:3
-   * with object-fit: cover). Defaults to "center". Use "top" for tall portrait
-   * shots so heads are not cropped out. Per-image overrides live on the image.
+   * CSS object-position for the filmstrip frames. Only matters when
+   * `imageFit` is "cover"; frames letterbox ("contain") by default so the
+   * whole photo is always visible.
    */
   imagePosition?: string;
+  /**
+   * "contain" (default) shrinks each photo to fit the 4:3 frame on the dark
+   * well. "cover" fills the frame and crops, honoring `imagePosition`.
+   */
+  imageFit?: "cover" | "contain";
   stats: ProjectStat[];
   /** Featured projects get a full job file on the home archive. */
   featured?: boolean;
+  /** Position on the home archive, lowest first. Ordered by client recognition. */
+  featuredOrder?: number;
+  /**
+   * Position within its vertical page, lowest first. Jobs without a value keep
+   * registry order after any pinned ones. Job numbers never change with this.
+   */
+  sortOrder?: number;
 }
 
 export const PROJECTS: Project[] = [
@@ -96,6 +108,9 @@ export const PROJECTS: Project[] = [
     scope: "CONCEPT · FABRICATION · TWO-HOUR VENUE INSTALL",
     blurb: `Built a 10 by 8 foot Alice in Wonderland photo moment featuring custom vinyl wrapped playing cards with the organization's initials and a lush garden wall backdrop. Fabricated off site and installed in under two hours despite strict venue constraints. Organizers cited it as the highlight of the evening.`,
     render: { src: `${S3}/lesgc/render.jpg` },
+    // Leads the home archive.
+    featured: true,
+    featuredOrder: 0,
     images: [
       `${S3}/lesgc/view.jpg`,
       `${S3}/lesgc/twogirls.jpg`,
@@ -108,7 +123,6 @@ export const PROJECTS: Project[] = [
       { value: "< 2 HR", label: "VENUE INSTALL" },
       { value: "10 × 8 FT", label: "CUSTOM BUILD" },
     ],
-    featured: true,
   },
   {
     slug: "seismic-systems-office",
@@ -140,6 +154,7 @@ export const PROJECTS: Project[] = [
       { value: "TURNKEY", label: "DESIGN TO STYLING" },
     ],
     featured: true,
+    featuredOrder: 6,
   },
   {
     slug: "this-is-not-a-billboard",
@@ -163,13 +178,14 @@ export const PROJECTS: Project[] = [
       { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
     ],
     featured: true,
+    featuredOrder: 4,
   },
   {
     slug: "google-photos",
     jobNo: "04",
     client: "GOOGLE PHOTOS",
     title: "YEARLY RECAP WITH EJAE - GOOGLE PHOTOS",
-    vertical: "activation",
+    vertical: "setDesign",
     scope: "PRODUCTION DESIGN · SET DRESSING · PROP SOURCING",
     blurb: `Led production design for Google Photos' video recap campaign featuring K-pop star EJAE. Full scope: set design, prop and furniture sourcing, and complete set dressing across multiple color stories. Every visual element curated to support a clean, lifestyle driven aesthetic aligned with the brand.`,
     images: [
@@ -188,6 +204,7 @@ export const PROJECTS: Project[] = [
       { value: "1K+", label: "COMMENTS" },
     ],
     featured: true,
+    featuredOrder: 2,
   },
   {
     slug: "notloveline",
@@ -201,7 +218,9 @@ export const PROJECTS: Project[] = [
       `${S3}/NLL/IMG_1.JPG`,
       `${S3}/NLL/IMG_2.JPG`,
       `${S3}/NLL/IMG_3.JPG`,
-      `${S3}/NLL/IMG_4.jpeg`,
+      // Portrait host shot: the cap and face sit in the top fifth, so a
+      // centered crop beheads her.
+      { src: `${S3}/NLL/IMG_4.jpeg`, position: "50% 12%" },
       `${S3}/NLL/IMG_5.jpeg`,
     ],
     stats: [
@@ -211,13 +230,14 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
+    featuredOrder: 3,
   },
   {
     slug: "original-southside",
     jobNo: "06",
     client: "THE ORIGINAL SOUTHSIDE",
     title: "PRODUCT LAUNCH CAMPAIGN",
-    vertical: "activation",
+    vertical: "setDesign",
     scope: "PROP SOURCING · STYLING · CUSTOM VINYL",
     blurb: `Collaborated with The Original Southside on their launch ad campaign. Scope included prop sourcing, styling, and custom vinyl wraps that reinforced a modern twist on the classic 1920s Southside cocktail. The campaign and product were later named among Forbes' Best Canned Cocktails.`,
     images: [
@@ -237,10 +257,19 @@ export const PROJECTS: Project[] = [
     jobNo: "07",
     client: "WHETHAN x EMEI",
     title: "'SUNNYD' MUSIC VIDEO",
-    vertical: "musicVideo",
+    vertical: "setDesign",
     scope: "WORLD BUILDING · PROPS · BRANDED VINYL",
     blurb: `Transformed a vacant office building into the world of the 'SUNNYD' music video for Whethan and Emei. We worked with the bones of the space, trucking in custom props, branded vinyl, and layered dressing. Empty corridors, lobbies, and offices became distinct performance and narrative beats inside the track's saturated Sunny D palette.`,
-    images: [`${S3}/sunnyd/still.jpg`],
+    // Stills pulled from the official video (Emei / Whethan, Oct 2024).
+    images: [
+      `${S3}/sunnyd/1.jpg`,
+      `${S3}/sunnyd/2.jpg`,
+      `${S3}/sunnyd/3.jpg`,
+      `${S3}/sunnyd/4.jpg`,
+      `${S3}/sunnyd/5.jpg`,
+      `${S3}/sunnyd/6.jpg`,
+      `${S3}/sunnyd/7.jpg`,
+    ],
     stats: [
       { value: "444K+", label: "YOUTUBE VIEWS" },
       { value: "OFFICIAL", label: "MUSIC VIDEO" },
@@ -251,7 +280,7 @@ export const PROJECTS: Project[] = [
     jobNo: "08",
     client: "FRAIM",
     title: "FRAIM FREESTYLE SET - TWO GIANT RED SPEAKERS",
-    vertical: "podcast",
+    vertical: "setDesign",
     scope: "SET DESIGN · CARPENTRY · SCENIC PAINT · STUDIO SET BUILD",
     blurb: `Designed and fabricated two giant red speakers as the signature set piece for FRAIM Freestyle, the Brooklyn shot freestyle rap series from FRAIM, an NYC media brand covering hip-hop and art. Each cabinet is an oversized hip-hop speaker stack: a boxed wood shell with two black woofers set into the face and a faceted red horn crate on top, finished in a flat saturated red so it reads as one graphic block on camera. Built in our NYC shop and delivered as a two piece backdrop that frames every artist at the desk, the set has carried the whole first season, including Lord Sko, LIFEOFTHOM, ANKHLEJOHN, Andre Lawrence, Radamiz, and Nelovesbias. Across Instagram, YouTube, and TikTok, season one has pulled more than 325K views, 12K likes, and 1K comments with the speakers in frame.`,
     render: { src: `${S3}/fraim/render.jpg` },
@@ -272,13 +301,14 @@ export const PROJECTS: Project[] = [
       { value: "6", label: "EPISODES · SEASON 1" },
     ],
     featured: true,
+    featuredOrder: 5,
   },
   {
     slug: "crisscut-new-york",
     jobNo: "09",
     client: "CRISSCUT NEW YORK",
     title: "'BUY YOURSELF THE DIAMONDS' CAMPAIGN - CRISSCUT NEW YORK",
-    vertical: "activation",
+    vertical: "setDesign",
     scope: "SET DESIGN · SET DRESSING · PROP SOURCING",
     blurb: `Set design for Crisscut New York's "Buy yourself the diamonds. You earned them." campaign film, a self purchase spot for the Manhattan diamond house behind the patented Crisscut. We designed and dressed the world of a corner office with the Empire State Building in the window: a heavy executive desk under a green banker's lamp, a cream rotary phone, a period beige computer and keyboard, an abstract canvas on the wall, and a desktop layered with ring sketches and technical drawings so the jewelry sits inside a story about a woman who runs the room. Every prop was sourced and placed to hold up in extreme close up, from the Crisscut New York nameplate to the drawings under the rings, while the palette stays warm and restrained so the stones are the brightest thing in frame.`,
     images: [
@@ -296,11 +326,127 @@ export const PROJECTS: Project[] = [
       { value: "PERIOD", label: "PROP SOURCING" },
       { value: "MAY 2026", label: "CAMPAIGN LAUNCH" },
     ],
+  },
+  {
+    slug: "jennifers-body",
+    jobNo: "10",
+    client: "EDITORIAL PHOTO SHOOT",
+    title: "'JENNIFER'S BODY' POOL SCENE RECREATION",
+    vertical: "setDesign",
+    scope: "SET DESIGN · SCENIC FABRICATION · WORKING POOL",
+    blurb: `Rebuilt the pool scene from Jennifer's Body as a working set for an editorial photo shoot. We framed a roughly 20 by 20 foot structure around a functional above ground pool, then aged it into a derelict municipal pool: tiled walls distressed and stained to read as decades old, a numbered lane marker, moss and vines creeping through the grout, and the film's HOPELESS graffiti sprayed across the wall. Built and dressed on location so the talent could shoot in and out of the water, the set carries the whole story of the scene in a single frame.`,
+    images: [
+      // Talent sits low in the water on this frame; drop the window so her
+      // face is centered instead of pinned to the bottom edge.
+      { src: `${S3}/jennifersbody/jb1.png`, position: "50% 65%" },
+      `${S3}/jennifersbody/jb2.png`,
+      `${S3}/jennifersbody/jb3.png`,
+      `${S3}/jennifersbody/jb4.png`,
+    ],
+    // Portrait shots in a 4:3 frame: anchor to the top so the talent and the
+    // HOPELESS graffiti stay in frame instead of the pool water.
+    imagePosition: "top",
+    stats: [
+      { value: "20 × 20 FT", label: "SET FOOTPRINT" },
+      { value: "WORKING", label: "POOL ON SET" },
+      { value: "SCENIC", label: "AGED + DISTRESSED" },
+      { value: "ON LOCATION", label: "BUILT + DRESSED" },
+    ],
+  },
+  {
+    slug: "paris-hilton-easter",
+    jobNo: "11",
+    // Leads the set design page.
+    sortOrder: 0,
+    client: "PARIS HILTON",
+    title: "'EASTER EDITORIAL' - PARIS HILTON x PARIVIE",
+    vertical: "setDesign",
+    scope: "SET DESIGN · FLORALS · PROP SOURCING · SET DRESSING",
+    blurb: `Designed and dressed a whimsical spring garden at the Hilton residence for Paris Hilton's Easter and Mother's Day editorial, shot by Ashley Osborn and produced by 11:11 Media. We built the world in five days from brief to shoot: a lawn of oversized pastel eggs and inflatable bunnies and ducks, a white picket fence stacked with hydrangea and wildflower florals, a wildflower meadow for the beauty frames, and a full prop kit down to the baskets. The installation landed so well that the family kept it in place for their own Easter celebration, and Paris has brought us back three more times since, including the Parivie beauty shoot. Her own TikToks shot on the set have passed 3.7 million views.`,
+    images: [
+      `${S3}/paris/1.jpg`,
+      // Family portrait sits low in frame; drop the window so the kids stay in.
+      { src: `${S3}/paris/2.jpg`, position: "50% 28%" },
+      `${S3}/paris/3.jpg`,
+      `${S3}/paris/4.jpg`,
+      `${S3}/paris/5.jpg`,
+      `${S3}/paris/6.jpg`,
+      `${S3}/paris/7.jpg`,
+    ],
+    imagePosition: "top",
+    stats: [
+      // Six @parishilton TikToks shot on the set (Easter + Mother's Day 2025),
+      // tallied Sep 2026. IG posts hide like counts, so they are not included.
+      { value: "3.7M+", label: "TIKTOK VIEWS ON HER POSTS" },
+      { value: "5 DAYS", label: "BRIEF TO SHOOT" },
+      { value: "KEPT UP", label: "FOR THE FAMILY'S EASTER" },
+      { value: "PRIVATE", label: "HILTON RESIDENCE" },
+    ],
     featured: true,
+    featuredOrder: 1,
+  },
+  {
+    slug: "james-oro-complexcon",
+    jobNo: "12",
+    client: "JAMES ORO",
+    title: "JAMES ORO x COMPLEXCON - DECONSTRUCTED JAIL CELL",
+    vertical: "activation",
+    scope: "BOOTH DESIGN · SCENIC FABRICATION · ON-SITE INSTALL",
+    blurb: `Designed and built a sculptural retail environment for eyewear brand James Oro at ComplexCon 2022 in the Long Beach Convention Center, working from the visual language of a deconstructed jail cell. Oversized bar-wall forms with cut-through entry points framed the booth and created a threshold that pulled the crowd in off the floor, with the James Oro graffiti wall and cased frames behind the bars. Every cell wall was fabricated in-house from plywood, fence posts, and friction-fit PVC, with 94 hand-drilled holes in the posts, then primed, painted, trucked to Long Beach, and installed on site. The booth stayed a high-engagement destination for the whole weekend.`,
+    render: { src: `${S3}/oro/render.jpg` },
+    // Tall booth shots and portrait reel stills: show the whole cell rather
+    // than cropping the bars.
+    imageFit: "contain",
+    images: [
+      `${S3}/oro/1.jpg`,
+      `${S3}/oro/2.jpg`,
+      `${S3}/oro/3.jpg`,
+      `${S3}/oro/4.jpg`,
+      `${S3}/oro/5.jpg`,
+    ],
+    stats: [
+      { value: "LONG BEACH", label: "COMPLEXCON 2022" },
+      { value: "94", label: "HAND-DRILLED PIPE HOLES" },
+      { value: "IN-HOUSE", label: "BUILT + PAINTED" },
+      { value: "2 DAYS", label: "ON THE SHOW FLOOR" },
+    ],
+  },
+  {
+    slug: "x3-expo",
+    jobNo: "13",
+    client: "ISMYGIRL · NMG MANAGEMENT",
+    title: "X3 EXPO SHOWCASE BOOTH - HOLLYWOOD PALLADIUM",
+    vertical: "activation",
+    scope: "BOOTH DESIGN · THREE PHOTO SETS · FABRICATION · INSTALL",
+    blurb: `Built a three-set photo environment for the ismygirl and NMG Management booth at X3 Expo 2023, the creator expo at the Hollywood Palladium. Instead of a branded backdrop, the booth became three places to be photographed: a marble checkerboard floor with giant chess pieces, a floral wall with a wire butterfly bench and turf lounge, and a pink classroom with lockers, a chalkboard, picnic tables, and plush props. The sets kept creators and fans lining up to shoot all weekend, and the vendor told us they doubled the prior year's email signups on day one.`,
+    images: [
+      `${S3}/x3/1.jpg`,
+      `${S3}/x3/2.jpg`,
+      `${S3}/x3/3.jpg`,
+      `${S3}/x3/4.jpg`,
+    ],
+    stats: [
+      { value: "2×", label: "DAY-ONE EMAIL SIGNUPS VS PRIOR YEAR" },
+      { value: "3 SETS", label: "ONE BOOTH FOOTPRINT" },
+      { value: "PALLADIUM", label: "X3 EXPO · JAN 2023" },
+      { value: "2 DAYS", label: "SHOW RUN" },
+    ],
   },
 ];
 
-export const featuredProjects = () => PROJECTS.filter((p) => p.featured);
+export const featuredProjects = () =>
+  PROJECTS.filter((p) => p.featured)
+    .map((p, i) => ({ p, i }))
+    .sort(
+      (a, b) =>
+        (a.p.featuredOrder ?? a.i + 1000) - (b.p.featuredOrder ?? b.i + 1000),
+    )
+    .map(({ p }) => p);
 
 export const projectsByVertical = (key: VerticalKey) =>
-  PROJECTS.filter((p) => p.vertical === key);
+  PROJECTS.filter((p) => p.vertical === key)
+    .map((p, i) => ({ p, i }))
+    .sort(
+      (a, b) => (a.p.sortOrder ?? a.i + 1000) - (b.p.sortOrder ?? b.i + 1000),
+    )
+    .map(({ p }) => p);

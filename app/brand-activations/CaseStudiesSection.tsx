@@ -6,19 +6,15 @@ import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NBImage from "../components/NBImage";
+import { RenderPanel } from "../components/JobFile";
+import type { ProjectRender } from "@/lib/projects";
 import { motion, useInView } from "framer-motion";
-import {
-  NB_COLORS,
-  NB_DISPLAY_SX,
-  NB_MONO_SX,
-  NB_RULE,
-} from "@/lib/theme";
+import { NB_COLORS, NB_DISPLAY_SX, NB_MONO_SX, NB_RULE } from "@/lib/theme";
 import { useDragScroll } from "@/lib/useDragScroll";
 
-// Metrics below reflect real numbers where available. LESGC reach is estimated
-// (see note field on the hero). Southside has no quantitative data yet, so the
-// hero renders the Forbes "Best Canned Cocktail" press placement as a text
-// hero linking to the article.
+// Case studies are limited to the activation vertical (live events, booths,
+// installations). Campaign and editorial shoots live on /set-design. Metrics
+// reflect real numbers where available; text heroes link to press or reports.
 
 type HeroMetric =
   | {
@@ -47,11 +43,18 @@ type CaseStudy = {
   headline: string;
   copy: string;
   image: string;
-  /** When set, the plate renders a scroll-snap carousel instead of one image. */
-  images?: string[];
+  /**
+   * When set, the plate renders a scroll-snap carousel instead of one image.
+   * An object entry overrides the object-position for that frame only.
+   */
+  images?: (string | { src: string; position?: string })[];
   imageAlt: string;
   /** CSS object-position for the plate image when it crops badly at center. */
   imagePosition?: string;
+  /** "contain" letterboxes tall shots instead of cropping them. */
+  imageFit?: "cover" | "contain";
+  /** Pre-build concept render, shown in its own panel beside the plate. */
+  render?: ProjectRender;
   youtubeId?: string;
   hero: HeroMetric;
   breakdown?: { title: string; slices: DonutSlice[] };
@@ -73,6 +76,9 @@ const CASE_STUDIES: CaseStudy[] = [
     headline: "Alice in Wonderland photo moment for 200 guests.",
     copy: "Built a 10 by 8 foot Alice in Wonderland photo moment featuring custom vinyl wrapped playing cards with the organization's initials and a lush garden wall backdrop. Fabricated off site and installed in under two hours despite strict venue constraints. Organizers cited it as the highlight of the evening.",
     image: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/view.jpg",
+    render: {
+      src: "https://dripdome-site.s3.us-east-2.amazonaws.com/lesgc/render.jpg",
+    },
     imageAlt: "Lower East Side Girls Club Alice in Wonderland activation",
     hero: {
       kind: "count",
@@ -88,74 +94,90 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     number: "02",
-    client: "GOOGLE PHOTOS",
-    category: "BRAND VIDEO CAMPAIGN",
-    headline: "K-pop talent spot designed for a global platform.",
-    copy: "Led production design for Google Photos' video recap campaign featuring K-pop star EJAE. Full scope: set design, prop and furniture sourcing, and complete set dressing across multiple color stories. Every visual element curated to support a clean, lifestyle driven aesthetic aligned with the brand.",
-    image:
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/goog-photos/ejae.png",
-    imageAlt: "Google Photos brand campaign set design with EJAE",
-    imagePosition: "50% 17%",
+    client: "VITA KARI",
+    category: "PUBLIC ART INSTALLATION",
+    headline: "A human billboard on the WeHo Pride parade route.",
+    copy: "Fabricated and installed THIS IS NOT A BILLBOARD, artist Vita Kari's 16 foot monochrome light box mounted on the roof of Endless Romance on Santa Monica Blvd for WeHo Pride 2026. From the street it read as a half rendered digital billboard. Up close, live performers inside repeated looping gestures for hours, a nod to Magritte's 'This is not a pipe.' Funded through Instagram's Drafts Fund and covered by WeHo Times and Wonderland.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+    render: {
+      src: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/render.jpg",
+    },
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/3.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/4.png",
+    ],
+    imageAlt:
+      "THIS IS NOT A BILLBOARD by Vita Kari, a rooftop light box installation fabricated by DripDome for WeHo Pride",
     hero: {
-      kind: "count",
-      target: 214,
-      suffix: "K+",
-      label: "INSTAGRAM ENGAGEMENTS",
-      note: "Combined across @ejae_k and @googlephotos",
+      kind: "text",
+      value: "8.8M+",
+      label: "SOCIAL VIEWS",
+      link: "https://wehotimes.com/artist-vita-kari-debuts-human-billboard-installation-in-west-hollywood-for-weho-pride/",
     },
     stats: [
-      { value: "208K+", label: "LIKES" },
-      { value: "2.5K+", label: "REPOSTS" },
-      { value: "2.5K+", label: "SHARES" },
-      { value: "1K+", label: "COMMENTS" },
+      { value: "16 FT", label: "LIGHT BOX BUILD" },
+      { value: "100K+", label: "WEHO PRIDE ATTENDEES" },
+      { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
     ],
   },
   {
     number: "03",
-    client: "WHETHAN x EMEI",
-    category: "PROMOTIONAL MUSIC VIDEO",
-    headline: "Sunny D coded world built for the 'SUNNYD' music video.",
-    copy: "Transformed a vacant office building into the world of the 'SUNNYD' music video for Whethan and Emei. Instead of building a set from scratch, we worked with the bones of the space, trucking in custom props, branded vinyl, and layered dressing to modify what was already there. Empty corridors, lobbies, and offices became distinct performance and narrative beats inside the track's saturated Sunny D palette.",
-    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/sunnyd/still.jpg",
-    imageAlt: "Whethan x Emei SUNNYD music video set design",
-    youtubeId: "zLY71gPk8Ms",
+    client: "JAMES ORO",
+    category: "COMPLEXCON BOOTH",
+    headline: "A deconstructed jail cell on the ComplexCon floor.",
+    copy: "Sculptural retail booth for eyewear brand James Oro at ComplexCon 2022, Long Beach Convention Center. Oversized bar-wall forms with cut-through entry points framed the James Oro graffiti wall and cased frames, and pulled the crowd in off the aisle. Every wall was fabricated in-house from plywood, fence posts, and friction-fit PVC, then painted, trucked to Long Beach, and installed on site.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/1.jpg",
+    render: {
+      src: "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/render.jpg",
+    },
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/1.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/2.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/3.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/oro/4.jpg",
+    ],
+    imageAlt:
+      "James Oro ComplexCon booth by DripDome, a deconstructed jail cell of oversized bar walls",
+    imageFit: "contain",
     hero: {
-      kind: "count",
-      target: 444,
-      suffix: "K+",
-      label: "YOUTUBE VIEWS",
-      note: "Official 'SUNNYD' music video, Whethan x Emei",
+      kind: "text",
+      value: "LONG BEACH",
+      label: "COMPLEXCON 2022",
     },
     stats: [
-      { value: "7K+", label: "LIKES" },
-      { value: "400+", label: "COMMENTS" },
-      { value: "OFFICIAL", label: "MUSIC VIDEO" },
+      { value: "94", label: "HAND-DRILLED PIPE HOLES" },
+      { value: "IN-HOUSE", label: "BUILT + PAINTED" },
+      { value: "2 DAYS", label: "ON THE SHOW FLOOR" },
     ],
   },
   {
     number: "04",
-    client: "THE ORIGINAL SOUTHSIDE",
-    category: "AD CAMPAIGN + PRODUCT LAUNCH",
-    headline: "Forbes-featured launch for a modern bottled cocktail brand.",
-    copy: "Collaborated with The Original Southside on their launch ad campaign. Scope included prop sourcing, styling, and custom vinyl wraps that reinforced a modern twist on the classic 1920s Southside cocktail. The campaign and product were later named among Forbes' Best Canned Cocktails.",
-    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
+    client: "ISMYGIRL · NMG MANAGEMENT",
+    category: "EXPO SHOWCASE BOOTH",
+    headline: "Three photo sets that doubled day-one signups.",
+    copy: "Booth for ismygirl and NMG Management at X3 Expo 2023, the creator expo at the Hollywood Palladium. Instead of a branded backdrop, the footprint became three places to be photographed: a marble checkerboard with giant chess pieces, a floral wall with a wire butterfly bench, and a pink classroom with lockers, chalkboard, and picnic tables. Creators and fans lined up to shoot all weekend.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/x3/3.jpg",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss1.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss2.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss3.png",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/southside/ss4.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/x3/3.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/x3/1.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/x3/2.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/x3/4.jpg",
     ],
-    imageAlt: "The Original Southside ad campaign set",
+    imageAlt:
+      "X3 Expo showcase booth by DripDome with pink classroom, floral wall, and giant chess set",
     hero: {
-      kind: "text",
-      value: "FORBES",
-      label: "FEATURED: 'BEST CANNED COCKTAIL'",
-      link: "https://www.forbes.com/sites/karlaalindahao/2024/03/01/best-canned-cocktail-original-southside/",
+      kind: "count",
+      target: 2,
+      suffix: "×",
+      label: "DAY-ONE EMAIL SIGNUPS VS PRIOR YEAR",
+      note: "Reported by the vendor after day one of the show",
     },
     stats: [
-      { value: "LAUNCH", label: "CAMPAIGN SCOPE" },
-      { value: "CUSTOM", label: "VINYL FABRICATION" },
-      { value: "EDITORIAL", label: "SHOT LIST" },
+      { value: "3 SETS", label: "ONE BOOTH FOOTPRINT" },
+      { value: "PALLADIUM", label: "X3 EXPO · JAN 2023" },
+      { value: "2 DAYS", label: "SHOW RUN" },
     ],
   },
 ];
@@ -199,10 +221,7 @@ function HeroMetricView({
     color: NB_COLORS.ink,
   } as const;
 
-  const count = useCountUp(
-    metric.kind === "count" ? metric.target : 0,
-    inView,
-  );
+  const count = useCountUp(metric.kind === "count" ? metric.target : 0, inView);
 
   return (
     <Box>
@@ -432,7 +451,17 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
   );
 }
 
-function Carousel({ images, alt }: { images: string[]; alt: string }) {
+function Carousel({
+  images,
+  alt,
+  objectPosition = "center",
+  objectFit = "contain",
+}: {
+  images: (string | { src: string; position?: string })[];
+  alt: string;
+  objectPosition?: string;
+  objectFit?: "cover" | "contain";
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const drag = useDragScroll(trackRef);
   const [index, setIndex] = useState(0);
@@ -467,25 +496,32 @@ function Carousel({ images, alt }: { images: string[]; alt: string }) {
           "&::-webkit-scrollbar": { display: "none" },
         }}
       >
-        {images.map((image, i) => (
-          <Box
-            key={image}
-            sx={{
-              flex: "0 0 100%",
-              height: "100%",
-              position: "relative",
-              scrollSnapAlign: "start",
-            }}
-          >
-            <NBImage
-              src={image}
-              alt={`${alt}, frame ${i + 1}`}
-              fill
-              sizes="(max-width: 900px) 100vw, 50vw"
-              style={{ objectFit: "cover" }}
-            />
-          </Box>
-        ))}
+        {images.map((image, i) => {
+          const src = typeof image === "string" ? image : image.src;
+          const position =
+            typeof image === "string"
+              ? objectPosition
+              : (image.position ?? objectPosition);
+          return (
+            <Box
+              key={src}
+              sx={{
+                flex: "0 0 100%",
+                height: "100%",
+                position: "relative",
+                scrollSnapAlign: "start",
+              }}
+            >
+              <NBImage
+                src={src}
+                alt={`${alt}, frame ${i + 1}`}
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{ objectFit, objectPosition: position }}
+              />
+            </Box>
+          );
+        })}
       </Box>
 
       {/* Overlaid NB controls: square arrows + frame counter */}
@@ -529,7 +565,9 @@ function Carousel({ images, alt }: { images: string[]; alt: string }) {
         >
           <ArrowForwardIcon fontSize="small" />
         </IconButton>
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
+        <Typography
+          sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}
+        >
           {String(index + 1).padStart(2, "0")} /{" "}
           {String(images.length).padStart(2, "0")}
         </Typography>
@@ -596,44 +634,64 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
       >
         <Box
           sx={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: study.youtubeId ? "16 / 9" : "4 / 3",
-            bgcolor: NB_COLORS.well,
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
             borderRight: { md: NB_RULE },
             borderBottom: { xs: NB_RULE, md: "none" },
           }}
         >
-          {study.youtubeId ? (
-            <Box
-              component="iframe"
-              src={`https://www.youtube-nocookie.com/embed/${study.youtubeId}?rel=0`}
-              title={study.imageAlt}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              sx={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                border: 0,
-              }}
-            />
-          ) : study.images ? (
-            <Carousel images={study.images} alt={study.imageAlt} />
-          ) : (
-            <Image
-              src={study.image}
+          {study.render && (
+            <RenderPanel
+              render={study.render}
               alt={study.imageAlt}
-              fill
-              sizes="(max-width: 900px) 100vw, 50vw"
-              style={{
-                objectFit: "cover",
-                objectPosition: study.imagePosition ?? "center",
-              }}
+              widthMd={0.3}
             />
           )}
+          <Box
+            sx={{
+              position: "relative",
+              flex: 1,
+              minWidth: 0,
+              aspectRatio: study.youtubeId ? "16 / 9" : "4 / 3",
+              bgcolor: NB_COLORS.well,
+            }}
+          >
+            {study.youtubeId ? (
+              <Box
+                component="iframe"
+                src={`https://www.youtube-nocookie.com/embed/${study.youtubeId}?rel=0`}
+                title={study.imageAlt}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: 0,
+                }}
+              />
+            ) : study.images ? (
+              <Carousel
+                images={study.images}
+                alt={study.imageAlt}
+                objectPosition={study.imagePosition}
+                objectFit={study.imageFit}
+              />
+            ) : (
+              <Image
+                src={study.image}
+                alt={study.imageAlt}
+                fill
+                sizes="(max-width: 900px) 100vw, 50vw"
+                style={{
+                  objectFit: "contain",
+                  objectPosition: study.imagePosition ?? "center",
+                }}
+              />
+            )}
+          </Box>
         </Box>
 
         <Box
@@ -646,7 +704,9 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
             gap: 2,
           }}
         >
-          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+          <Typography
+            sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
+          >
             {study.category}
           </Typography>
           <Typography
@@ -659,7 +719,9 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
           >
             {study.headline}
           </Typography>
-          <Typography sx={{ fontSize: { xs: 15, md: 16 }, color: NB_COLORS.steel }}>
+          <Typography
+            sx={{ fontSize: { xs: 15, md: 16 }, color: NB_COLORS.steel }}
+          >
             {study.copy}
           </Typography>
         </Box>
@@ -725,15 +787,23 @@ export default function CaseStudiesSection() {
         >
           SELECTED WORK
         </Typography>
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
+        <Typography
+          sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
+        >
           CASE FILES · 04 ENTRIES
         </Typography>
       </Box>
 
       <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 3 } }}>
-        <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.steel, maxWidth: 720 }}>
-          Four recent builds across charity, tech, music, and CPG.
-          Same studio. Same team. Very different briefs.
+        <Typography
+          sx={{
+            fontSize: { xs: 15, md: 17 },
+            color: NB_COLORS.steel,
+            maxWidth: 720,
+          }}
+        >
+          Four recent builds across charity, tech, music, and CPG. Same studio.
+          Same team. Very different briefs.
         </Typography>
       </Box>
 
