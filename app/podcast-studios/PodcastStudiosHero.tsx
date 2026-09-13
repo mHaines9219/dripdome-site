@@ -14,7 +14,7 @@ import {
 } from "@/lib/theme";
 
 const PROOF = [
-  { value: "20M+", label: "VIEWS SHOT ON OUR BUILDS" },
+  { value: "30M+", label: "VIEWS SHOT ON OUR BUILDS" },
   { value: "230K+", label: "SUBSCRIBERS ON THE FLAGSHIP SET" },
   { value: "65+", label: "EPISODES AND COUNTING" },
   { value: "4 DAYS", label: "FASTEST FULL BUILD" },

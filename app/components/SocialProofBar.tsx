@@ -64,7 +64,7 @@ function AnimatedNumber({
 
 const stats = [
   { label: "PROJECTS DELIVERED", prefix: "", target: 100, suffix: "+" },
-  { label: "VIEWS ON OUR SET BUILDS", prefix: "", target: 20, suffix: "M+" },
+  { label: "VIEWS ON OUR SET BUILDS", prefix: "", target: 30, suffix: "M+" },
   { label: "BRANDS SERVED", prefix: "", target: 100, suffix: "+" },
   { label: "AVG TURNAROUND, DAYS", prefix: "", target: 14, suffix: "" },
 ];

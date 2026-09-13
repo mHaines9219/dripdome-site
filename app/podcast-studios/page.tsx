@@ -11,13 +11,13 @@ import { NB_COLORS, NB_RULE } from "@/lib/theme";
 export const metadata: Metadata = {
   title: "Podcast Studio Design & Build - NYC & LA | DripDome",
   description:
-    "DripDome designs and builds permanent, camera-ready podcast studios in NYC & LA. Custom fabrication, lighting, LED signage & full wiring. Our builds have 20M+ views. Built in as little as 4 days.",
+    "DripDome designs and builds permanent, camera-ready podcast studios in NYC & LA. Custom fabrication, lighting, LED signage & full wiring. Our builds have 30M+ views. Built in as little as 4 days.",
   keywords:
     "podcast studio builders, podcast studio design, podcast set design, custom podcast studio NYC, podcast studio build LA, podcast set fabrication, camera-ready studio, podcast studio construction",
   openGraph: {
     title: "Podcast Studio Design & Build - NYC & LA | DripDome",
     description:
-      "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 20M+ views shot on our builds. NYC & LA.",
+      "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 30M+ views shot on our builds. NYC & LA.",
     url: "https://www.dripdome.com/podcast-studios",
     type: "website",
     locale: "en_US",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Podcast Studio Design & Build - NYC & LA | DripDome",
     description:
-      "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 20M+ views shot on our builds.",
+      "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 30M+ views shot on our builds.",
     images: ["https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG"],
   },
   alternates: {

@@ -20,6 +20,7 @@ npx tsc --noEmit     # Type-check without emitting
 `app/layout.tsx` (server) loads Google Fonts (Source Sans 3), JSON-LD, Vercel Analytics, and the GTM container (conditional on `NEXT_PUBLIC_GTM_ID`). It wraps children in:
 - `ThemeRegistry.tsx` - MUI Emotion cache + ThemeProvider
 - `ClientLayout.tsx` - renders the Navbar on every route (sticky, in normal flow, so no spacer hacks)
+- `components/PageFrame.tsx` - wraps every route in the page sheet: a centered column capped at `NB_PAGE_MAX_WIDTH` (1440) with `NB_PAGE_GUTTER_SX` to the window edge and a 2px ink frame from tablet width up. Phones stay full bleed. Sections inside it should still use `px: { xs: 3, md: 6 }`; never size a section with `vw`/`dvw` (use percentages or `min(Nvw, px)` so it respects the frame). The Navbar shares the same tokens so its content lines up with the sheet
 
 The home page (`app/page.tsx`) is a single scroll of section components imported from `app/components/`.
 
@@ -37,14 +38,15 @@ Every active route is converted to this system. The legacy champagne-gold tokens
 
 ### Routes
 
-The site is organized around three specialty verticals (podcast studios, brand activations, interior/office design) with the home page acting as the master work archive. Set design and music videos are sunset services: kept in the archive index and taken "for the right project," but not promoted with dedicated pages or nav items. `/portfolio`, `/services`, and `/rentals` remain live but are intentionally out of the nav.
+The site is organized around four specialty verticals (podcast studios, brand activations, interior/office design, set design) with the home page acting as the master work archive. Music videos are a sunset service and now file under set design; the `musicVideo` vertical key is kept for the index label only. `/portfolio`, `/services`, and `/rentals` remain live but are intentionally out of the nav.
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Home: hero, specialties router ("What do you need built?"), master work archive (featured job files + full index) |
+| `/` | Home: hero, specialties router ("What do you need built?"), master work archive (featured job files) |
 | `/podcast-studios` | Vertical landing page for podcasters/networks. Hero, proof band, build spec sheet, shipped builds, intake |
 | `/brand-activations` | Vertical landing page + Google Ads LP. Budget-qualified inquiry form fires `generate_lead` conversion |
 | `/interior-office-design` | Vertical landing page for offices/interiors. Hero (Seismic HQ image), proof band, scope spec sheet, shipped builds, intake |
+| `/set-design` | Vertical landing page for campaigns, music videos, studio shows. Hero (FRAIM speakers), proof band, scope spec sheet, shipped sets (campaign and editorial shoots, music videos, studio shows), intake |
 | `/blog` | Blog listing with category filtering |
 | `/blog/[slug]` | Dynamic blog post pages |
 | `/blog/feed.xml` | RSS feed (route handler) |
@@ -59,7 +61,7 @@ The site is organized around three specialty verticals (podcast studios, brand a
 
 Blog, portfolio, rentals, and services data live in co-located `data.ts` files (e.g., `app/blog/data.ts`). No database. Blog posts store full HTML content as template literal strings in the `content` field.
 
-**Project registry**: `lib/projects.ts` is the single source of truth for build projects. Each `Project` has a `vertical` key (`podcast`, `activation`, `interior`, `setDesign`, `musicVideo` — the latter two flagged `legacy`), images, stats, and a `featured` flag. The home archive renders featured projects as full job files plus a complete index table; vertical pages filter with `projectsByVertical()`. Add a project there and it flows to every surface.
+**Project registry**: `lib/projects.ts` is the single source of truth for build projects. Each `Project` has a `vertical` key (`podcast`, `activation`, `interior`, `setDesign`, `musicVideo` — the last one flagged `legacy`), images, stats, and a `featured` flag. The home archive renders featured projects as full job files; vertical pages list every project in their vertical with `projectsByVertical()`. Add a project there and it flows to every surface.
 
 ### API
 
@@ -99,7 +101,7 @@ Every page route exports `metadata` with Open Graph, Twitter cards, and canonica
 
 `app/components/` holds sections reused across multiple pages:
 - `JobFile` — project case sheet (ink header bar with job no./vertical tag/client, scroll-snap filmstrip with frame counter, title + stat chips + blurb). Consumes a `Project` from `lib/projects.ts`. Used on home archive and vertical pages
-- `Specialties` — "What do you need built?" two-panel intent router (podcast studios / brand activations) with sunset-services strip
+- `Specialties` — "What do you need built?" four-panel intent router (podcast studios / brand activations / office design / set design) with sunset-services strip
 - `SocialProofBar` — 4-stat animated counter row (used on home and `/brand-activations`)
 - `TrustWall` (default) — "Trusted By" + logo marquee. `TrustPress` (named export) — "In the Press" link list. Originally one component, split so each page can place them independently
 - `FeaturedProjects` — Swiper card-effect carousel of project case studies

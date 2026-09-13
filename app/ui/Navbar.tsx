@@ -13,12 +13,15 @@ import {
   NB_FOCUS_VISIBLE_SX,
   NB_MONO_SX,
   NB_RULE,
+  NB_PAGE_GUTTER_SX,
+  NB_PAGE_WIDTH_SX,
 } from "@/lib/theme";
 
 const links = [
   { name: "PODCAST STUDIOS", href: "/podcast-studios" },
   { name: "ACTIVATIONS", href: "/brand-activations" },
   { name: "OFFICE DESIGN", href: "/interior-office-design" },
+  { name: "SET DESIGN", href: "/set-design" },
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },
   // Legacy pages kept live but out of nav: /portfolio, /services
@@ -40,13 +43,17 @@ export default function Navbar() {
           bgcolor: NB_COLORS.paper,
           color: NB_COLORS.ink,
           borderBottom: NB_RULE,
+          ...NB_PAGE_GUTTER_SX,
         }}
       >
+        {/* Toolbar shares the page sheet's width and gutters so the
+            wordmark lines up with section content below it. */}
         <Toolbar
           disableGutters
           sx={{
+            ...NB_PAGE_WIDTH_SX,
             minHeight: { xs: 64, md: 76 },
-            px: { xs: 2, md: 4 },
+            px: { xs: 2, md: 6 },
             gap: 2,
           }}
         >
