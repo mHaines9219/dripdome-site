@@ -362,7 +362,7 @@ export const PROJECTS: Project[] = [
     title: "'EASTER EDITORIAL' - PARIS HILTON x PARIVIE",
     vertical: "setDesign",
     scope: "SET DESIGN · FLORALS · PROP SOURCING · SET DRESSING",
-    blurb: `Designed and dressed a whimsical spring garden at the Hilton residence for Paris Hilton's Easter and Mother's Day editorial, shot by Ashley Osborn and produced by 11:11 Media. We built the world in five days from brief to shoot: a lawn of oversized pastel eggs and inflatable bunnies and ducks, a white picket fence stacked with hydrangea and wildflower florals, a wildflower meadow for the beauty frames, and a full prop kit down to the baskets. The installation landed so well that the family kept it in place for their own Easter celebration, and Paris has brought us back three more times since, including the Parivie beauty shoot. Her own TikToks shot on the set have passed 3.7 million views.`,
+    blurb: `Designed and dressed a whimsical spring garden at the Hilton residence for Paris Hilton's Easter and Mother's Day editorial, shot by Ashley Osborn and produced by 11:11 Media. We built the world in five days from brief to shoot: a lawn of oversized pastel eggs and inflatable bunnies and ducks, a white picket fence stacked with hydrangea and wildflower florals, a wildflower meadow for the beauty frames, and a full prop kit down to the baskets. The same build carried the Parivie beauty frames, and the installation landed so well that the family kept it in place for their own Easter celebration. Her own TikToks shot on the set have passed 3.7 million views.`,
     images: [
       `${S3}/paris/1.jpg`,
       // Family portrait sits low in frame; drop the window so the kids stay in.
