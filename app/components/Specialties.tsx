@@ -30,7 +30,7 @@ const SPECIALTIES = [
   },
   {
     index: "S.03",
-    title: "OFFICE DESIGN",
+    title: "INTERIOR DESIGN",
     href: "/interior-office-design",
     buyer: "FOR FOUNDERS + OPERATORS",
     proof: "FLATIRON HQ FOR SEISMIC SYSTEMS",

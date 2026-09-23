@@ -2,7 +2,7 @@ export default function InteriorOfficeDesignJsonLd() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Interior and Office Design and Build",
+    name: "Interior Design and Build",
     serviceType: "Commercial Interior Design and Office Buildout",
     description:
       "Turnkey office and interior design. Space planning, custom CNC signage, furniture and FF&E, and styling, managed end to end. Design-forward workplaces in NYC and LA.",
