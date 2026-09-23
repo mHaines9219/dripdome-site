@@ -9,13 +9,13 @@ import { projectsByVertical } from "@/lib/projects";
 import { NB_COLORS, NB_RULE } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  title: "Interior & Office Design Build - NYC & LA | DripDome",
+  title: "Interior Design Build - NYC & LA | DripDome",
   description:
     "DripDome designs design-forward offices and interiors in NYC & LA. Space planning, custom CNC signage, furniture, FF&E & styling, managed end to end. See our Flatiron HQ buildout for Seismic Systems.",
   keywords:
     "office design NYC, interior design build, commercial interior design, office buildout NYC, custom signage, workspace design LA, office fit out, branded office signage, Flatiron office design",
   openGraph: {
-    title: "Interior & Office Design Build - NYC & LA | DripDome",
+    title: "Interior Design Build - NYC & LA | DripDome",
     description:
       "Design-forward offices and interiors, space-planned, furnished, and styled end to end. See our Flatiron HQ buildout for Seismic Systems. NYC & LA.",
     url: "https://www.dripdome.com/interior-office-design",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Interior & Office Design Build - NYC & LA | DripDome",
+    title: "Interior Design Build - NYC & LA | DripDome",
     description:
       "Design-forward offices and interiors, space-planned, furnished, and styled end to end. See our Flatiron HQ buildout for Seismic Systems.",
     images: [

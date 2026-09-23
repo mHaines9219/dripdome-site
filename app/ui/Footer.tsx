@@ -15,7 +15,7 @@ import {
 const NAV = [
   { name: "PODCAST STUDIOS", href: "/podcast-studios" },
   { name: "ACTIVATIONS", href: "/brand-activations" },
-  { name: "OFFICE DESIGN", href: "/interior-office-design" },
+  { name: "INTERIOR DESIGN", href: "/interior-office-design" },
   { name: "SET DESIGN", href: "/set-design" },
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },

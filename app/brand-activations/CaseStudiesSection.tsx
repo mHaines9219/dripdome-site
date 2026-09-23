@@ -180,6 +180,33 @@ const CASE_STUDIES: CaseStudy[] = [
       { value: "2 DAYS", label: "SHOW RUN" },
     ],
   },
+  {
+    number: "05",
+    client: "FOOT LOCKER",
+    category: "HQ PARTY PROPS",
+    headline: "A shoebox cooler and street signs for 2 Penn.",
+    copy: "Custom props for a celebration at Foot Locker's new headquarters at 2 Penn, above Penn Station. The centerpiece is an oversized Foot Locker shoebox built as a cooler shell: striped lid, referee logo and wordmark in cut vinyl, a 2 Penn size label on the end, and a magnetic faceplate that lifts off and swaps for a new graphic. A pair of NYC-style street sign posts pointed guests to each activation zone: Sneaker District, Bar Ave, Burger Borough, Pizza St, and Chinatown Rd.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/cool1.JPG",
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/cool1.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/sl1.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/cool4.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/sl2.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/FL/cool2.JPG",
+    ],
+    imageAlt:
+      "Oversized Foot Locker shoebox cooler with striped lid and vinyl graphics, fabricated by DripDome for the 2 Penn headquarters",
+    hero: {
+      kind: "text",
+      value: "2 PENN",
+      label: "FOOT LOCKER HQ · NYC",
+    },
+    stats: [
+      { value: "MAGNETIC", label: "SWAPPABLE FACEPLATE" },
+      { value: "5 BLADES", label: "CUSTOM STREET SIGNS" },
+      { value: "CUT VINYL", label: "BRAND GRAPHICS" },
+    ],
+  },
 ];
 
 function useCountUp(target: number, inView: boolean, duration = 1600) {

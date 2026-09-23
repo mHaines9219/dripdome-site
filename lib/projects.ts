@@ -31,7 +31,7 @@ export const VERTICALS: Record<VerticalKey, Vertical> = {
   },
   interior: {
     key: "interior",
-    label: "INTERIOR + OFFICE DESIGN",
+    label: "INTERIOR DESIGN",
     href: "/interior-office-design",
   },
   setDesign: {
@@ -432,6 +432,75 @@ export const PROJECTS: Project[] = [
       { value: "2 DAYS", label: "SHOW RUN" },
     ],
   },
+  // Soul of Science (job 14): not released yet. Uncomment when cleared by the client.
+  // {
+  //   slug: "soul-of-science-podcast",
+  //   jobNo: "14",
+  //   client: "THE SOUL OF SCIENCE · GILEAD SCIENCES",
+  //   title: "THE SOUL OF SCIENCE PODCAST STUDIO - PRESENTED BY GILEAD",
+  //   vertical: "podcast",
+  //   scope: "3D DESIGN · ON-SITE FABRICATION · NEON · SET DRESSING",
+  //   blurb: `Designed and built the studio for The Soul of Science, the Gilead Sciences presented podcast hosted by Michael Rice about science, health, social issues, and the queer community. We modeled the set in 3D, then fabricated it on site as two camera-ready zones in one room: a lounge with two armchairs, a round table, and a lit globe under the neon show logo, and a faux marble anchor desk with three mics and "the lab" in blue neon across its face. Deep green walls and warm wood slat panels frame floating shelves dressed with books, plants, and framed archival photos from the AIDS activism era, so the space reads as a working lab library instead of a backdrop. Built to shoot from multiple angles with the host and two guests in frame.`,
+  //   images: [
+  //     `${S3}/SOS/hero.JPG`,
+  //     `${S3}/SOS/2.JPG`,
+  //     `${S3}/SOS/4.JPG`,
+  //     `${S3}/SOS/3.JPG`,
+  //   ],
+  //   stats: [
+  //     { value: "GILEAD", label: "PRESENTING SPONSOR" },
+  //     { value: "2 ZONES", label: "LOUNGE + ANCHOR DESK" },
+  //     { value: "ON SITE", label: "FABRICATED IN PLACE" },
+  //     { value: "3D", label: "MODELED BEFORE BUILD" },
+  //   ],
+  //   featured: true,
+  //   featuredOrder: 8,
+  // },
+  {
+    slug: "foot-locker-2-penn",
+    jobNo: "15",
+    client: "FOOT LOCKER",
+    title: "PARTY PROPS FOR FOOT LOCKER'S NEW HQ - 2 PENN, NYC",
+    vertical: "activation",
+    scope: "PROP FABRICATION · CUSTOM VINYL · MAGNETIC FACEPLATE",
+    blurb: `Fabricated a set of custom party props for a celebration at Foot Locker's new headquarters at 2 Penn, above Penn Station in New York City. The centerpiece is an oversized Foot Locker shoebox that hides a working cooler: a built shell with a striped lid, the referee logo and wordmark in cut vinyl, a 2 Penn "size label" on the end, and a magnetic faceplate that lifts off for access and swaps out for a new graphic. To route guests through the party, we built a pair of NYC-style street sign posts on cast-look bases, with vinyl blades pointing to each activation zone: Sneaker District, Bar Ave, Burger Borough, Pizza St, and Chinatown Rd. Small footprint, fully branded, and built to live on in the office after the party.`,
+    images: [
+      `${S3}/FL/cool1.JPG`,
+      `${S3}/FL/sl1.JPG`,
+      `${S3}/FL/cool4.JPG`,
+      `${S3}/FL/sl2.JPG`,
+      `${S3}/FL/cool2.JPG`,
+      `${S3}/FL/cool3.JPG`,
+    ],
+    stats: [
+      { value: "2 PENN", label: "NEW HQ · NYC" },
+      { value: "MAGNETIC", label: "SWAPPABLE FACEPLATE" },
+      { value: "5 BLADES", label: "CUSTOM STREET SIGNS" },
+      { value: "CUT VINYL", label: "BRAND GRAPHICS" },
+    ],
+    featured: true,
+    featuredOrder: 7,
+  },
+  // Holiday foyer install (job 16): not released yet. Uncomment when cleared by the client.
+  // {
+  //   slug: "holiday-foyer-install",
+  //   jobNo: "16",
+  //   client: "PRIVATE RESIDENCE",
+  //   title: "HOLIDAY FOYER + STAIRCASE INSTALL - PRIVATE RESIDENCE",
+  //   vertical: "interior",
+  //   scope: "HOLIDAY DECOR · SOURCING · STYLING · IN-HOME INSTALLATION",
+  //   blurb: `Dressed the double-height foyer and main staircase of a client's home for Christmas. Twin lit trees flank the stairs, each anchored by a gold reindeer and a spill of plaid-wrapped gifts, with a garland of ornaments and berries running the length of the iron balustrade up to the landing. At the top, red velvet curtains and an oversized bow frame the doors, guarded by a pair of life-size nutcrackers. Everything was sourced, delivered, and installed by our team in a single pass, then styled to work with the home's existing chandelier, gallery wall, and stone floor. No shop fabrication on this one, but the job says something we care about: a client handing us the keys to their home is the highest form of trust we get, and we treat the install accordingly.`,
+  //   images: [
+  //     `${S3}/TRISHAXMAS/hero.JPG`,
+  //     `${S3}/TRISHAXMAS/2.JPG`,
+  //   ],
+  //   stats: [
+  //     { value: "IN-HOME", label: "CLIENT RESIDENCE" },
+  //     { value: "2 TREES", label: "FLANKING THE STAIRS" },
+  //     { value: "FULL KIT", label: "SOURCED + STYLED" },
+  //     { value: "1 PASS", label: "DELIVERED + INSTALLED" },
+  //   ],
+  // },
 ];
 
 export const featuredProjects = () =>

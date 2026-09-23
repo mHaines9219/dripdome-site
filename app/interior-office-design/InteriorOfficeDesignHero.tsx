@@ -85,7 +85,7 @@ export default function InteriorOfficeDesignHero() {
               transition={{ duration: 0.5 }}
             >
               <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
-                SPECIALTY 03 · INTERIOR + OFFICE DESIGN · NYC + LA
+                SPECIALTY 03 · INTERIOR DESIGN · NYC + LA
               </Typography>
             </motion.div>
 
