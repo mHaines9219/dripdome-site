@@ -510,9 +510,9 @@ export const PROJECTS: Project[] = [
     scope: "INTERIOR DESIGN · GROUND-UP BUILD · CUSTOM FURNITURE · ACOUSTIC PANELING",
     blurb: `Designed and built a three-room recording studio in Downtown Los Angeles, with a photo studio on the same floor. Two of the rooms were conversions of existing space and the third was built from the ground up, and each got its own identity so artists could pick a mood, not just a booking slot. The flagship room pairs floor-to-ceiling slatted wood paneling with a dark palette, a stone niche behind the console, and a Persian rug under the mix position. The live room next door goes the other way: whitewashed ceiling joists, an orange leather sofa, and lime and blue light over a patterned rug, a space that reads as a living room until the gear comes out. The ground-up room is the brightest of the set, with a neon script sign on a preserved moss wall, hexagonal acoustic panels as the graphic, and a built-in banquette wrapped in pillows under a run of LED. The furniture and acoustic paneling throughout were custom made by our team, and we carried the build from framing to the final plants.`,
     images: [
-      `${S3}/knockhouse/hero.jpg`,
-      `${S3}/knockhouse/1.jpg`,
-      `${S3}/knockhouse/2.jpg`,
+      `${S3}/knockhouse-kingbird/knockhouse/hero.jpg`,
+      `${S3}/knockhouse-kingbird/knockhouse/1.jpg`,
+      `${S3}/knockhouse-kingbird/knockhouse/2.jpg`,
     ],
     stats: [
       { value: "DTLA", label: "LOS ANGELES" },
@@ -530,11 +530,11 @@ export const PROJECTS: Project[] = [
     scope: "INTERIOR DESIGN · GROUND-UP BUILD · CUSTOM FURNITURE · ACOUSTIC PANELING",
     blurb: `Designed and built a boutique recording studio and creative compound in the heart of Hollywood, from the ground up and executed entirely by our team. We kept the raw cinder block shell and vaulted timber ceiling, then warmed it up with wide plank walnut floors and floor-to-ceiling plum velvet drapes that double as acoustic treatment. The signature move is a series of preserved moss walls veined with amethyst crystal, set into the block like geodes, with a guitar rack and a vintage amp hung against them. The lounge layers a custom wood block diffuser wall, a black iron candelabra, a chesterfield sofa, patterned club chairs, and a glass coffee table under a canopy of greenery. Off the control room, a drape-lined vocal booth with a picture window keeps talent connected to the desk. Furniture and acoustic paneling were made in our shop, and two photo studios sit in the same compound so artists could track, shoot, and cut content without leaving the building.`,
     images: [
-      `${S3}/kingbird/hero.jpg`,
-      `${S3}/kingbird/1.jpg`,
-      `${S3}/kingbird/2.jpg`,
-      `${S3}/kingbird/3.jpg`,
-      `${S3}/kingbird/4.jpg`,
+      `${S3}/knockhouse-kingbird/kingbird/hero.jpg`,
+      `${S3}/knockhouse-kingbird/kingbird/1.jpg`,
+      `${S3}/knockhouse-kingbird/kingbird/2.jpg`,
+      `${S3}/knockhouse-kingbird/kingbird/3.jpg`,
+      `${S3}/knockhouse-kingbird/kingbird/4.jpg`,
     ],
     stats: [
       { value: "HOLLYWOOD", label: "LOS ANGELES" },
