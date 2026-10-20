@@ -4,6 +4,7 @@ import { useRef, useState, FormEvent } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendData } from "@/hooks/sendData";
+import { getAttribution } from "@/lib/attribution";
 import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
 import { trackGenerateLead } from "@/lib/analytics";
 import FormStatus, { FormStatusState } from "./FormStatus";
@@ -106,7 +107,11 @@ export default function ContactForm() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ ...formData, ...guardFields(form) }),
+            body: JSON.stringify({
+              ...formData,
+              ...guardFields(form),
+              attribution: getAttribution(),
+            }),
           });
           const result = (await response.json().catch(() => ({}))) as ContactApiResponse;
           if (response.ok) {
@@ -118,7 +123,7 @@ export default function ContactForm() {
                 email: formData.email,
               });
               // Fire-and-forget: the CRM webhook must not affect user feedback
-              void sendData(formData).catch(() => {});
+              void sendData({ ...formData, leadId: result.leadId }).catch(() => {});
             }
             setStatus({
               type: "success",

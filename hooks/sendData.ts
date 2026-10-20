@@ -1,8 +1,12 @@
+import { getAttribution } from "@/lib/attribution";
+
 type formData = {
   name: string;
   instagram: string;
   email: string;
   message: string;
+  referral?: string;
+  leadId?: string;
 };
 
 export const sendData = async (data: formData) => {
@@ -16,6 +20,9 @@ export const sendData = async (data: formData) => {
         email: data.email,
         instagram: data.instagram,
         message: data.message,
+        referral: data.referral ?? "",
+        leadId: data.leadId ?? "",
+        attribution: getAttribution(),
       }),
     }
   );

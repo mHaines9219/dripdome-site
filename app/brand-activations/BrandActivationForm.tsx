@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { trackGenerateLead } from "@/lib/analytics";
+import { getAttribution } from "@/lib/attribution";
 import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
 import FormStatus, { FormStatusState } from "../components/FormStatus";
 import HoneypotField from "../components/HoneypotField";
@@ -207,6 +208,7 @@ export default function BrandActivationForm() {
                 brief: formElements.brief.value,
                 formType: "brandActivation",
                 ...guardFields(form),
+                attribution: getAttribution(),
               };
 
               setStatus(null);

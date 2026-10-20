@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { rentalEquipment } from "./data";
+import { getAttribution } from "@/lib/attribution";
 import { useSpamGuard } from "@/hooks/useSpamGuard";
 import FormStatus, { FormStatusState } from "../components/FormStatus";
 import HoneypotField from "../components/HoneypotField";
@@ -230,6 +231,7 @@ export default function RentalForm() {
                 projectDescription: formElements.projectDescription.value,
                 formType: "rental", // Identify this as a rental request
                 ...guardFields(form),
+                attribution: getAttribution(),
               };
 
               setStatus(null);

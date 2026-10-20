@@ -70,7 +70,7 @@ Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Scree
 - `"brandActivation"` — brand activation inquiry form (`app/brand-activations/BrandActivationForm.tsx`), includes company/projectDate/budgetRange/brief and marks source as "Google Ads landing page"
 - default (unset) — general contact form (`app/components/ContactForm.tsx`)
 
-All three variants email the user and BCC the team via SendGrid. Bot-trap hits (honeypot, too fast, link spam) get a silent `200 { lead: false }` with no email; real sends return `{ lead: true, leadId }`. Every form renders `<HoneypotField />` and spreads `guardFields(form)` from `hooks/useSpamGuard.ts` into its POST body. Optional env `RECAPTCHA_ALLOWED_HOSTNAMES` (comma separated) rejects CAPTCHA tokens solved on other hosts.
+All three variants email the user and BCC the team via SendGrid. Bot-trap hits (honeypot, too fast, link spam) get a silent `200 { lead: false }` with no email; real sends return `{ lead: true, leadId }`. Every form renders `<HoneypotField />` and spreads `guardFields(form)` from `hooks/useSpamGuard.ts` into its POST body. Optional env `RECAPTCHA_ALLOWED_HOSTNAMES` (comma separated) rejects CAPTCHA tokens solved on other hosts. Forms also send `attribution` (gclid/gbraid/wbraid, UTMs, landing page, external referrer) captured once per session by `AttributionCapture` in `ClientLayout` via `lib/attribution.ts`; the API emails it to info@ in a separate team-only "Lead source" note next to the self-reported referral answer, and the contact form forwards it to the n8n CRM webhook.
 
 ### Analytics & Tracking
 

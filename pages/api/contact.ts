@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { randomUUID } from "crypto";
 import sgMail from "@sendgrid/mail";
+import { formatAttribution, sanitizeAttribution } from "@/lib/attribution";
 import { screenLead, verifyRecaptcha } from "@/lib/leadScreen";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
@@ -54,6 +55,23 @@ export default async function handler(
     // Ties the email to the conversion so qualified leads can be
     // matched up and imported back into Google Ads later
     const leadId = randomUUID();
+    const attribution = sanitizeAttribution(req.body?.attribution);
+
+    // Team-only note so the measured source can be compared with the
+    // self-reported answer, kept out of the customer's confirmation email
+    const sendSourceNote = async (kind: string) => {
+      try {
+        await sgMail.send({
+          to: { email: "info@dripdome.com", name: "Drip Dome Productions" },
+          from: { email: "info@dripdome.com", name: "Drip Dome Productions" },
+          subject: `Lead source: ${name} (${kind})`,
+          text: `Reference: ${leadId}\nForm: ${kind}\nName: ${name}\nEmail: ${email}\n\nHow they heard about us (self-reported): ${referral || "not answered"}\n\nMeasured source:\n${formatAttribution(attribution)}`,
+        });
+      } catch (error) {
+        // The customer email already went out, so don't fail the request
+        console.error("SendGrid source note error:", error);
+      }
+    };
 
     // Validate inputs based on form type
     if (formType === "rental") {
@@ -84,6 +102,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
+        await sendSourceNote("rental");
         res.status(200).json({ message: "Rental request sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
@@ -113,6 +132,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
+        await sendSourceNote("brandActivation");
         res.status(200).json({ message: "Brand activation inquiry sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
@@ -143,6 +163,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
+        await sendSourceNote("contact");
         res.status(200).json({ message: "Email sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
