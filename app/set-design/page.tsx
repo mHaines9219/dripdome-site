@@ -67,7 +67,7 @@ export default function SetDesignPage() {
       <HowWeWork />
 
       <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
-        <Contact />
+        <Contact projectType="setDesign" />
       </Box>
     </Box>
   );
