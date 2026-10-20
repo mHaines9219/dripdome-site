@@ -4,7 +4,11 @@ import { useRef, useState, FormEvent } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { sendData } from "@/hooks/sendData";
+import { getAttribution } from "@/lib/attribution";
+import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
+import { trackGenerateLead } from "@/lib/analytics";
 import FormStatus, { FormStatusState } from "./FormStatus";
+import HoneypotField from "./HoneypotField";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
@@ -42,16 +46,17 @@ const FIELD_SX = {
 } as const;
 
 const FIELDS = [
-  { name: "name", label: "NAME", type: "text" },
-  { name: "instagram", label: "INSTAGRAM", type: "text" },
-  { name: "email", label: "EMAIL", type: "email" },
-  { name: "referral", label: "HOW DID YOU HEAR ABOUT US?", type: "text" },
+  { name: "name", label: "NAME", type: "text", required: true },
+  { name: "instagram", label: "INSTAGRAM (OPTIONAL)", type: "text", required: false },
+  { name: "email", label: "EMAIL", type: "email", required: true },
+  { name: "referral", label: "HOW DID YOU HEAR ABOUT US? (OPTIONAL)", type: "text", required: false },
 ];
 
 export default function ContactForm() {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<FormStatusState>(null);
+  const { guardFields, restart } = useSpamGuard();
 
   return (
     <Box
@@ -102,17 +107,31 @@ export default function ContactForm() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify({
+              ...formData,
+              ...guardFields(form),
+              attribution: getAttribution(),
+            }),
           });
+          const result = (await response.json().catch(() => ({}))) as ContactApiResponse;
           if (response.ok) {
-            // Fire-and-forget: the CRM webhook must not affect user feedback
-            void sendData(formData).catch(() => {});
+            // Spam the server silently dropped stays out of the CRM and Ads
+            if (result.lead && result.leadId) {
+              trackGenerateLead({
+                form: "contact",
+                leadId: result.leadId,
+                email: formData.email,
+              });
+              // Fire-and-forget: the CRM webhook must not affect user feedback
+              void sendData({ ...formData, leadId: result.leadId }).catch(() => {});
+            }
             setStatus({
               type: "success",
               message: "MESSAGE RECEIVED. WE REPLY WITHIN 48 HOURS.",
             });
             form.reset();
             recaptchaRef.current?.reset();
+            restart();
           } else {
             throw new Error("Failed to send message");
           }
@@ -140,7 +159,7 @@ export default function ContactForm() {
             id={`contact-${field.name}`}
             name={field.name}
             type={field.type}
-            required
+            required={field.required}
             fullWidth
             sx={FIELD_SX}
           />
@@ -164,6 +183,7 @@ export default function ContactForm() {
           sx={FIELD_SX}
         />
       </Box>
+      <HoneypotField />
       <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
         <ReCAPTCHA
           ref={recaptchaRef}
