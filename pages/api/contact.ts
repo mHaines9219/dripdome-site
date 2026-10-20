@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { randomUUID } from "crypto";
 import sgMail from "@sendgrid/mail";
+import { screenLead, verifyRecaptcha } from "@/lib/leadScreen";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
@@ -28,28 +30,30 @@ export default async function handler(
       brief,
     } = req.body;
 
-    // Verify reCAPTCHA token
+    // Screen for bots before spending a CAPTCHA call or an email on them
+    const screen = screenLead(req.body ?? {});
+    if (!screen.ok) {
+      console.warn(`Contact form rejected (${formType ?? "contact"}): ${screen.reason}`);
+      if (screen.silent) {
+        // Look like a success so bots don't adapt; `lead: false` keeps the
+        // client from firing a conversion or forwarding it to the CRM
+        return res.status(200).json({ message: "Received", lead: false });
+      }
+      return res.status(400).json({ error: screen.error });
+    }
+
     try {
-      const recaptchaResponse = await fetch(
-        "https://www.google.com/recaptcha/api/siteverify",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
-        }
-      );
-
-      const recaptchaData = await recaptchaResponse.json();
-
-      if (!recaptchaData.success) {
+      if (!(await verifyRecaptcha(recaptchaToken))) {
         return res.status(400).json({ error: "Invalid CAPTCHA" });
       }
     } catch (error) {
       console.error("reCAPTCHA verification error:", error);
       return res.status(500).json({ error: "Failed to verify CAPTCHA" });
     }
+
+    // Ties the email to the conversion so qualified leads can be
+    // matched up and imported back into Google Ads later
+    const leadId = randomUUID();
 
     // Validate inputs based on form type
     if (formType === "rental") {
@@ -69,7 +73,7 @@ export default async function handler(
           name: "Drip Dome Productions",
         },
         subject: "Thank you for your rental request",
-        text: `Hi ${name},\n\nThank you for your rental request. We have received your inquiry and will review it shortly.\n\nRental Details:\n- Equipment Requested: ${equipmentList}\n- Rental Period: ${rentalStartDate} to ${rentalEndDate}\n- Project Description: ${projectDescription}\n${instagram ? `- Instagram: ${instagram}` : ""}\n\nWe will be in touch soon!\n\nBest regards,\nDrip Dome Productions`,
+        text: `Hi ${name},\n\nThank you for your rental request. We have received your inquiry and will review it shortly.\n\nRental Details:\n- Equipment Requested: ${equipmentList}\n- Rental Period: ${rentalStartDate} to ${rentalEndDate}\n- Project Description: ${projectDescription}\n${instagram ? `- Instagram: ${instagram}\n` : ""}- Reference: ${leadId}\n\nWe will be in touch soon!\n\nBest regards,\nDrip Dome Productions`,
         cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
         bcc: [
           { email: "diana@dripdome.com", name: "Diana Haines" },
@@ -80,7 +84,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
-        res.status(200).json({ message: "Rental request sent successfully" });
+        res.status(200).json({ message: "Rental request sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
         const errorMessage = error instanceof Error ? error.message : "Failed to send email";
@@ -98,7 +102,7 @@ export default async function handler(
           name: "Drip Dome Productions",
         },
         subject: `New Brand Activation Inquiry: ${company}`,
-        text: `Hi ${name},\n\nThank you for reaching out about your brand activation project. We received your inquiry and will review it within 48 hours.\n\nProject Details:\n- Company: ${company}\n- Estimated Project Date: ${projectDate}\n- Budget Range: ${budgetRange}\n- Brief: ${brief}\n${referral ? `- How they heard about us: ${referral}\n` : ""}\nSource: Google Ads landing page\n\nSpeak soon,\nDrip Dome Productions`,
+        text: `Hi ${name},\n\nThank you for reaching out about your brand activation project. We received your inquiry and will review it within 48 hours.\n\nProject Details:\n- Company: ${company}\n- Estimated Project Date: ${projectDate}\n- Budget Range: ${budgetRange}\n- Brief: ${brief}\n${referral ? `- How they heard about us: ${referral}\n` : ""}\nSource: Google Ads landing page\nReference: ${leadId}\n\nSpeak soon,\nDrip Dome Productions`,
         cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
         bcc: [
           { email: "diana@dripdome.com", name: "Diana Haines" },
@@ -109,7 +113,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
-        res.status(200).json({ message: "Brand activation inquiry sent successfully" });
+        res.status(200).json({ message: "Brand activation inquiry sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
         const errorMessage = error instanceof Error ? error.message : "Failed to send email";
@@ -128,7 +132,7 @@ export default async function handler(
           name: "Drip Dome Productions",
         },
         subject: "Thank you for contacting us",
-        text: `Hi ${name},\n\nThank you for reaching out. We have received your message and will be in touch shortly!: "${message}".\n\n${referral ? `How they heard about us: ${referral}` : ""}\n\nBest regards,\nDrip Dome Productions`,
+        text: `Hi ${name},\n\nThank you for reaching out. We have received your message and will be in touch shortly!: "${message}".\n\n${referral ? `How they heard about us: ${referral}\n` : ""}Reference: ${leadId}\n\nBest regards,\nDrip Dome Productions`,
         cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
         bcc: [
           { email: "diana@dripdome.com", name: "Diana Haines" },
@@ -139,7 +143,7 @@ export default async function handler(
 
       try {
         await sgMail.send(msg);
-        res.status(200).json({ message: "Email sent successfully" });
+        res.status(200).json({ message: "Email sent successfully", lead: true, leadId });
       } catch (error) {
         console.error("SendGrid Error:", error);
         const errorMessage = error instanceof Error ? error.message : "Failed to send email";

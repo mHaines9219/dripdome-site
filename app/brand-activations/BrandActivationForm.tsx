@@ -14,7 +14,9 @@ import {
 } from "@mui/material";
 import ReCAPTCHA from "react-google-recaptcha";
 import { trackGenerateLead } from "@/lib/analytics";
+import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
 import FormStatus, { FormStatusState } from "../components/FormStatus";
+import HoneypotField from "../components/HoneypotField";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
@@ -75,6 +77,7 @@ export default function BrandActivationForm() {
   const [budgetRange, setBudgetRange] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<FormStatusState>(null);
+  const { guardFields, restart } = useSpamGuard();
 
   const handleBudgetChange = (event: SelectChangeEvent<string>) => {
     setBudgetRange(event.target.value);
@@ -203,6 +206,7 @@ export default function BrandActivationForm() {
                 referral: formElements.referral.value,
                 brief: formElements.brief.value,
                 formType: "brandActivation",
+                ...guardFields(form),
               };
 
               setStatus(null);
@@ -214,8 +218,17 @@ export default function BrandActivationForm() {
                   body: JSON.stringify(formData),
                 });
 
+                const result = (await response.json().catch(() => ({}))) as ContactApiResponse;
                 if (response.ok) {
-                  trackGenerateLead({ form: "brandActivation", value: 500 });
+                  // Only a server-verified lead counts as a conversion
+                  if (result.lead && result.leadId) {
+                    trackGenerateLead({
+                      form: "brandActivation",
+                      leadId: result.leadId,
+                      email: formData.email,
+                      value: 500,
+                    });
+                  }
                   setStatus({
                     type: "success",
                     message: "INQUIRY RECEIVED. WE REPLY WITHIN 48 HOURS.",
@@ -223,6 +236,7 @@ export default function BrandActivationForm() {
                   form.reset();
                   setBudgetRange("");
                   recaptchaRef.current?.reset();
+                  restart();
                 } else {
                   throw new Error("Failed to send inquiry");
                 }
@@ -360,6 +374,7 @@ export default function BrandActivationForm() {
               />
             </Box>
 
+            <HoneypotField />
             <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
               <ReCAPTCHA
                 ref={recaptchaRef}

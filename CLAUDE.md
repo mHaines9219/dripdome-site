@@ -65,12 +65,12 @@ Blog, portfolio, rentals, and services data live in co-located `data.ts` files (
 
 ### API
 
-Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Validates reCAPTCHA server-side then routes on `formType`:
+Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Screens every submission with `screenLead()` from `lib/leadScreen.ts` (honeypot field, minimum fill time, email and length checks, link limits), then validates reCAPTCHA server-side, then routes on `formType`:
 - `"rental"` — rental form (`app/rentals/RentalForm.tsx`)
 - `"brandActivation"` — brand activation inquiry form (`app/brand-activations/BrandActivationForm.tsx`), includes company/projectDate/budgetRange/brief and marks source as "Google Ads landing page"
 - default (unset) — general contact form (`app/components/ContactForm.tsx`)
 
-All three variants email the user and BCC the team via SendGrid.
+All three variants email the user and BCC the team via SendGrid. Bot-trap hits (honeypot, too fast, link spam) get a silent `200 { lead: false }` with no email; real sends return `{ lead: true, leadId }`. Every form renders `<HoneypotField />` and spreads `guardFields(form)` from `hooks/useSpamGuard.ts` into its POST body. Optional env `RECAPTCHA_ALLOWED_HOSTNAMES` (comma separated) rejects CAPTCHA tokens solved on other hosts.
 
 ### Analytics & Tracking
 
@@ -78,7 +78,7 @@ GTM + GA4 + Google Ads conversions are wired through a single GTM container load
 
 Client-side event helpers live in `lib/analytics.ts`:
 - `pushDataLayer(event, payload)` — SSR-safe primitive
-- `trackGenerateLead({ form, value })` — called on successful form submit; pushes `generate_lead` with `form_type`, `currency: 'USD'`, `value` (default 500)
+- `trackGenerateLead({ form, leadId, email, value })` — called only when `/api/contact` returns `lead: true` (never on click, never for screened spam); pushes `generate_lead` with `form_type`, `lead_id`/`transaction_id` (dedupe + offline import matching), `user_data.email` (enhanced conversions), `currency: 'USD'`, `value` (default 500). Fired by the contact form (`form_type: contact`) and the brand activation form
 - `trackPageView({ page })` — called from `PageViewTracker` components on landing pages (e.g., `app/brand-activations/PageViewTracker.tsx`)
 
 Required env vars (populate in Vercel before launch):
