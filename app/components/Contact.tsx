@@ -18,7 +18,8 @@ const DETAILS: { label: string; value: string; href?: string }[] = [
   { label: "RESPONSE TIME", value: "WITHIN 48 HOURS" },
 ];
 
-export default function Contact() {
+/** `projectType` preselects the intake's project chip on vertical pages */
+export default function Contact({ projectType }: { projectType?: string } = {}) {
   return (
     <>
       <Box component="section" sx={{ bgcolor: NB_COLORS.paper }}>
@@ -105,7 +106,7 @@ export default function Contact() {
 
           {/* Right: form */}
           <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 4, md: 6 } }}>
-            <ContactForm />
+            <ContactForm projectType={projectType} />
           </Box>
         </Box>
       </Box>

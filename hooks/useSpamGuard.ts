@@ -8,6 +8,10 @@ export type ContactApiResponse = {
   error?: string;
   lead?: boolean;
   leadId?: string;
+  /** Drive resumable upload URLs, in the order the files were sent */
+  uploads?: { folderId: string; urls: string[] };
+  /** Files were attached but Drive could not take them */
+  uploadsUnavailable?: boolean;
 };
 
 /**

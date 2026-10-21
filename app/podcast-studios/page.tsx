@@ -65,7 +65,7 @@ export default function PodcastStudiosPage() {
       <HowWeWork />
 
       <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
-        <Contact />
+        <Contact projectType="podcast" />
       </Box>
     </Box>
   );
