@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   isDriveConfigured,
+  isFreshLeadFolder,
   listFolderFiles,
   readFileHead,
   trashFile,
-  verifyFinalizeToken,
+  rememberOidcToken,
 } from "@/lib/drive";
 import { ALLOWED_FILE_TYPES, MAX_FILE_BYTES, sniffFileKind } from "@/lib/leadFiles";
 
@@ -18,17 +19,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
-  const { leadId, folderId, token } = req.body ?? {};
+  const { leadId, folderId } = req.body ?? {};
   if (
     typeof leadId !== "string" ||
     typeof folderId !== "string" ||
-    !isDriveConfigured() ||
-    !verifyFinalizeToken(leadId, folderId, token)
+    !/^[\w-]{10,100}$/.test(folderId) ||
+    !isDriveConfigured()
   ) {
     return res.status(403).json({ error: "Forbidden" });
   }
 
   try {
+    rememberOidcToken(req);
+    if (!(await isFreshLeadFolder(folderId, leadId))) {
+      return res.status(403).json({ error: "Forbidden" });
+    }
     const files = await listFolderFiles(folderId);
     let kept = 0;
     const removed: string[] = [];

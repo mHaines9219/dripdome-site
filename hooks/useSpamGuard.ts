@@ -9,7 +9,7 @@ export type ContactApiResponse = {
   lead?: boolean;
   leadId?: string;
   /** Drive resumable upload URLs, in the order the files were sent */
-  uploads?: { folderId: string; token: string; urls: string[] };
+  uploads?: { folderId: string; urls: string[] };
   /** Files were attached but Drive could not take them */
   uploadsUnavailable?: boolean;
 };

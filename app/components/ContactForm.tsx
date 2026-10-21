@@ -209,7 +209,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
       await fetch("/api/lead-files", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ leadId, folderId: uploads.folderId, token: uploads.token }),
+        body: JSON.stringify({ leadId, folderId: uploads.folderId }),
       }).catch(() => {});
     }
     return failed;

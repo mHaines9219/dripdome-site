@@ -1,4 +1,4 @@
-import { createHmac, createSign, timingSafeEqual } from "crypto";
+import type { IncomingMessage } from "http";
 import { SNIFF_BYTES, type FileManifestEntry } from "@/lib/leadFiles";
 
 /**
@@ -7,33 +7,56 @@ import { SNIFF_BYTES, type FileManifestEntry } from "@/lib/leadFiles";
  * resumable upload session per file; the browser then PUTs each file to its
  * session URL, so attachments never pass through Vercel's request limit.
  *
+ * No key file: the function signs in with Vercel's OIDC token through Google
+ * Workload Identity Federation, then impersonates the service account.
+ *
  * Env (see the Drive setup guide in the PR):
- *   GOOGLE_DRIVE_CLIENT_EMAIL     service account email
- *   GOOGLE_DRIVE_PRIVATE_KEY      its private key (literal \n is fine)
- *   GOOGLE_DRIVE_LEADS_FOLDER_ID  shared drive or folder that holds lead folders
+ *   GCP_PROJECT_NUMBER                     Google Cloud project number
+ *   GCP_WORKLOAD_IDENTITY_POOL_ID          e.g. "vercel"
+ *   GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID e.g. "vercel"
+ *   GOOGLE_DRIVE_CLIENT_EMAIL              service account email
+ *   GOOGLE_DRIVE_LEADS_FOLDER_ID           shared drive or folder that holds lead folders
  */
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
-const TOKEN_URL = "https://oauth2.googleapis.com/token";
+const STS_URL = "https://sts.googleapis.com/v1/token";
 const FOLDER_MIME = "application/vnd.google-apps.folder";
 
-/** How long the browser has to finish uploads and call /api/lead-files. */
+/** How long after the lead the browser may ask for its files to be checked. */
 const FINALIZE_WINDOW_MS = 2 * 60 * 60 * 1000;
 
 function config() {
+  const projectNumber = process.env.GCP_PROJECT_NUMBER;
+  const poolId = process.env.GCP_WORKLOAD_IDENTITY_POOL_ID;
+  const providerId = process.env.GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID;
   const clientEmail = process.env.GOOGLE_DRIVE_CLIENT_EMAIL;
-  const privateKey = process.env.GOOGLE_DRIVE_PRIVATE_KEY?.replace(/\\n/g, "\n");
   const parentId = process.env.GOOGLE_DRIVE_LEADS_FOLDER_ID;
-  if (!clientEmail || !privateKey || !parentId) return null;
-  return { clientEmail, privateKey, parentId };
+  if (!projectNumber || !poolId || !providerId || !clientEmail || !parentId) return null;
+  return {
+    audience: `//iam.googleapis.com/projects/${projectNumber}/locations/global/workloadIdentityPools/${poolId}/providers/${providerId}`,
+    clientEmail,
+    parentId,
+  };
 }
 
 export function isDriveConfigured() {
   return config() !== null;
 }
 
-const base64url = (input: string | Buffer) => Buffer.from(input).toString("base64url");
+/*
+ * Vercel hands each function invocation an OIDC token in the
+ * x-vercel-oidc-token header (VERCEL_OIDC_TOKEN in local dev via
+ * `vercel env pull`). Any current token for this project is equally valid,
+ * so remembering the latest one is safe across concurrent requests.
+ */
+let oidcToken = "";
+
+export function rememberOidcToken(req: IncomingMessage) {
+  const header = req.headers["x-vercel-oidc-token"];
+  const token = Array.isArray(header) ? header[0] : header;
+  if (token) oidcToken = token;
+}
 
 let cachedToken: { value: string; expiresAt: number } | null = null;
 
@@ -41,38 +64,46 @@ async function accessToken(): Promise<string> {
   if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) return cachedToken.value;
   const cfg = config();
   if (!cfg) throw new Error("Google Drive is not configured");
+  const subjectToken = oidcToken || process.env.VERCEL_OIDC_TOKEN;
+  if (!subjectToken) throw new Error("No Vercel OIDC token (is OIDC federation enabled?)");
 
-  const now = Math.floor(Date.now() / 1000);
-  const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const claims = base64url(
-    JSON.stringify({
-      iss: cfg.clientEmail,
-      scope: "https://www.googleapis.com/auth/drive",
-      aud: TOKEN_URL,
-      iat: now,
-      exp: now + 3600,
-    })
-  );
-  const signature = createSign("RSA-SHA256")
-    .update(`${header}.${claims}`)
-    .sign(cfg.privateKey)
-    .toString("base64url");
-
-  const response = await fetch(TOKEN_URL, {
+  // 1. Vercel OIDC token -> federated Google token
+  const sts = await fetch(STS_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: `${header}.${claims}.${signature}`,
-    }).toString(),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      grantType: "urn:ietf:params:oauth:grant-type:token-exchange",
+      audience: cfg.audience,
+      scope: "https://www.googleapis.com/auth/cloud-platform",
+      requestedTokenType: "urn:ietf:params:oauth:token-type:access_token",
+      subjectToken,
+      subjectTokenType: "urn:ietf:params:oauth:token-type:jwt",
+    }),
   });
-  const data = (await response.json()) as { access_token?: string; expires_in?: number };
-  if (!response.ok || !data.access_token) {
-    throw new Error(`Drive token request failed (${response.status})`);
+  const federated = (await sts.json()) as { access_token?: string };
+  if (!sts.ok || !federated.access_token) {
+    throw new Error(`Google token exchange failed (${sts.status})`);
+  }
+
+  // 2. Federated token -> short-lived service account token for Drive
+  const impersonate = await fetch(
+    `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${encodeURIComponent(cfg.clientEmail)}:generateAccessToken`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${federated.access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ scope: ["https://www.googleapis.com/auth/drive"], lifetime: "3600s" }),
+    }
+  );
+  const data = (await impersonate.json()) as { accessToken?: string; expireTime?: string };
+  if (!impersonate.ok || !data.accessToken) {
+    throw new Error(`Service account impersonation failed (${impersonate.status})`);
   }
   cachedToken = {
-    value: data.access_token,
-    expiresAt: Date.now() + (data.expires_in ?? 3600) * 1000,
+    value: data.accessToken,
+    expiresAt: data.expireTime ? Date.parse(data.expireTime) : Date.now() + 3600_000,
   };
   return cachedToken.value;
 }
@@ -102,7 +133,7 @@ export async function createLeadFolder(leadName: string, leadId: string): Promis
       name: `${date} ${safeName} (${leadId.slice(0, 8)})`,
       mimeType: FOLDER_MIME,
       parents: [cfg.parentId],
-      description: `Website lead ${leadId}`,
+      description: leadFolderDescription(leadId),
     }),
   });
   const data = (await response.json()) as { id?: string };
@@ -207,31 +238,35 @@ export function allowedUploadOrigin(origin: unknown): string | null {
   return ok ? url.origin : null;
 }
 
-/* Finalize token: proves a /api/lead-files call is for a folder this server
-   created for a verified lead, without storing anything. */
-
-function tokenKey() {
+/**
+ * Confirms a folder is a lead folder this server made for `leadId` in the
+ * last couple of hours, so /api/lead-files can only touch fresh lead
+ * uploads. Folder IDs are unguessable and the check only removes invalid
+ * files, so no extra secret is needed.
+ */
+export async function isFreshLeadFolder(folderId: string, leadId: string): Promise<boolean> {
   const cfg = config();
-  if (!cfg) throw new Error("Google Drive is not configured");
-  return createHmac("sha256", cfg.privateKey).update("lead-files-finalize").digest();
+  if (!cfg) return false;
+  const response = await driveFetch(
+    `${DRIVE_API}/files/${encodeURIComponent(folderId)}?supportsAllDrives=true&fields=mimeType,parents,description,createdTime,trashed`
+  );
+  if (!response.ok) return false;
+  const folder = (await response.json()) as {
+    mimeType?: string;
+    parents?: string[];
+    description?: string;
+    createdTime?: string;
+    trashed?: boolean;
+  };
+  return (
+    folder.mimeType === FOLDER_MIME &&
+    !folder.trashed &&
+    (folder.parents ?? []).includes(cfg.parentId) &&
+    folder.description === leadFolderDescription(leadId) &&
+    Date.now() - Date.parse(folder.createdTime ?? "") < FINALIZE_WINDOW_MS
+  );
 }
 
-export function signFinalizeToken(leadId: string, folderId: string): string {
-  const expires = Date.now() + FINALIZE_WINDOW_MS;
-  const mac = createHmac("sha256", tokenKey())
-    .update(`${leadId}.${folderId}.${expires}`)
-    .digest("base64url");
-  return `${expires}.${mac}`;
-}
-
-export function verifyFinalizeToken(leadId: string, folderId: string, token: unknown): boolean {
-  if (typeof token !== "string") return false;
-  const [expiresRaw, mac] = token.split(".");
-  const expires = Number(expiresRaw);
-  if (!Number.isFinite(expires) || expires < Date.now() || !mac) return false;
-  const expected = createHmac("sha256", tokenKey())
-    .update(`${leadId}.${folderId}.${expires}`)
-    .digest();
-  const given = Buffer.from(mac, "base64url");
-  return given.length === expected.length && timingSafeEqual(given, expected);
+function leadFolderDescription(leadId: string) {
+  return `Website lead ${leadId}`;
 }

@@ -10,7 +10,7 @@ import {
   createUploadSession,
   folderUrl,
   isDriveConfigured,
-  signFinalizeToken,
+  rememberOidcToken,
 } from "@/lib/drive";
 import {
   BUDGET_RANGES,
@@ -179,8 +179,7 @@ export default async function handler(
 
       // Attachments go browser -> Drive. A Drive problem must never cost us
       // the lead, so on failure the inquiry still sends without uploads.
-      let drive: { folderId: string; folderUrl: string; uploadUrls: string[]; token: string } | null =
-        null;
+      let drive: { folderId: string; folderUrl: string; uploadUrls: string[] } | null = null;
       let filesNote = "";
       if (lead.files.length > 0) {
         const origin = allowedUploadOrigin(req.headers.origin);
@@ -188,6 +187,7 @@ export default async function handler(
           filesNote = !origin ? "upload origin not allowed" : "Drive not configured";
         } else {
           try {
+            rememberOidcToken(req);
             const folderId = await createLeadFolder(name, leadId);
             const uploadUrls = await Promise.all(
               lead.files.map((file) => createUploadSession(folderId, file, origin))
@@ -196,7 +196,6 @@ export default async function handler(
               folderId,
               folderUrl: folderUrl(folderId),
               uploadUrls,
-              token: signFinalizeToken(leadId, folderId),
             };
           } catch (error) {
             console.error("Drive upload setup error:", error);
@@ -295,7 +294,6 @@ export default async function handler(
           ? {
               uploads: {
                 folderId: drive.folderId,
-                token: drive.token,
                 urls: drive.uploadUrls,
               },
             }
