@@ -25,10 +25,8 @@ export const LOCATIONS: LeadOption[] = [
 
 export const BUDGET_RANGES: LeadOption[] = [
   { value: "under10k", label: "UNDER $10K" },
-  { value: "10k-25k", label: "$10K TO $25K" },
-  { value: "25k-50k", label: "$25K TO $50K" },
-  { value: "50k-100k", label: "$50K TO $100K" },
-  { value: "100k+", label: "$100K+" },
+  { value: "10k-20k", label: "$10K TO $20K" },
+  { value: "20k+", label: "$20K+" },
   { value: "unsure", label: "NOT SURE YET" },
 ];
 
