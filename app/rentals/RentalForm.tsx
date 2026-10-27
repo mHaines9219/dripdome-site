@@ -15,7 +15,10 @@ import {
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { rentalEquipment } from "./data";
+import { getAttribution } from "@/lib/attribution";
+import { useSpamGuard } from "@/hooks/useSpamGuard";
 import FormStatus, { FormStatusState } from "../components/FormStatus";
+import HoneypotField from "../components/HoneypotField";
 import {
   FONT_MONO,
   NB_BUTTON_SX,
@@ -102,6 +105,7 @@ export default function RentalForm() {
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<FormStatusState>(null);
+  const { guardFields, restart } = useSpamGuard();
 
   const handleEquipmentChange = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value;
@@ -226,6 +230,8 @@ export default function RentalForm() {
                 rentalEndDate: formElements.endDate.value,
                 projectDescription: formElements.projectDescription.value,
                 formType: "rental", // Identify this as a rental request
+                ...guardFields(form),
+                attribution: getAttribution(),
               };
 
               setStatus(null);
@@ -247,6 +253,7 @@ export default function RentalForm() {
                   form.reset();
                   setSelectedEquipment([]);
                   recaptchaRef.current?.reset();
+                  restart();
                 } else {
                   throw new Error("Failed to send request");
                 }
@@ -364,6 +371,7 @@ export default function RentalForm() {
             </Box>
 
             {/* ReCAPTCHA */}
+            <HoneypotField />
             <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
               <ReCAPTCHA
                 ref={recaptchaRef}
