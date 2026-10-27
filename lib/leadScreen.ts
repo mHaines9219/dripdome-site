@@ -23,6 +23,15 @@ const MAX_LENGTH: Record<string, number> = {
   company: 160,
   instagram: 120,
   referral: 300,
+  referralSource: 40,
+  referralDetail: 300,
+  phone: 40,
+  zip: 20,
+  projectType: 40,
+  location: 40,
+  budget: 40,
+  timeline: 40,
+  links: 3000,
   projectDate: 40,
   budgetRange: 40,
   rentalStartDate: 40,
@@ -87,6 +96,7 @@ export function screenLead(body: Record<string, unknown>): ScreenResult {
     return spam("link_in_name");
   }
 
+  // The references field exists for links, so the API caps it separately
   const freeText = ["message", "brief", "projectDescription"]
     .map((field) => (typeof body[field] === "string" ? (body[field] as string) : ""))
     .join(" ");
