@@ -243,6 +243,8 @@ export default function BrandActivationForm() {
                   throw new Error("Failed to send inquiry");
                 }
               } catch {
+                // A token is single use, so a retry needs a fresh tick
+                recaptchaRef.current?.reset();
                 setStatus({
                   type: "error",
                   message:

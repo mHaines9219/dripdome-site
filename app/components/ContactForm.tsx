@@ -229,6 +229,8 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           });
           const result = (await response.json().catch(() => ({}))) as ContactApiResponse;
           if (!response.ok) {
+            // A token is single use, so a retry needs a fresh tick
+            recaptchaRef.current?.reset();
             setStatus({
               type: "error",
               message: (
@@ -252,6 +254,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           recaptchaRef.current?.reset();
           restart();
         } catch {
+          recaptchaRef.current?.reset();
           setStatus({
             type: "error",
             message: "SOMETHING WENT WRONG. PLEASE TRY AGAIN OR EMAIL INFO@DRIPDOME.COM.",
