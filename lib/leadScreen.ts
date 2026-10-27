@@ -114,24 +114,43 @@ export function screenLead(body: Record<string, unknown>): ScreenResult {
  * on any other host are rejected too.
  */
 export async function verifyRecaptcha(token: unknown): Promise<boolean> {
-  if (typeof token !== "string" || token === "") return false;
+  if (typeof token !== "string" || token === "") {
+    console.warn("reCAPTCHA rejected: no token in request");
+    return false;
+  }
+  if (!process.env.RECAPTCHA_SECRET_KEY) {
+    console.error("reCAPTCHA rejected: RECAPTCHA_SECRET_KEY is not set in this environment");
+    return false;
+  }
 
   const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      secret: process.env.RECAPTCHA_SECRET_KEY ?? "",
+      secret: process.env.RECAPTCHA_SECRET_KEY,
       response: token,
     }).toString(),
   });
-  const data = (await response.json()) as { success?: boolean; hostname?: string };
-  if (!data.success) return false;
+  const data = (await response.json()) as {
+    success?: boolean;
+    hostname?: string;
+    "error-codes"?: string[];
+  };
+  if (!data.success) {
+    // e.g. invalid-input-secret (secret and site key from different keys),
+    // timeout-or-duplicate (token over 2 minutes old or reused)
+    console.warn(
+      `reCAPTCHA rejected by Google: ${(data["error-codes"] ?? []).join(", ") || "no reason given"} (host ${data.hostname ?? "unknown"})`
+    );
+    return false;
+  }
 
   const allowed = (process.env.RECAPTCHA_ALLOWED_HOSTNAMES ?? "")
     .split(",")
     .map((host) => host.trim().toLowerCase())
     .filter(Boolean);
   if (allowed.length > 0 && !allowed.includes((data.hostname ?? "").toLowerCase())) {
+    console.warn(`reCAPTCHA rejected: host ${data.hostname} not in RECAPTCHA_ALLOWED_HOSTNAMES`);
     return false;
   }
   return true;

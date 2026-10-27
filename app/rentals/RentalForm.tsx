@@ -258,6 +258,8 @@ export default function RentalForm() {
                   throw new Error("Failed to send request");
                 }
               } catch {
+                // A token is single use, so a retry needs a fresh tick
+                recaptchaRef.current?.reset();
                 setStatus({
                   type: "error",
                   message:

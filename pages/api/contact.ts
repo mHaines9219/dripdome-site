@@ -52,9 +52,18 @@ export default async function handler(
       return res.status(400).json({ error: screen.error });
     }
 
+    // Check the intake answers before the CAPTCHA: Google accepts a token
+    // only once, so a field error after verifying would burn it and the
+    // visitor's retry would fail as "Invalid CAPTCHA"
+    const intake = formType === "rental" || formType === "brandActivation" ? null : checkIntake(req.body);
+    if (intake && !intake.ok) {
+      console.warn(`Contact form rejected (contact): ${intake.error}`);
+      return res.status(400).json({ error: intake.error });
+    }
+
     try {
       if (!(await verifyRecaptcha(recaptchaToken))) {
-        return res.status(400).json({ error: "Invalid CAPTCHA" });
+        return res.status(400).json({ error: "CAPTCHA check failed. Please tick the box again and resend." });
       }
     } catch (error) {
       console.error("reCAPTCHA verification error:", error);
@@ -161,12 +170,8 @@ export default async function handler(
         res.status(500).json({ error: errorMessage });
       }
     } else {
-      // Project intake form (app/components/ContactForm.tsx)
-      const intake = checkIntake(req.body);
-      if (!intake.ok) {
-        console.warn(`Contact form rejected (contact): ${intake.error}`);
-        return res.status(400).json({ error: intake.error });
-      }
+      // Project intake form (app/components/ContactForm.tsx), validated above
+      if (!intake?.ok) return res.status(400).json({ error: "Missing required fields" });
       const lead = intake.lead;
 
       const answers = [
