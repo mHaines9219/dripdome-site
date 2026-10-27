@@ -14,9 +14,7 @@ import {
   TIMELINES,
   type LeadOption,
 } from "@/lib/leadFields";
-import { uploadToDrive } from "@/lib/uploadToDrive";
 import ChoiceChips from "./ChoiceChips";
-import FileDrop, { type AttachedFile } from "./FileDrop";
 import FormStatus, { FormStatusState } from "./FormStatus";
 import HoneypotField from "./HoneypotField";
 import {
@@ -28,9 +26,6 @@ import {
   NB_RULE,
   nbShadow,
 } from "@/lib/theme";
-
-/** Hidden until the Drive service account is set up in Vercel */
-const UPLOADS_ENABLED = process.env.NEXT_PUBLIC_LEAD_UPLOADS_ENABLED === "true";
 
 const FIELD_SX = {
   "& .MuiInputBase-root": {
@@ -176,44 +171,8 @@ const value = (form: HTMLFormElement, name: string) => {
 export default function ContactForm({ projectType }: { projectType?: string }) {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [files, setFiles] = useState<AttachedFile[]>([]);
   const [status, setStatus] = useState<FormStatusState>(null);
-  const [buttonLabel, setButtonLabel] = useState("SENDING...");
-  // Remounts the picker after a send so its file errors clear too
-  const [fileDropKey, setFileDropKey] = useState(0);
   const { guardFields, restart } = useSpamGuard();
-
-  const updateFile = (id: string, patch: Partial<AttachedFile>) =>
-    setFiles((current) => current.map((item) => (item.id === id ? { ...item, ...patch } : item)));
-
-  /** Sends each file to its Drive upload URL, then has the server check them. */
-  const uploadFiles = async (uploads: NonNullable<ContactApiResponse["uploads"]>, leadId: string) => {
-    let failed = 0;
-    for (const [index, item] of files.entries()) {
-      const url = uploads.urls[index];
-      setButtonLabel(`UPLOADING ${index + 1} OF ${files.length}...`);
-      updateFile(item.id, { state: "uploading", progress: 0 });
-      try {
-        if (!url) throw new Error("No upload URL");
-        await uploadToDrive(url, item.file, item.type, (progress) =>
-          updateFile(item.id, { progress })
-        );
-        updateFile(item.id, { state: "done", progress: 1 });
-      } catch {
-        failed += 1;
-        updateFile(item.id, { state: "failed", progress: 0 });
-      }
-    }
-    if (failed < files.length) {
-      // Best effort: unchecked files are still scanned by Drive
-      await fetch("/api/lead-files", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ leadId, folderId: uploads.folderId }),
-      }).catch(() => {});
-    }
-    return failed;
-  };
 
   return (
     <Box
@@ -256,13 +215,11 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           links: value(form, "links"),
           referralSource: value(form, "referralSource"),
           referralDetail: value(form, "referralDetail"),
-          files: files.map((item) => ({ name: item.file.name, size: item.file.size, type: item.type })),
           ...guardFields(form),
           attribution: getAttribution(),
         };
 
         setStatus(null);
-        setButtonLabel("SENDING...");
         setSubmitting(true);
         try {
           const response = await fetch("/api/contact", {
@@ -281,26 +238,17 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
             return;
           }
 
-          let failedUploads = 0;
           // Spam the server silently dropped stays out of Ads; the CRM
           // hand-off now happens server-side for verified leads only
           if (result.lead && result.leadId) {
             trackGenerateLead({ form: "contact", leadId: result.leadId, email });
-            if (result.uploads && files.length) {
-              failedUploads = await uploadFiles(result.uploads, result.leadId);
-            }
           }
 
-          const filesLost = files.length > 0 && (result.uploadsUnavailable || failedUploads > 0);
           setStatus({
             type: "success",
-            message: filesLost
-              ? "MESSAGE RECEIVED. SOME FILES DID NOT UPLOAD, SO PLEASE REPLY TO OUR CONFIRMATION EMAIL WITH THEM. WE REPLY WITHIN 48 HOURS."
-              : "MESSAGE RECEIVED. WE REPLY WITHIN 48 HOURS.",
+            message: "MESSAGE RECEIVED. WE REPLY WITHIN 48 HOURS.",
           });
           form.reset();
-          setFiles([]);
-          setFileDropKey((key) => key + 1);
           recaptchaRef.current?.reset();
           restart();
         } catch {
@@ -360,14 +308,45 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           fullWidth
           multiline
           minRows={2}
-          placeholder="PINTEREST, DRIVE, DROPBOX. ONE PER LINE"
-          slotProps={{ htmlInput: { inputMode: "url", autoCapitalize: "none", spellCheck: false } }}
+          placeholder="PINTEREST, GOOGLE DRIVE, DROPBOX. ONE PER LINE"
+          slotProps={{
+            htmlInput: {
+              inputMode: "url",
+              autoCapitalize: "none",
+              spellCheck: false,
+              "aria-describedby": "contact-links-warning",
+            },
+          }}
           sx={FIELD_SX}
         />
+        {/* Private Drive/Dropbox links are the most common dead end */}
+        <Box
+          id="contact-links-warning"
+          sx={{
+            display: "flex",
+            gap: 1.25,
+            alignItems: "flex-start",
+            mt: 1,
+            px: 1.5,
+            py: 1.25,
+            border: NB_RULE,
+            bgcolor: NB_COLORS.silverLight,
+          }}
+        >
+          <Typography
+            aria-hidden
+            sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700, color: NB_COLORS.ink, lineHeight: 1.6 }}
+          >
+            !
+          </Typography>
+          <Typography
+            sx={{ ...NB_MONO_SX, fontSize: 11, fontWeight: 700, color: NB_COLORS.ink, lineHeight: 1.6 }}
+          >
+            MAKE SURE SHARED LINKS ARE PUBLIC. IN GOOGLE DRIVE OR DROPBOX, SET ACCESS TO
+            &quot;ANYONE WITH THE LINK CAN VIEW&quot; OR WE WON&apos;T BE ABLE TO OPEN THEM.
+          </Typography>
+        </Box>
       </Box>
-      {UPLOADS_ENABLED && (
-        <FileDrop key={fileDropKey} files={files} onChange={setFiles} disabled={submitting} />
-      )}
 
       <SectionHead index="03" title="WHO YOU ARE" />
       <Box sx={PAIR_SX}>
@@ -437,7 +416,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           },
         }}
       >
-        {submitting ? buttonLabel : "SEND IT →"}
+        {submitting ? "SENDING..." : "SEND IT →"}
       </Button>
     </Box>
   );

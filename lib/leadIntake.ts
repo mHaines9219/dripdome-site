@@ -10,7 +10,6 @@ import {
   optionLabel,
   parseReferenceLinks,
 } from "@/lib/leadFields";
-import { checkManifest, type FileManifestEntry } from "@/lib/leadFiles";
 
 export type IntakeLead = {
   projectType: string;
@@ -25,7 +24,6 @@ export type IntakeLead = {
   referralDetail: string;
   /** Source label plus detail, e.g. "A FRIEND OR CLIENT: Jane at Spotify" */
   referral: string;
-  files: FileManifestEntry[];
 };
 
 const text = (value: unknown) => (typeof value === "string" ? value.trim() : "");
@@ -69,9 +67,6 @@ export function checkIntake(
     .filter(Boolean)
     .join(": ");
 
-  const manifest = checkManifest(body.files);
-  if (!manifest.ok) return { ok: false, error: manifest.error };
-
   return {
     ok: true,
     lead: {
@@ -86,7 +81,6 @@ export function checkIntake(
       referralSource,
       referralDetail,
       referral,
-      files: manifest.files,
     },
   };
 }

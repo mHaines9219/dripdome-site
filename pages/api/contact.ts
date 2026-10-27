@@ -5,14 +5,6 @@ import { formatAttribution, sanitizeAttribution } from "@/lib/attribution";
 import { screenLead, verifyRecaptcha } from "@/lib/leadScreen";
 import { sendLeadToCrm } from "@/lib/crm";
 import {
-  allowedUploadOrigin,
-  createLeadFolder,
-  createUploadSession,
-  folderUrl,
-  isDriveConfigured,
-  rememberOidcToken,
-} from "@/lib/drive";
-import {
   BUDGET_RANGES,
   LOCATIONS,
   PROJECT_TYPES,
@@ -177,35 +169,6 @@ export default async function handler(
       }
       const lead = intake.lead;
 
-      // Attachments go browser -> Drive. A Drive problem must never cost us
-      // the lead, so on failure the inquiry still sends without uploads.
-      let drive: { folderId: string; folderUrl: string; uploadUrls: string[] } | null = null;
-      let filesNote = "";
-      if (lead.files.length > 0) {
-        const origin = allowedUploadOrigin(req.headers.origin);
-        if (!isDriveConfigured() || !origin) {
-          filesNote = !origin ? "upload origin not allowed" : "Drive not configured";
-        } else {
-          try {
-            rememberOidcToken(req);
-            const folderId = await createLeadFolder(name, leadId);
-            const uploadUrls = await Promise.all(
-              lead.files.map((file) => createUploadSession(folderId, file, origin))
-            );
-            drive = {
-              folderId,
-              folderUrl: folderUrl(folderId),
-              uploadUrls,
-            };
-          } catch (error) {
-            console.error("Drive upload setup error:", error);
-            filesNote = "Drive upload setup failed";
-          }
-        }
-        if (filesNote) console.warn(`Lead ${leadId}: files not uploaded (${filesNote})`);
-      }
-
-      const fileNames = lead.files.map((file) => file.name);
       const answers = [
         `- Project: ${optionLabel(PROJECT_TYPES, lead.projectType)}`,
         `- Location: ${optionLabel(LOCATIONS, lead.location)}${lead.zip ? ` (${lead.zip})` : ""}`,
@@ -226,7 +189,7 @@ export default async function handler(
           name: "Drip Dome Productions",
         },
         subject: "Thank you for contacting us",
-        text: `Hi ${name},\n\nThank you for reaching out. We have received your project details and will be in touch within 48 hours.\n\n${answers}${fileNames.length ? `\n- Files: ${fileNames.join(", ")}` : ""}\n\nWhat you want built:\n${message}\n\nReference: ${leadId}\n\nBest regards,\nDrip Dome Productions`,
+        text: `Hi ${name},\n\nThank you for reaching out. We have received your project details and will be in touch within 48 hours.\n\n${answers}\n\nWhat you want built:\n${message}\n\nReference: ${leadId}\n\nBest regards,\nDrip Dome Productions`,
         cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
         bcc: [
           { email: "diana@dripdome.com", name: "Diana Haines" },
@@ -243,20 +206,15 @@ export default async function handler(
         return res.status(500).json({ error: errorMessage });
       }
 
-      // Team-only lead sheet: the answers, the Drive folder, and the measured
-      // source beside the self-reported one. Kept out of the customer email.
-      const filesLine = fileNames.length
-        ? drive
-          ? `Files (${fileNames.length}, uploading from the visitor's browser): ${drive.folderUrl}\n${fileNames.map((file) => `    ${file}`).join("\n")}`
-          : `Files (${fileNames.length}) NOT uploaded (${filesNote}). Ask the client to email them:\n${fileNames.map((file) => `    ${file}`).join("\n")}`
-        : "Files: none";
+      // Team-only lead sheet: the answers and the measured source beside
+      // the self-reported one. Kept out of the customer email.
       try {
         await sgMail.send({
           to: { email: "info@dripdome.com", name: "Drip Dome Productions" },
           from: { email: "info@dripdome.com", name: "Drip Dome Productions" },
           replyTo: email,
           subject: `New lead: ${name} · ${optionLabel(PROJECT_TYPES, lead.projectType)} · ${optionLabel(BUDGET_RANGES, lead.budget)}`,
-          text: `Reference: ${leadId}\nForm: contact\nName: ${name}\nEmail: ${email}\n${answers}\n\nWhat they want built:\n${message}\n\n${filesLine}\n\nHow they heard about us (self-reported): ${lead.referral || "not answered"}\n\nMeasured source:\n${formatAttribution(attribution)}`,
+          text: `Reference: ${leadId}\nForm: contact\nName: ${name}\nEmail: ${email}\n${answers}\n\nWhat they want built:\n${message}\n\nHow they heard about us (self-reported): ${lead.referral || "not answered"}\n\nMeasured source:\n${formatAttribution(attribution)}`,
         });
       } catch (error) {
         // The customer email already went out, so don't fail the request
@@ -281,8 +239,6 @@ export default async function handler(
         referral: lead.referral,
         referralSource: lead.referralSource,
         referralDetail: lead.referralDetail,
-        files: fileNames,
-        driveFolderUrl: drive?.folderUrl ?? "",
         attribution,
       });
 
@@ -290,15 +246,6 @@ export default async function handler(
         message: "Email sent successfully",
         lead: true,
         leadId,
-        ...(drive
-          ? {
-              uploads: {
-                folderId: drive.folderId,
-                urls: drive.uploadUrls,
-              },
-            }
-          : {}),
-        ...(lead.files.length && !drive ? { uploadsUnavailable: true } : {}),
       });
     }
   } else {
