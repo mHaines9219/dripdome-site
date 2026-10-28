@@ -19,9 +19,195 @@ export interface BlogPost {
   };
   readingTime: string;
   gallery?: string[];
+  /** Optional FAQ pairs, emitted as FAQPage structured data on the post page. */
+  faq?: { question: string; answer: string }[];
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "vita-kari-this-is-not-a-billboard-weho-pride-lightbox-fabrication",
+    title:
+      "From Render to Reality: Building Vita Kari's 16 Foot Living Billboard for WeHo Pride",
+    excerpt:
+      "DripDome fabricated THIS IS NOT A BILLBOARD, a 16 foot frosted acrylic LED light box with live performers inside, on a West Hollywood rooftop for WeHo Pride 2026. One month, two builders, roughly $15K.",
+    content: `<p>When artist Vita Kari came to DripDome with a rough sketch and a one page concept deck, the brief was simple to say and hard to build: a billboard on Santa Monica Blvd that looks like a screen from across the street and turns out to be two real people when you get close. DripDome fabricated and installed the piece, a 16 foot monochrome light box, on the roof of Endless Romance at 8722 Santa Monica Blvd, directly on the <a href="https://www.wehopride.com/parade" target="_blank" rel="noopener noreferrer">WeHo Pride parade route</a>, for June 7, 2026. About a month of lead time. A budget of roughly $15,000. Two builders, two days on site. And a street that closed to traffic before the install was done.</p>
+
+<blockquote>
+<p><strong>TL;DR</strong><br />
+Client: Vita Kari, backed by Instagram's Drafts Fund.<br />
+Build: 16 foot black and white light box, lumber frame, frosted acrylic face, close to 50 linked LED tubes, foil lined interior, on a 2 foot platform for street clearance.<br />
+Timeline: about one month from sketch to install, two days on the roof.<br />
+Result: performers inside all day on the parade route, 100K+ attendees, 8.8M+ social views, coverage by WeHo Times and Wonderland.</p>
+</blockquote>
+
+<h2>What Did Vita Kari Want? A Billboard That Isn't One</h2>
+
+<p>The piece is called THIS IS NOT A BILLBOARD. The title points at René Magritte's 1929 painting <a href="https://en.wikipedia.org/wiki/The_Treachery_of_Images" target="_blank" rel="noopener noreferrer">The Treachery of Images</a>, the pipe with "Ceci n'est pas une pipe" written under it. Vita's version swaps the pipe for an advertising format. From a distance it reads as a half rendered digital billboard. Up close, the "ad" is alive: real performers inside the structure repeating small looping gestures for hours, the kind of micro motion you'd expect from a screen running on a loop.</p>
+
+<p>Two things in the deck set the constraints for everything DripDome built. First, the piece had to be rendered almost entirely in black and white so it would stand apart from the color of Pride weekend. No branding on the shell, nothing that read as a sponsor. Second, it had to pass as a screen from the street. That meant the light had to be even, bright and flat, with no visible hardware and no hot spots, so a passerby could not tell whether they were looking at pixels or a person.</p>
+
+<p>Joining Vita inside the box was <strong>EVIANXLUCY</strong>, a local trans femme performance artist. Two performers, cycling in and out all day, in a box with no ventilation. That detail drove the single most important decision on the job.</p>
+
+<p>The project was funded through Instagram's Drafts Fund and later featured by Instagram Creators. For a full breakdown of the kind of work DripDome takes on in this category, see <a href="https://www.dripdome.com/brand-activations">brand activations and public art fabrication</a>.</p>
+
+<h2>How a Rough Sketch Became a 16 Foot Frosted Light Box</h2>
+
+<p>Vita's sketch showed the idea in three strokes: a lit panel with "This is not" top left, "a billboard" bottom right, and two silhouettes between them. A second drawing showed the mechanic: a performer stepping into a shallow box, backlit with LED.</p>
+
+<p>DripDome took that and rendered the full structure before cutting a single board. The render settled the proportions, the split between the lit panel and the black wing that carries "a billboard" in vertical type, and how the whole thing would sit on the roofline. The key move: the design grew from one element, a light box with a frosted face, and everything else was built to serve that face.</p>
+
+<figure>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/render.jpg" alt="3D render of DripDome's 16 foot light box for Vita Kari's THIS IS NOT A BILLBOARD installation, showing the frosted lit panel and black wing" />
+<figcaption>The 3D render used during pre-production to lock proportions, type placement and the split between the lit panel and the black wing.</figcaption>
+</figure>
+
+<figure>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png" alt="Vita Kari's THIS IS NOT A BILLBOARD light box installed on the Endless Romance rooftop on Santa Monica Blvd for WeHo Pride, performers visible as soft silhouettes behind the frosted acrylic" />
+<figcaption>The finished light box on the Endless Romance roof during WeHo Pride. Compare the type placement, the wing and the panel split with the render above.</figcaption>
+</figure>
+
+<p>The shell is a lumber frame, skinned black on the outside. The face is <a href="https://www.pexco.com/about-us/news/innovative-frosted-acrylic-material-enhances-lighting/" target="_blank" rel="noopener noreferrer">frosted acrylic</a> rather than frosted glass. Acrylic was the right call for three reasons. It is a fraction of the weight of glass at this size, which matters when the piece is going up to a roof. It will not shatter if a gust or a ladder meets it on a parade day. And it diffuses light well enough to hide the tubes behind it, which is the whole illusion.</p>
+
+<p>The interior is foil lined, with the wall of light on one side. Light bounces off the foil, fills the box, and the performer standing between the light and the face becomes a clean, soft edged silhouette. No face, no costume, no color. Just a body moving in a loop. That is what sells it as a screen.</p>
+
+<h2>How DripDome Lit the Box: Close to 50 LED Tubes and One Non-Negotiable</h2>
+
+<p>A frosted panel this big needs a lot of light behind it to read as a screen in direct Southern California sun. Not a few fixtures. A wall of them. DripDome brought in a lighting subcontractor to engineer the array, and the final count came in close to 50 LED tubes, linked together to throw enough even light across the full face.</p>
+
+<p>Why tubes and not panels or strips? Linear tubes spaced tight and bounced off foil give the flattest field for the money, and they can be daisy chained so the whole array runs off a manageable number of circuits. The lighting sub handled the tube spacing, the linking and the power draw so that the frosted face lit edge to edge with no visible lines. Here's a pro tip: on any light box larger than a doorway, bring the lighting person in before the frame is built, not after. The frame depth, the foil and the tube spacing have to be designed together or you end up chasing hot spots on site.</p>
+
+<p>There were two ways to hit the brightness target. Pile on cheaper, hotter fixtures and accept the heat. Or spec energy efficient LED tubes, pay a little more per unit, and keep the interior temperature down. DripDome took the second path, for a reason that had nothing to do with the electric bill.</p>
+
+<h2>Why Heat Was the Problem That Could Have Broken It</h2>
+
+<p>Matt, DripDome's lead of fabrication, had one concern above all the others on this job: the people inside. The box had no ventilation by design. Cut a vent and you cut a hole in the illusion. Fifty light sources in a sealed wooden box on a rooftop in June, with a performer standing inside for a shift, is a real thermal problem.</p>
+
+<p>LEDs are far cooler than incandescent sources, but they still produce heat, and <a href="https://www.energystar.gov/products/learn-about-led-lighting" target="_blank" rel="noopener noreferrer">thermal management is what determines how an LED performs and how long it lasts</a>. Dozens of them in a closed volume add up. So the team specified the most energy efficient tubes the array could use, because efficiency in an LED is the same thing as less waste heat. Lower draw, cooler box.</p>
+
+<p>Vita and EVIANXLUCY are seasoned performance artists. They know how to pace a long piece and they cycled in and out through the day rather than holding a single marathon shift. DripDome's job was to make sure the box they were stepping into was as cool as the light level allowed. That is the kind of decision a client never sees in the finished photo. It is also the one that lets the performance run for hours instead of minutes.</p>
+
+<h2>Then Came the Curveball: A Closed Street and a Tight Rooftop</h2>
+
+<p>Santa Monica Blvd does not stay open for Pride weekend. The city <a href="https://www.foxla.com/news/weho-pride-2026-street-closures-traffic-transit-guide" target="_blank" rel="noopener noreferrer">closed the boulevard from La Cienega to Doheny starting Friday at noon</a>, with the closure expanding early Sunday morning for the parade. 8722 Santa Monica Blvd sits inside that zone. Which meant every sheet of acrylic, every stick of lumber and every tube had to be on the roof before the barricades went up, with a delivery plan that worked around a street that was about to disappear.</p>
+
+<p>The second constraint was the roof itself. The usable footprint on top of Endless Romance was tight, and the parapet in front of it was high enough that a box sitting flat on the roof would have been partly hidden from the sidewalk. DripDome built a 2 foot platform under the light box to lift it clear of the parapet so the full face read from street level. Two feet of structure nobody sees, so that 100,000 people could see the thing on top of it.</p>
+
+<figure>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/2.png" alt="THIS IS NOT A BILLBOARD light box by Vita Kari seen from Santa Monica Blvd during WeHo Pride, fabricated and installed by DripDome" />
+<figcaption>The view the piece was built for: full face visible from the sidewalk, lifted on a 2 foot platform to clear the rooftop parapet.</figcaption>
+</figure>
+
+<p>Two trusted subcontractors built the piece on site over two days. Not a shop build trucked in whole. The frame, the skin, the platform and the lighting all came together on the roof, which is the only way a 16 foot box fits through the access a small retail building gives you.</p>
+
+<h2>Here's the Business Case for a Public Art Activation</h2>
+
+<p>Here's the takeaway for any brand, agency or artist weighing a built piece against a media buy: one physical object on the right street for one weekend outperforms a lot of impressions.</p>
+
+<p>THIS IS NOT A BILLBOARD sat on the parade route for an event that drew more than 100,000 people. The piece pulled 8.8M+ social views. It was funded through Instagram's Drafts Fund, featured by Instagram Creators, and written up by <a href="https://wehotimes.com/artist-vita-kari-debuts-human-billboard-installation-in-west-hollywood-for-weho-pride/" target="_blank" rel="noopener noreferrer">WeHo Times</a> and Wonderland, both of which credited DripDome among the collaborators. All of that from a build budget of roughly $15,000 and a month of lead time.</p>
+
+<p>The math works because the object does two jobs at once. On the street it is an experience, a thing people stop for, photograph and talk about. Online it is content, and black and white silhouettes in a lit box cut through a feed full of rainbow floats. A render, a frosted panel and a wall of light became a story that traveled far past West Hollywood. That's the kind of reveal moment you work for.</p>
+
+<figure>
+<img src="https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/4.png" alt="Performer silhouette inside the frosted acrylic face of Vita Kari's living billboard at WeHo Pride, lit by an LED tube wall built by DripDome" />
+<figcaption>Up close, the "ad" is a body. A performer in the box, backlit by the LED wall, reduced to a moving silhouette by the frosted acrylic.</figcaption>
+</figure>
+
+<h2>Lessons From the Build: Design for Load-In, Not Just the Site</h2>
+
+<p>If a fabricator takes one thing from this job, it is this: design for the load-in, not just the site. A piece that looks perfect in the render and fits the roof on paper still has to get up a narrow stair, through a door, onto a tight footprint and in front of a parapet, on a street that is closing in hours. Every one of those steps is a design input. The 2 foot platform, the on site build and the delivery schedule were all answers to the load-in, not the design.</p>
+
+<p>Three craft notes from the roof:</p>
+
+<ul>
+<li><strong>Spec the light before the box.</strong> Frame depth, interior finish and tube spacing decide whether a frosted face reads flat or striped. Bring the lighting person in at the drawing stage.</li>
+<li><strong>Treat heat as a safety spec.</strong> A sealed light box with a person inside is a thermal design problem. Energy efficient LEDs are the first line of defense, and the performer's cycle schedule is the second.</li>
+<li><strong>Build the thing nobody sees.</strong> The platform under the box and the foil inside it are invisible in every photo. They are also why the photo exists.</li>
+</ul>
+
+<p>DripDome builds the same way on a gala stage, a <a href="https://www.dripdome.com/set-design">campaign set</a>, or a podcast studio. The hidden carpentry and the visible result are the same job. For another render to reality case from the team, read how DripDome <a href="https://www.dripdome.com/blog/lesgc-alice-in-wonderland-gala-set-design-nyc">built a hedge wall activation for a NYC charity gala in two hours</a>.</p>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>How much does a custom lightbox installation cost?</h3>
+<p>This 16 foot rooftop light box came in at roughly $15,000, including fabrication, the lighting array, the platform and a two day on site install. DripDome's brand activation and public art builds typically run between $10K and $30K depending on size, lighting, site access and how long the piece needs to survive.</p>
+
+<h3>How long does it take to fabricate a large LED light box?</h3>
+<p>THIS IS NOT A BILLBOARD went from a rough sketch to a finished rooftop install in about one month, with two days of building on site. Rendering and lighting design happen in the first weeks. The physical build is the last stretch.</p>
+
+<h3>Do LED light boxes get hot?</h3>
+<p>Yes. LEDs run much cooler than incandescent fixtures, but they still produce heat, and dozens of them inside a sealed box add up. For this build DripDome specified energy efficient LED tubes to keep the interior as cool as possible, because the performers inside had no ventilation.</p>
+
+<h3>How do you build a large light box that looks like a screen?</h3>
+<p>A lumber frame, a frosted acrylic face, a foil lined interior and a dense wall of linked LED tubes on one side. The foil bounces light to fill the box evenly and the frosted acrylic hides the tubes, so anything between the light and the face reads as a flat silhouette.</p>
+
+<h3>What is a living billboard?</h3>
+<p>A living billboard is a built structure that mimics an advertising format, a digital sign or a poster, but is occupied by real performers. From a distance it reads as media. Up close it reveals live bodies, which is the point of Vita Kari's piece and its reference to Magritte.</p>
+
+<h2>What's Next</h2>
+
+<p>Public art fabrication is a growing part of DripDome's work in both Los Angeles and New York, alongside <a href="https://www.dripdome.com/brand-activations">brand activations</a> and the built sets in the <a href="https://www.dripdome.com/portfolio">portfolio</a>. The scale changes from job to job. The fundamentals don't: render it first, design for the load-in, and build the parts nobody sees as carefully as the parts everybody does.</p>
+
+<p>Planning a light box, a public art piece or a Pride activation? <a href="https://www.dripdome.com/#contact">Start a project</a> and send the team your brief.</p>`,
+    date: "2026-10-28",
+    author: {
+      name: "DripDome Team",
+      role: "Production Design Studio",
+    },
+    category: "Behind the Scenes",
+    tags: [
+      "custom lightbox fabrication",
+      "art installation fabrication",
+      "pride activation",
+      "living billboard",
+      "LED light box",
+      "frosted acrylic",
+      "brand activation Los Angeles",
+      "public art fabrication",
+      "WeHo Pride",
+      "Vita Kari",
+    ],
+    image: {
+      url: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+      alt: "Vita Kari's THIS IS NOT A BILLBOARD light box installed on the Endless Romance rooftop on Santa Monica Blvd for WeHo Pride, fabricated by DripDome",
+      width: 1226,
+      height: 774,
+    },
+    readingTime: "7 min read",
+    gallery: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/render.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/2.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/3.png",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/4.png",
+    ],
+    faq: [
+      {
+        question: "How much does a custom lightbox installation cost?",
+        answer:
+          "This 16 foot rooftop light box came in at roughly $15,000, including fabrication, the lighting array, the platform and a two day on site install. DripDome's brand activation and public art builds typically run between $10K and $30K depending on size, lighting, site access and how long the piece needs to survive.",
+      },
+      {
+        question: "How long does it take to fabricate a large LED light box?",
+        answer:
+          "THIS IS NOT A BILLBOARD went from a rough sketch to a finished rooftop install in about one month, with two days of building on site. Rendering and lighting design happen in the first weeks. The physical build is the last stretch.",
+      },
+      {
+        question: "Do LED light boxes get hot?",
+        answer:
+          "Yes. LEDs run much cooler than incandescent fixtures, but they still produce heat, and dozens of them inside a sealed box add up. For this build DripDome specified energy efficient LED tubes to keep the interior as cool as possible, because the performers inside had no ventilation.",
+      },
+      {
+        question: "How do you build a large light box that looks like a screen?",
+        answer:
+          "A lumber frame, a frosted acrylic face, a foil lined interior and a dense wall of linked LED tubes on one side. The foil bounces light to fill the box evenly and the frosted acrylic hides the tubes, so anything between the light and the face reads as a flat silhouette.",
+      },
+      {
+        question: "What is a living billboard?",
+        answer:
+          "A living billboard is a built structure that mimics an advertising format, a digital sign or a poster, but is occupied by real performers. From a distance it reads as media. Up close it reveals live bodies, which is the point of Vita Kari's piece and its reference to Magritte.",
+      },
+    ],
+  },
   {
     slug: "how-to-start-set-design-essential-tools-under-500",
     title: "How to Start in Set Design: The Essential Tool Kit Under $500",
