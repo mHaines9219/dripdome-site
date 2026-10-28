@@ -2,7 +2,8 @@
 
 import { useRef, useState, FormEvent } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import ReCAPTCHA from "react-google-recaptcha";
+import type ReCAPTCHA from "react-google-recaptcha";
+import LazyRecaptcha from "./LazyRecaptcha";
 import { getAttribution } from "@/lib/attribution";
 import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
 import { trackGenerateLead } from "@/lib/analytics";
@@ -394,13 +395,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
       <Field spec={{ name: "instagram", label: "INSTAGRAM (OPTIONAL)" }} />
 
       <HoneypotField />
-      <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          theme="dark"
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-        />
-      </Box>
+      <LazyRecaptcha ref={recaptchaRef} />
       <FormStatus status={status} />
       <Button
         type="submit"

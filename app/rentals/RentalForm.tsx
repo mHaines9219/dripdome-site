@@ -13,7 +13,8 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import type ReCAPTCHA from "react-google-recaptcha";
+import LazyRecaptcha from "../components/LazyRecaptcha";
 import { rentalEquipment } from "./data";
 import { getAttribution } from "@/lib/attribution";
 import { useSpamGuard } from "@/hooks/useSpamGuard";
@@ -374,13 +375,7 @@ export default function RentalForm() {
 
             {/* ReCAPTCHA */}
             <HoneypotField />
-            <Box sx={{ display: "flex", justifyContent: { xs: "center", md: "flex-start" } }}>
-              <ReCAPTCHA
-                ref={recaptchaRef}
-                theme="dark"
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-              />
-            </Box>
+            <LazyRecaptcha ref={recaptchaRef} />
 
             <FormStatus status={status} />
 

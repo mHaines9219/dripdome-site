@@ -100,7 +100,7 @@ export default function RootLayout({
         <Script
           id="google-ads-gtag"
           src="https://www.googletagmanager.com/gtag/js?id=AW-18099031816"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           async
         />
         <Script id="google-ads-gtag-init" strategy="afterInteractive">

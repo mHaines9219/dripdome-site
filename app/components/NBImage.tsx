@@ -31,7 +31,7 @@ export default function NBImage({ style, onLoad, alt, ...props }: ImageProps) {
             sx={{
               ...NB_MONO_SX,
               fontSize: 11,
-              color: NB_COLORS.steel,
+              color: NB_COLORS.ink,
               animation: "nb-pulse 1.2s ease-in-out infinite",
             }}
           >
