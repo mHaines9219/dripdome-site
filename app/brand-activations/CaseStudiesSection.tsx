@@ -48,6 +48,11 @@ type CaseStudy = {
    * An object entry overrides the object-position for that frame only.
    */
   images?: (string | { src: string; position?: string })[];
+  /**
+   * Exactly two shots shown side by side in the plate, no carousel. Wins over
+   * `images` when both are set.
+   */
+  pair?: [string, string];
   imageAlt: string;
   /** CSS object-position for the plate image when it crops badly at center. */
   imagePosition?: string;
@@ -205,6 +210,30 @@ const CASE_STUDIES: CaseStudy[] = [
       { value: "MAGNETIC", label: "SWAPPABLE FACEPLATE" },
       { value: "5 BLADES", label: "CUSTOM STREET SIGNS" },
       { value: "CUT VINYL", label: "BRAND GRAPHICS" },
+    ],
+  },
+  {
+    number: "06",
+    client: "CATCH ONE",
+    category: "NIGHTCLUB ACTIVATIONS",
+    headline: "A UV glow wall and a giant mouth DJ booth for club nights.",
+    copy: "Two crowd pieces for club nights at Catch One in Los Angeles. The glow wall is full height glow-in-the-dark PVC sheet framed in black and lit under UV, so guests can draw and write on it with UV pens and the wall keeps filling up all night. The giant mouth DJ booth is an oversized red lips and teeth facade cut and painted in our shop, then wrapped around the booth so the DJ plays from inside an open mouth between the subs.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/catch_one/bigmouth.jpg",
+    pair: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/catch_one/bigmouth.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/catch_one/glowwall.jpg",
+    ],
+    imageAlt:
+      "Giant red mouth DJ booth facade and UV glow-in-the-dark drawing wall built by DripDome for Catch One nightclub in Los Angeles",
+    hero: {
+      kind: "text",
+      value: "CATCH ONE",
+      label: "NIGHTCLUB · LOS ANGELES",
+    },
+    stats: [
+      { value: "UV PENS", label: "GUEST-DRAWN GLOW WALL" },
+      { value: "GLOW PVC", label: "WALL SURFACE" },
+      { value: "DJ BOOTH", label: "GIANT MOUTH FACADE" },
     ],
   },
 ];
@@ -478,6 +507,38 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
   );
 }
 
+/** Two shots side by side, split by an ink rule. Each fills its half. */
+function Pair({ images, alt }: { images: [string, string]; alt: string }) {
+  return (
+    <Box
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      {images.map((src, i) => (
+        <Box
+          key={src}
+          sx={{
+            position: "relative",
+            borderLeft: i === 1 ? NB_RULE : "none",
+          }}
+        >
+          <NBImage
+            src={src}
+            alt={`${alt}, photo ${i + 1}`}
+            fill
+            sizes="(max-width: 900px) 50vw, 25vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
 function Carousel({
   images,
   alt,
@@ -699,6 +760,8 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
                   border: 0,
                 }}
               />
+            ) : study.pair ? (
+              <Pair images={study.pair} alt={study.imageAlt} />
             ) : study.images ? (
               <Carousel
                 images={study.images}
