@@ -30,6 +30,20 @@ export const jobAnchorId = (slug: string) => `job-${slug}`;
 /** Clears the sticky navbar when a #job-<slug> link lands. Same as #featured-work. */
 export const JOB_SCROLL_MARGIN = "120px";
 
+/**
+ * Card shell shared by the full job file and the compact job row: an 80%
+ * column of the page frame from tablet up (full bleed on phones), with side
+ * rules so each sheet reads as its own card.
+ */
+export const JOB_SHEET_SX = {
+  width: { xs: "100%", md: "80%" },
+  mx: "auto",
+  scrollMarginTop: JOB_SCROLL_MARGIN,
+  borderBottom: NB_RULE,
+  borderLeft: { md: NB_RULE },
+  borderRight: { md: NB_RULE },
+} as const;
+
 // Concept render column: a small outlined figure pinned beside the build
 // frames, not a full-bleed panel. Frames keep their normal width.
 const RENDER_WIDTH_MD = 0.22;
@@ -400,20 +414,7 @@ function Filmstrip({
 
 export default function JobFile({ project }: { project: Project }) {
   return (
-    // Job files sit in an 80% column of the page frame from tablet up (full
-    // bleed on phones), with side rules so each sheet reads as its own card.
-    <Box
-      component="article"
-      id={jobAnchorId(project.slug)}
-      sx={{
-        width: { xs: "100%", md: "80%" },
-        mx: "auto",
-        scrollMarginTop: JOB_SCROLL_MARGIN,
-        borderBottom: NB_RULE,
-        borderLeft: { md: NB_RULE },
-        borderRight: { md: NB_RULE },
-      }}
-    >
+    <Box component="article" id={jobAnchorId(project.slug)} sx={JOB_SHEET_SX}>
       <JobHeaderBar project={project} />
 
       <Filmstrip
