@@ -543,6 +543,24 @@ export const PROJECTS: Project[] = [
       { value: "CUSTOM", label: "FURNITURE + PANELING" },
     ],
   },
+  {
+    slug: "catch-one-nightclub-activations",
+    jobNo: "19",
+    client: "CATCH ONE",
+    title: "NIGHTCLUB ACTIVATIONS AT CATCH ONE - LOS ANGELES",
+    vertical: "activation",
+    scope: "INTERACTIVE INSTALL · DJ BOOTH FACADE · FABRICATION · INSTALL",
+    blurb: `Two crowd pieces for club nights at Catch One in Los Angeles. The first is a glow wall: full height panels of glow-in-the-dark PVC sheet framed in black, lit under UV so the surface reads neon green in a dark room. Guests draw and write on it with UV pens all night, and the wall keeps filling up with tags, doodles, and messages as the party goes on. The second is a giant mouth DJ booth: an oversized red lips and teeth facade cut and painted in our shop, then wrapped around the booth so the DJ plays from inside an open mouth between the subs. Both pieces were built to survive a nightclub, load in fast, and give people something to photograph besides the dance floor.`,
+    // Portrait phone shots from the floor: show the whole piece.
+    imageFit: "contain",
+    images: [`${S3}/catch_one/bigmouth.jpg`, `${S3}/catch_one/glowwall.jpg`],
+    stats: [
+      { value: "CATCH ONE", label: "LOS ANGELES" },
+      { value: "UV PENS", label: "GUEST-DRAWN GLOW WALL" },
+      { value: "GLOW PVC", label: "WALL SURFACE" },
+      { value: "DJ BOOTH", label: "GIANT MOUTH FACADE" },
+    ],
+  },
 ];
 
 export const featuredProjects = () =>
