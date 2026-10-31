@@ -158,7 +158,7 @@ function Filmstrip({ images, alt }: { images: string[]; alt: string }) {
           <ArrowForwardIcon />
         </IconButton>
         <Typography sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}>
-          FRAME {String(index + 1).padStart(2, "0")} /{" "}
+          {String(index + 1).padStart(2, "0")} /{" "}
           {String(images.length).padStart(2, "0")}
         </Typography>
         <Typography

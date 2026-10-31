@@ -87,7 +87,7 @@ export default function BrandActivationsFAQ() {
                 className="faq-index"
                 sx={{ ...NB_MONO_SX, fontSize: 12 }}
               >
-                Q.{String(i + 1).padStart(2, "0")}
+                {String(i + 1).padStart(2, "0")}
               </Typography>
               <Typography
                 component="h3"
@@ -129,16 +129,8 @@ export default function BrandActivationsFAQ() {
                   gap: { xs: 0, md: 3 },
                 }}
               >
-                <Typography
-                  sx={{
-                    ...NB_MONO_SX,
-                    fontSize: 12,
-                    color: NB_COLORS.steel,
-                    display: { xs: "none", md: "block" },
-                  }}
-                >
-                  A.{String(i + 1).padStart(2, "0")}
-                </Typography>
+                {/* Empty gutter keeps the answer aligned under the question text. */}
+                <Box sx={{ display: { xs: "none", md: "block" } }} />
                 <Typography
                   sx={{
                     fontSize: { xs: 15, md: 16 },

@@ -201,7 +201,7 @@ export default function BlogContent() {
                   display: { xs: "none", md: "block" },
                 }}
               >
-                E.{String(index + 1).padStart(2, "0")}
+                {String(index + 1).padStart(2, "0")}
               </Typography>
 
               {/* Thumbnail */}

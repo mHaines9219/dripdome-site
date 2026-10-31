@@ -22,22 +22,22 @@ const PROOF = [
 
 const SPECS = [
   {
-    index: "A",
+    index: "01",
     title: "CAMERA-READY DESIGN",
     copy: "Backdrops composed for your framing, not an empty room with chairs.",
   },
   {
-    index: "B",
+    index: "02",
     title: "CINEMATIC LIGHTING",
     copy: "Key, fill, and practicals planned into the build, no fix-it-in-post.",
   },
   {
-    index: "C",
+    index: "03",
     title: "CUSTOM DESKS + SEATING",
     copy: "Fabricated to your show's format: solo, panel, or face-to-face.",
   },
   {
-    index: "D",
+    index: "04",
     title: "LED + NEON SIGNAGE",
     copy: "Hand wired statement pieces, like the NotLoveline heart wall.",
   },
@@ -208,7 +208,7 @@ export default function PodcastStudiosHero() {
               }}
             >
               <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 1.5 }}>
-                SPEC {spec.index}
+                {spec.index}
               </Typography>
               <Typography
                 sx={{ ...NB_DISPLAY_SX, fontSize: { xs: 17, md: 20 }, color: NB_COLORS.ink, mb: 1 }}

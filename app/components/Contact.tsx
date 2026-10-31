@@ -40,7 +40,7 @@ export default function Contact() {
             }}
           >
             <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}>
-              PROJECT INTAKE · FORM A
+              PROJECT INTAKE
             </Typography>
             <Typography
               variant="h2"

@@ -190,7 +190,7 @@ export default function BrandActivationsHero() {
                 }}
               >
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  FIG. 01 · LESGC ACTIVATION
+                  LESGC ACTIVATION
                 </Typography>
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
                   INSTALLED &lt; 2 HR

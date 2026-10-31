@@ -127,9 +127,9 @@ export const NB_FIELD_LABEL_SX = {
 
 /** Depth color for the button offset shadow. A mid-tone (not the white
  *  button face) so the raised face and the shadow beneath it read as two
- *  distinct layers — the 3D press effect. Steel is dark enough to step down
- *  from the white face, yet light enough to stay visible on the dark paper
- *  sections where most buttons live. */
+ *  distinct layers, which is the 3D press effect. Steel is dark enough to
+ *  step down from the white face, yet light enough to stay visible on the
+ *  dark paper sections where most buttons live. */
 const NB_BUTTON_SHADOW = NB_COLORS.steel;
 
 const NB_PRESS_MECHANIC = {

@@ -179,7 +179,7 @@ export default function VideoPhotoPage() {
                 <Typography
                   sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
                 >
-                  FIG. {String(i + 1).padStart(2, "0")} · {image.caption}
+                  {image.caption}
                 </Typography>
               </Box>
             </Box>

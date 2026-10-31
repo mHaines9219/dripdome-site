@@ -457,7 +457,7 @@ export default function BlogPostContent({ slug }: { slug: string }) {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <Typography sx={{ ...META_SX, mb: 2 }}>
-                PROJECT INTAKE · FORM A
+                PROJECT INTAKE
               </Typography>
               <Typography
                 variant="h2"

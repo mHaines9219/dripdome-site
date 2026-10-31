@@ -87,7 +87,7 @@ const PressSection = () => {
             className="press-meta"
             sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
           >
-            P.{String(i + 1).padStart(2, "0")}
+            {String(i + 1).padStart(2, "0")}
           </Typography>
           <Typography
             sx={{

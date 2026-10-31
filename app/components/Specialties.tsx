@@ -13,7 +13,7 @@ import {
 
 const SPECIALTIES = [
   {
-    index: "S.01",
+    index: "01",
     title: "PODCAST STUDIOS",
     href: "/podcast-studios",
     buyer: "FOR PODCASTERS + NETWORKS",
@@ -21,7 +21,7 @@ const SPECIALTIES = [
     copy: "Permanent, camera-ready studios designed and fabricated around your show. Acoustics, lighting, and a set your audience remembers.",
   },
   {
-    index: "S.02",
+    index: "02",
     title: "BRAND ACTIVATIONS",
     href: "/brand-activations",
     buyer: "FOR CMOS + BRAND TEAMS",
@@ -29,7 +29,7 @@ const SPECIALTIES = [
     copy: "Pop-ups, photo moments, and launch campaigns. Concept to strike, fabricated in-house and installed on your timeline.",
   },
   {
-    index: "S.03",
+    index: "03",
     title: "INTERIOR DESIGN",
     href: "/interior-office-design",
     buyer: "FOR FOUNDERS + OPERATORS",
@@ -37,7 +37,7 @@ const SPECIALTIES = [
     copy: "Offices, studios, and interiors that look like the company inside them. Space planning, custom signage, furniture, and styling, installed turnkey.",
   },
   {
-    index: "S.04",
+    index: "04",
     title: "SET DESIGN",
     href: "/set-design",
     buyer: "FOR PRODUCERS + ART DIRECTORS",
