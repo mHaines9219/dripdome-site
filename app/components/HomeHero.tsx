@@ -15,6 +15,7 @@ import {
   NB_TAG_SX,
   nbShadow,
 } from "@/lib/theme";
+import { scrollToIntake } from "@/lib/scrollToIntake";
 
 const HERO_IMAGE =
   "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG";
@@ -93,8 +94,6 @@ export default function HomeHero() {
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "7fr 5fr" },
-          maxWidth: 1440,
-          mx: "auto",
         }}
       >
         {/* Left: type column */}
@@ -116,7 +115,7 @@ export default function HomeHero() {
             <Typography
               sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}
             >
-              DRIPDOME PRODUCTIONS · SPEC 001 · EXPERIENTIAL DESIGN STUDIO
+              NYC // LA - DESIGN + FABRICATION STUDIO
             </Typography>
           </motion.div>
 
@@ -184,6 +183,7 @@ export default function HomeHero() {
               <Button
                 component={Link}
                 href="/#contact"
+                onClick={scrollToIntake}
                 disableElevation
                 sx={{ ...NB_BUTTON_SX, px: 4, py: 1.5, fontSize: { xs: 13, md: 14 } }}
               >

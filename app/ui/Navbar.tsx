@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
 import BrandLogo from "@/app/components/BrandLogo";
+import { scrollToIntake } from "@/lib/scrollToIntake";
 import {
   FONT_DISPLAY,
   NB_BUTTON_SX,
@@ -16,6 +17,7 @@ import {
   NB_RULE,
   NB_PAGE_GUTTER_SX,
   NB_PAGE_WIDTH_SX,
+  isFullBleedRoute,
 } from "@/lib/theme";
 
 const links = [
@@ -33,6 +35,7 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const fullBleed = isFullBleedRoute(pathname);
 
   return (
     <>
@@ -44,15 +47,16 @@ export default function Navbar() {
           bgcolor: NB_COLORS.paper,
           color: NB_COLORS.ink,
           borderBottom: NB_RULE,
-          ...NB_PAGE_GUTTER_SX,
+          ...(fullBleed ? {} : NB_PAGE_GUTTER_SX),
         }}
       >
         {/* Toolbar shares the page sheet's width and gutters so the
-            wordmark lines up with section content below it. */}
+            wordmark lines up with section content below it. On a
+            full-bleed route it spans the window like the bands do. */}
         <Toolbar
           disableGutters
           sx={{
-            ...NB_PAGE_WIDTH_SX,
+            ...(fullBleed ? {} : NB_PAGE_WIDTH_SX),
             minHeight: { xs: 64, md: 76 },
             px: { xs: 2, md: 6 },
             gap: 2,
@@ -109,6 +113,7 @@ export default function Navbar() {
           <Button
             component={Link}
             href="/#contact"
+            onClick={scrollToIntake}
             disableElevation
             sx={{
               ...NB_BUTTON_SX,
@@ -235,7 +240,10 @@ export default function Navbar() {
           <Box
             component={Link}
             href="/#contact"
-            onClick={() => setIsOpen(false)}
+            onClick={(e) => {
+              setIsOpen(false);
+              scrollToIntake(e);
+            }}
             sx={{
               ...NB_FOCUS_VISIBLE_SX,
               display: "flex",

@@ -13,7 +13,6 @@ import {
 
 const SPECIALTIES = [
   {
-    index: "S.01",
     title: "PODCAST STUDIOS",
     href: "/podcast-studios",
     buyer: "FOR PODCASTERS + NETWORKS",
@@ -21,7 +20,6 @@ const SPECIALTIES = [
     copy: "Permanent, camera-ready studios designed and fabricated around your show. Acoustics, lighting, and a set your audience remembers.",
   },
   {
-    index: "S.02",
     title: "BRAND ACTIVATIONS",
     href: "/brand-activations",
     buyer: "FOR CMOS + BRAND TEAMS",
@@ -29,7 +27,6 @@ const SPECIALTIES = [
     copy: "Pop-ups, photo moments, and launch campaigns. Concept to strike, fabricated in-house and installed on your timeline.",
   },
   {
-    index: "S.03",
     title: "INTERIOR DESIGN",
     href: "/interior-office-design",
     buyer: "FOR FOUNDERS + OPERATORS",
@@ -37,11 +34,10 @@ const SPECIALTIES = [
     copy: "Offices, studios, and interiors that look like the company inside them. Space planning, custom signage, furniture, and styling, installed turnkey.",
   },
   {
-    index: "S.04",
     title: "SET DESIGN",
     href: "/set-design",
     buyer: "FOR PRODUCERS + ART DIRECTORS",
-    proof: "325K+ VIEWS ON THE FRAIM FREESTYLE SET",
+    proof: "PARIS HILTON EDITORIAL · 'SUNNYD' VIDEO",
     copy: "Sets, props, and production design for campaigns, music videos, and studio shows. Designed, fabricated, dressed, and struck by one shop.",
   },
 ];
@@ -70,9 +66,6 @@ export default function Specialties() {
           }}
         >
           WHAT DO YOU NEED BUILT?
-        </Typography>
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}>
-          FOUR SPECIALTIES · ONE SHOP
         </Typography>
       </Box>
 
@@ -121,7 +114,7 @@ export default function Specialties() {
                 className="spec-muted"
                 sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
               >
-                {spec.index} · {spec.buyer}
+                {spec.buyer}
               </Typography>
             </Box>
             <Typography
@@ -149,37 +142,6 @@ export default function Specialties() {
             </Box>
           </Box>
         ))}
-      </Box>
-
-      {/* Sunset services: available for the right project, not promoted */}
-      <Box
-        sx={{
-          borderTop: NB_RULE,
-          px: { xs: 3, md: 6 },
-          py: 1.25,
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 1,
-        }}
-      >
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-          ALSO ON FILE: MUSIC VIDEOS · RENTALS
-        </Typography>
-        <Typography
-          component={Link}
-          href="/#contact"
-          sx={{
-            ...NB_MONO_SX,
-            fontSize: 11,
-            color: NB_COLORS.steel,
-            textDecoration: "underline",
-            textUnderlineOffset: 3,
-            "&:hover": { color: NB_COLORS.ink },
-          }}
-        >
-          FOR THE RIGHT PROJECT, ASK →
-        </Typography>
       </Box>
     </Box>
   );

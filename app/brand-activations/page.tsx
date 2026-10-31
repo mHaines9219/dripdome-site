@@ -5,7 +5,7 @@ import TrustWall, { TrustPress } from "../components/TrustWall";
 import SocialProofBar from "../components/SocialProofBar";
 import Footer from "../ui/Footer";
 import BrandActivationsHero from "./BrandActivationsHero";
-import BrandActivationsProcess from "./BrandActivationsProcess";
+// import BrandActivationsProcess from "./BrandActivationsProcess";
 import CaseStudiesSection from "./CaseStudiesSection";
 import BrandActivationsFAQ from "./BrandActivationsFAQ";
 import BrandActivationForm from "./BrandActivationForm";
@@ -56,7 +56,7 @@ export default function BrandActivationsPage() {
       <BrandActivationsFAQJsonLd />
       <PageViewTracker />
       <BrandActivationsHero />
-      <BrandActivationsProcess />
+      {/* <BrandActivationsProcess /> */}
       <SocialProofBar />
       <TrustWall />
       <CaseStudiesSection />

@@ -1,13 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
 import NBImage from "./NBImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
 import type { Project, ProjectImage, ProjectRender } from "@/lib/projects";
-import { VERTICALS } from "@/lib/projects";
 import {
   NB_COLORS,
   NB_DISPLAY_SX,
@@ -274,9 +272,25 @@ function Filmstrip({
   );
 }
 
-export default function JobFile({ project }: { project: Project }) {
-  const vertical = VERTICALS[project.vertical];
+/** Longer stat values (words, dimensions) step down so they fit one line. */
+function statValueSize(value: string) {
+  if (value.length > 10) return { xs: 16, md: 18, lg: 20 };
+  if (value.length > 7) return { xs: 22, md: 24, lg: 26 };
+  return { xs: 26, md: 32, lg: 36 };
+}
 
+/**
+ * `spaced` is for lists that leave room between sheets (home case
+ * studies): the sheet gets a top rule too so it reads as a closed card.
+ * Flush stacks (vertical pages) share rules and leave it off.
+ */
+export default function JobFile({
+  project,
+  spaced = false,
+}: {
+  project: Project;
+  spaced?: boolean;
+}) {
   return (
     // Job files sit in an 80% column of the page frame from tablet up (full
     // bleed on phones), with side rules so each sheet reads as its own card.
@@ -284,71 +298,30 @@ export default function JobFile({ project }: { project: Project }) {
       sx={{
         width: { xs: "100%", md: "80%" },
         mx: "auto",
+        borderTop: { md: spaced ? NB_RULE : "none" },
         borderBottom: NB_RULE,
         borderLeft: { md: NB_RULE },
         borderRight: { md: NB_RULE },
       }}
     >
-      {/* Job header bar */}
+      {/* Title bar */}
       <Box
         sx={{
           bgcolor: NB_COLORS.ink,
           color: NB_COLORS.paperOnInk,
-          display: "flex",
-          alignItems: "center",
-          gap: { xs: 1.5, md: 3 },
           px: { xs: 3, md: 6 },
-          py: 1.25,
-          flexWrap: "wrap",
+          py: { xs: 1.5, md: 2 },
         }}
       >
         <Typography
+          variant="h3"
           sx={{
-            ...NB_MONO_SX,
-            fontSize: 12,
-            fontWeight: 700,
-            bgcolor: NB_COLORS.silver,
-            color: NB_COLORS.onSilver,
-            px: 1,
-            py: 0.25,
+            ...NB_DISPLAY_SX,
+            fontSize: { xs: 18, sm: 22, md: 26 },
+            color: "inherit",
           }}
         >
-          JOB {project.jobNo}
-        </Typography>
-        {vertical.href ? (
-          <Typography
-            component={Link}
-            href={vertical.href}
-            sx={{
-              ...NB_MONO_SX,
-              fontSize: 12,
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-              "&:hover": { color: NB_COLORS.mutedOnInk },
-            }}
-          >
-            {vertical.label}
-          </Typography>
-        ) : (
-          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700 }}>
-            {vertical.label}
-          </Typography>
-        )}
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12 }}>
-          CLIENT: {project.client}
-        </Typography>
-        <Typography
-          sx={{
-            ...NB_MONO_SX,
-            fontSize: 12,
-            ml: "auto",
-            color: NB_COLORS.mutedOnInk,
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          {project.scope}
+          {project.title}
         </Typography>
       </Box>
 
@@ -368,53 +341,61 @@ export default function JobFile({ project }: { project: Project }) {
           borderTop: NB_RULE,
         }}
       >
+        {/* Stat cards fill the left column edge to edge */}
         <Box
           sx={{
-            px: { xs: 3, md: 6 },
-            py: { xs: 2.5, md: 4 },
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gridAutoRows: "1fr",
             borderRight: { md: NB_RULE },
             borderBottom: { xs: NB_RULE, md: "none" },
           }}
         >
-          <Typography
-            variant="h3"
-            sx={{
-              ...NB_DISPLAY_SX,
-              fontSize: { xs: 26, sm: 32, md: 38 },
-              color: NB_COLORS.ink,
-              mb: 2,
-            }}
-          >
-            {project.title}
-          </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-            {project.stats.map((stat) => (
-              <Box key={stat.label} sx={{ border: NB_RULE, px: 1.25, py: 0.5 }}>
-                <Typography
-                  component="span"
+            {project.stats.map((stat, i) => {
+              const last = i === project.stats.length - 1;
+              // An odd last cell spans the row so the grid stays full width
+              const spans = last && project.stats.length % 2 === 1;
+              return (
+                <Box
+                  key={stat.label}
                   sx={{
-                    ...NB_MONO_SX,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: NB_COLORS.ink,
+                    px: { xs: 3, md: 4 },
+                    py: { xs: 2.5, md: 3 },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: 0.5,
+                    gridColumn: spans ? "1 / -1" : "auto",
+                    borderRight: i % 2 === 0 && !spans ? NB_RULE : "none",
+                    borderBottom: i + 2 < project.stats.length ? NB_RULE : "none",
+                    // Checkerboard: tint flips every cell and every row
+                    bgcolor:
+                      (i + Math.floor(i / 2)) % 2 === 1
+                        ? NB_COLORS.silverLight
+                        : NB_COLORS.paper,
                   }}
                 >
-                  {stat.value}
-                </Typography>
-                <Typography
-                  component="span"
-                  sx={{
-                    ...NB_MONO_SX,
-                    fontSize: 10,
-                    color: NB_COLORS.steel,
-                    ml: 0.75,
-                  }}
-                >
-                  {stat.label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+                  <Typography
+                    sx={{
+                      ...NB_DISPLAY_SX,
+                      fontSize: statValueSize(stat.value),
+                      lineHeight: 1,
+                      // Values stay on one line from tablet up so the grid
+                      // holds its third of the column; phones stack freely.
+                      whiteSpace: { xs: "normal", md: "nowrap" },
+                      color: NB_COLORS.ink,
+                    }}
+                  >
+                    {stat.value}
+                  </Typography>
+                  <Typography
+                    sx={{ ...NB_MONO_SX, fontSize: 10, lineHeight: 1.3, color: NB_COLORS.steel }}
+                  >
+                    {stat.label}
+                  </Typography>
+                </Box>
+              );
+            })}
         </Box>
         <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 4 } }}>
           <Typography

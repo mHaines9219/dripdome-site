@@ -156,6 +156,12 @@ const PAIR_SX = {
   gap: { xs: 2, md: 2.5 },
 } as const;
 
+/** Four fields across from tablet up, so the form stays short */
+const QUAD_SX = {
+  ...PAIR_SX,
+  gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(4, 1fr)" },
+} as const;
+
 const value = (form: HTMLFormElement, name: string) => {
   const field = form.elements.namedItem(name);
   if (field instanceof RadioNodeList) return field.value;
@@ -182,7 +188,6 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        maxWidth: 900,
         mx: "auto",
         gap: { xs: 2, md: 2.5 },
       }}
@@ -275,16 +280,9 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
       />
       <ChoiceChips name="location" label="WHERE IS IT?" options={LOCATIONS} required />
       <Box sx={PAIR_SX}>
-        <Field
-          spec={{
-            name: "zip",
-            label: "ZIP OR CITY (OPTIONAL)",
-            autoComplete: "postal-code",
-          }}
-        />
         <SelectField name="timeline" label="WHEN DO YOU NEED IT?" options={TIMELINES} required />
+        <SelectField name="budget" label="BUDGET RANGE" options={BUDGET_RANGES} required />
       </Box>
-      <SelectField name="budget" label="BUDGET RANGE" options={BUDGET_RANGES} required />
       <Box>
         <Typography component="label" htmlFor="contact-message" sx={NB_FIELD_LABEL_SX}>
           TELL US ABOUT IT
@@ -295,17 +293,18 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           required
           fullWidth
           multiline
-          minRows={4}
+          minRows={3}
           placeholder="THE SPACE, THE SHOW, THE BRAND, WHAT SUCCESS LOOKS LIKE"
           sx={FIELD_SX}
         />
       </Box>
 
       <SectionHead index="02" title="REFERENCES" />
-      <Box>
-        <Typography component="label" htmlFor="contact-links" sx={NB_FIELD_LABEL_SX}>
-          MOODBOARD OR REFERENCE LINKS (OPTIONAL)
-        </Typography>
+      <Box sx={{ ...PAIR_SX, alignItems: "end" }}>
+        <Box>
+          <Typography component="label" htmlFor="contact-links" sx={NB_FIELD_LABEL_SX}>
+            MOODBOARD OR REFERENCE LINKS (OPTIONAL)
+          </Typography>
         <TextField
           id="contact-links"
           name="links"
@@ -323,6 +322,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           }}
           sx={FIELD_SX}
         />
+        </Box>
         {/* Private Drive/Dropbox links are the most common dead end */}
         <Box
           id="contact-links-warning"
@@ -330,7 +330,6 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
             display: "flex",
             gap: 1.25,
             alignItems: "flex-start",
-            mt: 1,
             px: 1.5,
             py: 1.25,
             border: NB_RULE,
@@ -353,7 +352,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
       </Box>
 
       <SectionHead index="03" title="WHO YOU ARE" />
-      <Box sx={PAIR_SX}>
+      <Box sx={QUAD_SX}>
         <Field spec={{ name: "name", label: "NAME", required: true, autoComplete: "name" }} />
         <Field
           spec={{
@@ -384,18 +383,23 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           label="HOW DID YOU HEAR ABOUT US? (OPTIONAL)"
           options={REFERRAL_SOURCES}
         />
-        <Field
-          spec={{
-            name: "referralDetail",
-            label: "ANY DETAIL? (OPTIONAL)",
-            placeholder: "WHO REFERRED YOU, WHICH POST",
-          }}
-        />
+        <Field spec={{ name: "instagram", label: "INSTAGRAM (OPTIONAL)" }} />
       </Box>
-      <Field spec={{ name: "instagram", label: "INSTAGRAM (OPTIONAL)" }} />
 
       <HoneypotField />
-      <LazyRecaptcha ref={recaptchaRef} />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 3,
+        }}
+      >
+        <LazyRecaptcha ref={recaptchaRef} />
+        <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
+          RESPONSE TIME · WITHIN 48 HOURS
+        </Typography>
+      </Box>
       <FormStatus status={status} />
       <Button
         type="submit"
