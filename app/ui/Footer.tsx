@@ -4,13 +4,8 @@ import React from "react";
 import Link from "next/link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Box, Typography } from "@mui/material";
-import {
-  NB_COLORS,
-  NB_DISPLAY_SX,
-  NB_FOCUS_VISIBLE_SX,
-  NB_MONO_SX,
-  NB_PAGE_MAX_WIDTH,
-} from "@/lib/theme";
+import { NB_COLORS, NB_FOCUS_VISIBLE_SX, NB_MONO_SX } from "@/lib/theme";
+import BrandLogo from "@/app/components/BrandLogo";
 
 const NAV = [
   { name: "PODCAST STUDIOS", href: "/podcast-studios" },
@@ -37,21 +32,9 @@ export default function Footer() {
       component="footer"
       sx={{ bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk, borderTop: `2px solid ${NB_COLORS.ink}` }}
     >
-      {/* Giant wordmark */}
-      <Box sx={{ px: { xs: 2, md: 4 }, pt: { xs: 4, md: 6 }, overflow: "hidden" }}>
-        <Typography
-          aria-hidden
-          sx={{
-            ...NB_DISPLAY_SX,
-            fontSize: { xs: "17vw", md: `min(11vw, ${NB_PAGE_MAX_WIDTH * 0.11}px)` },
-            lineHeight: 0.85,
-            color: NB_COLORS.paperOnInk,
-            whiteSpace: "nowrap",
-            userSelect: "none",
-          }}
-        >
-          DRIPDOME
-        </Typography>
+      {/* Brand logo */}
+      <Box sx={{ px: { xs: 3, md: 4 }, pt: { xs: 4, md: 6 }, height: { xs: 96, md: 140 }, boxSizing: "content-box" }}>
+        <BrandLogo on="ink" />
       </Box>
 
       {/* Link columns */}

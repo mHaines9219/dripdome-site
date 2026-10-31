@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
+import BrandLogo from "@/app/components/BrandLogo";
 import {
   FONT_DISPLAY,
   NB_BUTTON_SX,
@@ -69,15 +70,9 @@ export default function Navbar() {
               mr: "auto",
             }}
           >
-            <Typography
-              sx={{
-                fontFamily: FONT_DISPLAY,
-                fontSize: { xs: 18, md: 22 },
-                letterSpacing: "0.02em",
-              }}
-            >
-              DRIPDOME
-            </Typography>
+            <Box sx={{ height: { xs: 64, md: 88 } }}>
+              <BrandLogo on="paper" priority />
+            </Box>
           </Box>
 
           <Box sx={{ display: { xs: "none", lg: "flex" } }}>

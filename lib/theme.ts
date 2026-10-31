@@ -38,6 +38,21 @@ export const NB_SHADOW_OFFSET = 6;
 /** 2px solid ink rule, the default border everywhere */
 export const NB_RULE = `${NB_BORDER_WIDTH}px solid ${NB_COLORS.ink}`;
 
+/** Brand logo PNG on S3: dark wordmark on a transparent ground. It reads
+ *  as-is on `ink` bands and is inverted to sit on the dark `paper` page,
+ *  so a retheme that lightens `paper` should flip these filters. */
+export const NB_BRAND_LOGO = {
+  src: "https://dripdome-site.s3.us-east-2.amazonaws.com/brandlogo.png",
+  width: 402,
+  height: 162,
+  /** First and last opaque rows of the mark. The transparent padding is
+   *  uneven (51px above, 18px below), so BrandLogo centers these rows
+   *  rather than the file's box. */
+  artworkTop: 51,
+  artworkBottom: 144,
+  filterOn: { paper: "invert(1)", ink: "none" },
+} as const;
+
 /* ---------- Page frame ---------- */
 /** Max content width of the page sheet. Every route renders inside a
  *  centered frame of this width (see app/components/PageFrame.tsx), so
