@@ -123,19 +123,6 @@ export default function SocialProofBar() {
           </Box>
         ))}
       </Box>
-      <Box
-        sx={{
-          borderTop: NB_RULE,
-          px: { xs: 2, md: 4 },
-          py: 1,
-        }}
-      >
-        <Typography
-          sx={{ ...NB_MONO_SX, fontSize: { xs: 10, md: 11 }, color: NB_COLORS.steel }}
-        >
-          AS SEEN IN FORBES, ROLLING STONE + BUSINESS INSIDER
-        </Typography>
-      </Box>
     </Box>
   );
 }

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { NB_COLORS } from "@/lib/theme";
 import HomeHero from "./components/HomeHero";
 import SocialProofBar from "./components/SocialProofBar";
-import Specialties from "./components/Specialties";
+// import Specialties from "./components/Specialties";
 import HomeFeaturedWork from "./components/HomeFeaturedWork";
-import TrustWall, { TrustPress } from "./components/TrustWall";
+import TrustWall from "./components/TrustWall";
 import OurServices from "./components/OurServices";
 import HowWeWork from "./components/HowWeWork";
 import Contact from "./components/Contact";
@@ -55,12 +55,12 @@ export default function Home() {
     <Box component="main" sx={{ bgcolor: NB_COLORS.paper, color: NB_COLORS.ink }}>
       <HomeHero />
       <SocialProofBar />
-      <Specialties />
+      {/* <Specialties /> */}
       <HomeFeaturedWork />
       <TrustWall />
       {/* <OurServices /> */}
       <HowWeWork />
-      <TrustPress />
+      {/* <TrustPress /> */}
       <Box id="contact" sx={{ scrollMarginTop: { xs: 95, md: 120 } }}>
         <Contact />
       </Box>

@@ -15,9 +15,10 @@ import {
   NB_TAG_SX,
   nbShadow,
 } from "@/lib/theme";
+import { scrollToIntake } from "@/lib/scrollToIntake";
 
 const HERO_IMAGE =
-  "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG";
+  "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png";
 
 const BADGES = ["WOMEN OWNED", "NYC + LA", "CONCEPT TO COMPLETION"];
 
@@ -93,8 +94,6 @@ export default function HomeHero() {
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "7fr 5fr" },
-          maxWidth: 1440,
-          mx: "auto",
         }}
       >
         {/* Left: type column */}
@@ -116,7 +115,7 @@ export default function HomeHero() {
             <Typography
               sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}
             >
-              DRIPDOME PRODUCTIONS · SPEC 001 · EXPERIENTIAL DESIGN STUDIO
+              NYC // LA - DESIGN + FABRICATION STUDIO
             </Typography>
           </motion.div>
 
@@ -184,6 +183,7 @@ export default function HomeHero() {
               <Button
                 component={Link}
                 href="/#contact"
+                onClick={scrollToIntake}
                 disableElevation
                 sx={{ ...NB_BUTTON_SX, px: 4, py: 1.5, fontSize: { xs: 13, md: 14 } }}
               >
@@ -245,7 +245,7 @@ export default function HomeHero() {
               <Box sx={{ position: "relative", aspectRatio: "4 / 3", border: NB_RULE }}>
                 <Image
                   src={HERO_IMAGE}
-                  alt="DripDome set build for the NotLoveline podcast"
+                  alt="THIS IS NOT A BILLBOARD, the Vita Kari light box DripDome built on the WeHo Pride parade route"
                   fill
                   priority
                   sizes="(max-width: 900px) 90vw, 40vw"
@@ -261,10 +261,10 @@ export default function HomeHero() {
                 }}
               >
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  FIG. 01 · NOTLOVELINE SET
+                  FIG. 01 · THIS IS NOT A BILLBOARD
                 </Typography>
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  20M+ VIEWS
+                  8.8M+ VIEWS
                 </Typography>
               </Box>
             </Box>

@@ -13,6 +13,7 @@ import {
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
 } from "@/lib/theme";
+import { scrollToIntake } from "@/lib/scrollToIntake";
 
 const steps = [
   {
@@ -144,6 +145,7 @@ export default function HowWeWork() {
         <Button
           component={Link}
           href="/#contact"
+          onClick={scrollToIntake}
           disableElevation
           endIcon={<ArrowForwardIcon />}
           sx={{ ...NB_BUTTON_DARK_SX, px: 3.5, py: 1.25, fontSize: 13 }}

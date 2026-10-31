@@ -66,6 +66,10 @@ export const NB_PAGE_GUTTER_SX = {
   px: { xs: 0, md: 3, lg: 5 },
 } as const;
 
+/** Routes that skip the page sheet: their bands, section rules, and
+ *  tickers run edge to edge, and the navbar drops its gutter to match. */
+export const isFullBleedRoute = (pathname: string | null) => pathname === "/";
+
 /** Centered, width-capped column that matches the page sheet */
 export const NB_PAGE_WIDTH_SX = {
   width: "100%",
