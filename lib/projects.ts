@@ -87,8 +87,13 @@ export interface Project {
    */
   imageFit?: "cover" | "contain";
   stats: ProjectStat[];
-  /** Featured projects get a full job file on the home archive. */
+  /** Featured projects appear on the home archive. */
   featured?: boolean;
+  /**
+   * Anchors are the featured projects that get a full job file on home.
+   * Every other featured project renders as a compact job row.
+   */
+  anchor?: boolean;
   /** Position on the home archive, lowest first. Ordered by client recognition. */
   featuredOrder?: number;
   /**
@@ -178,6 +183,7 @@ export const PROJECTS: Project[] = [
       { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
     ],
     featured: true,
+    anchor: true,
     featuredOrder: 4,
   },
   {
@@ -230,6 +236,7 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
+    anchor: true,
     featuredOrder: 3,
   },
   {
@@ -383,6 +390,7 @@ export const PROJECTS: Project[] = [
       { value: "PRIVATE", label: "HILTON RESIDENCE" },
     ],
     featured: true,
+    anchor: true,
     featuredOrder: 1,
   },
   {
@@ -511,6 +519,19 @@ export const featuredProjects = () =>
         (a.p.featuredOrder ?? a.i + 1000) - (b.p.featuredOrder ?? b.i + 1000),
     )
     .map(({ p }) => p);
+
+export type FeaturedTier = "anchor" | "row";
+
+/**
+ * The home archive in display order, each featured project tagged with the
+ * tier that decides how it renders: anchors as full job files, the rest as
+ * compact rows.
+ */
+export const featuredArchive = () =>
+  featuredProjects().map((project) => ({
+    project,
+    tier: (project.anchor ? "anchor" : "row") as FeaturedTier,
+  }));
 
 export const projectsByVertical = (key: VerticalKey) =>
   PROJECTS.filter((p) => p.vertical === key)
