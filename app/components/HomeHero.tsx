@@ -18,7 +18,7 @@ import {
 import { scrollToIntake } from "@/lib/scrollToIntake";
 
 const HERO_IMAGE =
-  "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG";
+  "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png";
 
 const BADGES = ["WOMEN OWNED", "NYC + LA", "CONCEPT TO COMPLETION"];
 
@@ -245,7 +245,7 @@ export default function HomeHero() {
               <Box sx={{ position: "relative", aspectRatio: "4 / 3", border: NB_RULE }}>
                 <Image
                   src={HERO_IMAGE}
-                  alt="DripDome set build for the NotLoveline podcast"
+                  alt="THIS IS NOT A BILLBOARD, the Vita Kari light box DripDome built on the WeHo Pride parade route"
                   fill
                   priority
                   sizes="(max-width: 900px) 90vw, 40vw"
@@ -261,10 +261,10 @@ export default function HomeHero() {
                 }}
               >
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  FIG. 01 · NOTLOVELINE SET
+                  FIG. 01 · THIS IS NOT A BILLBOARD
                 </Typography>
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  20M+ VIEWS
+                  8.8M+ VIEWS
                 </Typography>
               </Box>
             </Box>
