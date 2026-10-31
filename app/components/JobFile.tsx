@@ -217,7 +217,11 @@ export function JobHeaderBar({ project }: { project: Project }) {
           fontSize: 11,
           color: NB_COLORS.mutedOnInk,
           ml: { md: "auto" },
-          flexBasis: { xs: "100%", md: "auto" },
+          // Basis 0 keeps the scope on the job line from tablet up; it takes
+          // the leftover width and wraps inside that instead of dropping down.
+          flex: { xs: "0 0 100%", md: "1 1 0" },
+          minWidth: 0,
+          textAlign: { md: "right" },
         }}
       >
         {project.scope}
@@ -226,7 +230,11 @@ export function JobHeaderBar({ project }: { project: Project }) {
   );
 }
 
-/** Stats as one wrapping mono line: bold value, steel label, dot separators. */
+/**
+ * Stats as one wrapping mono line: bold value, steel label, dot separators.
+ * Each stat is an unbreakable unit that carries its own leading dot, so a
+ * line never starts with a dot and a value never parts from its label.
+ */
 export function StatLine({ stats }: { stats: ProjectStat[] }) {
   return (
     <Typography
@@ -239,18 +247,20 @@ export function StatLine({ stats }: { stats: ProjectStat[] }) {
         m: 0,
       }}
     >
-      {stats.map((stat, i) => (
-        <Box component="span" key={stat.label}>
-          {i > 0 && " · "}
-          <Box component="span" sx={{ display: "inline-block" }}>
-            <Box
-              component="span"
-              sx={{ fontWeight: 700, color: NB_COLORS.ink }}
-            >
-              {stat.value}
-            </Box>{" "}
-            {stat.label}
-          </Box>
+      {stats.map((stat) => (
+        <Box
+          component="span"
+          key={stat.label}
+          sx={{
+            display: "inline-block",
+            whiteSpace: "nowrap",
+            "&:not(:first-of-type)::before": { content: '"·"', mx: 0.75 },
+          }}
+        >
+          <Box component="span" sx={{ fontWeight: 700, color: NB_COLORS.ink }}>
+            {stat.value}
+          </Box>{" "}
+          {stat.label}
         </Box>
       ))}
     </Typography>

@@ -522,16 +522,27 @@ export const featuredProjects = () =>
 
 export type FeaturedTier = "anchor" | "row";
 
+export type ArchiveEntry = { project: Project; tier: FeaturedTier };
+
 /**
- * The home archive in display order, each featured project tagged with the
- * tier that decides how it renders: anchors as full job files, the rest as
- * compact rows.
+ * The home archive in display order. Rhythm: one anchor as a full job file,
+ * then two compact rows, repeated until both lists run out; leftovers follow.
  */
-export const featuredArchive = () =>
-  featuredProjects().map((project) => ({
-    project,
-    tier: (project.anchor ? "anchor" : "row") as FeaturedTier,
-  }));
+export const featuredArchive = (): ArchiveEntry[] => {
+  const featured = featuredProjects();
+  const anchors = featured.filter((p) => p.anchor);
+  const rows = featured.filter((p) => !p.anchor);
+  const archive: ArchiveEntry[] = [];
+  while (anchors.length || rows.length) {
+    for (const project of anchors.splice(0, 1)) {
+      archive.push({ project, tier: "anchor" });
+    }
+    for (const project of rows.splice(0, 2)) {
+      archive.push({ project, tier: "row" });
+    }
+  }
+  return archive;
+};
 
 export const projectsByVertical = (key: VerticalKey) =>
   PROJECTS.filter((p) => p.vertical === key)
