@@ -3,16 +3,16 @@
 import Link from "next/link";
 import { Box, Typography } from "@mui/material";
 import NBImage from "./NBImage";
-import { JOB_SHEET_SX, JobHeaderBar, StatLine, jobAnchorId } from "./JobFile";
+import {
+  JOB_LINK_SX,
+  JOB_SHEET_SX,
+  JobHeaderBar,
+  StatLine,
+  jobAnchorId,
+} from "./JobFile";
 import type { Project } from "@/lib/projects";
 import { VERTICALS } from "@/lib/projects";
-import {
-  NB_COLORS,
-  NB_DISPLAY_SX,
-  NB_FOCUS_VISIBLE_SX,
-  NB_HAIRLINE,
-  NB_MONO_SX,
-} from "@/lib/theme";
+import { NB_COLORS, NB_DISPLAY_SX, NB_HAIRLINE, NB_MONO_SX } from "@/lib/theme";
 
 /**
  * Compact archive entry: the job header bar, one wide still, and the title,
@@ -88,18 +88,7 @@ export default function JobRow({ project }: { project: Project }) {
             <Typography
               component={Link}
               href={fullHref}
-              sx={{
-                ...NB_MONO_SX,
-                fontSize: 12,
-                fontWeight: 700,
-                color: NB_COLORS.ink,
-                textDecoration: "underline",
-                textUnderlineOffset: 3,
-                mt: "auto",
-                alignSelf: "flex-start",
-                "&:hover": { color: NB_COLORS.silver },
-                ...NB_FOCUS_VISIBLE_SX,
-              }}
+              sx={{ ...JOB_LINK_SX, mt: "auto", alignSelf: "flex-start" }}
             >
               FULL JOB FILE →
             </Typography>

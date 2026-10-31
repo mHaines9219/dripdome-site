@@ -5,20 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  NB_BUTTON_OUTLINE_SX,
   NB_BUTTON_SX,
   NB_COLORS,
   NB_DISPLAY_SX,
   NB_MONO_SX,
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
-  NB_TAG_SX,
 } from "@/lib/theme";
+import { JOB_LINK_SX } from "./JobFile";
 
 const HERO_IMAGE =
   "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG";
-
-const BADGES = ["WOMEN OWNED", "NYC + LA", "CONCEPT TO COMPLETION"];
 
 const TICKER_ITEMS = [
   "SET DESIGN",
@@ -115,7 +112,7 @@ export default function HomeHero() {
             <Typography
               sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel, mb: 2 }}
             >
-              DRIPDOME PRODUCTIONS · SPEC 001 · EXPERIENTIAL DESIGN STUDIO
+              EXPERIENTIAL DESIGN STUDIO · NYC + LA
             </Typography>
           </motion.div>
 
@@ -137,21 +134,6 @@ export default function HomeHero() {
               <Box component="span" sx={{ ...NB_OUTLINE_TEXT_SX, display: "block" }}>
                 WORLDS.
               </Box>
-              <Box
-                component="span"
-                sx={{
-                  display: "inline-block",
-                  fontSize: "0.35em",
-                  bgcolor: NB_COLORS.silver,
-                  color: NB_COLORS.onSilver,
-                  border: NB_RULE,
-                  px: 1.5,
-                  py: 0.5,
-                  mt: 2,
-                }}
-              >
-                SETS. STAGES. STORIES.
-              </Box>
             </Typography>
           </motion.div>
 
@@ -169,7 +151,7 @@ export default function HomeHero() {
               }}
             >
               Production design and custom fabrication trusted by world-class
-              brands and A-list talent. From concept to completion in NYC and LA.
+              brands and A-list talent.
             </Typography>
           </motion.div>
 
@@ -178,7 +160,9 @@ export default function HomeHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
           >
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 4 }}>
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 3 }}
+            >
               <Button
                 component={Link}
                 href="/#contact"
@@ -187,27 +171,9 @@ export default function HomeHero() {
               >
                 START A PROJECT
               </Button>
-              <Button
-                component={Link}
-                href="/portfolio"
-                disableElevation
-                sx={{
-                  ...NB_BUTTON_OUTLINE_SX,
-                  px: 4,
-                  py: 1.5,
-                  fontSize: { xs: 13, md: 14 },
-                }}
-              >
-                VIEW PORTFOLIO
-              </Button>
-            </Box>
-
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5 }}>
-              {BADGES.map((badge) => (
-                <Box key={badge} sx={{ ...NB_TAG_SX, fontSize: { xs: 10, md: 11 } }}>
-                  {badge}
-                </Box>
-              ))}
+              <Typography component={Link} href="#featured-work" sx={JOB_LINK_SX}>
+                SEE THE ARCHIVE →
+              </Typography>
             </Box>
           </motion.div>
         </Box>
@@ -256,7 +222,7 @@ export default function HomeHero() {
                 }}
               >
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
-                  FIG. 01 · NOTLOVELINE SET
+                  NOTLOVELINE SET
                 </Typography>
                 <Typography sx={{ ...NB_MONO_SX, fontSize: 11, color: NB_COLORS.steel }}>
                   20M+ VIEWS

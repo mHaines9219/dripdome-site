@@ -44,6 +44,18 @@ export const JOB_SHEET_SX = {
   borderRight: { md: NB_RULE },
 } as const;
 
+/** Mono text link beside a job sheet or under the hero: FULL JOB FILE, SEE THE ARCHIVE. */
+export const JOB_LINK_SX = {
+  ...NB_MONO_SX,
+  fontSize: 12,
+  fontWeight: 700,
+  color: NB_COLORS.ink,
+  textDecoration: "underline",
+  textUnderlineOffset: 3,
+  "&:hover": { color: NB_COLORS.silver },
+  ...NB_FOCUS_VISIBLE_SX,
+} as const;
+
 // Concept render column: a small outlined figure pinned beside the build
 // frames, not a full-bleed panel. Frames keep their normal width.
 const RENDER_WIDTH_MD = 0.22;
