@@ -1,26 +1,42 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import NBImage from "./NBImage";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, IconButton, Typography } from "@mui/material";
-import type { Project, ProjectImage, ProjectRender } from "@/lib/projects";
+import type {
+  Project,
+  ProjectImage,
+  ProjectRender,
+  ProjectStat,
+} from "@/lib/projects";
 import { VERTICALS } from "@/lib/projects";
 import {
+  NB_BORDER_WIDTH,
   NB_COLORS,
   NB_DISPLAY_SX,
+  NB_FOCUS_VISIBLE_SX,
+  NB_HAIRLINE,
   NB_MONO_SX,
   NB_RULE,
 } from "@/lib/theme";
 import { useDragScroll } from "@/lib/useDragScroll";
+
+/** DOM id of a project's sheet, the target of archive index and job row links. */
+export const jobAnchorId = (slug: string) => `job-${slug}`;
+
+/** Clears the sticky navbar when a #job-<slug> link lands. Same as #featured-work. */
+export const JOB_SCROLL_MARGIN = "120px";
 
 // Concept render column: a small outlined figure pinned beside the build
 // frames, not a full-bleed panel. Frames keep their normal width.
 const RENDER_WIDTH_MD = 0.22;
 // Silver gutter that separates the concept render from the build frames.
 const RENDER_DIVIDER_PX = 28;
+
+const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
  * Concept render figure plus the silver "RENDER -> BUILD" gutter. Shared by
@@ -50,7 +66,6 @@ export function RenderPanel({
           py: { xs: 2.5, md: 2 },
         }}
       >
-        {/* Outlined figure: ink frame, mono caption */}
         <Box
           component="figure"
           sx={{
@@ -65,7 +80,7 @@ export function RenderPanel({
             sx={{
               position: "relative",
               aspectRatio: "4 / 3",
-              borderBottom: NB_RULE,
+              borderBottom: NB_HAIRLINE,
             }}
           >
             <NBImage
@@ -91,7 +106,7 @@ export function RenderPanel({
               color: NB_COLORS.paperOnInk,
             }}
           >
-            FIG. 00 · 3D RENDER
+            RENDER
           </Typography>
         </Box>
       </Box>
@@ -106,10 +121,10 @@ export function RenderPanel({
           color: NB_COLORS.onSilver,
           width: { xs: "auto", md: RENDER_DIVIDER_PX },
           height: { xs: RENDER_DIVIDER_PX, md: "auto" },
-          borderTop: { xs: NB_RULE, md: "none" },
-          borderBottom: { xs: NB_RULE, md: "none" },
-          borderLeft: { md: NB_RULE },
-          borderRight: { md: NB_RULE },
+          borderTop: { xs: NB_HAIRLINE, md: "none" },
+          borderBottom: { xs: NB_HAIRLINE, md: "none" },
+          borderLeft: { md: NB_HAIRLINE },
+          borderRight: { md: NB_HAIRLINE },
         }}
       >
         <Typography
@@ -127,6 +142,136 @@ export function RenderPanel({
         </Typography>
       </Box>
     </>
+  );
+}
+
+/**
+ * Ink header bar: job number, vertical, client, and the scope line. Shared by
+ * the full job file and the compact job row so the two never drift.
+ */
+export function JobHeaderBar({ project }: { project: Project }) {
+  const vertical = VERTICALS[project.vertical];
+  const label = { ...NB_MONO_SX, fontSize: 12, fontWeight: 700 } as const;
+
+  return (
+    <Box
+      sx={{
+        bgcolor: NB_COLORS.ink,
+        color: NB_COLORS.paperOnInk,
+        display: "flex",
+        alignItems: "center",
+        gap: { xs: 1.5, md: 3 },
+        px: { xs: 3, md: 4 },
+        py: 1.25,
+        flexWrap: "wrap",
+      }}
+    >
+      <Typography
+        sx={{
+          ...label,
+          bgcolor: NB_COLORS.silver,
+          color: NB_COLORS.onSilver,
+          px: 1,
+          py: 0.25,
+        }}
+      >
+        JOB {project.jobNo}
+      </Typography>
+      {vertical.href ? (
+        <Typography
+          component={Link}
+          href={vertical.href}
+          sx={{
+            ...label,
+            color: "inherit",
+            textDecoration: "underline",
+            textUnderlineOffset: 3,
+            "&:hover": { color: NB_COLORS.mutedOnInk },
+          }}
+        >
+          {vertical.label}
+        </Typography>
+      ) : (
+        <Typography sx={label}>{vertical.label}</Typography>
+      )}
+      <Typography sx={{ ...NB_MONO_SX, fontSize: 12 }}>
+        CLIENT: {project.client}
+      </Typography>
+      <Typography
+        sx={{
+          ...NB_MONO_SX,
+          fontSize: 11,
+          color: NB_COLORS.mutedOnInk,
+          ml: { md: "auto" },
+          flexBasis: { xs: "100%", md: "auto" },
+        }}
+      >
+        {project.scope}
+      </Typography>
+    </Box>
+  );
+}
+
+/** Stats as one wrapping mono line: bold value, steel label, dot separators. */
+export function StatLine({ stats }: { stats: ProjectStat[] }) {
+  return (
+    <Typography
+      component="p"
+      sx={{
+        ...NB_MONO_SX,
+        fontSize: 12,
+        lineHeight: 1.9,
+        color: NB_COLORS.steel,
+        m: 0,
+      }}
+    >
+      {stats.map((stat, i) => (
+        <Box component="span" key={stat.label}>
+          {i > 0 && " · "}
+          <Box component="span" sx={{ display: "inline-block" }}>
+            <Box
+              component="span"
+              sx={{ fontWeight: 700, color: NB_COLORS.ink }}
+            >
+              {stat.value}
+            </Box>{" "}
+            {stat.label}
+          </Box>
+        </Box>
+      ))}
+    </Typography>
+  );
+}
+
+const ARROW_SIZE = 32;
+const ARROW_OUTLINE = `${NB_BORDER_WIDTH}px solid ${NB_COLORS.paperOnInk}`;
+
+function ArrowButton({
+  label,
+  onClick,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <IconButton
+      aria-label={label}
+      onClick={onClick}
+      sx={{
+        width: ARROW_SIZE,
+        height: ARROW_SIZE,
+        borderRadius: 0,
+        color: "inherit",
+        transition: "transform 120ms ease",
+        "&:hover": { bgcolor: NB_COLORS.paperOnInk, color: NB_COLORS.ink },
+        "&:active": { transform: "translate(1px, 1px)" },
+        ...NB_FOCUS_VISIBLE_SX,
+      }}
+    >
+      {children}
+    </IconButton>
   );
 }
 
@@ -162,9 +307,10 @@ function Filmstrip({
   };
 
   return (
-    <Box>
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
-        {render && <RenderPanel render={render} alt={alt} />}
+    <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" } }}>
+      {render && <RenderPanel render={render} alt={alt} />}
+      {/* The overlay sits on this wrapper, not the track, so it stays put while the track scrolls. */}
+      <Box sx={{ position: "relative", flex: 1, minWidth: 0 }}>
         <Box
           ref={trackRef}
           onScroll={handleScroll}
@@ -172,8 +318,6 @@ function Filmstrip({
           sx={{
             cursor: "grab",
             userSelect: "none",
-            flex: 1,
-            minWidth: 0,
             display: "flex",
             overflowX: "auto",
             scrollSnapType: "x mandatory",
@@ -194,7 +338,7 @@ function Filmstrip({
                   flex: "0 0 auto",
                   width: { xs: "82%", sm: "60%", md: "44%" },
                   scrollSnapAlign: "start",
-                  borderRight: idx < images.length - 1 ? NB_RULE : "none",
+                  borderRight: idx < images.length - 1 ? NB_HAIRLINE : "none",
                   position: "relative",
                   aspectRatio: "4 / 3",
                   // Frames letterbox the whole photo; the dark well hides
@@ -213,138 +357,64 @@ function Filmstrip({
             );
           })}
         </Box>
-      </Box>
 
-      {/* Control bar */}
-      <Box sx={{ display: "flex", alignItems: "center", borderTop: NB_RULE }}>
-        <IconButton
-          aria-label="Previous frame"
-          onClick={() => nudge(-1)}
-          sx={{
-            borderRadius: 0,
-            borderRight: NB_RULE,
-            color: NB_COLORS.ink,
-            px: 2.5,
-            py: 1,
-            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
-          }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-        <IconButton
-          aria-label="Next frame"
-          onClick={() => nudge(1)}
-          sx={{
-            borderRadius: 0,
-            borderRight: NB_RULE,
-            color: NB_COLORS.ink,
-            px: 2.5,
-            py: 1,
-            "&:hover": { bgcolor: NB_COLORS.ink, color: NB_COLORS.paperOnInk },
-          }}
-        >
-          <ArrowForwardIcon />
-        </IconButton>
-        <Typography
-          sx={{ ...NB_MONO_SX, fontSize: 12, px: 2, color: NB_COLORS.steel }}
-        >
-          FRAME {String(index + 1).padStart(2, "0")} /{" "}
-          {String(images.length).padStart(2, "0")}
-        </Typography>
-        <Typography
-          sx={{
-            ...NB_MONO_SX,
-            fontSize: 12,
-            px: 2,
-            ml: "auto",
-            color: NB_COLORS.steel,
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          DRAG OR SCROLL →
-        </Typography>
+        {images.length > 1 && (
+          <Box
+            sx={{
+              position: "absolute",
+              left: 12,
+              bottom: 12,
+              display: "flex",
+              alignItems: "center",
+              bgcolor: NB_COLORS.ink,
+              color: NB_COLORS.paperOnInk,
+              border: ARROW_OUTLINE,
+            }}
+          >
+            <ArrowButton label="Previous frame" onClick={() => nudge(-1)}>
+              <ArrowBackIcon fontSize="small" />
+            </ArrowButton>
+            <Typography
+              aria-live="polite"
+              sx={{
+                ...NB_MONO_SX,
+                fontSize: 11,
+                fontWeight: 700,
+                px: 1.25,
+                borderLeft: ARROW_OUTLINE,
+                borderRight: ARROW_OUTLINE,
+                lineHeight: `${ARROW_SIZE}px`,
+              }}
+            >
+              {pad(index + 1)}/{pad(images.length)}
+            </Typography>
+            <ArrowButton label="Next frame" onClick={() => nudge(1)}>
+              <ArrowForwardIcon fontSize="small" />
+            </ArrowButton>
+          </Box>
+        )}
       </Box>
     </Box>
   );
 }
 
 export default function JobFile({ project }: { project: Project }) {
-  const vertical = VERTICALS[project.vertical];
-
   return (
     // Job files sit in an 80% column of the page frame from tablet up (full
     // bleed on phones), with side rules so each sheet reads as its own card.
     <Box
+      component="article"
+      id={jobAnchorId(project.slug)}
       sx={{
         width: { xs: "100%", md: "80%" },
         mx: "auto",
+        scrollMarginTop: JOB_SCROLL_MARGIN,
         borderBottom: NB_RULE,
         borderLeft: { md: NB_RULE },
         borderRight: { md: NB_RULE },
       }}
     >
-      {/* Job header bar */}
-      <Box
-        sx={{
-          bgcolor: NB_COLORS.ink,
-          color: NB_COLORS.paperOnInk,
-          display: "flex",
-          alignItems: "center",
-          gap: { xs: 1.5, md: 3 },
-          px: { xs: 3, md: 6 },
-          py: 1.25,
-          flexWrap: "wrap",
-        }}
-      >
-        <Typography
-          sx={{
-            ...NB_MONO_SX,
-            fontSize: 12,
-            fontWeight: 700,
-            bgcolor: NB_COLORS.silver,
-            color: NB_COLORS.onSilver,
-            px: 1,
-            py: 0.25,
-          }}
-        >
-          JOB {project.jobNo}
-        </Typography>
-        {vertical.href ? (
-          <Typography
-            component={Link}
-            href={vertical.href}
-            sx={{
-              ...NB_MONO_SX,
-              fontSize: 12,
-              fontWeight: 700,
-              color: "inherit",
-              textDecoration: "underline",
-              textUnderlineOffset: 3,
-              "&:hover": { color: NB_COLORS.mutedOnInk },
-            }}
-          >
-            {vertical.label}
-          </Typography>
-        ) : (
-          <Typography sx={{ ...NB_MONO_SX, fontSize: 12, fontWeight: 700 }}>
-            {vertical.label}
-          </Typography>
-        )}
-        <Typography sx={{ ...NB_MONO_SX, fontSize: 12 }}>
-          CLIENT: {project.client}
-        </Typography>
-        <Typography
-          sx={{
-            ...NB_MONO_SX,
-            fontSize: 12,
-            ml: "auto",
-            color: NB_COLORS.mutedOnInk,
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          {project.scope}
-        </Typography>
-      </Box>
+      <JobHeaderBar project={project} />
 
       <Filmstrip
         images={project.images}
@@ -354,20 +424,19 @@ export default function JobFile({ project }: { project: Project }) {
         render={project.render}
       />
 
-      {/* Job sheet copy */}
       <Box
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", md: "5fr 7fr" },
-          borderTop: NB_RULE,
+          borderTop: NB_HAIRLINE,
         }}
       >
         <Box
           sx={{
-            px: { xs: 3, md: 6 },
-            py: { xs: 2.5, md: 4 },
-            borderRight: { md: NB_RULE },
-            borderBottom: { xs: NB_RULE, md: "none" },
+            px: { xs: 3, md: 4 },
+            py: { xs: 2.5, md: 3 },
+            borderRight: { md: NB_HAIRLINE },
+            borderBottom: { xs: NB_HAIRLINE, md: "none" },
           }}
         >
           <Typography
@@ -381,36 +450,9 @@ export default function JobFile({ project }: { project: Project }) {
           >
             {project.title}
           </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-            {project.stats.map((stat) => (
-              <Box key={stat.label} sx={{ border: NB_RULE, px: 1.25, py: 0.5 }}>
-                <Typography
-                  component="span"
-                  sx={{
-                    ...NB_MONO_SX,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: NB_COLORS.ink,
-                  }}
-                >
-                  {stat.value}
-                </Typography>
-                <Typography
-                  component="span"
-                  sx={{
-                    ...NB_MONO_SX,
-                    fontSize: 10,
-                    color: NB_COLORS.steel,
-                    ml: 0.75,
-                  }}
-                >
-                  {stat.label}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+          <StatLine stats={project.stats} />
         </Box>
-        <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 2.5, md: 4 } }}>
+        <Box sx={{ px: { xs: 3, md: 4 }, py: { xs: 2.5, md: 3 } }}>
           <Typography
             sx={{ fontSize: { xs: 15, md: 17 }, color: NB_COLORS.ink }}
           >
