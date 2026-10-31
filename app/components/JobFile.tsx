@@ -242,11 +242,7 @@ export function JobHeaderBar({ project }: { project: Project }) {
   );
 }
 
-/**
- * Stats as one wrapping mono line: bold value, steel label, dot separators.
- * Each stat is an unbreakable unit that carries its own leading dot, so a
- * line never starts with a dot and a value never parts from its label.
- */
+/** Stats as a mono list, one per line: bold value, steel label. */
 export function StatLine({ stats }: { stats: ProjectStat[] }) {
   return (
     <Typography
@@ -260,15 +256,7 @@ export function StatLine({ stats }: { stats: ProjectStat[] }) {
       }}
     >
       {stats.map((stat) => (
-        <Box
-          component="span"
-          key={stat.label}
-          sx={{
-            display: "inline-block",
-            whiteSpace: "nowrap",
-            "&:not(:first-of-type)::before": { content: '"·"', mx: 0.75 },
-          }}
-        >
+        <Box component="span" key={stat.label} sx={{ display: "block" }}>
           <Box component="span" sx={{ fontWeight: 700, color: NB_COLORS.ink }}>
             {stat.value}
           </Box>{" "}
