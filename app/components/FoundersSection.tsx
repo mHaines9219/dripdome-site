@@ -8,7 +8,6 @@ import {
   NB_DISPLAY_SX,
   NB_MONO_SX,
   NB_RULE,
-  nbShadow,
 } from "@/lib/theme";
 
 const founders = [
@@ -105,7 +104,6 @@ const FoundersSection = () => {
                   position: "relative",
                   aspectRatio: "1 / 1",
                   border: NB_RULE,
-                  boxShadow: nbShadow(),
                   bgcolor: NB_COLORS.surface,
                   mb: 3,
                 }}

@@ -12,7 +12,6 @@ import {
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
   NB_TAG_SX,
-  nbShadow,
 } from "@/lib/theme";
 
 // TODO: replace hero image with a 15s branded reel once produced
@@ -169,7 +168,6 @@ export default function BrandActivationsHero() {
               sx={{
                 border: NB_RULE,
                 bgcolor: NB_COLORS.surface,
-                boxShadow: nbShadow(10),
                 p: 1,
               }}
             >

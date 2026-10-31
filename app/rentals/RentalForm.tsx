@@ -75,7 +75,6 @@ const MENU_PROPS = {
       color: NB_COLORS.ink,
       border: NB_RULE,
       borderRadius: 0,
-      boxShadow: nbShadow(4),
       "& .MuiMenuItem-root": {
         fontFamily: FONT_MONO,
         fontSize: 13,

@@ -13,7 +13,6 @@ import {
   NB_OUTLINE_TEXT_SX,
   NB_RULE,
   NB_TAG_SX,
-  nbShadow,
 } from "@/lib/theme";
 
 const HERO_IMAGE =
@@ -146,7 +145,6 @@ export default function HomeHero() {
                   bgcolor: NB_COLORS.silver,
                   color: NB_COLORS.onSilver,
                   border: NB_RULE,
-                  boxShadow: nbShadow(),
                   px: 1.5,
                   py: 0.5,
                   mt: 2,
@@ -236,7 +234,6 @@ export default function HomeHero() {
               sx={{
                 border: NB_RULE,
                 bgcolor: NB_COLORS.surface,
-                boxShadow: nbShadow(10),
                 p: 1,
               }}
             >

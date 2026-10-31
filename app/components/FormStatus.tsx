@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { NB_COLORS, NB_MONO_SX, NB_RULE, nbShadow } from "@/lib/theme";
+import { NB_COLORS, NB_MONO_SX, NB_RULE } from "@/lib/theme";
 
 export type FormStatusState = {
   type: "success" | "error";
@@ -19,7 +19,6 @@ export default function FormStatus({ status }: { status: FormStatusState }) {
         <Box
           sx={{
             border: NB_RULE,
-            boxShadow: nbShadow(4),
             px: 2.5,
             py: 1.75,
             bgcolor:

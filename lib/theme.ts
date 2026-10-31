@@ -1,11 +1,18 @@
 /**
  * ============================================================
- * NEOBRUTALIST DESIGN SYSTEM — single source of truth
+ * NEOBRUTALIST DESIGN SYSTEM. Single source of truth.
  * ============================================================
  * To retheme the site, edit NB_COLORS (and NB_BORDER_WIDTH /
  * NB_SHADOW_OFFSET if you want chunkier or thinner hardware).
  * Nothing below hardcodes a color; every component imports
  * from here.
+ *
+ * Hardware tiers:
+ * - NB_RULE (2px) outlines cards and divides full-width section bands.
+ * - NB_HAIRLINE (1px) divides the inside of a card or panel.
+ * - Hard shadows (nbShadow) belong only on things you can press:
+ *   buttons and arrow controls. Cards, chips, filmstrip frames, image
+ *   plates and render figures are border only.
  */
 
 export const NB_COLORS = {
@@ -35,8 +42,11 @@ export const NB_COLORS = {
 export const NB_BORDER_WIDTH = 2;
 export const NB_SHADOW_OFFSET = 6;
 
-/** 2px solid ink rule, the default border everywhere */
+/** 2px solid ink rule: section bands and card outlines */
 export const NB_RULE = `${NB_BORDER_WIDTH}px solid ${NB_COLORS.ink}`;
+
+/** 1px solid ink rule: the divider inside a card or panel */
+export const NB_HAIRLINE = `1px solid ${NB_COLORS.ink}`;
 
 /* ---------- Page frame ---------- */
 /** Max content width of the page sheet. Every route renders inside a

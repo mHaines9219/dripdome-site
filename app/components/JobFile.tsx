@@ -13,8 +13,6 @@ import {
   NB_DISPLAY_SX,
   NB_MONO_SX,
   NB_RULE,
-  NB_SHADOW_OFFSET,
-  nbShadow,
 } from "@/lib/theme";
 import { useDragScroll } from "@/lib/useDragScroll";
 
@@ -52,7 +50,7 @@ export function RenderPanel({
           py: { xs: 2.5, md: 2 },
         }}
       >
-        {/* Outlined figure: ink frame + hard offset shadow, mono caption */}
+        {/* Outlined figure: ink frame, mono caption */}
         <Box
           component="figure"
           sx={{
@@ -61,10 +59,6 @@ export function RenderPanel({
             maxWidth: 360,
             bgcolor: NB_COLORS.paper,
             border: NB_RULE,
-            boxShadow: nbShadow(),
-            // Leave room for the shadow inside the padded column.
-            mr: `${NB_SHADOW_OFFSET}px`,
-            mb: `${NB_SHADOW_OFFSET}px`,
           }}
         >
           <Box

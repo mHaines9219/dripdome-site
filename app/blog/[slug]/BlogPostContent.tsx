@@ -18,7 +18,6 @@ import {
   NB_MONO_SX,
   NB_RULE,
   NB_TAG_SX,
-  nbShadow,
 } from "@/lib/theme";
 
 const CRUMB_SX = {
@@ -204,7 +203,6 @@ export default function BlogPostContent({ slug }: { slug: string }) {
                   width: "100%",
                   height: { xs: 220, sm: 300, md: 400 },
                   border: NB_RULE,
-                  boxShadow: nbShadow(),
                   bgcolor: NB_COLORS.well,
                 }}
               >
