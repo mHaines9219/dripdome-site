@@ -236,6 +236,34 @@ const CASE_STUDIES: CaseStudy[] = [
       { value: "DJ BOOTH", label: "GIANT MOUTH FACADE" },
     ],
   },
+  {
+    number: "07",
+    client: "ADIDAS",
+    category: "RETAIL RACE WEEK ACTIVATION",
+    headline: "The whole marathon course, cut into a wall on Fifth Avenue.",
+    copy: "Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood in applied vinyl. Geometric rear legs hide the sandbags so it stands on its own. Engineered, fabricated, and finished in one week, loaded in through the dock after close, built inside a two hour window, and struck the night after the race.",
+    // Served from public/projects/adidas until the folder moves to S3.
+    image: "/projects/adidas/hero.jpg",
+    render: { src: "/projects/adidas/render.jpg" },
+    images: [
+      "/projects/adidas/hero.jpg",
+      "/projects/adidas/1.jpg",
+      "/projects/adidas/2.jpg",
+      "/projects/adidas/3.jpg",
+    ],
+    imageAlt:
+      "NYC Marathon route wall for adidas at the 565 Fifth Avenue store, a cranberry red freestanding wall with a CNC-cut race route fabricated by DripDome",
+    hero: {
+      kind: "text",
+      value: "565 5TH AVE",
+      label: "ADIDAS FLAGSHIP · RACE WEEK 2026",
+    },
+    stats: [
+      { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
+      { value: "1 WEEK", label: "BUILT START TO FINISH" },
+      { value: "2 HR", label: "AFTER-HOURS INSTALL" },
+    ],
+  },
 ];
 
 function useCountUp(target: number, inView: boolean, duration = 1600) {
