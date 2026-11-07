@@ -6,7 +6,7 @@ import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import NBImage from "../components/NBImage";
-import { RenderPanel } from "../components/JobFile";
+import { RenderPanel, statValueSize } from "../components/JobFile";
 import type { ProjectRender } from "@/lib/projects";
 import { motion, useInView } from "framer-motion";
 import { NB_COLORS, NB_DISPLAY_SX, NB_MONO_SX, NB_RULE } from "@/lib/theme";
@@ -148,8 +148,8 @@ const CASE_STUDIES: CaseStudy[] = [
     imageFit: "contain",
     hero: {
       kind: "text",
-      value: "LONG BEACH",
-      label: "COMPLEXCON 2022",
+      value: "COMPLEXCON",
+      label: "LONG BEACH · 2022",
     },
     stats: [
       { value: "94", label: "HAND-DRILLED PIPE HOLES" },
@@ -241,7 +241,7 @@ const CASE_STUDIES: CaseStudy[] = [
     client: "ADIDAS",
     category: "RETAIL RACE WEEK ACTIVATION",
     headline: "The whole marathon course, cut into a wall on Fifth Avenue.",
-    copy: "Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood in applied vinyl. Geometric rear legs hide the sandbags so it stands on its own. Engineered, fabricated, and finished in one week, loaded in through the dock after close, built inside a two hour window, and struck the night after the race.",
+    copy: "Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood in applied vinyl. Geometric rear legs hide the sandbags so it stands on its own.",
     // Served from public/projects/adidas until the folder moves to S3.
     image: "/projects/adidas/hero.jpg",
     render: { src: "/projects/adidas/render.jpg" },
@@ -260,8 +260,8 @@ const CASE_STUDIES: CaseStudy[] = [
     },
     stats: [
       { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
-      { value: "1 WEEK", label: "BUILT START TO FINISH" },
-      { value: "2 HR", label: "AFTER-HOURS INSTALL" },
+      { value: "DOUBLE SIDED", label: "BRANDED FRONT AND BACK" },
+      { value: "HIDDEN", label: "SANDBAGS IN THE LEGS" },
     ],
   },
 ];
@@ -487,15 +487,16 @@ function DonutChart({
   );
 }
 
+/**
+ * Stat tiles size to their text and flow onto a new row when they run out of
+ * width, so a tile is always one tall line over one short line.
+ */
 function StatCluster({ stats }: { stats: StatTile[] }) {
   return (
     <Box
       sx={{
-        display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr 1fr",
-          sm: "repeat(auto-fit, minmax(140px, 1fr))",
-        },
+        display: "flex",
+        flexWrap: "wrap",
         gap: 2,
         width: "100%",
       }}
@@ -504,6 +505,7 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
         <Box
           key={s.label}
           sx={{
+            flex: "1 1 auto",
             p: 2,
             border: NB_RULE,
             bgcolor: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.surface,
@@ -513,7 +515,9 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
           <Typography
             sx={{
               ...NB_DISPLAY_SX,
-              fontSize: { xs: 22, md: 28 },
+              fontSize: statValueSize(s.value),
+              lineHeight: 1,
+              whiteSpace: "nowrap",
               color: NB_COLORS.ink,
             }}
           >
@@ -524,6 +528,7 @@ function StatCluster({ stats }: { stats: StatTile[] }) {
               ...NB_MONO_SX,
               mt: 0.75,
               fontSize: { xs: 10, md: 11 },
+              whiteSpace: "nowrap",
               color: NB_COLORS.steel,
             }}
           >

@@ -405,7 +405,7 @@ export const PROJECTS: Project[] = [
       `${S3}/oro/5.jpg`,
     ],
     stats: [
-      { value: "LONG BEACH", label: "COMPLEXCON 2022" },
+      { value: "COMPLEXCON", label: "LONG BEACH · 2022" },
       { value: "94", label: "HAND-DRILLED PIPE HOLES" },
       { value: "IN-HOUSE", label: "BUILT + PAINTED" },
       { value: "2 DAYS", label: "ON THE SHOW FLOOR" },
@@ -426,7 +426,7 @@ export const PROJECTS: Project[] = [
       `${S3}/x3/4.jpg`,
     ],
     stats: [
-      { value: "2×", label: "DAY-ONE EMAIL SIGNUPS VS PRIOR YEAR" },
+      { value: "2×", label: "DAY-ONE SIGNUPS VS PRIOR YEAR" },
       { value: "3 SETS", label: "ONE BOOTH FOOTPRINT" },
       { value: "PALLADIUM", label: "X3 EXPO · JAN 2023" },
       { value: "2 DAYS", label: "SHOW RUN" },
@@ -568,7 +568,7 @@ export const PROJECTS: Project[] = [
     title: "NYC MARATHON ROUTE WALL - ADIDAS 5TH AVE",
     vertical: "activation",
     scope: "CNC ACRYLIC · CNC TYPOGRAPHY · VINYL · OVERNIGHT RETAIL INSTALL",
-    blurb: `Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, running from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood called out in applied vinyl. Geometric rear legs hide the sandbags so the wall stands on its own on the sales floor. Engineered, fabricated, and finished in one week, loaded in through the dock after close, built inside a two hour window, and struck the night after the race.`,
+    blurb: `Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, running from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood called out in applied vinyl. Geometric rear legs hide the sandbags so the wall stands on its own on the sales floor.`,
     // Served from public/projects/adidas until the folder moves to S3
     // (then `${S3}/adidas/...`).
     render: { src: "/projects/adidas/render.jpg" },
@@ -583,8 +583,8 @@ export const PROJECTS: Project[] = [
     stats: [
       { value: "565 5TH AVE", label: "ADIDAS FLAGSHIP · NYC" },
       { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
-      { value: "1 WEEK", label: "BUILT START TO FINISH" },
-      { value: "2 HR", label: "AFTER-HOURS INSTALL" },
+      { value: "DOUBLE SIDED", label: "BRANDED FRONT AND BACK" },
+      { value: "HIDDEN", label: "SANDBAGS IN THE LEGS" },
     ],
   },
 ];
