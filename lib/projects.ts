@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
       { value: "1K+", label: "COMMENTS" },
     ],
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 3,
   },
   {
     slug: "notloveline",
@@ -213,7 +213,7 @@ export const PROJECTS: Project[] = [
     title: "THE SET OF NOT LOVELINE - TRISHA PAYTAS AND TANA MONGEAU",
     vertical: "podcast",
     scope: "STUDIO DESIGN · FABRICATION · CUSTOM WIRING",
-    blurb: `Designed and fabricated the NotLoveline podcast studio for Trisha Paytas and Tana Mongeau in four days. A vaporwave inspired environment anchored by a hand wired LED neon heart wall with alternating color sequences. The set has since carried 65+ episodes and crossed 20 million YouTube views with 230K+ subscribers.`,
+    blurb: `Designed and fabricated the NotLoveline podcast studio for Trisha Paytas and Tana Mongeau in four days. A vaporwave inspired environment anchored by a hand wired LED neon heart wall with alternating color sequences. We cut and rewired every heart sign individually so it could pass through the wall and sit flat against the face, and measured the pattern out meticulously so the layout landed exact. The set has since carried 65+ episodes and crossed 20 million YouTube views with 230K+ subscribers.`,
     images: [
       `${S3}/NLL/IMG_1.JPG`,
       `${S3}/NLL/IMG_2.JPG`,
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
-    featuredOrder: 3,
+    featuredOrder: 2,
   },
   {
     slug: "original-southside",
