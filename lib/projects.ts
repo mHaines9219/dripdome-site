@@ -569,16 +569,14 @@ export const PROJECTS: Project[] = [
     vertical: "activation",
     scope: "CNC ACRYLIC · CNC TYPOGRAPHY · VINYL · OVERNIGHT RETAIL INSTALL",
     blurb: `Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, running from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood called out in applied vinyl. Geometric rear legs hide the sandbags so the wall stands on its own on the sales floor.`,
-    // Served from public/projects/adidas until the folder moves to S3
-    // (then `${S3}/adidas/...`).
-    render: { src: "/projects/adidas/render.jpg" },
+    render: { src: `${S3}/adidas/render.jpg` },
     // Tall wall shot in portrait: show the whole piece.
     imageFit: "contain",
     images: [
-      "/projects/adidas/hero.jpg",
-      "/projects/adidas/1.jpg",
-      "/projects/adidas/2.jpg",
-      "/projects/adidas/3.jpg",
+      `${S3}/adidas/hero.jpg`,
+      `${S3}/adidas/1.jpg`,
+      `${S3}/adidas/2.jpg`,
+      `${S3}/adidas/3.jpg`,
     ],
     stats: [
       { value: "565 5TH AVE", label: "ADIDAS FLAGSHIP · NYC" },
