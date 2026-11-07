@@ -273,11 +273,30 @@ function Filmstrip({
 }
 
 /** Longer stat values (words, dimensions) step down so they fit one line. */
-function statValueSize(value: string) {
+export function statValueSize(value: string) {
   if (value.length > 10) return { xs: 16, md: 18, lg: 20 };
   if (value.length > 7) return { xs: 22, md: 24, lg: 26 };
   return { xs: 26, md: 32, lg: 36 };
 }
+
+// Widest measured advance per character, in em, for the two stat typefaces
+// (Archivo Black caps 0.80, Plex Mono 0.68 with its letter spacing), with a
+// little headroom. Used to shrink a line to its cell so a stat never wraps.
+const DISPLAY_EM_PER_CHAR = 0.82;
+const MONO_EM_PER_CHAR = 0.7;
+
+/**
+ * Font size that keeps `chars` characters on one line inside a cell that is a
+ * size container (`100cqw` is its content width), capped at `maxPx` and never
+ * below `floorPx`.
+ */
+const fitOneLine = (
+  maxPx: number,
+  chars: number,
+  emPerChar: number,
+  floorPx: number,
+) =>
+  `clamp(${floorPx}px, calc(100cqw / ${(chars * emPerChar).toFixed(2)}), ${maxPx}px)`;
 
 /**
  * `spaced` is for lists that leave room between sheets (home case
@@ -345,51 +364,104 @@ export default function JobFile({
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            // The 2 x 2 checkerboard needs cells wide enough for a label on
+            // one line: full-width tablets and large desktops. Phones and
+            // small desktops (where the stats share the row with the blurb)
+            // stack the stats instead. minmax(0, ...) keeps a long stat from
+            // widening the grid.
+            gridTemplateColumns: {
+              xs: "minmax(0, 1fr)",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "minmax(0, 1fr)",
+              lg: "repeat(2, minmax(0, 1fr))",
+            },
             gridAutoRows: "1fr",
             borderRight: { md: NB_RULE },
             borderBottom: { xs: NB_RULE, md: "none" },
           }}
         >
             {project.stats.map((stat, i) => {
-              const last = i === project.stats.length - 1;
+              const count = project.stats.length;
+              const last = i === count - 1;
               // An odd last cell spans the row so the grid stays full width
-              const spans = last && project.stats.length % 2 === 1;
+              const spans = last && count % 2 === 1;
+              const valueSize = statValueSize(stat.value);
+              const fitValue = (maxPx: number) =>
+                fitOneLine(maxPx, stat.value.length, DISPLAY_EM_PER_CHAR, 12);
+              // Rules and tint for the stacked list vs the 2 x 2 checkerboard
+              // (which flips tint every cell and every row).
+              const stacked = {
+                right: "none",
+                bottom: last ? "none" : NB_RULE,
+                bg: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.paper,
+              };
+              const checker = {
+                right: i % 2 === 0 && !spans ? NB_RULE : "none",
+                bottom: i + 2 < count ? NB_RULE : "none",
+                bg:
+                  (i + Math.floor(i / 2)) % 2 === 1
+                    ? NB_COLORS.silverLight
+                    : NB_COLORS.paper,
+              };
               return (
                 <Box
                   key={stat.label}
                   sx={{
-                    px: { xs: 3, md: 4 },
+                    px: { xs: 3, lg: 2 },
                     py: { xs: 2.5, md: 3 },
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
                     gap: 0.5,
+                    // Size container for the one-line fit below.
+                    containerType: "inline-size",
+                    overflow: "hidden",
                     gridColumn: spans ? "1 / -1" : "auto",
-                    borderRight: i % 2 === 0 && !spans ? NB_RULE : "none",
-                    borderBottom: i + 2 < project.stats.length ? NB_RULE : "none",
-                    // Checkerboard: tint flips every cell and every row
-                    bgcolor:
-                      (i + Math.floor(i / 2)) % 2 === 1
-                        ? NB_COLORS.silverLight
-                        : NB_COLORS.paper,
+                    borderRight: {
+                      xs: stacked.right,
+                      sm: checker.right,
+                      md: stacked.right,
+                      lg: checker.right,
+                    },
+                    borderBottom: {
+                      xs: stacked.bottom,
+                      sm: checker.bottom,
+                      md: stacked.bottom,
+                      lg: checker.bottom,
+                    },
+                    bgcolor: {
+                      xs: stacked.bg,
+                      sm: checker.bg,
+                      md: stacked.bg,
+                      lg: checker.bg,
+                    },
                   }}
                 >
                   <Typography
                     sx={{
                       ...NB_DISPLAY_SX,
-                      fontSize: statValueSize(stat.value),
+                      // A stat is always one tall line over one short line:
+                      // the text shrinks to its cell instead of wrapping.
+                      fontSize: {
+                        xs: fitValue(valueSize.xs),
+                        md: fitValue(valueSize.md),
+                        lg: fitValue(valueSize.lg),
+                      },
                       lineHeight: 1,
-                      // Values stay on one line from tablet up so the grid
-                      // holds its third of the column; phones stack freely.
-                      whiteSpace: { xs: "normal", md: "nowrap" },
+                      whiteSpace: "nowrap",
                       color: NB_COLORS.ink,
                     }}
                   >
                     {stat.value}
                   </Typography>
                   <Typography
-                    sx={{ ...NB_MONO_SX, fontSize: 10, lineHeight: 1.3, color: NB_COLORS.steel }}
+                    sx={{
+                      ...NB_MONO_SX,
+                      fontSize: fitOneLine(10, stat.label.length, MONO_EM_PER_CHAR, 8),
+                      lineHeight: 1.3,
+                      whiteSpace: "nowrap",
+                      color: NB_COLORS.steel,
+                    }}
                   >
                     {stat.label}
                   </Typography>
