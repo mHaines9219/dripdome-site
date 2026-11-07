@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
       { value: "1K+", label: "COMMENTS" },
     ],
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 3,
   },
   {
     slug: "notloveline",
@@ -213,7 +213,7 @@ export const PROJECTS: Project[] = [
     title: "THE SET OF NOT LOVELINE - TRISHA PAYTAS AND TANA MONGEAU",
     vertical: "podcast",
     scope: "STUDIO DESIGN · FABRICATION · CUSTOM WIRING",
-    blurb: `Designed and fabricated the NotLoveline podcast studio for Trisha Paytas and Tana Mongeau in four days. A vaporwave inspired environment anchored by a hand wired LED neon heart wall with alternating color sequences. The set has since carried 65+ episodes and crossed 20 million YouTube views with 230K+ subscribers.`,
+    blurb: `Designed and fabricated the NotLoveline podcast studio for Trisha Paytas and Tana Mongeau in four days. A vaporwave inspired environment anchored by a hand wired LED neon heart wall with alternating color sequences. We cut and rewired every heart sign individually so it could pass through the wall and sit flat against the face, and measured the pattern out meticulously so the layout landed exact. The set has since carried 65+ episodes and crossed 20 million YouTube views with 230K+ subscribers.`,
     images: [
       `${S3}/NLL/IMG_1.JPG`,
       `${S3}/NLL/IMG_2.JPG`,
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
-    featuredOrder: 3,
+    featuredOrder: 2,
   },
   {
     slug: "original-southside",
@@ -559,6 +559,32 @@ export const PROJECTS: Project[] = [
       { value: "UV PENS", label: "GUEST-DRAWN GLOW WALL" },
       { value: "GLOW PVC", label: "WALL SURFACE" },
       { value: "DJ BOOTH", label: "GIANT MOUTH FACADE" },
+    ],
+  },
+  {
+    slug: "adidas-nyc-marathon-wall",
+    jobNo: "20",
+    client: "ADIDAS",
+    title: "NYC MARATHON ROUTE WALL - ADIDAS 5TH AVE",
+    vertical: "activation",
+    scope: "CNC ACRYLIC · CNC TYPOGRAPHY · VINYL · OVERNIGHT RETAIL INSTALL",
+    blurb: `Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, running from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood called out in applied vinyl. Geometric rear legs hide the sandbags so the wall stands on its own on the sales floor. Engineered, fabricated, and finished in one week, loaded in through the dock after close, built inside a two hour window, and struck the night after the race.`,
+    // Served from public/projects/adidas until the folder moves to S3
+    // (then `${S3}/adidas/...`).
+    render: { src: "/projects/adidas/render.jpg" },
+    // Tall wall shot in portrait: show the whole piece.
+    imageFit: "contain",
+    images: [
+      "/projects/adidas/hero.jpg",
+      "/projects/adidas/1.jpg",
+      "/projects/adidas/2.jpg",
+      "/projects/adidas/3.jpg",
+    ],
+    stats: [
+      { value: "565 5TH AVE", label: "ADIDAS FLAGSHIP · NYC" },
+      { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
+      { value: "1 WEEK", label: "BUILT START TO FINISH" },
+      { value: "2 HR", label: "AFTER-HOURS INSTALL" },
     ],
   },
 ];

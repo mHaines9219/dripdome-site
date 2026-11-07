@@ -13,6 +13,7 @@ import {
 const S3 = "https://dripdome-site.s3.us-east-2.amazonaws.com/nu_logo";
 
 const logos = [
+  { src: `${S3}/adidasw.png`, alt: "adidas" },
   { src: `${S3}/biw.png`, alt: "Business Insider" },
   { src: `${S3}/ccw.png`, alt: "Complex" },
   { src: `${S3}/googtrans.png`, alt: "Google" },
