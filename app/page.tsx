@@ -56,8 +56,8 @@ export default function Home() {
       <HomeHero />
       <SocialProofBar />
       {/* <Specialties /> */}
-      <HomeFeaturedWork />
       <TrustWall />
+      <HomeFeaturedWork />
       {/* <OurServices /> */}
       <HowWeWork />
       {/* <TrustPress /> */}

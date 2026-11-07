@@ -154,7 +154,7 @@ export const PROJECTS: Project[] = [
       { value: "TURNKEY", label: "DESIGN TO STYLING" },
     ],
     featured: true,
-    featuredOrder: 6,
+    featuredOrder: 7,
   },
   {
     slug: "this-is-not-a-billboard",
@@ -178,7 +178,7 @@ export const PROJECTS: Project[] = [
       { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
     ],
     featured: true,
-    featuredOrder: 4,
+    featuredOrder: 5,
   },
   {
     slug: "google-photos",
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
       { value: "1K+", label: "COMMENTS" },
     ],
     featured: true,
-    featuredOrder: 3,
+    featuredOrder: 4,
   },
   {
     slug: "notloveline",
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 3,
   },
   {
     slug: "original-southside",
@@ -301,7 +301,7 @@ export const PROJECTS: Project[] = [
       { value: "6", label: "EPISODES · SEASON 1" },
     ],
     featured: true,
-    featuredOrder: 5,
+    featuredOrder: 6,
   },
   {
     slug: "crisscut-new-york",
@@ -479,7 +479,7 @@ export const PROJECTS: Project[] = [
       { value: "CUT VINYL", label: "BRAND GRAPHICS" },
     ],
     featured: true,
-    featuredOrder: 7,
+    featuredOrder: 8,
   },
   // Holiday foyer install (job 16): not released yet. Uncomment when cleared by the client.
   // {
@@ -569,17 +569,18 @@ export const PROJECTS: Project[] = [
     vertical: "activation",
     scope: "CNC ACRYLIC · CNC TYPOGRAPHY · VINYL · OVERNIGHT RETAIL INSTALL",
     blurb: `Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, running from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood called out in applied vinyl. Geometric rear legs hide the sandbags so the wall stands on its own on the sales floor.`,
-    // Served from public/projects/adidas until the folder moves to S3
-    // (then `${S3}/adidas/...`).
-    render: { src: "/projects/adidas/render.jpg" },
+    render: { src: `${S3}/adidas/render.jpg` },
     // Tall wall shot in portrait: show the whole piece.
     imageFit: "contain",
     images: [
-      "/projects/adidas/hero.jpg",
-      "/projects/adidas/1.jpg",
-      "/projects/adidas/2.jpg",
-      "/projects/adidas/3.jpg",
+      `${S3}/adidas/hero.jpg`,
+      `${S3}/adidas/1.jpg`,
+      `${S3}/adidas/2.jpg`,
+      `${S3}/adidas/3.jpg`,
     ],
+    featured: true,
+    featuredOrder: 2,
+    sortOrder: 0,
     stats: [
       { value: "565 5TH AVE", label: "ADIDAS FLAGSHIP · NYC" },
       { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
