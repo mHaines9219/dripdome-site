@@ -100,7 +100,15 @@ export default function SocialProofBar() {
                 md: i < stats.length - 1 ? NB_RULE : "none",
               },
               borderBottom: { xs: i < 2 ? NB_RULE : "none", md: "none" },
-              bgcolor: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.paper,
+              // Phones show a 2 x 2 checkerboard (tint flips each row); wider
+              // screens run one row and simply alternate.
+              bgcolor: {
+                xs:
+                  (i + Math.floor(i / 2)) % 2 === 1
+                    ? NB_COLORS.silverLight
+                    : NB_COLORS.paper,
+                md: i % 2 === 1 ? NB_COLORS.silverLight : NB_COLORS.paper,
+              },
             }}
           >
             <AnimatedNumber

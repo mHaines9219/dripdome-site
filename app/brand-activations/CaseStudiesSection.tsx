@@ -76,6 +76,33 @@ export const DONUT_COLORS = [
 const CASE_STUDIES: CaseStudy[] = [
   {
     number: "01",
+    client: "ADIDAS",
+    category: "RETAIL RACE WEEK ACTIVATION",
+    headline: "The whole marathon course, cut into a wall on Fifth Avenue.",
+    copy: "Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood in applied vinyl. Geometric rear legs hide the sandbags so it stands on its own.",
+    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/hero.jpg",
+    render: { src: "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/render.jpg" },
+    images: [
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/hero.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/1.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/2.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/3.jpg",
+    ],
+    imageAlt:
+      "NYC Marathon route wall for adidas at the 565 Fifth Avenue store, a cranberry red freestanding wall with a CNC-cut race route fabricated by DripDome",
+    hero: {
+      kind: "text",
+      value: "565 5TH AVE",
+      label: "ADIDAS FLAGSHIP · RACE WEEK 2026",
+    },
+    stats: [
+      { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
+      { value: "DOUBLE SIDED", label: "BRANDED FRONT AND BACK" },
+      { value: "HIDDEN", label: "SANDBAGS IN THE LEGS" },
+    ],
+  },
+  {
+    number: "02",
     client: "LOWER EAST SIDE GIRLS CLUB",
     category: "CHARITY ACTIVATION",
     headline: "Alice in Wonderland photo moment for 200 guests.",
@@ -98,7 +125,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     client: "VITA KARI",
     category: "PUBLIC ART INSTALLATION",
     headline: "A human billboard on the WeHo Pride parade route.",
@@ -128,7 +155,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     client: "JAMES ORO",
     category: "COMPLEXCON BOOTH",
     headline: "A deconstructed jail cell on the ComplexCon floor.",
@@ -158,7 +185,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     client: "ISMYGIRL · NMG MANAGEMENT",
     category: "EXPO SHOWCASE BOOTH",
     headline: "Three photo sets that doubled day-one signups.",
@@ -186,7 +213,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "05",
+    number: "06",
     client: "FOOT LOCKER",
     category: "HQ PARTY PROPS",
     headline: "A shoebox cooler and street signs for 2 Penn.",
@@ -213,7 +240,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    number: "06",
+    number: "07",
     client: "CATCH ONE",
     category: "NIGHTCLUB ACTIVATIONS",
     headline: "A UV glow wall and a giant mouth DJ booth for club nights.",
@@ -234,33 +261,6 @@ const CASE_STUDIES: CaseStudy[] = [
       { value: "UV PENS", label: "GUEST-DRAWN GLOW WALL" },
       { value: "GLOW PVC", label: "WALL SURFACE" },
       { value: "DJ BOOTH", label: "GIANT MOUTH FACADE" },
-    ],
-  },
-  {
-    number: "07",
-    client: "ADIDAS",
-    category: "RETAIL RACE WEEK ACTIVATION",
-    headline: "The whole marathon course, cut into a wall on Fifth Avenue.",
-    copy: "Race week photo moment for adidas at the 565 Fifth Avenue flagship, produced with agency Times10 Entertainment. A 6 by 9 foot freestanding wall in cranberry red carries the full 26.2 mile course as a raised route CNC cut from acrylic, from the Staten Island start to the Central Park finish, with the adidas badge and New York 2026 typography CNC cut and mounted proud of the face and every borough and neighborhood in applied vinyl. Geometric rear legs hide the sandbags so it stands on its own.",
-    image: "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/hero.jpg",
-    render: { src: "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/render.jpg" },
-    images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/hero.jpg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/1.jpg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/2.jpg",
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/adidas/3.jpg",
-    ],
-    imageAlt:
-      "NYC Marathon route wall for adidas at the 565 Fifth Avenue store, a cranberry red freestanding wall with a CNC-cut race route fabricated by DripDome",
-    hero: {
-      kind: "text",
-      value: "565 5TH AVE",
-      label: "ADIDAS FLAGSHIP · RACE WEEK 2026",
-    },
-    stats: [
-      { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
-      { value: "DOUBLE SIDED", label: "BRANDED FRONT AND BACK" },
-      { value: "HIDDEN", label: "SANDBAGS IN THE LEGS" },
     ],
   },
 ];
@@ -912,7 +912,7 @@ export default function CaseStudiesSection() {
         <Typography
           sx={{ ...NB_MONO_SX, fontSize: 12, color: NB_COLORS.steel }}
         >
-          CASE FILES · 04 ENTRIES
+          CASE FILES · 07 ENTRIES
         </Typography>
       </Box>
 
@@ -924,7 +924,7 @@ export default function CaseStudiesSection() {
             maxWidth: 720,
           }}
         >
-          Four recent builds across charity, tech, music, and CPG. Same studio.
+          Seven builds across retail, charity, tech, music, and CPG. Same studio.
           Same team. Very different briefs.
         </Typography>
       </Box>

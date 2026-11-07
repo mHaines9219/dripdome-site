@@ -79,7 +79,7 @@ function LogoBelt() {
         sx={{
           display: "flex",
           width: "max-content",
-          animation: "nb-ticker 24s linear infinite",
+          animation: "nb-ticker 24s linear infinite reverse",
           "&:hover": { animationPlayState: "paused" },
         }}
       >

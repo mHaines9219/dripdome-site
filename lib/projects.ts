@@ -154,7 +154,7 @@ export const PROJECTS: Project[] = [
       { value: "TURNKEY", label: "DESIGN TO STYLING" },
     ],
     featured: true,
-    featuredOrder: 6,
+    featuredOrder: 7,
   },
   {
     slug: "this-is-not-a-billboard",
@@ -178,7 +178,7 @@ export const PROJECTS: Project[] = [
       { value: "IG DRAFTS FUND", label: "PROJECT BACKING" },
     ],
     featured: true,
-    featuredOrder: 4,
+    featuredOrder: 5,
   },
   {
     slug: "google-photos",
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
       { value: "1K+", label: "COMMENTS" },
     ],
     featured: true,
-    featuredOrder: 3,
+    featuredOrder: 4,
   },
   {
     slug: "notloveline",
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       { value: "4 DAYS", label: "BUILD TIMELINE" },
     ],
     featured: true,
-    featuredOrder: 2,
+    featuredOrder: 3,
   },
   {
     slug: "original-southside",
@@ -301,7 +301,7 @@ export const PROJECTS: Project[] = [
       { value: "6", label: "EPISODES · SEASON 1" },
     ],
     featured: true,
-    featuredOrder: 5,
+    featuredOrder: 6,
   },
   {
     slug: "crisscut-new-york",
@@ -479,7 +479,7 @@ export const PROJECTS: Project[] = [
       { value: "CUT VINYL", label: "BRAND GRAPHICS" },
     ],
     featured: true,
-    featuredOrder: 7,
+    featuredOrder: 8,
   },
   // Holiday foyer install (job 16): not released yet. Uncomment when cleared by the client.
   // {
@@ -578,6 +578,9 @@ export const PROJECTS: Project[] = [
       `${S3}/adidas/2.jpg`,
       `${S3}/adidas/3.jpg`,
     ],
+    featured: true,
+    featuredOrder: 2,
+    sortOrder: 0,
     stats: [
       { value: "565 5TH AVE", label: "ADIDAS FLAGSHIP · NYC" },
       { value: "ACRYLIC", label: "CNC CUT 26.2 MILE ROUTE" },
