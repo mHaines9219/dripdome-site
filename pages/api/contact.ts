@@ -26,11 +26,6 @@ export default async function handler(
       message,
       recaptchaToken,
       formType,
-      // Rental-specific fields
-      equipmentDesired,
-      rentalStartDate,
-      rentalEndDate,
-      projectDescription,
       instagram,
       referral,
       // Brand activation-specific fields
@@ -55,7 +50,7 @@ export default async function handler(
     // Check the intake answers before the CAPTCHA: Google accepts a token
     // only once, so a field error after verifying would burn it and the
     // visitor's retry would fail as "Invalid CAPTCHA"
-    const intake = formType === "rental" || formType === "brandActivation" ? null : checkIntake(req.body);
+    const intake = formType === "brandActivation" ? null : checkIntake(req.body);
     if (intake && !intake.ok) {
       console.warn(`Contact form rejected (contact): ${intake.error}`);
       return res.status(400).json({ error: intake.error });
@@ -92,42 +87,7 @@ export default async function handler(
     };
 
     // Validate inputs based on form type
-    if (formType === "rental") {
-      if (!name || !email || !equipmentDesired || !rentalStartDate || !rentalEndDate || !projectDescription) {
-        return res.status(400).json({ error: "Missing required fields for rental request" });
-      }
-
-      // Format equipment list
-      const equipmentList = Array.isArray(equipmentDesired)
-        ? equipmentDesired.join(", ")
-        : equipmentDesired;
-
-      const msg = {
-        to: email,
-        from: {
-          email: "info@dripdome.com",
-          name: "Drip Dome Productions",
-        },
-        subject: "Thank you for your rental request",
-        text: `Hi ${name},\n\nThank you for your rental request. We have received your inquiry and will review it shortly.\n\nRental Details:\n- Equipment Requested: ${equipmentList}\n- Rental Period: ${rentalStartDate} to ${rentalEndDate}\n- Project Description: ${projectDescription}\n${instagram ? `- Instagram: ${instagram}\n` : ""}- Reference: ${leadId}\n\nWe will be in touch soon!\n\nBest regards,\nDrip Dome Productions`,
-        cc: [{ email: "info@dripdome.com", name: "Drip Dome Productions" }],
-        bcc: [
-          { email: "diana@dripdome.com", name: "Diana Haines" },
-          { email: "matt@dripdome.com", name: "Matt Haines" },
-          { email: "patricia@dripdome.com", name: "Patricia Kwiatkowski" },
-        ],
-      };
-
-      try {
-        await sgMail.send(msg);
-        await sendSourceNote("rental");
-        res.status(200).json({ message: "Rental request sent successfully", lead: true, leadId });
-      } catch (error) {
-        console.error("SendGrid Error:", error);
-        const errorMessage = error instanceof Error ? error.message : "Failed to send email";
-        res.status(500).json({ error: errorMessage });
-      }
-    } else if (formType === "brandActivation") {
+    if (formType === "brandActivation") {
       if (!name || !email || !company || !projectDate || !budgetRange || !brief) {
         return res.status(400).json({ error: "Missing required fields for brand activation inquiry" });
       }

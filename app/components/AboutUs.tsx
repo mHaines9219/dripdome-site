@@ -76,8 +76,8 @@ export default function AboutUs() {
             </Box>{" "}
             is a majority women-owned, family-run business based in New York
             City, with a presence in Los Angeles as well. We specialize in set
-            design, custom fabrication, murals, graphic design, photography,
-            and rentals. From photoshoots and music videos to large-scale
+            design, custom fabrication, murals, graphic design, and
+            photography. From photoshoots and music videos to large-scale
             event installations, we bring creative visions to life with
             artistry and precision. At Drip Dome, family values and
             collaboration fuel our passion for creating extraordinary projects

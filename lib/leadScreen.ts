@@ -34,11 +34,8 @@ const MAX_LENGTH: Record<string, number> = {
   links: 3000,
   projectDate: 40,
   budgetRange: 40,
-  rentalStartDate: 40,
-  rentalEndDate: 40,
   message: 5000,
   brief: 5000,
-  projectDescription: 5000,
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -97,7 +94,7 @@ export function screenLead(body: Record<string, unknown>): ScreenResult {
   }
 
   // The references field exists for links, so the API caps it separately
-  const freeText = ["message", "brief", "projectDescription"]
+  const freeText = ["message", "brief"]
     .map((field) => (typeof body[field] === "string" ? (body[field] as string) : ""))
     .join(" ");
   const links = freeText.match(URL_GLOBAL_RE)?.length ?? 0;
