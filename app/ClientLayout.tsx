@@ -5,6 +5,7 @@ import { MotionConfig } from "framer-motion";
 import Navbar from "./ui/Navbar";
 import PageFrame from "./components/PageFrame";
 import AttributionCapture from "./components/AttributionCapture";
+import EngagementTracker from "./components/EngagementTracker";
 // Chatbot temporarily disabled — not working in prod
 // import Chatbot from "./components/Chatbot";
 
@@ -16,6 +17,7 @@ export default function ClientLayout({
   return (
     <MotionConfig reducedMotion="user">
       <AttributionCapture />
+      <EngagementTracker />
       <Navbar />
       <PageFrame>{children}</PageFrame>
       {/* <Chatbot /> */}

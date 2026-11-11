@@ -28,8 +28,6 @@ const links = [
   { name: "ABOUT", href: "/about-us" },
   { name: "BLOG", href: "/blog" },
   // Legacy pages kept live but out of nav: /portfolio, /services
-  // Rentals page taken down from nav for now; route still live at /rentals
-  // { name: "RENTALS", href: "/rentals" },
 ];
 
 export default function Navbar() {

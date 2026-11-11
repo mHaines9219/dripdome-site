@@ -3,8 +3,9 @@
  * self-reported "how did you hear about us" answer can be compared with the
  * measured source, and Google Ads leads can be matched by click ID later.
  *
- * The browser half captures it once per landing (see AttributionCapture in
- * ClientLayout); the server half sanitizes what a form sends back.
+ * The browser half captures it on landing and keeps it for 90 days (see
+ * AttributionCapture in ClientLayout); the server half sanitizes what a form
+ * sends back.
  */
 
 export const ATTRIBUTION_KEYS = [
@@ -36,17 +37,29 @@ const URL_PARAMS = [
 ] as const;
 const MAX_VALUE_LENGTH = 500;
 
+/** Google keeps an ad click eligible for conversions for up to 90 days. */
+const MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
+
+function readStored(): Attribution | null {
+  const raw = window.localStorage.getItem(STORAGE_KEY);
+  if (!raw) return null;
+  const data = JSON.parse(raw) as Attribution;
+  const age = Date.now() - Date.parse(data.landed_at ?? "");
+  return age >= 0 && age <= MAX_AGE_MS ? data : null;
+}
+
 /**
- * Records the landing page's attribution for this browser session. A later
- * landing that carries its own click ID or UTMs (a second ad click) replaces
- * it; plain internal navigation never does.
+ * Records where this browser first landed and keeps it for 90 days, so a
+ * visitor who clicks an ad and inquires a week later still carries the
+ * click ID. A later landing that carries its own click ID or UTMs (a second
+ * ad click) replaces it; untagged visits and internal navigation never do.
  */
 export function captureAttribution() {
   if (typeof window === "undefined") return;
   try {
     const params = new URLSearchParams(window.location.search);
     const tagged = URL_PARAMS.some((key) => params.get(key));
-    if (!tagged && window.sessionStorage.getItem(STORAGE_KEY)) return;
+    if (!tagged && readStored()) return;
 
     const data: Attribution = {
       landing_page: window.location.pathname,
@@ -61,7 +74,7 @@ export function captureAttribution() {
       const ref = new URL(document.referrer);
       if (ref.host !== window.location.host) data.referrer = ref.origin + ref.pathname;
     }
-    window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch {
     // Storage blocked or bad referrer: forms just send no attribution
   }
@@ -70,7 +83,7 @@ export function captureAttribution() {
 export function getAttribution(): Attribution {
   if (typeof window === "undefined") return {};
   try {
-    return JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) ?? "{}") as Attribution;
+    return readStored() ?? {};
   } catch {
     return {};
   }

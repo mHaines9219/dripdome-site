@@ -16,6 +16,7 @@ import type ReCAPTCHA from "react-google-recaptcha";
 import LazyRecaptcha from "../components/LazyRecaptcha";
 import { trackGenerateLead } from "@/lib/analytics";
 import { getAttribution } from "@/lib/attribution";
+import { ACTIVATION_BUDGET_RANGES, leadValueFor } from "@/lib/leadFields";
 import { ContactApiResponse, useSpamGuard } from "@/hooks/useSpamGuard";
 import FormStatus, { FormStatusState } from "../components/FormStatus";
 import HoneypotField from "../components/HoneypotField";
@@ -30,13 +31,6 @@ import {
   NB_RULE,
   nbShadow,
 } from "@/lib/theme";
-
-const BUDGET_RANGES = [
-  "$10K – $25K",
-  "$25K – $50K",
-  "$50K – $100K",
-  "$100K+",
-];
 
 const FIELD_SX = {
   "& .MuiInputBase-root": {
@@ -162,6 +156,7 @@ export default function BrandActivationForm() {
         <Box sx={{ px: { xs: 3, md: 6 }, py: { xs: 4, md: 6 } }}>
           <Box
             component="form"
+            data-form="brandActivation"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -229,7 +224,8 @@ export default function BrandActivationForm() {
                       form: "brandActivation",
                       leadId: result.leadId,
                       email: formData.email,
-                      value: 500,
+                      budget: budgetRange,
+                      value: leadValueFor(ACTIVATION_BUDGET_RANGES, budgetRange),
                     });
                   }
                   setStatus({
@@ -351,9 +347,9 @@ export default function BrandActivationForm() {
                   },
                 }}
               >
-                {BUDGET_RANGES.map((range) => (
-                  <MenuItem key={range} value={range}>
-                    {range}
+                {ACTIVATION_BUDGET_RANGES.map((range) => (
+                  <MenuItem key={range.value} value={range.value}>
+                    {range.label}
                   </MenuItem>
                 ))}
               </Select>

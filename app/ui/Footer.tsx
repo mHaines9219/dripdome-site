@@ -20,7 +20,6 @@ const NAV = [
 const ARCHIVE = [
   { name: "PORTFOLIO", href: "/portfolio" },
   { name: "SERVICES", href: "/services" },
-  { name: "RENTALS", href: "/rentals" },
   { name: "VIDEO + PHOTO", href: "/video-photo" },
 ];
 

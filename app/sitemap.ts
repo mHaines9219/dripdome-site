@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.dripdome.com";
 
   // Static pages with their priorities and change frequencies.
-  // Archive routes (/portfolio, /services, /rentals, /video-photo) are
+  // Archive routes (/portfolio, /services, /video-photo) are
   // linked only from the footer, so they carry demoted priorities.
   const routes = [
     {
@@ -63,12 +63,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       path: "/services",
       priority: 0.5,
-      changeFrequency: "monthly" as const,
-      lastModified: REDESIGN_DATE,
-    },
-    {
-      path: "/rentals",
-      priority: 0.4,
       changeFrequency: "monthly" as const,
       lastModified: REDESIGN_DATE,
     },
