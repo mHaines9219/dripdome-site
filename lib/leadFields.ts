@@ -23,12 +23,36 @@ export const LOCATIONS: LeadOption[] = [
   { value: "other", label: "SOMEWHERE ELSE" },
 ];
 
-export const BUDGET_RANGES: LeadOption[] = [
-  { value: "under10k", label: "UNDER $10K" },
-  { value: "10k-20k", label: "$10K TO $20K" },
-  { value: "20k+", label: "$20K+" },
-  { value: "unsure", label: "NOT SURE YET" },
+/**
+ * `leadValue` is the dollar value Google Ads receives for a lead in that
+ * band, so bidding can favor bigger projects. Ads never sees the form.
+ *
+ * PLACEHOLDER VALUES: 5% of the band's midpoint (open-ended bands use 1.5x
+ * their floor). Replace with expected revenue x close rate per band.
+ */
+export type BudgetOption = LeadOption & { leadValue: number };
+
+/** What a lead is worth when its budget is unknown. */
+export const DEFAULT_LEAD_VALUE = 500;
+
+export const BUDGET_RANGES: BudgetOption[] = [
+  { value: "under10k", label: "UNDER $10K", leadValue: 250 },
+  { value: "10k-20k", label: "$10K TO $20K", leadValue: 750 },
+  { value: "20k+", label: "$20K+", leadValue: 1500 },
+  { value: "unsure", label: "NOT SURE YET", leadValue: DEFAULT_LEAD_VALUE },
 ];
+
+/** Brand activation landing page bands; the label is the stored value. */
+export const ACTIVATION_BUDGET_RANGES: BudgetOption[] = [
+  { value: "$10K – $25K", label: "$10K – $25K", leadValue: 875 },
+  { value: "$25K – $50K", label: "$25K – $50K", leadValue: 1875 },
+  { value: "$50K – $100K", label: "$50K – $100K", leadValue: 3750 },
+  { value: "$100K+", label: "$100K+", leadValue: 7500 },
+];
+
+export function leadValueFor(options: BudgetOption[], budget: string): number {
+  return options.find((option) => option.value === budget)?.leadValue ?? DEFAULT_LEAD_VALUE;
+}
 
 export const TIMELINES: LeadOption[] = [
   { value: "asap", label: "ASAP (UNDER 1 MONTH)" },

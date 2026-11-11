@@ -70,7 +70,7 @@ Single API route at `pages/api/contact.ts` (Pages Router, not App Router). Scree
 
 Both variants email the user and BCC the team via SendGrid. Verified contact and brand activation leads also go to the n8n CRM server-side (`lib/crm.ts`, env `N8N_LEAD_WEBHOOK_URL`); never call the webhook from client code.
 
-There are no file uploads: visitors share moodboards as links in the references field (plain text, never embedded), with an on-form reminder to set Drive/Dropbox sharing to "anyone with the link". Bot-trap hits (honeypot, too fast, link spam) get a silent `200 { lead: false }` with no email; real sends return `{ lead: true, leadId }`. Every form renders `<HoneypotField />` and spreads `guardFields(form)` from `hooks/useSpamGuard.ts` into its POST body. Optional env `RECAPTCHA_ALLOWED_HOSTNAMES` (comma separated) rejects CAPTCHA tokens solved on other hosts. Forms also send `attribution` (gclid/gbraid/wbraid, UTMs, landing page, external referrer) captured once per session by `AttributionCapture` in `ClientLayout` via `lib/attribution.ts`; the API emails it to info@ in a separate team-only "Lead source" note next to the self-reported referral answer, and the contact form forwards it to the n8n CRM webhook.
+There are no file uploads: visitors share moodboards as links in the references field (plain text, never embedded), with an on-form reminder to set Drive/Dropbox sharing to "anyone with the link". Bot-trap hits (honeypot, too fast, link spam) get a silent `200 { lead: false }` with no email; real sends return `{ lead: true, leadId }`. Every form renders `<HoneypotField />` and spreads `guardFields(form)` from `hooks/useSpamGuard.ts` into its POST body. Optional env `RECAPTCHA_ALLOWED_HOSTNAMES` (comma separated) rejects CAPTCHA tokens solved on other hosts. Forms also send `attribution` (gclid/gbraid/wbraid, UTMs, landing page, external referrer) captured on landing and kept for 90 days in localStorage by `AttributionCapture` in `ClientLayout` via `lib/attribution.ts`; the API emails it to info@ in a separate team-only "Lead source" note next to the self-reported referral answer, and the contact form forwards it to the n8n CRM webhook.
 
 ### Analytics & Tracking
 
@@ -78,8 +78,10 @@ GTM + GA4 + Google Ads conversions are wired through a single GTM container load
 
 Client-side event helpers live in `lib/analytics.ts`:
 - `pushDataLayer(event, payload)` — SSR-safe primitive
-- `trackGenerateLead({ form, leadId, email, value })` — called only when `/api/contact` returns `lead: true` (never on click, never for screened spam); pushes `generate_lead` with `form_type`, `lead_id`/`transaction_id` (dedupe + offline import matching), `user_data.email` (enhanced conversions), `currency: 'USD'`, `value` (default 500). Fired by the contact form (`form_type: contact`) and the brand activation form
+- `trackGenerateLead({ form, leadId, email, budget, value })` — called only when `/api/contact` returns `lead: true` (never on click, never for screened spam); pushes `generate_lead` with `form_type`, `lead_id`/`transaction_id` (dedupe + offline import matching), `user_data.email` (enhanced conversions), `currency: 'USD'`, `budget_range`, and `value` from the budget band's `leadValue` in `lib/leadFields.ts` (placeholder values until real ones are set). Fired by the contact form (`form_type: contact`) and the brand activation form
 - `trackPageView({ page })` — called from `PageViewTracker` components on landing pages (e.g., `app/brand-activations/PageViewTracker.tsx`)
+
+`app/components/EngagementTracker.tsx` (mounted in `ClientLayout`) pushes the signals before a lead: `scroll_depth` (25/50/75/90), `cta_click` (links to `#contact` / `#inquiry`), `email_click`, and `lead_form_start` / `lead_form_submit` for any form carrying a `data-form` attribute. They reach GA4 only once the GTM container forwards them.
 
 Required env vars (populate in Vercel before launch):
 - `NEXT_PUBLIC_GTM_ID` (format: `GTM-XXXXXXX`) — gates the whole tracking stack

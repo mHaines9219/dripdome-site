@@ -24,6 +24,7 @@ export function pushDataLayer(event: string, payload: DataLayerPayload = {}) {
  * never on button click, so spam and failed sends stay out of Google Ads.
  * `leadId` doubles as transaction_id so a retried push counts once, and
  * `email` feeds enhanced conversions for leads via GTM's user-provided data.
+ * `value` comes from the budget band the visitor picked (lib/leadFields.ts).
  *
  * When NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL is set it also sends the
  * conversion straight to Google Ads through gtag. Don't also add a GTM Ads
@@ -34,14 +35,16 @@ export function trackGenerateLead(opts: {
   form: string;
   leadId: string;
   email?: string;
-  value?: number;
-  currency?: string;
+  budget: string;
+  value: number;
 }) {
-  const { form, leadId, email, value = 500, currency = "USD" } = opts;
+  const { form, leadId, email, budget, value } = opts;
+  const currency = "USD";
   pushDataLayer("generate_lead", {
     form_type: form,
     lead_id: leadId,
     transaction_id: leadId,
+    budget_range: budget,
     value,
     currency,
     ...(email ? { user_data: { email: email.trim().toLowerCase() } } : {}),

@@ -13,6 +13,7 @@ import {
   PROJECT_TYPES,
   REFERRAL_SOURCES,
   TIMELINES,
+  leadValueFor,
   type LeadOption,
 } from "@/lib/leadFields";
 import ChoiceChips from "./ChoiceChips";
@@ -184,6 +185,7 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
   return (
     <Box
       component="form"
+      data-form="contact"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -249,7 +251,13 @@ export default function ContactForm({ projectType }: { projectType?: string }) {
           // Spam the server silently dropped stays out of Ads; the CRM
           // hand-off now happens server-side for verified leads only
           if (result.lead && result.leadId) {
-            trackGenerateLead({ form: "contact", leadId: result.leadId, email });
+            trackGenerateLead({
+              form: "contact",
+              leadId: result.leadId,
+              email,
+              budget: body.budget,
+              value: leadValueFor(BUDGET_RANGES, body.budget),
+            });
           }
 
           setStatus({
