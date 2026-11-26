@@ -81,7 +81,7 @@ function BlogPostingJsonLd({ slug }: { slug: string }) {
     },
     image: {
       "@type": "ImageObject",
-      url: new URL(post.image.url, "https://www.dripdome.com").href,
+      url: post.image.url,
       width: post.image.width,
       height: post.image.height,
     },

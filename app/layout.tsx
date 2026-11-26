@@ -47,10 +47,10 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "/og/not-loveline-studio.jpg",
-        width: 1200,
-        height: 630,
-        alt: "DripDome set build for the NotLoveline podcast studio",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+        width: 1226,
+        height: 774,
+        alt: "THIS IS NOT A BILLBOARD, a rooftop light box DripDome fabricated for artist Vita Kari at WeHo Pride",
       },
     ],
   },
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     description:
       "Women-owned set design and custom fabrication studio in NYC & LA. Podcast studios, brand activations, and immersive environments designed, built, and installed in-house.",
     images: [
-      "/og/not-loveline-studio.jpg",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
     ],
   },
   alternates: {

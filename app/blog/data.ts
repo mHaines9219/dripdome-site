@@ -490,7 +490,7 @@ Result: performers inside all day on the parade route, 100K+ attendees, 8.8M+ so
       "vaporwave design",
     ],
     image: {
-      url: "/og/not-loveline-set.jpg",
+      url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
       alt: "DripDome custom NotLoveLine podcast studio set featuring a neon heart wall and vaporwave Y2K design for Trisha Paytas and Tana Mongeau",
       width: 1200,
       height: 630,
