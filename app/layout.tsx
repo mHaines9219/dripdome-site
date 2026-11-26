@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+        url: "/og/not-loveline-studio.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome set build for the NotLoveline podcast studio",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     description:
       "Women-owned set design and custom fabrication studio in NYC & LA. Podcast studios, brand activations, and immersive environments designed, built, and installed in-house.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+      "/og/not-loveline-studio.jpg",
     ],
   },
   alternates: {

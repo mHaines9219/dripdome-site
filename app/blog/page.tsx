@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+        url: "/og/not-loveline-set.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome Blog - Set Design, Fabrication & Experiential Design Insights",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Behind-the-scenes looks at set builds, fabrication techniques, and experiential design from DripDome's production design studio.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+      "/og/not-loveline-set.jpg",
     ],
   },
 };

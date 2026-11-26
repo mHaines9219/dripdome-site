@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
+        url: "/og/not-loveline-studio.jpg",
         width: 1200,
         height: 630,
         alt: "DripDome custom podcast studio build for NotLoveline",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Podcast Studio Design & Build - NYC & LA | DripDome",
     description:
       "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 30M+ views shot on our builds.",
-    images: ["https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG"],
+    images: ["/og/not-loveline-studio.jpg"],
   },
   alternates: {
     canonical: "https://www.dripdome.com/podcast-studios",
