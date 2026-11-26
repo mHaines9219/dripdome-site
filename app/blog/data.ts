@@ -17,8 +17,6 @@ export interface BlogPost {
     width: number;
     height: number;
   };
-  /** Replaces `image` in link previews only. The page still shows `image`. */
-  shareImage?: BlogPost["image"];
   readingTime: string;
   gallery?: string[];
   /** Optional FAQ pairs, emitted as FAQPage structured data on the post page. */
@@ -496,12 +494,6 @@ Result: performers inside all day on the parade route, 100K+ attendees, 8.8M+ so
       alt: "DripDome custom NotLoveLine podcast studio set featuring a neon heart wall and vaporwave Y2K design for Trisha Paytas and Tana Mongeau",
       width: 1200,
       height: 630,
-    },
-    shareImage: {
-      url: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
-      alt: "THIS IS NOT A BILLBOARD, a rooftop light box DripDome fabricated for artist Vita Kari at WeHo Pride",
-      width: 1226,
-      height: 774,
     },
     readingTime: "5 min read",
     gallery: [
