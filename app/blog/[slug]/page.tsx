@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
+  const shareImage = post.shareImage ?? post.image;
 
   return {
     title: `${post.title} | DripDome Blog`,
@@ -37,10 +38,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "DripDome",
       images: [
         {
-          url: post.image.url,
-          width: post.image.width,
-          height: post.image.height,
-          alt: post.image.alt,
+          url: shareImage.url,
+          width: shareImage.width,
+          height: shareImage.height,
+          alt: shareImage.alt,
         },
       ],
     },
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.image.url],
+      images: [shareImage.url],
     },
   };
 }

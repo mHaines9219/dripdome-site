@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG",
-        width: 1200,
-        height: 630,
-        alt: "DripDome custom podcast studio build for NotLoveline",
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+        width: 1226,
+        height: 774,
+        alt: "THIS IS NOT A BILLBOARD, a rooftop light box DripDome fabricated for artist Vita Kari at WeHo Pride",
       },
     ],
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Podcast Studio Design & Build - NYC & LA | DripDome",
     description:
       "Permanent, camera-ready podcast studios designed, fabricated, and wired in-house. 30M+ views shot on our builds.",
-    images: ["https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_1.JPG"],
+    images: ["https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png"],
   },
   alternates: {
     canonical: "https://www.dripdome.com/podcast-studios",

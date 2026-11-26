@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     siteName: "DripDome",
     images: [
       {
-        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
-        width: 1200,
-        height: 630,
+        url: "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
+        width: 1226,
+        height: 774,
         alt: "DripDome Blog - Set Design, Fabrication & Experiential Design Insights",
       },
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Behind-the-scenes looks at set builds, fabrication techniques, and experiential design from DripDome's production design studio.",
     images: [
-      "https://dripdome-site.s3.us-east-2.amazonaws.com/NLL/IMG_3.JPG",
+      "https://dripdome-site.s3.us-east-2.amazonaws.com/vita_tinab/1.png",
     ],
   },
 };
